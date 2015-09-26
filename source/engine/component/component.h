@@ -1,0 +1,31 @@
+#pragma once
+#include "platform/inc_func.h"
+#include "types.h"
+#include "math/matrix_2d.h"
+#include "shape/aabb.h"
+#include "json.h"
+#include "bit_flag.h"
+#include "enums.h"
+#include <map>
+#include <list>
+#include <vector>
+
+namespace engine
+{
+	namespace component
+	{
+		class IPart;
+		typedef std::list<IPart*> PartList;
+		typedef std::list<IPart*>::iterator PartIter;
+		typedef std::map<int, PartList> PartPriorityMap;
+		typedef std::map<int, PartList>::iterator PartPriorityIter;
+
+		typedef ulonglong						PartTypeKey;
+		typedef std::function<IPart*(void)>		PartFunctor;
+
+		class CObject;
+		class CGroup;
+		typedef std::vector<CObject*> ObjectList;
+		typedef std::vector<CObject*>::iterator ObjectIter;
+	}
+}

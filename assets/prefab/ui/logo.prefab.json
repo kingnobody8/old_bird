@@ -1,0 +1,237 @@
+{
+	"name": "logo",
+	"matrix":
+	{
+		"position":
+		{
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"scale":
+		{
+			"x": 40,
+			"y": 40
+		},
+		"rotation": 0
+	},
+	"parts":
+	[
+		{
+			"type": "CScale",
+			"lat_lock": "mid",
+			"vert_lock": "mid",
+			"aspect_lock": "x"
+		},
+		{
+			"type": "CUiLogo"
+		}
+	],
+	"children":
+	[
+		{
+			"name": "back_blue",
+			"matrix":
+			{
+				"position":
+				{
+					"x": 2,
+					"y": 2,
+					"z": 1
+				},
+				"scale":
+				{
+					"x": 1,
+					"y": 1
+				},
+				"rotation": 0
+			},
+			"parts":
+			[
+				{
+					"type": "CImg",
+					"img": "assets/image/logo/layer0.png",
+					"layer": "ui",
+					"blend_mode": "blend",
+					"color":
+					{
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					},
+					"anchor":
+					{
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			],
+			"children": [ ]
+		},
+		{
+			"name": "fore_red",
+			"matrix":
+			{
+				"position":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 2
+				},
+				"scale":
+				{
+					"x": 1,
+					"y": 1
+				},
+				"rotation": 0
+			},
+			"parts":
+			[
+				{
+					"type": "CImg",
+					"img": "assets/image/logo/layer1.png",
+					"layer": "ui",
+					"blend_mode": "blend",
+					"color":
+					{
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					},
+					"anchor":
+					{
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			],
+			"children": [ ]
+		},
+		{
+			"name": "edge_group",
+			"matrix":
+			{
+				"position":
+				{
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"scale":
+				{
+					"x": 1,
+					"y": 1
+				},
+				"rotation": 0
+			},
+			"parts": [ ],
+			"children":
+			[
+				{
+					"name": "edge_pos_group",
+					"matrix":
+					{
+						"position":
+						{
+							"x": 6,
+							"y": 6,
+							"z": 0
+						},
+						"scale":
+						{
+							"x": 1,
+							"y": 1
+						},
+						"rotation": 0
+					},
+					"parts": [ ],
+					"children":
+					[
+						{
+							"name": "edgeL",
+							"matrix":
+							{
+								"position":
+								{
+									"x": 0,
+									"y": 0,
+									"z": 3
+								},
+								"scale":
+								{
+									"x": 1,
+									"y": 1
+								},
+								"rotation": 0
+							},
+							"parts":
+							[
+								{
+									"type": "CImg",
+									"img": "assets/image/logo/layer2.png",
+									"blend_mode": "blend",
+									"layer": "ui",
+									"color":
+									{
+										"r": 1,
+										"g": 1,
+										"b": 1,
+										"a": 1
+									},
+									"anchor":
+									{
+										"x": 0.5,
+										"y": 0.5
+									}
+								}
+							],
+							"children": [ ]
+						},
+						{
+							"name": "edgeD",
+							"matrix":
+							{
+								"position":
+								{
+									"x": 1.5,
+									"y": 1.5,
+									"z": 4
+								},
+								"scale":
+								{
+									"x": 1,
+									"y": 1
+								},
+								"rotation": 0
+							},
+							"parts":
+							[
+								{
+									"type": "CImg",
+									"img": "assets/image/logo/layer3.png",
+									"blend_mode": "blend",
+									"layer": "ui",
+									"color":
+									{
+										"r": 1,
+										"g": 1,
+										"b": 1,
+										"a": 1
+									},
+									"anchor":
+									{
+										"x": 0.5,
+										"y": 0.5
+									}
+								}
+							],
+							"children": [ ]
+						}
+					]
+				}
+			]
+		}
+	]
+}

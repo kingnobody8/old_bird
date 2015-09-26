@@ -1,0 +1,123 @@
+{
+	"name": "play",
+	"matrix":
+	{
+		"position":
+		{
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"scale":
+		{
+			"x": 1,
+			"y": 1
+		},
+		"rotation": 0
+	},
+	"parts":
+	[
+		{
+			"type": "CScale",
+			"lat_lock": "mid",
+			"vert_lock": "bot",
+			"aspect_lock": "x"
+		}
+	],
+	"children":
+	[
+		{
+			"name": "floor",
+			"matrix":
+			{
+				"position":
+				{
+					"x": 0,
+					"y": -464,
+					"z": -2
+				},
+				"scale":
+				{
+					"x": 540,
+					"y": 64
+				},
+				"rotation": 0
+			},
+			"parts":
+			[
+				{
+					"type": "CImg",
+					"img": "assets/image/white_pixel.png",
+					"blend_mode": "blend",
+					"layer": "world",
+					"color":
+					{
+						"r": 1,
+						"g": 0.5,
+						"b": 0.5,
+						"a": 1
+					},
+					"anchor":
+					{
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"type": "CBoxPart",
+					"box_type": "static"
+				}
+			],
+			"children": []
+		},
+		{
+			"name": "cube",
+			"matrix":
+			{
+				"position":
+				{
+					"x": 0,
+					"y": 0,
+					"z": -1
+				},
+				"scale":
+				{
+					"x": 64,
+					"y": 64
+				},
+				"rotation": 0
+			},
+			"parts":
+			[
+				{
+					"type": "CImg",
+					"img": "assets/image/white_pixel.png",
+					"blend_mode": "blend",
+					"layer": "world",
+					"color":
+					{
+						"r": 0.5,
+						"g": 1.0,
+						"b": 0.5,
+						"a": 1
+					},
+					"anchor":
+					{
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"type": "CClickPart"
+				},
+				{
+					"type": "CBoxPart",
+					"box_type": "dynamic"
+				}
+			],
+			"children":
+			[
+			]
+		}
+	]
+}

@@ -1,0 +1,181 @@
+{
+	"name": "logo",
+	"local_position":
+	{
+		"x": 0,
+		"y": 0,
+		"z": 0
+	},
+	"local_scale":
+	{
+		"x": 40,
+		"y": 40
+	},
+	"local_rotation": 0,
+	"parts":
+	[
+		{
+			"type": "CScale",
+			"lat_lock": "mid",
+			"vert_lock": "mid",
+			"aspect_lock": "x"
+		},
+		{
+			"type": "CUiLogo2"
+		}
+	],
+	"children":
+	[
+		{
+			"name": "core",
+			"local_position":
+			{
+				"x": 0,
+				"y": 0,
+				"z": -1
+			},
+			"local_scale":
+			{
+				"x": 1,
+				"y": 1
+			},
+			"local_rotation": 0,
+			"parts":
+			[
+			],
+			"children":
+			[
+				{
+					"name": "core",
+					"local_position":
+					{
+						"x": 0,
+						"y": 0,
+						"z": -1
+					},
+					"local_scale":
+					{
+						"x": 1,
+						"y": 1
+					},
+					"local_rotation": 0,
+					"parts":
+					[
+						{
+							"type": "CImg",
+							"img": "assets/image/logo2/back.png",
+							"layer": "ui",
+							"blend_mode": "blend",
+							"color":
+							{
+								"r": 1,
+								"g": 1,
+								"b": 1,
+								"a": 1
+							},
+							"anchor":
+							{
+								"x": 0.5,
+								"y": 0.5
+							}
+						}
+					],
+					"children": [ ]
+				}
+			]
+		},
+		{
+			"name": "edge",
+			"local_position":
+			{
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"local_scale":
+			{
+				"x": 1,
+				"y": 1
+			},
+			"local_rotation": 0,
+			"parts": [ ],
+			"children":
+			[
+				{
+					"name": "edge_back",
+					"local_position":
+					{
+						"x": 6,
+						"y": 6,
+						"z": -2
+					},
+					"local_scale":
+					{
+						"x": 1,
+						"y": 1
+					},
+					"local_rotation": 0,
+					"parts":
+					[
+						{
+							"type": "CImg",
+							"img": "assets/image/logo2/edge0.png",
+							"blend_mode": "blend",
+							"layer": "ui",
+							"color":
+							{
+								"r": 1,
+								"g": 1,
+								"b": 1,
+								"a": 1
+							},
+							"anchor":
+							{
+								"x": 0.5,
+								"y": 0.5
+							}
+						}
+					],
+					"children": [ ]
+				},
+				{
+					"name": "edge_fore",
+					"local_position":
+					{
+						"x": 6,
+						"y": 6,
+						"z": 1
+					},
+					"local_scale":
+					{
+						"x": 1,
+						"y": 1
+					},
+					"local_rotation": 0,
+					"parts":
+					[
+						{
+							"type": "CImg",
+							"img": "assets/image/logo2/edge1.png",
+							"blend_mode": "blend",
+							"layer": "ui",
+							"color":
+							{
+								"r": 1,
+								"g": 1,
+								"b": 1,
+								"a": 1
+							},
+							"anchor":
+							{
+								"x": 0.5,
+								"y": 0.5
+							}
+						}
+					],
+					"children": [ ]
+				}
+			]
+		}
+	]
+}

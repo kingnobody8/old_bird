@@ -1,0 +1,42 @@
+{
+	"name": "root",
+	"local_position":
+	{
+		"x": 0,
+		"y": 0,
+		"z": 0
+	},
+	"local_scale":
+	{
+		"x": 0,
+		"y": 0
+	},
+	"local_rotation": 0,
+	"parts":[],
+	"children":
+	[
+		{
+			"name": "logo",
+			"local_position":
+			{
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"local_scale":
+			{
+				"x": 1,
+				"y": 1
+			},
+			"local_rotation": 0,
+			"parts":
+			[
+				{
+					"type": "CPrefab",
+					"prefab": "assets/logo.json"
+				}
+			],
+			"children": [ ]
+		}
+	]
+}
