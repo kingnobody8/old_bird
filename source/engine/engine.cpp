@@ -5,6 +5,12 @@
 #include "render/renderer.h"
 
 
+__todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
+void IosCallback(void* params)
+{
+	engine::Get()->RunFrame(params);
+}
+
 namespace engine
 {
 	Engine* Engine::s_pInstance = nullptr;
@@ -60,7 +66,8 @@ namespace engine
 
 #ifdef MOBILE
 		//Set Render Callback
-		//SDL_iPhoneSetAnimationCallback(pWin, 1, [this](void* params)
+		SDL_iPhoneSetAnimationCallback(render::GetSdlWindow(), 1, IosCallback,nullptr);
+		//SDL_SetI(render::GetSdlWindow(), 1, [this](void* params)
 		//{
 		//	this->Render();
 		//});
@@ -114,6 +121,11 @@ namespace engine
 		SDL_Quit();
 
 		DeleteInstance();
+	}
+	
+	void Engine::RunFrame(void* params)
+	{
+		this->Update();
 	}
 
 	void Engine::Update(void)
