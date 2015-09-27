@@ -47,7 +47,7 @@ namespace engine
 			s_sdlRen = SDL_CreateRenderer(s_sdlWin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 			//Error check
-			util::CheckSdlError();
+			util::CheckSdlError("Setting the swap interval is not supported");
 			assert(s_sdlRen);
 			SDL_Log("SDL Renderer Initialized");
 
@@ -91,7 +91,7 @@ namespace engine
 				logical_size.x, 0);
 
 
-			const util::Time t = util::Time::GetTimeSinceEpoch();
+		//	const util::Time t = util::Time::GetTimeSinceEpoch();
 
 			util::math::Matrix2D cam =util::math::Matrix2D(vec2(0,0), vec2(1,1), 0);
 			const util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(cam);

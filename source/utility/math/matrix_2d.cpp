@@ -1,4 +1,4 @@
-#include "math/matrix_2d.h"
+#include "matrix_2d.h"
 #include <cmath>
 
 namespace util

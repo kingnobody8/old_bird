@@ -15,15 +15,15 @@ namespace util
 			UnsubscribeAll();
 		}
 
-		/*void Subscriber::UnsubscribeAll()
+		void Subscriber::UnsubscribeAll()
 		{
-			while (!m_pubs.empty())
+			/*while (!m_pubs.empty())
 			{
 				Publisher* pub = m_pubs.back();
 				m_pubs.pop_back();
 				pub->Unsubscribe(this);
-			}
-		}*/
+			}*/
+		}
 
 		void Subscriber::AddPublisher(Publisher* pPub)
 		{

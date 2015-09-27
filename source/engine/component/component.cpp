@@ -1,4 +1,4 @@
-#include "component/component.h"
+#include "component.h"
 
 namespace engine
 {

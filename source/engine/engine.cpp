@@ -44,9 +44,7 @@ namespace engine
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		{
 #ifdef MOBILE
-			std::string error = SDL_GetError();
-			SDL_Log("Error - SDL_Init - %s.\n", error.c_str());
-			assert(error != "SDL not built with haptic (force feedback) support");
+			util::CheckSdlError("SDL not built with haptic (force feedback) support");
 #else
 			util::CheckSdlError();
 #endif
@@ -66,7 +64,7 @@ namespace engine
 		//{
 		//	this->Render();
 		//});
-		SDL_iPhoneSetAnimationCallback(pWin, 1, render_callback, this);
+		//SDL_iPhoneSetAnimationCallback(pWin, 1, render_callback, this);
 #endif
 
 		//Init Asset
@@ -125,7 +123,7 @@ namespace engine
 
 		//Update the timer
 		this->m_timer.Signal();
-		util::Time delta = this->m_timer.Delta();
+		//util::Time delta = this->m_timer.Delta();
 
 		//If a new state is available, then set it
 		if (this->m_pNextState)

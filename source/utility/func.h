@@ -11,6 +11,7 @@ Purpose:	These are commonly used utility functions and macros
 #include "types.h"
 #include <assert.h>
 #include "platform/inc_sdl.h"
+#include <string>
 
 #ifndef Max
 #define Max(a,b)					(((a) > (b)) ? (a) : (b))					//Returns the maximum between 2 numbers
@@ -45,12 +46,13 @@ namespace util
 		return (max - min) * (float(rand()) / float(RAND_MAX)) + min;
 	}
 
-	static void CheckSdlError()
+	static void CheckSdlError(const char* ignore_error = null)
 	{
 		const char* err = SDL_GetError();
 		if (*err != null)
 			SDL_Log("SDL Error: %s", err);
-		assert(*err == null);
+		assert(*err == null || std::strcmp(err, ignore_error) == 0);
+		SDL_ClearError();
 	}
 
 	bool BigEndianCheck(void);

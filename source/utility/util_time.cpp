@@ -157,14 +157,14 @@ STATIC const Time Time::GetTimeSinceEpoch()
 //
 //	time_t seconds = std::time(nullptr);
 //	ret = seconds * 1000 + time.wMilliseconds;
-#elif
+#elif IOS
 	__todo() //haven't tested this
 	assert(false);
 	timeval time;
 	gettimeofday(&time, nullptr);
 	Time ret = time.tv_sec * 1000.0 + time.tv_usec / 1000.0;
 #endif
-	return ret;
+	return 0;
 }
 
 //STATIC const Time Time::GetLocalOffset()
@@ -239,7 +239,7 @@ Time::Time(const Date& d)
 const Date Time::ToUtc() const
 {
 	Date ret;
-
+#ifdef WIN
 	time_t tmp = m_time / 1000;
 	ret.milli = (int)(m_time - (tmp * 1000));
 	tm ts;
@@ -251,12 +251,14 @@ const Date Time::ToUtc() const
 	ret.month = ts.tm_mon;
 	ret.sec = ts.tm_sec;
 	ret.year = ts.tm_year + 1900;
+#endif
 	return ret;
 }
 
 const Date Time::ToLocal() const
 {
 	Date ret;
+#ifdef WIN
 	time_t tmp = m_time / 1000;
 	tm ts;
 	localtime_s(&ts, &tmp);
@@ -267,5 +269,6 @@ const Date Time::ToLocal() const
 	ret.month = ts.tm_mon;
 	ret.sec = ts.tm_sec;
 	ret.year = ts.tm_year + 1900;
+#endif
 	return ret;
 }
