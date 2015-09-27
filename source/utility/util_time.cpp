@@ -5,12 +5,6 @@
 #include <ctime>
 #include <chrono>
 
-#if WIN
-#include <Windows.h>
-#else
-#include <sys/time.h>
-#endif
-
 #undef min
 #undef max
 
@@ -127,43 +121,7 @@ const Time Date::ToTimeAsLocal(void) const
 
 STATIC const Time Time::GetTimeSinceEpoch()
 {
-	//assert(false); //look into this
-	//double test = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-
-	time_t now;
-	std::time(&now);
-
-#ifdef WIN
-	SYSTEMTIME time;
-	GetSystemTime(&time);
-
-	Time ret = now * 1000 + time.wMilliseconds;
-////Get Current Time
-//	time(&now);
-//	gmtime_s(&utc, &now);
-//	localtime_s(&local, &now);
-//	
-//
-//	Date d;
-//	d.year = time.wYear;
-//	d.month = time.wMonth;
-//	d.day = time.wDay;
-//	d.hour = time.wHour;
-//	d.min = time.wMinute;
-//	d.sec = time.wSecond;
-//	d.milli = time.wMilliseconds;
-//
-//	Time t = d.ToTimeAsUtc();
-//
-//	time_t seconds = std::time(nullptr);
-//	ret = seconds * 1000 + time.wMilliseconds;
-#elif
-	__todo() //haven't tested this
-	assert(false);
-	timeval time;
-	gettimeofday(&time, nullptr);
-	Time ret = time.tv_sec * 1000.0 + time.tv_usec / 1000.0;
-#endif
+	ulonglong ret = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	return ret;
 }
 
@@ -239,18 +197,21 @@ Time::Time(const Date& d)
 const Date Time::ToUtc() const
 {
 	Date ret;
-
 	time_t tmp = m_time / 1000;
 	ret.milli = (int)(m_time - (tmp * 1000));
 	tm ts;
+#ifdef WIN
 	gmtime_s(&ts, &tmp);
-
+#else
+	gmtime_r(&tmp, &ts);
+#endif
 	ret.day = ts.tm_mday;
 	ret.hour = ts.tm_hour;
 	ret.min = ts.tm_min;
 	ret.month = ts.tm_mon;
 	ret.sec = ts.tm_sec;
 	ret.year = ts.tm_year + 1900;
+	
 	return ret;
 }
 
@@ -259,8 +220,12 @@ const Date Time::ToLocal() const
 	Date ret;
 	time_t tmp = m_time / 1000;
 	tm ts;
+#ifdef WIN
 	localtime_s(&ts, &tmp);
-
+#else
+	localtime_r(&tmp, &ts);
+#endif
+	
 	ret.day = ts.tm_mday;
 	ret.hour = ts.tm_hour;
 	ret.min = ts.tm_min;

@@ -38,7 +38,7 @@ namespace util
 
 		const bool Line::IsLineParallel(const Line* const test) const
 		{
-			return abs(dir.x) == abs(test->dir.x) && abs(dir.y) == abs(test->dir.y);
+			return fabs(dir.x) == fabs(test->dir.x) && fabs(dir.y) == fabs(test->dir.y);
 		}
 
 		const bool Line::IsRayParallel(const Ray* const test) const

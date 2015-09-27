@@ -14,8 +14,14 @@ namespace util
 		VIRTUAL Ray::~Ray()
 		{
 		}
+		
+		VIRTUAL bool Ray::Intersect(const math::vec2& point) const
+		{
+			__not_implemented(Ray::Intersect);
+			return false;
+		}
 
-		VIRTUAL bool Ray::Intersect(const vec2& point) const
+		VIRTUAL bool Ray::Intersect(const IShape* const test) const
 		{
 			__not_implemented(Ray::Intersect);
 			//__todo()//this isn't finished

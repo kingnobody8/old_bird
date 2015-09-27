@@ -5,6 +5,12 @@
 #include "render/renderer.h"
 
 
+__todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
+void IosCallback(void* params)
+{
+	engine::Get()->RunFrame(params);
+}
+
 namespace engine
 {
 	Engine* Engine::s_pInstance = nullptr;
@@ -44,9 +50,7 @@ namespace engine
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		{
 #ifdef MOBILE
-			std::string error = SDL_GetError();
-			SDL_Log("Error - SDL_Init - %s.\n", error.c_str());
-			assert(error != "SDL not built with haptic (force feedback) support");
+			util::CheckSdlError("SDL not built with haptic (force feedback) support");
 #else
 			util::CheckSdlError();
 #endif
@@ -62,11 +66,12 @@ namespace engine
 
 #ifdef MOBILE
 		//Set Render Callback
-		//SDL_iPhoneSetAnimationCallback(pWin, 1, [this](void* params)
+		SDL_iPhoneSetAnimationCallback(render::GetSdlWindow(), 1, IosCallback,nullptr);
+		//SDL_SetI(render::GetSdlWindow(), 1, [this](void* params)
 		//{
 		//	this->Render();
 		//});
-		SDL_iPhoneSetAnimationCallback(pWin, 1, render_callback, this);
+		//SDL_iPhoneSetAnimationCallback(pWin, 1, render_callback, this);
 #endif
 
 		//Init Asset
@@ -117,6 +122,11 @@ namespace engine
 
 		DeleteInstance();
 	}
+	
+	void Engine::RunFrame(void* params)
+	{
+		this->Update();
+	}
 
 	void Engine::Update(void)
 	{
@@ -125,7 +135,7 @@ namespace engine
 
 		//Update the timer
 		this->m_timer.Signal();
-		util::Time delta = this->m_timer.Delta();
+		//util::Time delta = this->m_timer.Delta();
 
 		//If a new state is available, then set it
 		if (this->m_pNextState)

@@ -57,10 +57,14 @@ int main(int argc, char** argv)
 	engine::Engine* engi = engine::Get();
 
 	engi->Init(null);
+	
+#ifdef WIN
 	while (!engi->GetQuit())
 	{
-		engi->Update();
+		engi->RunFrame(null);
+		engi->RunFrame);
 	}
 	engi->Exit();
+#endif
 	return 0;
 }

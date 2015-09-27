@@ -161,7 +161,7 @@ namespace engine
 			});
 
 			Matrix2D world;
-			for (size_t i = vec.size() - 1; i >= 0; --i)
+			for (int i = (int)vec.size() - 1; i >= 0; --i)
 			{
 				world *= vec[i];
 			}
@@ -644,7 +644,7 @@ namespace engine
 					parents.push_back(pParent);
 					pParent = pParent->GetParent();
 				}
-				for (size_t i = parents.size() - 1; i >= 0; --i)
+				for (int i = (int)parents.size() - 1; i >= 0; --i)
 				{
 					func(parents[i]);
 				}
