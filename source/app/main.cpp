@@ -62,7 +62,6 @@ int main(int argc, char** argv)
 	while (!engi->GetQuit())
 	{
 		engi->RunFrame(null);
-		engi->RunFrame);
 	}
 	engi->Exit();
 #endif
