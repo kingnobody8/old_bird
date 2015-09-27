@@ -19,7 +19,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+#*.a we don't want to ignore this right now because we aren't building this
 *.lib
 
 # Executables
