@@ -10,7 +10,7 @@ namespace engine
 			//if we want something centered on screen then we should move the camera over it (-half_screen_width, -half_screen_height)
 			//but for now maybe just put the origin offsets in a #debug statement
 
-			void IRenderNode::Register(const std::string& layer)
+		void IRenderNode::Register(const std::string& layer)
 		{
 			__not_implemented(IRenderNode::Register);
 			/*CRenderLayer* temp = CRenderer::Get()->GetLayer(layer);
@@ -181,8 +181,7 @@ namespace engine
 				box.m_max = util::math::vec2(Max(m_seg.start.x, m_seg.end.x), Max(m_seg.start.y, m_seg.end.y));
 
 				m_shape.SetAsBox((float32)box.CalcExtends().x, (float32)box.CalcExtends().y,
-					b2Vec2((float32)box.CalcCenter().x, (float32)box.CalcCenter().y),
-					0);
+					b2Vec2((float32)box.CalcCenter().x, (float32)box.CalcCenter().y), 0);
 			}
 			return m_shape;
 		}
@@ -194,9 +193,6 @@ namespace engine
 			//get screen space
 			tmp1 = util::math::Matrix2D::Vector_Matrix_Multiply(tmp1, inv_cam);
 			tmp2 = util::math::Matrix2D::Vector_Matrix_Multiply(tmp2, inv_cam);
-
-			//__todo() //do real camera inversion to all properties, for now we just use the position (subtracting position is a hack, do real matrix math)
-			//util::math::vec2 cam_position = inv_cam.GetPosition();
 
 			//get screen info
 			util::math::Type2<int> logical_size;
@@ -227,10 +223,8 @@ namespace engine
 			{
 				m_flag.BitOff(EFlag::MOVE_DIRTY);
 
-				__todo() //this might need to be the (size * scale) / 2
-					//also might need to use the center positio of the rect instead of the bottom corner
-					m_shape.SetAsBox((float32)m_aabb.CalcSize().w, (float32)m_aabb.CalcSize().h,
-					b2Vec2((float32)m_aabb.m_min.x, (float32)m_aabb.m_min.y), 0);
+				m_shape.SetAsBox((float32)m_aabb.CalcExtends().x, (float32)m_aabb.CalcExtends().h,
+				b2Vec2((float32)m_aabb.CalcCenter().x, (float32)m_aabb.CalcCenter().y), 0);
 			}
 			return m_shape;
 		}

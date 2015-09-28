@@ -56,6 +56,7 @@ namespace engine
 			const bool CheckInView(const b2PolygonShape& view);
 			inline void SetColor(const SDL_Color& clr) { m_clr = clr; }
 			inline const SDL_Color& GetColor() const { return m_clr; }
+			inline CRenderLayer* GetLayer() const { return m_pLayer; }
 
 			void Register(const std::string& layer);
 			void Unregister(void);

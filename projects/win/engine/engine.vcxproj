@@ -19,20 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\engine\asset\loader.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\component.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_node.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\rect_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\script_priorities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
+    <ClInclude Include="..\..\..\source\engine\asset\resource_path.h" />
     <ClInclude Include="..\..\..\source\engine\component\component.h" />
     <ClInclude Include="..\..\..\source\engine\component\object.h" />
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_node.h" />
+    <ClInclude Include="..\..\..\source\engine\scripts\script_priorities.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\rect_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />

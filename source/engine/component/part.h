@@ -68,7 +68,7 @@ namespace engine
 			virtual void OnMatrixChanged(void){};
 			virtual void OnVisibilityChanged(const bool visible){};
 
-			virtual util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
+			virtual const util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
 
 			//Gets
 			inline CObject*				GetOwner(void) const { return this->m_pOwner; }

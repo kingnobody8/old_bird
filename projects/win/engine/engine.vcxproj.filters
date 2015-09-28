@@ -7,6 +7,15 @@
     <Filter Include="render">
       <UniqueIdentifier>{65de5180-01ec-4ae4-82e8-6f8874afe9cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="asset">
+      <UniqueIdentifier>{4c5c8a50-259b-4b2e-9b61-2ced1072ac76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{1236dd37-8bb2-484e-9515-4da5c862cec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\renderable">
+      <UniqueIdentifier>{8d37b3d5-15fc-45a0-8877-9471e415240c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -25,6 +34,18 @@
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\asset\loader.cpp">
+      <Filter>asset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\renderable\rect_part.cpp">
+      <Filter>script\renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp">
+      <Filter>script\renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\script_priorities.cpp">
+      <Filter>script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -42,6 +63,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\renderer.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\asset\loader.h">
+      <Filter>asset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\asset\resource_path.h">
+      <Filter>asset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\scripts\script_priorities.h">
+      <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\renderable\rect_part.h">
+      <Filter>script\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h">
+      <Filter>script\renderable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

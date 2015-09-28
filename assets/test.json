@@ -1,0 +1,38 @@
+{
+	"name": "play",
+	"matrix":
+	{
+		"position":
+		{
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"scale":
+		{
+			"x": 1,
+			"y": 1
+		},
+		"rotation": 0
+	},
+	"parts":
+	[
+		{
+			"type": "CRectPart",
+			"aabb":
+			{
+				"min":
+				{
+					"x": -64,
+					"y": -64
+				},
+				"max":
+				{
+					"x": 64,
+					"y": 64
+				}
+			}
+		}
+	],
+	"children": [ ]
+}

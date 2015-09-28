@@ -1,5 +1,6 @@
 #pragma once
 #include "timer.h"
+#include "script/script_priorities.h"
 
 namespace engine
 {
@@ -26,20 +27,18 @@ namespace engine
 		Engine();
 		~Engine();
 
-		void PushState(IBaseState* const pState);
-		
 		void Update();
-		void Render(void);
+		void PushState(IBaseState* const pState);
+
 	public:
 		static Engine* Get(void);
 		static void DeleteInstance(void);
-
 		const bool GetQuit() const { return m_quit; }
-		
-		void RunFrame(void* params);
 
 		void Init(IBaseState* const pFirstState);
 		void Exit(void);
+		void RunFrame(void* params);
+
 	};
 
 	static Engine* Get()

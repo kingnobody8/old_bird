@@ -3,6 +3,8 @@
 #include "component/object.h"
 #include <assert.h>
 #include "render/renderer.h"
+#include "asset/loader.h"
+#include "asset/resource_path.h"
 
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
@@ -60,8 +62,8 @@ namespace engine
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 		//Initialize the rendering system
-		__todo()
 		render::SetupSdl();
+		__todo() //setup render layers here?
 		//Render::CRenderer::Get()->Init();
 
 #ifdef MOBILE
@@ -88,6 +90,9 @@ namespace engine
 		//Start timer
 		this->m_timer.Restart();
 
+		util::JSON doc = asset::FileLoaderJson(getResourcePath() + "assets/test.json");
+		m_pRoot = static_cast<component::CGroup*>(component::LoadObjectFromJson(doc));
+
 		//Don't quit
 		m_quit = false;
 	}
@@ -106,6 +111,7 @@ namespace engine
 		//	this->m_pCurrState = null;
 		//}
 
+		__todo() //delete render layers here?
 		//Destroy Renderer
 		//Render::CRenderer::DeleteInstance();
 
@@ -126,6 +132,7 @@ namespace engine
 	void Engine::RunFrame(void* params)
 	{
 		this->Update();
+		render::DoRender();
 	}
 
 	void Engine::Update(void)
@@ -133,14 +140,15 @@ namespace engine
 		if (m_quit)
 			return;
 
-		//Update the timer
-		this->m_timer.Signal();
-		//util::Time delta = this->m_timer.Delta();
-
-		//If a new state is available, then set it
+		//If a new state is available, then change states
 		if (this->m_pNextState)
 			this->PushState(this->m_pNextState);
 
+		//Update the timer
+		this->m_timer.Signal();
+		util::Time delta = this->m_timer.Delta();
+
+		//Poll events
 		SDL_Event tEvent;
 		while (SDL_PollEvent(&tEvent))
 		{
@@ -160,16 +168,9 @@ namespace engine
 		//		this->m_pCurrState->Update(delta);
 
 		//	Part::IPart::UpdateParts(delta);
-
-		//	Render::CRenderer::Get()->Update(delta);
-			this->Render();
 		//}
 	}
-	void Engine::Render(void)
-	{
-		render::DoRender();
-		//Render::CRenderer::Get()->Render(this->m_pRoot);
-	}
+	
 	void Engine::PushState(IBaseState* pState)
 	{
 		assert(pState);
