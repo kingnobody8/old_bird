@@ -47,16 +47,20 @@ namespace engine
 			b2PolygonShape		m_shape;
 			util::Flag08		m_flag;
 			SDL_Color			m_clr;
+			float				m_zed;
 
 		public:
 			IRenderNode(void);
+			virtual ~IRenderNode() = 0;
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam) = 0;
 			virtual const b2PolygonShape& CalcShape() = 0;
 			const util::shape::AABB CalcAABB();
 			const bool CheckInView(const b2PolygonShape& view);
 			inline void SetColor(const SDL_Color& clr) { m_clr = clr; }
+			inline void SetZed(const float& zed) { m_zed = zed; }
 			inline const SDL_Color& GetColor() const { return m_clr; }
 			inline CRenderLayer* GetLayer() const { return m_pLayer; }
+			inline const float& GetZed() const { return m_zed; }
 
 			void Register(const std::string& layer);
 			void Unregister(void);

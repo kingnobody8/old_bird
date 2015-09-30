@@ -25,6 +25,7 @@
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\rect_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
@@ -38,10 +39,11 @@
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
+    <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_node.h" />
-    <ClInclude Include="..\..\..\source\engine\scripts\script_priorities.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\rect_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\script_priorities.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />

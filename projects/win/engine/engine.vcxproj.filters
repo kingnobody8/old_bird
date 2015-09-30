@@ -46,6 +46,9 @@
     <ClCompile Include="..\..\..\source\engine\script\script_priorities.cpp">
       <Filter>script</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -70,14 +73,17 @@
     <ClInclude Include="..\..\..\source\engine\asset\resource_path.h">
       <Filter>asset</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\scripts\script_priorities.h">
-      <Filter>script</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\renderable\rect_part.h">
       <Filter>script\renderable</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h">
       <Filter>script\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\render_layer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\script_priorities.h">
+      <Filter>script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

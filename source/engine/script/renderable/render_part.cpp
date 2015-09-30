@@ -1,5 +1,6 @@
 #include "render_part.h"
 #include "render/render_node.h"
+#include "component/object.h"
 
 namespace engine
 {
@@ -27,7 +28,9 @@ namespace engine
 			{
 				m_szLayer = json["layer"].GetString();
 				m_color = ((const util::JSON&)(json["color"])).GetColor();
-				m_pNode->SetColor(m_color.SDL());
+
+				SetLayer(m_szLayer);
+				SetLocalColor(m_color);
 			}
 
 			VIRTUAL void IRenderPart::OnVisibilityChanged(const bool visible)
@@ -59,6 +62,12 @@ namespace engine
 				__todo() //this needs to do a vertical search for ColorModPart and see what colors it applies to us so we can properly set the nod
 				m_color = clr;
 				m_pNode->SetColor(clr.SDL());
+			}
+			void IRenderPart::SetLayer(const std::string& szLayer)
+			{
+				m_szLayer = szLayer;
+				if (m_pOwner->GetWorldVisible())
+					m_pNode->Register(szLayer);
 			}
 		}
 	}

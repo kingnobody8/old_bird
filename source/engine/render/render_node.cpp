@@ -1,6 +1,7 @@
 #include "render_node.h"
 #include "render_layer.h"
 #include "func.h"
+#include "render_layer.h"
 
 namespace engine
 {
@@ -12,29 +13,32 @@ namespace engine
 
 		void IRenderNode::Register(const std::string& layer)
 		{
-			__not_implemented(IRenderNode::Register);
-			/*CRenderLayer* temp = CRenderer::Get()->GetLayer(layer);
+			Unregister();
 
-			if (temp == null)
-			return;
+			CRenderLayer* tmp = CRenderLayer::FindLayer(layer);
+			assert(tmp);
 
-			temp->RegisterNode(this);
-			this->m_pLayer = temp;*/
+			tmp->RegisterNode(this);
+			this->m_pLayer = tmp;
 		}
 		void IRenderNode::Unregister(void)
 		{
-			__not_implemented(IRenderNode::UnRegister);
-			/*if (this->m_pLayer)
+			if (this->m_pLayer)
 			{
-			this->m_pLayer->UnregisterNode(this);
-			this->m_pLayer = null;
-			}*/
+				this->m_pLayer->UnregisterNode(this);
+				this->m_pLayer = null;
+			}
 		}
 
 		IRenderNode::IRenderNode(void)
 			: m_pLayer(null)
 			, m_flag(MOVE_DIRTY | CULL_DIRTY)
+			, m_zed(0.0f)
 		{
+		}
+		VIRTUAL IRenderNode::~IRenderNode()
+		{
+			Unregister();
 		}
 		const bool IRenderNode::CheckInView(const b2PolygonShape& view)
 		{
@@ -70,7 +74,7 @@ namespace engine
 		//SPRITE
 		VIRTUAL const b2PolygonShape& CRenderNodeSprite::CalcShape()
 		{
-			if (m_flag.Bit(EFlag::MOVE_DIRTY))
+			if (m_flag.Flag(EFlag::MOVE_DIRTY))
 			{
 				m_flag.BitOff(EFlag::MOVE_DIRTY);
 

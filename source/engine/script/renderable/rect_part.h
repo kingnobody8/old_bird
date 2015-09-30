@@ -22,6 +22,8 @@ namespace engine
 				CRectPart();
 				virtual ~CRectPart();
 				CRectPart& operator= (const CRectPart& that);
+			
+				virtual void OnMatrixChanged(void);
 
 				virtual void LoadJson(const util::JSON& json);
 

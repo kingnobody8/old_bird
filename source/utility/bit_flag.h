@@ -65,6 +65,35 @@ namespace util
 			assert(bit < this->GetMaxBit());
 			return (val & (1 << bit)) != 0;
 		}
+
+
+		//Turns on the bits corresponding to this flag
+		void FlagOn(const type& flag)
+		{
+			__not_implemented(BitFlag::FlagOn);
+		}
+		//Turns off the bits corresponding to this flag
+		void FlagOff(const type& flag)
+		{
+			__not_implemented(BitFlag::FlagOff);
+		}
+		//Toggles the bits corresonding to this flag
+		void FlagTog()
+		{
+			__not_implemented(BitFlag::FlagTog);
+		}
+		//Sets a value
+		void FlagBool(const type& flag, const bool b)
+		{
+			__not_implemented(BitFlag::FlagBool);
+		}
+		//Returns the result of the corresponding bits
+		bool Flag(const type& flag) const
+		{
+			__not_implemented(BitFlag::Flag);
+			return false;// (flag & type) != 0;
+		}
+
 		// Zeros out the whole flag
 		void ZeroOut(void)
 		{

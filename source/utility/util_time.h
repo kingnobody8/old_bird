@@ -4,7 +4,6 @@
 
 namespace util
 {
-
 	//forward declaration
 	class Time;
 
@@ -130,7 +129,7 @@ namespace util
 		// Subtract v from m_time, with underflow clamp
 		inline void TimeDiff(timeval_t t)
 		{
-			// in underflow clamp to zero
+			// if underflow clamp to zero
 			if (t > m_time)
 			{
 				m_time = 0;

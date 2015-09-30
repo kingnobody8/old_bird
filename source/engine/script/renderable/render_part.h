@@ -39,6 +39,7 @@ namespace engine
 				const util::Color GetWorldColor() const;
 
 				void SetLocalColor(const util::Color& clr);
+				void SetLayer(const std::string& szLayer);
 			};
 		}
 	}

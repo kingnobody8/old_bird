@@ -13,7 +13,7 @@ namespace engine
 		CObject::CObject(void)
 			: m_pParent(null)
 			, m_fZed(0.0f)
-			, m_bVisible(VisibilityMask::SELF | VisibilityMask::PARENT)
+			, m_bVisible(3) __todo() //fix this to use the real flags
 		{
 		}
 		VIRTUAL CObject::~CObject(void)
@@ -130,6 +130,8 @@ namespace engine
 		{
 			//Object
 			this->m_szName = json["name"].GetString();
+			bool visible = json["visible"].GetBool();
+			SetVisible(visible);
 			this->m_fZed = json["matrix"]["position"]["z"].GetDouble();
 			this->SetLocalMatrix(((const util::JSON)(json["matrix"])).GetMatrix());
 			const std::vector<util::JSON> parts = ((const util::JSON)(json["parts"])).GetArray<util::JSON>();
@@ -138,6 +140,7 @@ namespace engine
 			{
 				std::string type = parts[i]["type"].GetString();
 				IPart* pPart = IPart::CreatePart(type);
+				pPart->SetOwner(this); __todo() //is this really the best flow for creating, loading, and attaching parts???
 				pPart->LoadJson(parts[i]);
 				this->AttachPart(pPart);
 			}

@@ -5,7 +5,7 @@
 #include "render/renderer.h"
 #include "asset/loader.h"
 #include "asset/resource_path.h"
-
+#include "render/render_layer.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -63,6 +63,7 @@ namespace engine
 
 		//Initialize the rendering system
 		render::SetupSdl();
+		render::CRenderLayer::CreateLayer("ui_layer", 0, null);
 		__todo() //setup render layers here?
 		//Render::CRenderer::Get()->Init();
 
@@ -112,6 +113,7 @@ namespace engine
 		//}
 
 		__todo() //delete render layers here?
+		render::CRenderLayer::DestroyLayers();
 		//Destroy Renderer
 		//Render::CRenderer::DeleteInstance();
 

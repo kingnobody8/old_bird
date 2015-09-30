@@ -6,6 +6,7 @@
 #include "macro.h"
 #include "render_node.h"
 #include "util_time.h"
+#include "render_layer.h"
 
 namespace engine
 {
@@ -62,44 +63,48 @@ namespace engine
 			SDL_SetRenderTarget(s_sdlRen, NULL);
 			SDL_RenderClear(s_sdlRen);
 
-			render::CRenderNodeRect node;
-			node.SetColor(util::Color::BLACK.SDL());
-			node.SetFill(false);
-			util::shape::AABB tmp;
-			tmp.m_min = util::math::vec2(-64, -128);
-			tmp.m_max = util::math::vec2(64, 32);
-			node.SetAABB(tmp);
-
 			util::math::Type2<int> logical_size;
 			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.w, &logical_size.h);
-			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
-			SDL_SetRenderDrawColor(s_sdlRen, 32, 32, 32, 255);
 
-			render::CRenderNodeLine line;
-			line.SetColor(util::Color::WHITE.SDL());
-			util::shape::Segment seg;
-			seg.start = node.GetAABB().m_max;
-			seg.end = node.GetAABB().m_min;
-			line.SetLine(seg);
+			render::CRenderNodeRect node;
+			node.SetColor(util::Color::WHITE.SDL());
+			node.SetFill(false);
+			util::shape::AABB tmp;
+			tmp.m_min = util::math::vec2(logical_size.w * -0.25f, logical_size.h * -0.25f);
+			tmp.m_max = util::math::vec2(logical_size.w * 0.25f, logical_size.h * 0.25f);
+			node.SetAABB(tmp);
+			node(s_sdlRen, util::math::Matrix2D());
 
 			SDL_RenderDrawLine(s_sdlRen,
-				0,0,
+				0, 0,
 				logical_size.x, logical_size.y);
 
 			SDL_RenderDrawLine(s_sdlRen,
 				0, logical_size.y,
 				logical_size.x, 0);
 
+			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			SDL_SetRenderDrawColor(s_sdlRen, 32, 32, 32, 255);
 
-		//	const util::Time t = util::Time::GetTimeSinceEpoch();
+			//	render::CRenderNodeLine line;
+			//	line.SetColor(util::Color::WHITE.SDL());
+			//	util::shape::Segment seg;
+			//	seg.start = node.GetAABB().m_max;
+			//	seg.end = node.GetAABB().m_min;
+			//	line.SetLine(seg);
 
-			util::math::Matrix2D cam =util::math::Matrix2D(vec2(0,0), vec2(1,1), 0);
-			const util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(cam);
 
-			//node(s_sdlRen, inv_cam);
-			line(s_sdlRen, inv_cam);
-			node.SetAABB(line.CalcAABB());
-			node(s_sdlRen, inv_cam);
+			////	const util::Time t = util::Time::GetTimeSinceEpoch();
+
+			//	util::math::Matrix2D cam =util::math::Matrix2D(vec2(0,0), vec2(1,1), 0);
+			//	const util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(cam);
+
+			//	//node(s_sdlRen, inv_cam);
+			//	line(s_sdlRen, inv_cam);
+			//	node.SetAABB(line.CalcAABB());
+			//	node(s_sdlRen, inv_cam);
+
+			CRenderLayer::RenderLayers(s_sdlRen);
 
 			//Present
 			SDL_RenderPresent(s_sdlRen);
