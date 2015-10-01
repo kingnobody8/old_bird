@@ -67,31 +67,38 @@ namespace util
 		}
 
 
-		//Turns on the bits corresponding to this flag
+		//Turns on the bits corresponding to this flag(s)
 		void FlagOn(const type& flag)
 		{
-			__not_implemented(BitFlag::FlagOn);
+			val |= flag;
 		}
-		//Turns off the bits corresponding to this flag
+		//Turns off the bits corresponding to this flag(s)
 		void FlagOff(const type& flag)
 		{
-			__not_implemented(BitFlag::FlagOff);
+			val &= ~flag;
 		}
-		//Toggles the bits corresonding to this flag
-		void FlagTog()
+		//Toggles the bits corresonding to this flag(s)
+		void FlagTog(const type& flag)
 		{
-			__not_implemented(BitFlag::FlagTog);
+			val ^= flag;
 		}
 		//Sets a value
 		void FlagBool(const type& flag, const bool b)
 		{
-			__not_implemented(BitFlag::FlagBool);
+			if (b)
+			{
+				val |= flag;
+			}
+			else
+			{
+				val &= ~flag;
+			}
 		}
-		//Returns the result of the corresponding bits
+		//Returns the result of the corresponding flag(s)
 		bool Flag(const type& flag) const
 		{
-			__not_implemented(BitFlag::Flag);
-			return false;// (flag & type) != 0;
+			const type tmp = val & flag;
+			return tmp == flag;
 		}
 
 		// Zeros out the whole flag

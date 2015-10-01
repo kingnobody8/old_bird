@@ -51,7 +51,6 @@
     <ClInclude Include="..\..\..\source\utility\util_time.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\utility\bit_flag.cpp" />
     <ClCompile Include="..\..\..\source\utility\color.cpp" />
     <ClCompile Include="..\..\..\source\utility\event\publisher.cpp" />
     <ClCompile Include="..\..\..\source\utility\event\subscriber.cpp" />
@@ -120,25 +119,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;../../../api/win/box2d/lib/x86/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;../../../api/win/box2d/lib/x86/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;../../../api/win/box2d/lib/x64/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;../../../api/win/box2d/lib/x64/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -156,7 +155,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -176,7 +175,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -200,7 +199,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -225,7 +224,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
