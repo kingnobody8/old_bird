@@ -14,9 +14,7 @@ namespace util
 		public:
 			Line(); 
 			virtual ~Line();
-			__todo() //these parallel and orthoganal functions should go with IDimOne because that will do the switch statement
-			virtual const bool IsParallel(const IDimOne* const test) const;
-			virtual const bool IsOrthoganal(const IDimOne* const test) const;
+			virtual const float GetSlope() const { return dir.y / dir.x; };
 			virtual bool Intersect(const math::vec2& point) const;
 
 			void Create(const math::vec2& point_on_line, const math::vec2& direction);

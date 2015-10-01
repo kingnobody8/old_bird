@@ -28,6 +28,8 @@ namespace util
 			return *this;
 		}
 
+		/*BIT FUNCS USE 0, 1, 2, 3, ect*/
+
 		// Turns a bit ON
 		void BitOn(const uchar& bit)
 		{
@@ -46,7 +48,7 @@ namespace util
 			assert(bit < this->GetMaxBit());
 			val ^= (1 << bit);
 		}
-		// Sets a value
+		// Sets the given bit to the boolen value
 		void BitBool(const uchar& bit, const bool b)
 		{
 			assert(bit < this->GetMaxBit());
@@ -66,6 +68,7 @@ namespace util
 			return (val & (1 << bit)) != 0;
 		}
 
+		/*FLAG FUNCS USE 0x01, 0x02, 0x04, 0x08, ect*/
 
 		//Turns on the bits corresponding to this flag(s)
 		void FlagOn(const type& flag)
@@ -82,7 +85,7 @@ namespace util
 		{
 			val ^= flag;
 		}
-		//Sets a value
+		//Sets the given flag(s) to the boolean value
 		void FlagBool(const type& flag, const bool b)
 		{
 			if (b)

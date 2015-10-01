@@ -10,21 +10,16 @@ namespace util
 		{
 			m_eType = IShape::EShape::SEGMENT;
 		}
-
+		Segment::Segment(const math::vec2 s, const math::vec2 e)
+			: start(s)
+			, end(e)
+		{
+			m_eType = IShape::EShape::SEGMENT;
+		}
 		VIRTUAL Segment::~Segment()
 		{
 		}
 
-		VIRTUAL const bool Segment::IsParallel(const IDimOne* const test) const
-		{
-			__not_implemented(Segment::IsParallel);
-			return false;
-		}
-		VIRTUAL const bool Segment::IsOrthoganal(const IDimOne* const test) const
-		{
-			__not_implemented(Segment::IsOrthoganal);
-			return false;
-		}
 		VIRTUAL const bool Segment::Intersect(const IDimOne* const test, math::vec2* result) const
 		{
 			__not_implemented(Segment::Intersect);

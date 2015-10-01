@@ -10,6 +10,9 @@ namespace util
 		public:
 			Ray();
 			virtual ~Ray();
+
+			virtual const float GetSlope() const { return dir.y / dir.x; }
+
 			virtual bool Intersect(const math::vec2& point) const;
 			virtual bool Intersect(const IShape* const test) const;
 

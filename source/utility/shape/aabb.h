@@ -16,6 +16,8 @@ namespace util
 			virtual bool Intersect(const math::vec2& point) const;
 			bool IsInvalid() const { return m_min.x > m_max.x || m_min.y > m_max.y; }
 
+			void GetPoints(math::vec2 ary[4]) const;
+
 			void Create(const math::vec2& min, const math::vec2& max);
 			virtual const math::vec2 FindClosestPointOnEdge(const math::vec2& point) const;
 

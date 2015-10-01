@@ -28,9 +28,10 @@ namespace util
 
 		class IDimOne : public IShape //this is for one dimensional shapes [ LINE, SEGMENT, & RAY ]
 		{
-			virtual const bool IsParallel(const IDimOne* const test) const = 0;
-			virtual const bool IsOrthoganal(const IDimOne* const test) const = 0;
+			const bool IsParallel(const IDimOne* const test) const { return EPSI(GetSlope(), test->GetSlope()); }
+			const bool IsOrthoganal(const IDimOne* const test) const { return EPSI(GetSlope(), 1.0f / test->GetSlope()); }
 			const bool IsOblique(const IDimOne* const test) const { return !IsParallel(test) && !IsOrthoganal(test); }
+			virtual const float GetSlope() const = 0;
 			virtual const bool Intersect(const IDimOne* const test, math::vec2* result = nullptr) const = 0;
 		};
 
