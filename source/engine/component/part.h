@@ -5,6 +5,16 @@ namespace engine
 {
 	namespace component
 	{
+		/*
+		Part normal use flow is as follows
+		Parts are created during an object's load json
+		once created the part's load json is called (just set your local variables here, do not create anything or talk to any outside class/instance)
+		then the part is attached to it's owner
+		which will call the part's on attach (you should only do something here if this is a part that is dynamically added outside of load json
+		sometime later the part's Init func will be called, from here on you may create any new stuff and talk to other classes/instances
+		*/
+
+
 		class IPart
 		{
 			//Internal

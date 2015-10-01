@@ -74,9 +74,9 @@ namespace engine
 		//SPRITE
 		VIRTUAL const b2PolygonShape& CRenderNodeSprite::CalcShape()
 		{
-			if (m_flag.Flag(EFlag::MOVE_DIRTY))
+			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
 			{
-				m_flag.BitOff(EFlag::MOVE_DIRTY);
+				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
 
 				Uint32 format;
 				int access;
@@ -172,13 +172,13 @@ namespace engine
 		void CRenderNodeLine::SetLine(const util::shape::Segment& seg)
 		{
 			this->m_seg = seg;
-			m_flag = EFlag::MOVE_DIRTY | EFlag::CULL_DIRTY;
+			m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY;
 		}
 		VIRTUAL const b2PolygonShape& CRenderNodeLine::CalcShape()
 		{
-			if (m_flag.Bit(EFlag::MOVE_DIRTY))
+			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
 			{
-				m_flag.BitOff(EFlag::MOVE_DIRTY);
+				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
 
 				util::shape::AABB box;
 				box.m_min = util::math::vec2(Min(m_seg.start.x, m_seg.end.x), Min(m_seg.start.y, m_seg.end.y));
@@ -218,14 +218,14 @@ namespace engine
 		void CRenderNodeRect::SetAABB(const util::shape::AABB& aabb)
 		{
 			this->m_aabb = aabb;
-			m_flag = EFlag::MOVE_DIRTY | EFlag::CULL_DIRTY;
+			m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY;
 
 		}
 		VIRTUAL const b2PolygonShape& CRenderNodeRect::CalcShape()
 		{
-			if (m_flag.Bit(EFlag::MOVE_DIRTY))
+			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
 			{
-				m_flag.BitOff(EFlag::MOVE_DIRTY);
+				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
 
 				m_shape.SetAsBox((float32)m_aabb.CalcExtends().x, (float32)m_aabb.CalcExtends().h,
 				b2Vec2((float32)m_aabb.CalcCenter().x, (float32)m_aabb.CalcCenter().y), 0);

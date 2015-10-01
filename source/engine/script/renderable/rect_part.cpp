@@ -31,11 +31,16 @@ namespace engine
 				__todo() //maybe this should pass in our local and world matricies
 			}
 
+			VIRTUAL void CRectPart::Init()
+			{
+				IRenderPart::Init();
+				static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
+			}
+
 			VIRTUAL void CRectPart::LoadJson(const util::JSON& json)
 			{
 				IRenderPart::LoadJson(json);
 				m_aabb = ((const util::JSON&)(json["aabb"])).GetAabb();
-				static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
 			}
 		}
 	}

@@ -9,10 +9,10 @@ namespace engine
 		class IPart;
 		class CGroup;
 
-		enum VisibilityMask
+		enum VisibilityFlag
 		{
-			SELF,
-			PARENT
+			SELF = 0x01,
+			PARENT = 0x02
 		};
 
 		class CObject
@@ -63,8 +63,8 @@ namespace engine
 			inline const std::vector<IPart*>&		GetParts(void) const { return this->m_vParts; }
 			inline const util::math::Matrix2D&		GetLocalMatrix(void) const { return this->m_cMatLocal; }
 			inline const float&						GetLocalZed(void) const { return this->m_fZed; }
-			inline const bool						GetLocalVisible(void) const { return this->m_bVisible.Bit(VisibilityMask::SELF); }
-			inline const bool						GetWorldVisible(void) const { return this->m_bVisible.Bit(VisibilityMask::SELF) && this->m_bVisible.Bit(VisibilityMask::PARENT); }
+			inline const bool						GetLocalVisible(void) const { return this->m_bVisible.Flag(VisibilityFlag::SELF); }
+			inline const bool						GetWorldVisible(void) const { return this->m_bVisible.Flag(VisibilityFlag::SELF | VisibilityFlag::PARENT); }
 
 			inline const vec2						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
 			inline const vec2						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }

@@ -13,7 +13,7 @@ namespace engine
 		CObject::CObject(void)
 			: m_pParent(null)
 			, m_fZed(0.0f)
-			, m_bVisible(3) __todo() //fix this to use the real flags
+			, m_bVisible(VisibilityFlag::SELF | VisibilityFlag::PARENT)
 		{
 		}
 		VIRTUAL CObject::~CObject(void)
@@ -140,7 +140,6 @@ namespace engine
 			{
 				std::string type = parts[i]["type"].GetString();
 				IPart* pPart = IPart::CreatePart(type);
-				pPart->SetOwner(this); __todo() //is this really the best flow for creating, loading, and attaching parts???
 				pPart->LoadJson(parts[i]);
 				this->AttachPart(pPart);
 			}
@@ -182,18 +181,12 @@ namespace engine
 		}
 		const util::shape::AABB CObject::CalcAabb(void) const
 		{
-			//TODO this doesn't take into account the position of the aabb, we need the points in world space
-
-			__todo()
-
-			util::shape::AABB aabb;
-//aabb.MakeLimits();
-//std::list<IPart*> list = GetPartList(this);
-//for (auto iter = list.begin(); iter != list.end(); ++iter)
-//{
-//	aabb.Extend((*iter)->CalcAABB());
-//}
-//
+			util::shape::AABB aabb =  util::shape::AABB::INVALID_AABB;
+			std::list<IPart*> list = GetPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				aabb.Stretch((*iter)->CalcAABB());
+			}
 			return aabb;
 		}
 
@@ -305,7 +298,7 @@ namespace engine
 
 		VIRTUAL void CObject::SetVisible(const bool bVis)
 		{
-			m_bVisible.BitBool(VisibilityMask::SELF, bVis);
+			m_bVisible.FlagBool(VisibilityFlag::SELF, bVis);
 			OnVisibilityChanged(bVis);
 		}
 
@@ -354,7 +347,7 @@ namespace engine
 		}
 		void CObject::OnParentVisibilityChanged(const bool bVisible)
 		{
-			this->m_bVisible.BitBool(VisibilityMask::PARENT, bVisible);
+			this->m_bVisible.FlagBool(VisibilityFlag::PARENT, bVisible);
 			std::list<IPart*> list = GetPartList(this);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
@@ -467,7 +460,7 @@ namespace engine
 		//Sets
 		VIRTUAL void CGroup::SetVisible(const bool bVis)
 		{
-			m_bVisible.BitBool(VisibilityMask::SELF, bVis);
+			m_bVisible.FlagBool(VisibilityFlag::SELF, bVis);
 			TraverseChildren(this, [&bVis](CObject* pChild)
 			{
 				pChild->OnParentVisibilityChanged(bVis);

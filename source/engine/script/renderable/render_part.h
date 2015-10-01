@@ -25,6 +25,8 @@ namespace engine
 				IRenderPart(void);
 				virtual ~IRenderPart(void) = 0;
 				IRenderPart& operator= (const IRenderPart& that);
+
+				virtual void Init();
 				virtual void LoadJson(const util::JSON& json);
 
 				virtual void OnVisibilityChanged(const bool visible);

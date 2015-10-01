@@ -1,6 +1,7 @@
 #include "aabb.h"
 #include "segment.h"
 #include "enums.h"
+#include "func.h"
 
 namespace util
 {
@@ -31,6 +32,31 @@ namespace util
 			ary[4] = m_min + math::vec2(m_max.x, 0);
 		}
 
+		void AABB::MakeLimits()
+		{
+			__not_implemented(AABB::MakeLimits);
+		}
+		void AABB::Stretch(const math::vec2& point)
+		{
+			if (IsInvalid())
+			{
+				m_min = m_max = point;
+				return;
+			}
+			m_min.x = Min(point.x, m_min.x);
+			m_min.y = Min(point.y, m_min.y);
+			m_max.x = Max(point.x, m_min.x);
+			m_max.y = Max(point.y, m_min.y);
+		}
+
+		void AABB::Stretch(const AABB& box)
+		{
+			if (box.IsInvalid())
+				return;
+
+			Stretch(box.m_min);
+			Stretch(box.m_max);
+		}
 
 		VIRTUAL bool AABB::Intersect(const math::vec2& point) const
 		{

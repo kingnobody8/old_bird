@@ -36,10 +36,9 @@ namespace engine
 		class IRenderNode
 		{
 		public:
-			enum EFlag { 
+			enum NodeStateFlag { 
 				MOVE_DIRTY = 0x01,
 				CULL_DIRTY = 0x02,
-				FLAG_COUNT = 2 
 			};
 
 		protected:

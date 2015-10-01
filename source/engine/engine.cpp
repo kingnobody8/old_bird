@@ -6,6 +6,7 @@
 #include "asset/loader.h"
 #include "asset/resource_path.h"
 #include "render/render_layer.h"
+#include "component/part.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -93,6 +94,11 @@ namespace engine
 
 		util::JSON doc = asset::FileLoaderJson(getResourcePath() + "assets/test.json");
 		m_pRoot = static_cast<component::CGroup*>(component::LoadObjectFromJson(doc));
+		component::PartList parts = component::GetPartList(m_pRoot);
+		for (component::PartIter iter = parts.begin(); iter != parts.end(); ++iter)
+		{
+			(*iter)->Init();
+		}
 
 		//Don't quit
 		m_quit = false;

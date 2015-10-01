@@ -25,6 +25,7 @@ namespace engine
 			
 				virtual void OnMatrixChanged(void);
 
+				virtual void Init();
 				virtual void LoadJson(const util::JSON& json);
 
 			};

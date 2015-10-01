@@ -21,6 +21,10 @@ namespace util
 			void Create(const math::vec2& min, const math::vec2& max);
 			virtual const math::vec2 FindClosestPointOnEdge(const math::vec2& point) const;
 
+			void MakeLimits();
+			void Stretch(const math::vec2& point);
+			void Stretch(const AABB& box);
+
 			inline const math::vec2 CalcSize() const { return m_max - m_min; }
 			inline const math::vec2 CalcExtends() const { return (m_max - m_min) * 0.5f; }
 			inline const math::vec2 CalcCenter() const { return m_min + (m_max - m_min) * 0.5f; }

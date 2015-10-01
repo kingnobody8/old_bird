@@ -24,13 +24,16 @@ namespace engine
 			{
 			}
 
+			VIRTUAL void IRenderPart::Init()
+			{
+				SetLayer(m_szLayer);
+				SetLocalColor(m_color);
+			}
+
 			VIRTUAL void IRenderPart::LoadJson(const util::JSON& json)
 			{
 				m_szLayer = json["layer"].GetString();
 				m_color = ((const util::JSON&)(json["color"])).GetColor();
-
-				SetLayer(m_szLayer);
-				SetLocalColor(m_color);
 			}
 
 			VIRTUAL void IRenderPart::OnVisibilityChanged(const bool visible)
