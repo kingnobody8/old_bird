@@ -11,7 +11,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+#*.dll we need this (for SDL)
 
 # Fortran module files
 *.mod
