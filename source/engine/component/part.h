@@ -76,6 +76,7 @@ namespace engine
 			//virtual rapidjson::Document SaveJson(void) const; //TODO
 
 			virtual void OnMatrixChanged(void){};
+			virtual void OnZedChanged(void){};
 			virtual void OnVisibilityChanged(const bool visible){};
 
 			virtual const util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }

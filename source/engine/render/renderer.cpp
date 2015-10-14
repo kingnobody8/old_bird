@@ -104,7 +104,7 @@ namespace engine
 			//	node.SetAABB(line.CalcAABB());
 			//	node(s_sdlRen, inv_cam);
 
-			CRenderLayer::RenderLayers(s_sdlRen);
+			CRenderLayer::RenderAllLayers(s_sdlRen);
 
 			//Present
 			SDL_RenderPresent(s_sdlRen);

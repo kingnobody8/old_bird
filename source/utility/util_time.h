@@ -80,8 +80,8 @@ namespace util
 		Time();
 		Time(const u64& milli);
 		Time(const Date& d);
-		timeval_t Milli() const { return m_time; }
-		double ToDouble() { return (double)m_time; }
+		const timeval_t& Milli() const { return m_time; }
+		const double ToDouble() const { return (double)m_time; }
 		const Date ToUtc() const;
 		const Date ToLocal() const;
 		

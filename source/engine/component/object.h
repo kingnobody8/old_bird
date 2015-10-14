@@ -116,6 +116,7 @@ namespace engine
 
 		protected:
 			void OnMatrixChanged(void);
+			void OnZedChanged(void);
 			void OnVisibilityChanged(const bool bVisible);
 			void OnParentVisibilityChanged(const bool bVisible);
 		};

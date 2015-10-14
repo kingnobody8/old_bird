@@ -1,6 +1,7 @@
 #include "rect_part.h"
 #include "../script_priorities.h"
 #include "render/render_node.h"
+#include "component/object.h"
 
 namespace engine
 {
@@ -28,13 +29,28 @@ namespace engine
 
 			VIRTUAL void CRectPart::OnMatrixChanged(void)
 			{
-				__todo() //maybe this should pass in our local and world matricies
+				const util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
+				const util::math::vec2 offset = wmat.GetPosition() - m_aabb.CalcCenter();
+				m_aabb.m_min += offset;
+				m_aabb.m_max += offset;
+				static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
+			}
+
+			VIRTUAL void CRectPart::OnZedChanged(void)
+			{
+				const float wzed = m_pOwner->CalcWorldZed();
+				m_pNode->SetZed(wzed);
 			}
 
 			VIRTUAL void CRectPart::Init()
 			{
 				IRenderPart::Init();
-				static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
+				
+				//Setup the positions
+				OnMatrixChanged();
+				OnZedChanged();
+
+				//static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
 			}
 
 			VIRTUAL void CRectPart::LoadJson(const util::JSON& json)

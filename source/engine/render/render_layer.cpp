@@ -50,7 +50,7 @@ namespace engine
 			s_layers.clear();
 		}
 
-		STATIC void CRenderLayer::RenderLayers(SDL_Renderer* pRen)
+		STATIC void CRenderLayer::RenderAllLayers(SDL_Renderer* pRen)
 		{
 			for (auto iter = s_layers.begin(); iter != s_layers.end(); ++iter)
 				(*iter).m_pLayer->DoRender(pRen);

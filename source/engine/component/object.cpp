@@ -337,6 +337,14 @@ namespace engine
 				(*iter)->OnMatrixChanged();
 			}
 		}
+		void CObject::OnZedChanged(void)
+		{
+			std::list<IPart*> list = GetPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				(*iter)->OnZedChanged();
+			}
+		}
 		void CObject::OnVisibilityChanged(const bool bVisible)
 		{
 			std::list<IPart*> list = GetPartList(this);

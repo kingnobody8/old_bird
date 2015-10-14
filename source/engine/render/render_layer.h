@@ -30,7 +30,7 @@ namespace engine
 			static CRenderLayer* FindLayer(const std::string& szLayer);
 			static CRenderLayer* CreateLayer(const std::string& name, const int& sort_rank, CCamera* const pCam);
 			static void DestroyLayers();
-			static void RenderLayers(SDL_Renderer* pRen);
+			static void RenderAllLayers(SDL_Renderer* pRen);
 
 		private:
 			std::list<IRenderNode*> m_vNodes;

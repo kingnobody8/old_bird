@@ -155,6 +155,11 @@ namespace engine
 		//Update the timer
 		this->m_timer.Signal();
 		util::Time delta = this->m_timer.Delta();
+		
+		__todo()//remove this, this was for testing only
+		util::math::Matrix2D mat = m_pRoot->GetLocalMatrix();
+		mat.SetRotationZ((this->m_timer.Total().ToDouble() / 1000) * 100);
+		m_pRoot->SetLocalMatrix(mat);
 
 		//Poll events
 		SDL_Event tEvent;
