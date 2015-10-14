@@ -7,6 +7,8 @@ namespace engine
 	{
 		namespace renderable
 		{
+			//NOTE: due to the limitations of SDL render rects, the final rotation is ignored and the rect is rendered as an AABB
+
 			class CRectPart : public IRenderPart
 			{
 			public:

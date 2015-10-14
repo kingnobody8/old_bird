@@ -31,9 +31,12 @@ namespace engine
 			{
 				const util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
 				const util::math::vec2 offset = wmat.GetPosition() - m_aabb.CalcCenter();
-				m_aabb.m_min += offset;
-				m_aabb.m_max += offset;
-				static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
+				util::shape::AABB send = m_aabb;
+				send.m_min *= wmat.GetScale();
+				send.m_max *= wmat.GetScale();
+				send.m_min += offset;
+				send.m_max += offset;
+				static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(send);
 			}
 
 			VIRTUAL void CRectPart::OnZedChanged(void)

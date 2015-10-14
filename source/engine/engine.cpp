@@ -158,7 +158,9 @@ namespace engine
 		
 		__todo()//remove this, this was for testing only
 		util::math::Matrix2D mat = m_pRoot->GetLocalMatrix();
-		mat.SetRotationZ((this->m_timer.Total().ToDouble() / 1000) * 100);
+		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
+		mat.SetScale(util::math::vec2(use, 1.0f));
+		mat.SetRotationZ(use * 300);
 		m_pRoot->SetLocalMatrix(mat);
 
 		//Poll events
