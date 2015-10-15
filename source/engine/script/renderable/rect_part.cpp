@@ -27,6 +27,12 @@ namespace engine
 				return *this;
 			}
 
+			VIRTUAL void CRectPart::LoadJson(const util::JSON& json)
+			{
+				IRenderPart::LoadJson(json);
+				m_aabb = ((const util::JSON&)(json["aabb"])).GetAabb();
+			}
+
 			VIRTUAL void CRectPart::OnMatrixChanged(void)
 			{
 				const util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
@@ -43,23 +49,6 @@ namespace engine
 			{
 				const float wzed = m_pOwner->CalcWorldZed();
 				m_pNode->SetZed(wzed);
-			}
-
-			VIRTUAL void CRectPart::Init()
-			{
-				IRenderPart::Init();
-				
-				//Setup the positions
-				OnMatrixChanged();
-				OnZedChanged();
-
-				//static_cast<render::CRenderNodeRect*>(m_pNode)->SetAABB(m_aabb);
-			}
-
-			VIRTUAL void CRectPart::LoadJson(const util::JSON& json)
-			{
-				IRenderPart::LoadJson(json);
-				m_aabb = ((const util::JSON&)(json["aabb"])).GetAabb();
 			}
 		}
 	}

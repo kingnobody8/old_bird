@@ -25,12 +25,10 @@ namespace engine
 				virtual ~CRectPart();
 				CRectPart& operator= (const CRectPart& that);
 			
-				virtual void OnMatrixChanged(void);
-				virtual void OnZedChanged(void);
-
-				virtual void Init();
 				virtual void LoadJson(const util::JSON& json);
 
+				virtual void OnMatrixChanged(void);
+				virtual void OnZedChanged(void);
 			};
 		}
 	}

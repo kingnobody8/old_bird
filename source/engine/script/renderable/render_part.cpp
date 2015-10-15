@@ -28,6 +28,8 @@ namespace engine
 			{
 				SetLayer(m_szLayer);
 				SetLocalColor(m_color);
+				OnMatrixChanged();
+				OnZedChanged();
 			}
 
 			VIRTUAL void IRenderPart::LoadJson(const util::JSON& json)
