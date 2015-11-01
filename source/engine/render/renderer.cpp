@@ -16,6 +16,48 @@ namespace engine
 		static SDL_Window* s_sdlWin = null;
 		const util::math::Type2<int> default_dims = util::math::Type2<int>(1280, 720);
 		const std::string app_name = "The Lark Ascending";
+		const int GRID_CELL_SIZE = 64;
+
+
+		void RenderGrid(util::math::Type2<int> half_size) __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
+		{
+			render::CRenderNodeRect node;
+			node.SetColor(util::Color::CYAN.SDL());
+			node.SetFill(false);
+			util::shape::AABB tmp;
+
+			//Grid
+			for (int x = -half_size.x; x < half_size.x; x += GRID_CELL_SIZE)
+			{
+				for (int y = -half_size.y; y < half_size.y; y += GRID_CELL_SIZE)
+				{
+					tmp.m_min = util::math::vec2(x, y);
+					tmp.m_max = util::math::vec2(x + GRID_CELL_SIZE, y + GRID_CELL_SIZE);
+					node.SetAABB(tmp);
+					node(s_sdlRen, util::math::Matrix2D());
+				}
+			}
+		}
+		void RenderCrossSection(util::math::Type2<int> logical_size)
+		{
+			SDL_SetRenderDrawColor(s_sdlRen, 255, 255, 255, 255);
+			//X-axis
+			SDL_RenderDrawLine(s_sdlRen,
+				0, (int)(logical_size.y * 0.5f),
+				logical_size.x, (int)(logical_size.y * 0.5f));
+			//Y-axis
+			SDL_RenderDrawLine(s_sdlRen,
+				(int)(logical_size.x * 0.5f), 0,
+				(int)(logical_size.x * 0.5f), logical_size.y);
+			//topleft to botright
+			SDL_RenderDrawLine(s_sdlRen,
+				0, 0,
+				logical_size.x, logical_size.y);
+			//botleft to topright
+			SDL_RenderDrawLine(s_sdlRen,
+				0, logical_size.y,
+				logical_size.x, 0);
+		}
 
 		void SetupSdl()
 		{
@@ -65,25 +107,12 @@ namespace engine
 
 			util::math::Type2<int> logical_size;
 			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.w, &logical_size.h);
-
-			render::CRenderNodeRect node;
-			node.SetColor(util::Color::WHITE.SDL());
-			node.SetFill(false);
-			util::shape::AABB tmp;
-			tmp.m_min = util::math::vec2(logical_size.w * -0.25f, logical_size.h * -0.25f);
-			tmp.m_max = util::math::vec2(logical_size.w * 0.25f, logical_size.h * 0.25f);
-			node.SetAABB(tmp);
-			node(s_sdlRen, util::math::Matrix2D());
-
-			SDL_RenderDrawLine(s_sdlRen,
-				0, 0,
-				logical_size.x, logical_size.y);
-
-			SDL_RenderDrawLine(s_sdlRen,
-				0, logical_size.y,
-				logical_size.x, 0);
-
+			util::math::Type2<int> half_size = logical_size / 2;
 			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+
+			//RenderGrid(half_size);
+			RenderCrossSection(logical_size);
+			
 			SDL_SetRenderDrawColor(s_sdlRen, 32, 32, 32, 255);
 
 			//	render::CRenderNodeLine line;
