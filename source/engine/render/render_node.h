@@ -109,7 +109,7 @@ namespace engine
 		{
 		private:
 			util::shape::AABB m_aabb;
-			bool m_fill;
+			bool m_fill = true;
 
 		public:
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
