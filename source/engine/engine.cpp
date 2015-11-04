@@ -65,10 +65,21 @@ namespace engine
 
 		//Initialize the rendering system
 		render::SetupSdl();
-		render::CCamera* cam = render::CCamera::CreateCamera("ui_cam");
-		render::CRenderLayer::CreateLayer("ui_layer", 0, cam);
 
-		auto mat = cam->GetMatrix();
+		__todo() //refactor this into the initialization of the app class when it is
+		util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
+		for (int i = 0; i < (int)rconfig["camera_list"].Size(); ++i)
+		{
+			render::CCamera::CreateCamera(rconfig["camera_list"][i].GetString());
+		}
+		for (int i = 0; i < (int)rconfig["render_layer_list"].Size(); ++i)
+		{
+			std::string name = rconfig["render_layer_list"][i]["name"].GetString();
+			std::string camera = rconfig["render_layer_list"][i]["camera"].GetString();
+			render::CRenderLayer::CreateLayer(name, i, render::CCamera::FindCamera(camera));
+		}
+
+		//auto mat = cam->GetMatrix();
 		//mat.SetScale(vec2(2.0f,1.0f));
 	//	cam->SetMatrix(mat);
 		__todo() //setup render layers here?
@@ -164,15 +175,17 @@ namespace engine
 		util::Time delta = this->m_timer.Delta();
 		
 		__todo()//remove this, this was for testing only
-		util::math::Matrix2D mat = m_pRoot->GetLocalMatrix();
+		component::CObject* obj = m_pRoot->FindObject("woot");
+
+		util::math::Matrix2D mat = obj->GetLocalMatrix();
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
 		mat.SetScale(util::math::vec2(use, 1.0f));
 		mat.SetRotationZ(use * 300);
-		m_pRoot->SetLocalMatrix(mat);
+		obj->SetLocalMatrix(mat);
 
-		mat = Matrix2D();
+		/*mat = Matrix2D();
 		mat.SetPosition(vec2(this->m_timer.Total().Milli() / 10, 0.0f));
-		render::CCamera::FindCamera("ui_cam")->SetMatrix(mat);
+		render::CCamera::FindCamera("world_cam")->SetMatrix(mat);*/
 
 		//Poll events
 		SDL_Event tEvent;

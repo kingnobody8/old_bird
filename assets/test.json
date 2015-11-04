@@ -53,6 +53,45 @@
                 }
             ],
             "children": [ ]
+        },
+        {
+            "name": "woot",
+            "visible": true,
+            "matrix": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "scale": {
+                    "x": 1,
+                    "y": 1
+                },
+                "rotation": 0
+            },
+            "parts": [
+                {
+                    "type": "CRectPart",
+                    "layer": "world_layer",
+                    "color": {
+                        "r": 1.0,
+                        "g": 0.5,
+                        "b": 0.5,
+                        "a": 1.0
+                    },
+                    "aabb": {
+                        "min": {
+                            "x": -64,
+                            "y": -64
+                        },
+                        "max": {
+                            "x": 64,
+                            "y": 64
+                        }
+                    }
+                }
+            ],
+            "children": [ ]
         }
     ]
 }

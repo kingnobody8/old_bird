@@ -9,12 +9,12 @@ namespace engine
 	{
 		bool SortNodeFunc(IRenderNode* lhs, IRenderNode* rhs)
 		{
-			return lhs->GetZed() < rhs->GetZed();
+			return lhs->GetZed() > rhs->GetZed();
 		}
 
 		bool SortLayerFunc(const CRenderLayer::Desc& lhs, const CRenderLayer::Desc& rhs)
 		{
-			return lhs.m_sort_rank < rhs.m_sort_rank;
+			return lhs.m_sort_rank > rhs.m_sort_rank;
 		}
 
 		STATIC std::list<CRenderLayer::Desc> CRenderLayer::s_layers;
