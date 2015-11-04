@@ -1,5 +1,6 @@
 #include "render_layer.h"
 #include "render_node.h"
+#include "camera.h"
 #include <algorithm>
 
 namespace engine
@@ -32,7 +33,7 @@ namespace engine
 
 		STATIC CRenderLayer* CRenderLayer::CreateLayer(const std::string& name, const int& sort_rank, CCamera* const pCam)
 		{
-			//assert(!name.empty() || pCam != null);
+			assert(!name.empty() || pCam != null);
 
 			CRenderLayer::Desc desc;
 			desc.m_name = name;
@@ -72,22 +73,37 @@ namespace engine
 		{
 		}
 
-		void CRenderLayer::Cull(void)
+		void CRenderLayer::Cull(const util::shape::AABB& view)
 		{
 			//Copy the real list to the temp list
 			this->m_vCulledNodes.clear();
 			this->m_vCulledNodes = this->m_vNodes;
 
-			//TODO actually cull the nodes
+			__todo()//TODO actually cull the nodes
 		}
 
 		void CRenderLayer::DoRender(SDL_Renderer* pRen)
 		{
-			__todo() //replace this with the nodes found after the cull
-				//also use the actuall camera matrix
+			util::math::Type2<int> logical_size;
+			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
+			util::math::vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			const util::shape::AABB view = m_pCamera->CalcViewAabb(half_dims);
+			
+			Cull(view);
 
-			util::math::Matrix2D inv_cam = util::math::Matrix2D();
-			for (auto iter = m_vNodes.begin(); iter != m_vNodes.end(); ++iter)
+			__todo()//remove this when you don't want to see the camera box anymore
+			CRenderNodeRect cam_box;
+			cam_box.SetAABB(m_pCamera->CalcViewAabb(half_dims));
+			cam_box.SetFill(false);
+			cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
+
+
+
+			__todo() //replace this with the nodes found after the cull
+			//also use the actuall camera matrix
+
+			util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix());
+			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{
 				(*iter)->operator()(pRen, inv_cam);
 			}

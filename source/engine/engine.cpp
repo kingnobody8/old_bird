@@ -6,6 +6,7 @@
 #include "asset/loader.h"
 #include "asset/resource_path.h"
 #include "render/render_layer.h"
+#include "render/camera.h"
 #include "component/part.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
@@ -64,7 +65,12 @@ namespace engine
 
 		//Initialize the rendering system
 		render::SetupSdl();
-		render::CRenderLayer::CreateLayer("ui_layer", 0, null);
+		render::CCamera* cam = render::CCamera::CreateCamera("ui_cam");
+		render::CRenderLayer::CreateLayer("ui_layer", 0, cam);
+
+		auto mat = cam->GetMatrix();
+		//mat.SetScale(vec2(2.0f,1.0f));
+	//	cam->SetMatrix(mat);
 		__todo() //setup render layers here?
 		//Render::CRenderer::Get()->Init();
 
@@ -120,6 +126,7 @@ namespace engine
 
 		__todo() //delete render layers here?
 		render::CRenderLayer::DestroyLayers();
+		render::CCamera::DestroyCameras();
 		//Destroy Renderer
 		//Render::CRenderer::DeleteInstance();
 
@@ -162,6 +169,10 @@ namespace engine
 		mat.SetScale(util::math::vec2(use, 1.0f));
 		mat.SetRotationZ(use * 300);
 		m_pRoot->SetLocalMatrix(mat);
+
+		mat = Matrix2D();
+		mat.SetPosition(vec2(this->m_timer.Total().Milli() / 10, 0.0f));
+		render::CCamera::FindCamera("ui_cam")->SetMatrix(mat);
 
 		//Poll events
 		SDL_Event tEvent;

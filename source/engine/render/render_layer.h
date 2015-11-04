@@ -2,6 +2,7 @@
 #include "platform/inc_sdl.h"
 #include <list>
 #include "macro.h"
+#include "shape/aabb.h"
 
 namespace engine
 {
@@ -39,7 +40,7 @@ namespace engine
 			std::string m_name;
 
 		private:
-			void Cull(void);
+			void Cull(const util::shape::AABB& view);
 
 			CRenderLayer();
 			CRenderLayer(const std::string& name, CCamera* const pCam);
