@@ -98,6 +98,8 @@ namespace engine
 #define DEFINE_PART_TYPE_INFO(CLASS)																\
 			const int CLASS::Type = component::IPart::RegisterPart(#CLASS, util::CNewType<CLASS>());		\
 			const char* CLASS::GetTypeName() const { return #CLASS; }
+//#define DO_PART_STUFF(CLASS)
+
 		};
 	}
 }

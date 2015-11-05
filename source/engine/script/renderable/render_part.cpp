@@ -17,7 +17,7 @@ namespace engine
 				m_szLayer = that.m_szLayer;
 				m_color = that.m_color;
 				__todo() //is this ok? dereferencing the node
-				*m_pNode = *m_pNode;
+				*m_pNode = *that.m_pNode;
 				return *this;
 			}
 			VIRTUAL	IRenderPart::~IRenderPart(void)

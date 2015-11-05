@@ -57,11 +57,6 @@ namespace engine
 				(*iter).m_pLayer->DoRender(pRen);
 		}
 
-		__todo() //change script_priorities into just priorities.
-			//give that file enums of engine part priorities and layer priorities
-			//wait a minute!!! layers should be determined by the app not the engine
-			//hmmmmmm
-
 		CRenderLayer::CRenderLayer(void)
 			: m_pCamera(null)
 		{
@@ -108,22 +103,6 @@ namespace engine
 				(*iter)->operator()(pRen, inv_cam);
 			}
 		}
-
-		//void CRenderLayer::DrawLayer(SDL_Renderer* pRen)
-		//{
-		//	//Z Sort
-		//	this->m_vNodes.sort(SortFunc);
-
-		//	//Camera cull
-		//	this->Cull();
-
-		//	//Draw
-		//	CMatrix2D inv_cam = Math::Matrix_Inverse(m_pCamera->GetMatrix());
-		//	for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
-		//	{
-		//		(*iter)->operator()(pRen, inv_cam);
-		//	}
-		//}
 
 		void CRenderLayer::RegisterNode(IRenderNode* pNode)
 		{

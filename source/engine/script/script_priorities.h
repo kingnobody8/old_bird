@@ -10,5 +10,7 @@ namespace engine
 			RECT_PART,
 			PRIORITIES_COUNT
 		};
+
+		void RegisterScripts();
 	}
 }
