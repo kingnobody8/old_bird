@@ -7,6 +7,7 @@
 #include "render_node.h"
 #include "util_time.h"
 #include "render_layer.h"
+#include "camera.h"
 
 namespace engine
 {
@@ -94,6 +95,11 @@ namespace engine
 			assert(s_sdlRen);
 			SDL_Log("SDL Renderer Initialized");
 
+		}
+		void Destroy()
+		{
+			CRenderLayer::DestroyLayers();
+			CCamera::DestroyCameras();
 		}
 		SDL_Renderer* GetSdlRenderer() { return s_sdlRen; }
 		SDL_Window* GetSdlWindow() { return s_sdlWin; }

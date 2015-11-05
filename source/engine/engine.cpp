@@ -135,11 +135,7 @@ namespace engine
 		//	this->m_pCurrState = null;
 		//}
 
-		__todo() //delete render layers here?
-		render::CRenderLayer::DestroyLayers();
-		render::CCamera::DestroyCameras();
-		//Destroy Renderer
-		//Render::CRenderer::DeleteInstance();
+		render::Destroy();
 
 		//Engine::Box::CBox::DeleteInstance();
 
