@@ -492,7 +492,7 @@ namespace engine
 			}
 
 			//If we get here then search our children's children for the object
-			for (int i = 0; i < size; ++i)
+			for (size_t i = 0; i < size; ++i)
 			{
 				if (this->m_vChildren[i]->IsGroup())
 				{
@@ -520,7 +520,7 @@ namespace engine
 			}
 
 			//If we get here then search our children's children for the object
-			for (int i = 0; i < size; ++i)
+			for (size_t i = 0; i < size; ++i)
 			{
 				if (this->m_vChildren[i]->IsGroup())
 				{
@@ -675,7 +675,7 @@ namespace engine
 			if (depth == 0)
 				return;
 			
-			for (int i = 0; i < size; ++i)
+			for (size_t i = 0; i < size; ++i)
 			{
 				if (children[i]->IsGroup())
 				{
