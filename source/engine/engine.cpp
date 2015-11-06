@@ -48,6 +48,9 @@ namespace engine
 	{
 		util::TypeCheck();
 
+		//Init all engine scripts
+		script::RegisterScripts();
+
 		//assert(pFirstState);
 
 		//Init SDL

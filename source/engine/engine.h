@@ -1,6 +1,6 @@
 #pragma once
 #include "timer.h"
-#include "script/script_priorities.h"
+#include "script/script.h"
 
 namespace engine
 {

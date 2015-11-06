@@ -34,7 +34,7 @@ namespace engine
 			static void CleanParts(void);
 			static IPart* CreatePart(const std::string& type);
 			static IPart* CreatePart(const int type);
-			static PartTypeKey RegisterPart(const std::string& typeName, PartFunctor func);
+			static void RegisterPart(const std::string& typeName, const PartTypeKey& key, const PartFunctor func);
 
 			static const int Type = 0;
 			virtual int GetType() const { return Type; }
@@ -89,16 +89,14 @@ namespace engine
 			//Sets
 			virtual inline void			SetOwner(CObject* const pOwner) { this->m_pOwner = pOwner; }
 
-			//PRE PROCESSOR
-#define DECLARE_PART_TYPE_INFO(CLASS)																\
-			typedef CLASS class_t;																	\
-			static const int Type;																	\
-			virtual inline int GetType() const { return Type; }										\
+#define DECLARE_PART_TYPE_INFO(CLASS)									\
+			typedef CLASS class_t;										\
+			static const int Type;										\
+			virtual inline int GetType() const { return Type; }			\
 			virtual const char* GetTypeName() const;
-#define DEFINE_PART_TYPE_INFO(CLASS)																\
-			const int CLASS::Type = component::IPart::RegisterPart(#CLASS, util::CNewType<CLASS>());		\
+#define DEFINE_PART_TYPE_INFO(CLASS)									\
+			const int CLASS::Type = ++IPart::s_nextPartTypeId;			\
 			const char* CLASS::GetTypeName() const { return #CLASS; }
-//#define DO_PART_STUFF(CLASS)
 
 		};
 	}

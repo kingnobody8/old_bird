@@ -33,8 +33,6 @@ Purpose:	Crossplatform Main Interface
 #include "../engine/asset/loader.h"
 #include "../engine/asset/resource_path.h"
 
-#include "../engine/script/renderable/rect_part.h"
-
 
 //#include "platform/inc_sdl.h"
 //#include "util_time.h"
@@ -58,10 +56,6 @@ using namespace util;
 
 int main(int argc, char** argv)
 {
-	__todo() //we will need an cpp that creates temp versions of all the parts so that they are built properly
-		//we should only need that for the engine parts, because they are in the lib
-	engine::script::renderable::CRectPart part;
-
 	engine::Engine* engi = engine::Get();
 
 	engi->Init(null);

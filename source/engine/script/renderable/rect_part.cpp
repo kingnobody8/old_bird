@@ -1,5 +1,5 @@
 #include "rect_part.h"
-#include "../script_priorities.h"
+#include "../script.h"
 #include "render/render_node.h"
 #include "component/object.h"
 

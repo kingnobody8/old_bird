@@ -43,14 +43,14 @@
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp">
       <Filter>script\renderable</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\script\script_priorities.cpp">
-      <Filter>script</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp">
       <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp">
       <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\script.cpp">
+      <Filter>script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,11 +85,11 @@
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\script\script_priorities.h">
-      <Filter>script</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\camera.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\script.h">
+      <Filter>script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
