@@ -3,6 +3,8 @@ File:		main.cpp
 Purpose:	Crossplatform Main Interface
 */
 
+#include "sdl/include/sdl.h"
+
 #include "../utility/bit_flag.h"
 #include "../utility/color.h"
 #include "../utility/enums.h"
@@ -18,8 +20,6 @@ Purpose:	Crossplatform Main Interface
 #include "../utility/math/type4.h"
 #include "../utility/platform/inc_common.h"
 #include "../utility/platform/inc_func.h"
-#include "../utility/platform/inc_sdl.h"
-#include "../utility/platform/inc_sdl_img.h"
 #include "../utility/platform/platform.h"
 #include "../utility/timer.h"
 #include "../utility/types.h"

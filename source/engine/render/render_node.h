@@ -4,7 +4,7 @@
 #include "shape/segment.h"
 #include "math/type3.h"
 #include "math/matrix_2d.h"
-#include "platform/inc_sdl.h"
+#include "sdl/include/SDL.h"
 #include "bit_flag.h"
 #include <list>
 #include <map>
