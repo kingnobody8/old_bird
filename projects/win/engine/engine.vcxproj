@@ -139,7 +139,7 @@
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -159,7 +159,7 @@
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -183,7 +183,7 @@
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -211,7 +211,7 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <Lib>
-      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
