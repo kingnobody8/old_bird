@@ -9,9 +9,9 @@
 #include <list>
 #include <map>
 #include "macro.h"
-#include "box2d/include/Box2D/Collision/Shapes/b2PolygonShape.h"
-#include "box2d/include/Box2D/Collision/Shapes/b2EdgeShape.h"
-#include "box2d/include/Box2D/Collision/b2Collision.h"
+#include "Collision/Shapes/b2PolygonShape.h"
+#include "Collision/Shapes/b2EdgeShape.h"
+#include "Collision/b2Collision.h"
 
 #define ORIGIN_IS_CENTER = 1;
 
