@@ -6,6 +6,8 @@
 #include "macro.h"
 #include "render_node.h"
 #include "util_time.h"
+#include "render_layer.h"
+#include "camera.h"
 
 namespace engine
 {
@@ -15,6 +17,48 @@ namespace engine
 		static SDL_Window* s_sdlWin = null;
 		const util::math::Type2<int> default_dims = util::math::Type2<int>(1280, 720);
 		const std::string app_name = "The Lark Ascending";
+		const int GRID_CELL_SIZE = 64;
+
+
+		void RenderGrid(util::math::Type2<int> half_size) __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
+		{
+			render::CRenderNodeRect node;
+			node.SetColor(util::Color::CYAN.SDL());
+			node.SetFill(false);
+			util::shape::AABB tmp;
+
+			//Grid
+			for (int x = -half_size.x; x < half_size.x; x += GRID_CELL_SIZE)
+			{
+				for (int y = -half_size.y; y < half_size.y; y += GRID_CELL_SIZE)
+				{
+					tmp.m_min = util::math::vec2(x, y);
+					tmp.m_max = util::math::vec2(x + GRID_CELL_SIZE, y + GRID_CELL_SIZE);
+					node.SetAABB(tmp);
+					node(s_sdlRen, util::math::Matrix2D());
+				}
+			}
+		}
+		void RenderCrossSection(util::math::Type2<int> logical_size)
+		{
+			SDL_SetRenderDrawColor(s_sdlRen, 255, 255, 255, 255);
+			//X-axis
+			SDL_RenderDrawLine(s_sdlRen,
+				0, (int)(logical_size.y * 0.5f),
+				logical_size.x, (int)(logical_size.y * 0.5f));
+			//Y-axis
+			SDL_RenderDrawLine(s_sdlRen,
+				(int)(logical_size.x * 0.5f), 0,
+				(int)(logical_size.x * 0.5f), logical_size.y);
+			//topleft to botright
+			SDL_RenderDrawLine(s_sdlRen,
+				0, 0,
+				logical_size.x, logical_size.y);
+			//botleft to topright
+			SDL_RenderDrawLine(s_sdlRen,
+				0, logical_size.y,
+				logical_size.x, 0);
+		}
 
 		void SetupSdl()
 		{
@@ -52,6 +96,11 @@ namespace engine
 			SDL_Log("SDL Renderer Initialized");
 
 		}
+		void Destroy()
+		{
+			CRenderLayer::DestroyLayers();
+			CCamera::DestroyCameras();
+		}
 		SDL_Renderer* GetSdlRenderer() { return s_sdlRen; }
 		SDL_Window* GetSdlWindow() { return s_sdlWin; }
 		void DoRender()
@@ -62,44 +111,35 @@ namespace engine
 			SDL_SetRenderTarget(s_sdlRen, NULL);
 			SDL_RenderClear(s_sdlRen);
 
-			render::CRenderNodeRect node;
-			node.SetColor(util::Color::BLACK.SDL());
-			node.SetFill(false);
-			util::shape::AABB tmp;
-			tmp.m_min = util::math::vec2(-64, -128);
-			tmp.m_max = util::math::vec2(64, 32);
-			node.SetAABB(tmp);
-
 			util::math::Type2<int> logical_size;
 			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.w, &logical_size.h);
+			util::math::Type2<int> half_size = logical_size / 2;
 			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+
+			//RenderGrid(half_size);
+			RenderCrossSection(logical_size);
+			
 			SDL_SetRenderDrawColor(s_sdlRen, 32, 32, 32, 255);
 
-			render::CRenderNodeLine line;
-			line.SetColor(util::Color::WHITE.SDL());
-			util::shape::Segment seg;
-			seg.start = node.GetAABB().m_max;
-			seg.end = node.GetAABB().m_min;
-			line.SetLine(seg);
-
-			SDL_RenderDrawLine(s_sdlRen,
-				0,0,
-				logical_size.x, logical_size.y);
-
-			SDL_RenderDrawLine(s_sdlRen,
-				0, logical_size.y,
-				logical_size.x, 0);
+			//	render::CRenderNodeLine line;
+			//	line.SetColor(util::Color::WHITE.SDL());
+			//	util::shape::Segment seg;
+			//	seg.start = node.GetAABB().m_max;
+			//	seg.end = node.GetAABB().m_min;
+			//	line.SetLine(seg);
 
 
-		//	const util::Time t = util::Time::GetTimeSinceEpoch();
+			////	const util::Time t = util::Time::GetTimeSinceEpoch();
 
-			util::math::Matrix2D cam =util::math::Matrix2D(vec2(0,0), vec2(1,1), 0);
-			const util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(cam);
+			//	util::math::Matrix2D cam =util::math::Matrix2D(vec2(0,0), vec2(1,1), 0);
+			//	const util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(cam);
 
-			//node(s_sdlRen, inv_cam);
-			line(s_sdlRen, inv_cam);
-			node.SetAABB(line.CalcAABB());
-			node(s_sdlRen, inv_cam);
+			//	//node(s_sdlRen, inv_cam);
+			//	line(s_sdlRen, inv_cam);
+			//	node.SetAABB(line.CalcAABB());
+			//	node(s_sdlRen, inv_cam);
+
+			CRenderLayer::RenderAllLayers(s_sdlRen);
 
 			//Present
 			SDL_RenderPresent(s_sdlRen);

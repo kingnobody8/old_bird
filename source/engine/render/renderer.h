@@ -7,6 +7,7 @@ namespace engine
 	namespace render
 	{
 		void SetupSdl();
+		void Destroy();
 		SDL_Renderer* GetSdlRenderer();
 		SDL_Window* GetSdlWindow();
 		void DoRender();

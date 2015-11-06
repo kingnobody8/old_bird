@@ -5,6 +5,16 @@ namespace engine
 {
 	namespace component
 	{
+		/*
+		Part normal use flow is as follows
+		Parts are created during an object's load json
+		once created the part's load json is called (just set your local variables here, do not create anything or talk to any outside class/instance)
+		then the part is attached to it's owner
+		which will call the part's on attach (you should only do something here if this is a part that is dynamically added outside of load json
+		sometime later the part's Init func will be called, from here on you may create any new stuff and talk to other classes/instances
+		*/
+
+
 		class IPart
 		{
 			//Internal
@@ -24,7 +34,7 @@ namespace engine
 			static void CleanParts(void);
 			static IPart* CreatePart(const std::string& type);
 			static IPart* CreatePart(const int type);
-			static PartTypeKey RegisterPart(const std::string& typeName, PartFunctor func);
+			static void RegisterPart(const std::string& typeName, const PartTypeKey& key, const PartFunctor func);
 
 			static const int Type = 0;
 			virtual int GetType() const { return Type; }
@@ -66,9 +76,10 @@ namespace engine
 			//virtual rapidjson::Document SaveJson(void) const; //TODO
 
 			virtual void OnMatrixChanged(void){};
+			virtual void OnZedChanged(void){};
 			virtual void OnVisibilityChanged(const bool visible){};
 
-			virtual util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
+			virtual const util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
 
 			//Gets
 			inline CObject*				GetOwner(void) const { return this->m_pOwner; }
@@ -78,15 +89,15 @@ namespace engine
 			//Sets
 			virtual inline void			SetOwner(CObject* const pOwner) { this->m_pOwner = pOwner; }
 
-			//PRE PROCESSOR
-#define DECLARE_PART_TYPE_INFO(CLASS)																\
-			typedef CLASS class_t;																	\
-			static const int Type;																	\
-			virtual inline int GetType() const { return Type; }										\
+#define DECLARE_PART_TYPE_INFO(CLASS)									\
+			typedef CLASS class_t;										\
+			static const int Type;										\
+			virtual inline int GetType() const { return Type; }			\
 			virtual const char* GetTypeName() const;
-#define DEFINE_PART_TYPE_INFO(CLASS)																\
-			const int CLASS::Type = component::IPart::RegisterPart(#CLASS, util::CNewType<CLASS>());		\
+#define DEFINE_PART_TYPE_INFO(CLASS)									\
+			const int CLASS::Type = ++IPart::s_nextPartTypeId;			\
 			const char* CLASS::GetTypeName() const { return #CLASS; }
+
 		};
 	}
 }

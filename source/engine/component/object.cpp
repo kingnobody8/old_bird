@@ -13,7 +13,7 @@ namespace engine
 		CObject::CObject(void)
 			: m_pParent(null)
 			, m_fZed(0.0f)
-			, m_bVisible(VisibilityMask::SELF | VisibilityMask::PARENT)
+			, m_bVisible(VisibilityFlag::SELF | VisibilityFlag::PARENT)
 		{
 		}
 		VIRTUAL CObject::~CObject(void)
@@ -130,6 +130,8 @@ namespace engine
 		{
 			//Object
 			this->m_szName = json["name"].GetString();
+			bool visible = json["visible"].GetBool();
+			SetVisible(visible);
 			this->m_fZed = json["matrix"]["position"]["z"].GetDouble();
 			this->SetLocalMatrix(((const util::JSON)(json["matrix"])).GetMatrix());
 			const std::vector<util::JSON> parts = ((const util::JSON)(json["parts"])).GetArray<util::JSON>();
@@ -179,18 +181,12 @@ namespace engine
 		}
 		const util::shape::AABB CObject::CalcAabb(void) const
 		{
-			//TODO this doesn't take into account the position of the aabb, we need the points in world space
-
-			__todo()
-
-			util::shape::AABB aabb;
-//aabb.MakeLimits();
-//std::list<IPart*> list = GetPartList(this);
-//for (auto iter = list.begin(); iter != list.end(); ++iter)
-//{
-//	aabb.Extend((*iter)->CalcAABB());
-//}
-//
+			util::shape::AABB aabb =  util::shape::AABB::INVALID_AABB;
+			std::list<IPart*> list = GetPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				aabb.Stretch((*iter)->CalcAABB());
+			}
 			return aabb;
 		}
 
@@ -302,7 +298,7 @@ namespace engine
 
 		VIRTUAL void CObject::SetVisible(const bool bVis)
 		{
-			m_bVisible.BitBool(VisibilityMask::SELF, bVis);
+			m_bVisible.FlagBool(VisibilityFlag::SELF, bVis);
 			OnVisibilityChanged(bVis);
 		}
 
@@ -341,6 +337,14 @@ namespace engine
 				(*iter)->OnMatrixChanged();
 			}
 		}
+		void CObject::OnZedChanged(void)
+		{
+			std::list<IPart*> list = GetPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				(*iter)->OnZedChanged();
+			}
+		}
 		void CObject::OnVisibilityChanged(const bool bVisible)
 		{
 			std::list<IPart*> list = GetPartList(this);
@@ -351,7 +355,7 @@ namespace engine
 		}
 		void CObject::OnParentVisibilityChanged(const bool bVisible)
 		{
-			this->m_bVisible.BitBool(VisibilityMask::PARENT, bVisible);
+			this->m_bVisible.FlagBool(VisibilityFlag::PARENT, bVisible);
 			std::list<IPart*> list = GetPartList(this);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
@@ -464,7 +468,7 @@ namespace engine
 		//Sets
 		VIRTUAL void CGroup::SetVisible(const bool bVis)
 		{
-			m_bVisible.BitBool(VisibilityMask::SELF, bVis);
+			m_bVisible.FlagBool(VisibilityFlag::SELF, bVis);
 			TraverseChildren(this, [&bVis](CObject* pChild)
 			{
 				pChild->OnParentVisibilityChanged(bVis);

@@ -3,7 +3,11 @@
 #include "component/object.h"
 #include <assert.h>
 #include "render/renderer.h"
-
+#include "asset/loader.h"
+#include "asset/resource_path.h"
+#include "render/render_layer.h"
+#include "render/camera.h"
+#include "component/part.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -44,6 +48,9 @@ namespace engine
 	{
 		util::TypeCheck();
 
+		//Init all engine scripts
+		script::RegisterScripts();
+
 		//assert(pFirstState);
 
 		//Init SDL
@@ -60,8 +67,25 @@ namespace engine
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 		//Initialize the rendering system
-		__todo()
 		render::SetupSdl();
+
+		__todo() //refactor this into the initialization of the app class when it is
+		util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
+		for (int i = 0; i < (int)rconfig["camera_list"].Size(); ++i)
+		{
+			render::CCamera::CreateCamera(rconfig["camera_list"][i].GetString());
+		}
+		for (int i = 0; i < (int)rconfig["render_layer_list"].Size(); ++i)
+		{
+			std::string name = rconfig["render_layer_list"][i]["name"].GetString();
+			std::string camera = rconfig["render_layer_list"][i]["camera"].GetString();
+			render::CRenderLayer::CreateLayer(name, i, render::CCamera::FindCamera(camera));
+		}
+
+		//auto mat = cam->GetMatrix();
+		//mat.SetScale(vec2(2.0f,1.0f));
+	//	cam->SetMatrix(mat);
+		__todo() //setup render layers here?
 		//Render::CRenderer::Get()->Init();
 
 #ifdef MOBILE
@@ -88,6 +112,14 @@ namespace engine
 		//Start timer
 		this->m_timer.Restart();
 
+		util::JSON doc = asset::FileLoaderJson(getResourcePath() + "assets/test.json");
+		m_pRoot = static_cast<component::CGroup*>(component::LoadObjectFromJson(doc));
+		component::PartList parts = component::GetPartList(m_pRoot);
+		for (component::PartIter iter = parts.begin(); iter != parts.end(); ++iter)
+		{
+			(*iter)->Init();
+		}
+
 		//Don't quit
 		m_quit = false;
 	}
@@ -106,8 +138,7 @@ namespace engine
 		//	this->m_pCurrState = null;
 		//}
 
-		//Destroy Renderer
-		//Render::CRenderer::DeleteInstance();
+		render::Destroy();
 
 		//Engine::Box::CBox::DeleteInstance();
 
@@ -126,6 +157,7 @@ namespace engine
 	void Engine::RunFrame(void* params)
 	{
 		this->Update();
+		render::DoRender();
 	}
 
 	void Engine::Update(void)
@@ -133,14 +165,28 @@ namespace engine
 		if (m_quit)
 			return;
 
-		//Update the timer
-		this->m_timer.Signal();
-		//util::Time delta = this->m_timer.Delta();
-
-		//If a new state is available, then set it
+		//If a new state is available, then change states
 		if (this->m_pNextState)
 			this->PushState(this->m_pNextState);
 
+		//Update the timer
+		this->m_timer.Signal();
+		util::Time delta = this->m_timer.Delta();
+		
+		__todo()//remove this, this was for testing only
+		component::CObject* obj = m_pRoot->FindObject("woot");
+
+		util::math::Matrix2D mat = obj->GetLocalMatrix();
+		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
+		mat.SetScale(util::math::vec2(use, 1.0f));
+		mat.SetRotationZ(use * 300);
+		obj->SetLocalMatrix(mat);
+
+		/*mat = Matrix2D();
+		mat.SetPosition(vec2(this->m_timer.Total().Milli() / 10, 0.0f));
+		render::CCamera::FindCamera("world_cam")->SetMatrix(mat);*/
+
+		//Poll events
 		SDL_Event tEvent;
 		while (SDL_PollEvent(&tEvent))
 		{
@@ -160,16 +206,9 @@ namespace engine
 		//		this->m_pCurrState->Update(delta);
 
 		//	Part::IPart::UpdateParts(delta);
-
-		//	Render::CRenderer::Get()->Update(delta);
-			this->Render();
 		//}
 	}
-	void Engine::Render(void)
-	{
-		render::DoRender();
-		//Render::CRenderer::Get()->Render(this->m_pRoot);
-	}
+	
 	void Engine::PushState(IBaseState* pState)
 	{
 		assert(pState);

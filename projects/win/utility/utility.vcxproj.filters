@@ -130,6 +130,5 @@
     <ClCompile Include="..\..\..\source\utility\shape\rect.cpp">
       <Filter>shape</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\bit_flag.cpp" />
   </ItemGroup>
 </Project>

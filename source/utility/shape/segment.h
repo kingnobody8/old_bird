@@ -9,9 +9,12 @@ namespace util
 		{
 		public:
 			Segment();
+			Segment(const math::vec2 s, const math::vec2 e);
 			virtual ~Segment();
-			virtual const bool IsParallel(const IDimOne* const test) const;
-			virtual const bool IsOrthoganal(const IDimOne* const test) const;
+
+			inline math::vec2 GetDirection() const { return math::vec2::Normalize(end - start); }
+			virtual const float GetSlope() const { return GetDirection().y / GetDirection().x; }
+
 			virtual const bool Intersect(const IDimOne* const test, math::vec2* result = nullptr) const;
 			virtual bool Intersect(const math::vec2& point) const;
 

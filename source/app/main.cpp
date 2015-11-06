@@ -30,6 +30,8 @@ Purpose:	Crossplatform Main Interface
 #include "../engine/component/part.h"
 #include "../engine/component/component.h"
 
+#include "../engine/asset/loader.h"
+#include "../engine/asset/resource_path.h"
 
 
 //#include "platform/inc_sdl.h"
@@ -49,7 +51,7 @@ using namespace util;
 //#include <Box2D/Box2D.h>
 
 #ifdef WIN
-//#include <vld.h>
+#include <vld.h>
 #endif
 
 int main(int argc, char** argv)

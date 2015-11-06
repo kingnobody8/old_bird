@@ -4,7 +4,6 @@
 
 namespace util
 {
-
 	//forward declaration
 	class Time;
 
@@ -81,8 +80,8 @@ namespace util
 		Time();
 		Time(const u64& milli);
 		Time(const Date& d);
-		timeval_t Milli() const { return m_time; }
-		double ToDouble() { return (double)m_time; }
+		const timeval_t& Milli() const { return m_time; }
+		const double ToDouble() const { return (double)m_time; }
 		const Date ToUtc() const;
 		const Date ToLocal() const;
 		
@@ -130,7 +129,7 @@ namespace util
 		// Subtract v from m_time, with underflow clamp
 		inline void TimeDiff(timeval_t t)
 		{
-			// in underflow clamp to zero
+			// if underflow clamp to zero
 			if (t > m_time)
 			{
 				m_time = 0;

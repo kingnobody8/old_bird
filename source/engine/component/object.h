@@ -9,7 +9,7 @@ namespace engine
 		class IPart;
 		class CGroup;
 
-		enum VisibilityMask
+		enum VisibilityFlag
 		{
 			SELF = 0x01,
 			PARENT = 0x02
@@ -63,8 +63,8 @@ namespace engine
 			inline const std::vector<IPart*>&		GetParts(void) const { return this->m_vParts; }
 			inline const util::math::Matrix2D&		GetLocalMatrix(void) const { return this->m_cMatLocal; }
 			inline const float&						GetLocalZed(void) const { return this->m_fZed; }
-			inline const bool						GetLocalVisible(void) const { return this->m_bVisible.Bit(VisibilityMask::SELF); }
-			inline const bool						GetWorldVisible(void) const { return this->m_bVisible.Bit(VisibilityMask::SELF) && this->m_bVisible.Bit(VisibilityMask::PARENT); }
+			inline const bool						GetLocalVisible(void) const { return this->m_bVisible.Flag(VisibilityFlag::SELF); }
+			inline const bool						GetWorldVisible(void) const { return this->m_bVisible.Flag(VisibilityFlag::SELF | VisibilityFlag::PARENT); }
 
 			inline const vec2						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
 			inline const vec2						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
@@ -104,6 +104,7 @@ namespace engine
 			inline void								SetWorldScale(const vec2& scale) { this->SetWorldScale(scale.x, scale.y); }
 			void									SetWorldRotationZ(const float& rot);
 
+			__todo() //we need to make a virtual function for this in object and part to notify them only when the zed changed, separate from matrix
 			inline void								SetLocalZed(const float& fZed) { this->m_fZed = fZed; }
 			virtual void							SetVisible(const bool bVis);
 
@@ -115,6 +116,7 @@ namespace engine
 
 		protected:
 			void OnMatrixChanged(void);
+			void OnZedChanged(void);
 			void OnVisibilityChanged(const bool bVisible);
 			void OnParentVisibilityChanged(const bool bVisible);
 		};

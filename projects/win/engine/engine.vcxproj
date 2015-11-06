@@ -19,20 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\engine\asset\loader.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\component.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_node.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\rect_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
+    <ClInclude Include="..\..\..\source\engine\asset\resource_path.h" />
     <ClInclude Include="..\..\..\source\engine\component\component.h" />
     <ClInclude Include="..\..\..\source\engine\component\object.h" />
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />
+    <ClInclude Include="..\..\..\source\engine\render\camera.h" />
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
+    <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_node.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\rect_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\script.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />
@@ -88,26 +101,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;../../../api/win/box2d/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;../../../api/win/box2d/lib/x86/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;../../../build/lib_output/Win32/Debug/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;../../../api/win/box2d/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;../../../api/win/box2d/lib/x86/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;../../../build/lib_output/Win32/Release/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;../../../api/win/box2d/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;../../../api/win/box2d/lib/x64/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;../../../build/lib_output/x64/Debug/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;../../../api/win/box2d/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;../../../api/win/box2d/lib/x64/;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
+    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;../../../build/lib_output/x64/Release/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,7 +129,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;../../../api/win/box2d/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,6 +138,9 @@
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -133,7 +149,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;../../../api/win/box2d/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +158,9 @@
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -152,7 +171,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;../../../api/win/box2d/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,6 +182,9 @@
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -173,7 +195,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../api/win/;../../../source/engine/;../../../source/utility/;../../../api/win/box2d/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -188,6 +210,9 @@
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <Lib>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -51,3 +51,12 @@ typedef s64					slonglong;
 //Int
 typedef unsigned int		uint;
 typedef signed	int			sint;
+
+//Buffer
+struct TBuffer
+{
+	void* buffer;
+	slong size;
+	TBuffer() : buffer(null), size(0) {}
+	TBuffer(void* const b, const slong& s) : buffer(b), size(s) {}
+};

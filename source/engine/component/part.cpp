@@ -82,12 +82,18 @@ namespace engine
 			assert(find != IPart::GetKeyMap().end());
 			return find->second();
 		}
-		STATIC PartTypeKey IPart::RegisterPart(const std::string& typeName, PartFunctor func)
+		STATIC void IPart::RegisterPart(const std::string& typeName, const PartTypeKey& key, const PartFunctor func)
 		{
-			int key = ++IPart::s_nextPartTypeId;
+			std::map<std::string, PartFunctor>& name_map = IPart::GetNameMap();
+			std::map<PartTypeKey, PartFunctor>& key_map = IPart::GetKeyMap();
+
+			//Each part should be unique
+			assert(name_map.find(typeName) == name_map.end() && "You have a duplicate part!");
+			assert(key_map.find(key) == key_map.end() && "You have a duplicate part!");
+
+			//int key = ++IPart::s_nextPartTypeId;
 			IPart::GetNameMap()[typeName] = func;
 			IPart::GetKeyMap()[key] = func;
-			return key;
 		}
 
 		//------------------------------------------------------------------------------

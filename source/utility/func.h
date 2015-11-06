@@ -34,6 +34,12 @@ Purpose:	These are commonly used utility functions and macros
 #ifndef Even
 #define Even(num)					(!Odd(num))
 #endif
+#ifndef SafeDelete
+#define SafeDelete(param)					\
+						if(param != null)	\
+						{ delete param; }	\
+						param = null;
+#endif
 
 namespace util
 {
