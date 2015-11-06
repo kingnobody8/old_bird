@@ -1,7 +1,7 @@
 #pragma once
 #include "math/type4.h"
 #include "func.h"
-#include "platform/inc_sdl.h"
+#include "sdl/include/sdl.h"
 using namespace util::math;
 
 //https://en.wikipedia.org/wiki/Lists_of_colors

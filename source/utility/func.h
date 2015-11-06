@@ -10,7 +10,7 @@ Purpose:	These are commonly used utility functions and macros
 #include <stdlib.h>
 #include "types.h"
 #include <assert.h>
-#include "platform/inc_sdl.h"
+#include "sdl/include/sdl.h"
 #include <string>
 
 #ifndef Max
