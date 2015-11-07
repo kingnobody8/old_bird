@@ -48,6 +48,20 @@
                ReferencedContainer = "container:../utility/utility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BC075A801BEE58A500AA8C9A"
+               BuildableName = "libengine.a"
+               BlueprintName = "engine"
+               ReferencedContainer = "container:../engine/engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

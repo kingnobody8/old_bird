@@ -2,6 +2,7 @@
 #include "shape/aabb.h"
 #include "math/matrix_2d.h"
 #include <list>
+#include <string>
 
 namespace engine
 {

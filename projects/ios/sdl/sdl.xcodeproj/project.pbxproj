@@ -73,6 +73,16 @@
 		BCF30C5C1BED90D9001CF827 /* SDL_uikitwindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF30B591BED90D9001CF827 /* SDL_uikitwindow.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BC075A931BEE58E300AA8C9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC075A8E1BEE58E300AA8C9A /* engine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC075A911BEE58E300AA8C9A;
+			remoteInfo = engine;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		BCF304AA1BED8D49001CF827 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -87,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		BC0759AD1BEE562200AA8C9A /* libsdl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsdl.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC075A8E1BEE58E300AA8C9A /* engine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = engine.xcodeproj; path = ../engine/engine.xcodeproj; sourceTree = "<group>"; };
 		BCF304BA1BED8E6A001CF827 /* SDL_atomic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_atomic.c; sourceTree = "<group>"; };
 		BCF304BB1BED8E6A001CF827 /* SDL_spinlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_spinlock.c; sourceTree = "<group>"; };
 		BCF304CA1BED8E6A001CF827 /* SDL_coreaudio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_coreaudio.c; sourceTree = "<group>"; };
@@ -339,9 +350,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC075A8F1BEE58E300AA8C9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC075A941BEE58E300AA8C9A /* libengine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BCF304A31BED8D49001CF827 = {
 			isa = PBXGroup;
 			children = (
+				BC075A8E1BEE58E300AA8C9A /* engine.xcodeproj */,
 				BCF304B91BED8E6A001CF827 /* atomic */,
 				BCF304BC1BED8E6A001CF827 /* audio */,
 				BCF3051D1BED8E6A001CF827 /* cpuinfo */,
@@ -910,12 +930,28 @@
 			mainGroup = BCF304A31BED8D49001CF827;
 			productRefGroup = BCF304A31BED8D49001CF827;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BC075A8F1BEE58E300AA8C9A /* Products */;
+					ProjectRef = BC075A8E1BEE58E300AA8C9A /* engine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BCF304AB1BED8D49001CF827 /* sdl */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BC075A941BEE58E300AA8C9A /* libengine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libengine.a;
+			remoteRef = BC075A931BEE58E300AA8C9A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BCF304A81BED8D49001CF827 /* Sources */ = {

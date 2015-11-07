@@ -3,6 +3,7 @@
 #include <list>
 #include "macro.h"
 #include "shape/aabb.h"
+#include <string>
 
 namespace engine
 {

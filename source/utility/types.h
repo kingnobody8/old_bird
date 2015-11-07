@@ -56,7 +56,7 @@ typedef signed	int			sint;
 struct TBuffer
 {
 	void* buffer;
-	slong size;
+	ulonglong size;
 	TBuffer() : buffer(null), size(0) {}
 	TBuffer(void* const b, const slong& s) : buffer(b), size(s) {}
 };
