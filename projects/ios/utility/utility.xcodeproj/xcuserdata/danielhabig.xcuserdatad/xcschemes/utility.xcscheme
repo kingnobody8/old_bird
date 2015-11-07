@@ -14,38 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BCF30C8F1BED9B76001CF827"
-               BuildableName = "libbox2d.a"
-               BlueprintName = "box2d"
-               ReferencedContainer = "container:box2d.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BCF304AB1BED8D49001CF827"
-               BuildableName = "libsdl.a"
-               BlueprintName = "sdl"
-               ReferencedContainer = "container:../sdl/sdl.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
                BuildableName = "libutility.a"
                BlueprintName = "utility"
-               ReferencedContainer = "container:../utility/utility.xcodeproj">
+               ReferencedContainer = "container:utility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -57,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BCF30C8F1BED9B76001CF827"
-            BuildableName = "libbox2d.a"
-            BlueprintName = "box2d"
-            ReferencedContainer = "container:box2d.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -82,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BCF30C8F1BED9B76001CF827"
-            BuildableName = "libbox2d.a"
-            BlueprintName = "box2d"
-            ReferencedContainer = "container:box2d.xcodeproj">
+            BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
+            BuildableName = "libutility.a"
+            BlueprintName = "utility"
+            ReferencedContainer = "container:utility.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -100,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BCF30C8F1BED9B76001CF827"
-            BuildableName = "libbox2d.a"
-            BlueprintName = "box2d"
-            ReferencedContainer = "container:box2d.xcodeproj">
+            BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
+            BuildableName = "libutility.a"
+            BlueprintName = "utility"
+            ReferencedContainer = "container:utility.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

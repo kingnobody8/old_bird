@@ -86,7 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BCF304AC1BED8D49001CF827 /* libsdl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libsdl.a; path = "/Users/danielhabig/dev/lark/projects/ios/sdl/build/Debug-iphoneos/libsdl.a"; sourceTree = "<absolute>"; };
+		BC0759AD1BEE562200AA8C9A /* libsdl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsdl.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF304BA1BED8E6A001CF827 /* SDL_atomic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_atomic.c; sourceTree = "<group>"; };
 		BCF304BB1BED8E6A001CF827 /* SDL_spinlock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_spinlock.c; sourceTree = "<group>"; };
 		BCF304CA1BED8E6A001CF827 /* SDL_coreaudio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_coreaudio.c; sourceTree = "<group>"; };
@@ -367,6 +367,7 @@
 				BCF30A5D1BED90D8001CF827 /* SDL_internal.h */,
 				BCF30A5E1BED90D8001CF827 /* SDL_log.c */,
 				BCF30A5F1BED90D8001CF827 /* SDL.c */,
+				BC0759AD1BEE562200AA8C9A /* libsdl.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -882,7 +883,7 @@
 			);
 			name = sdl;
 			productName = sdl;
-			productReference = BCF304AC1BED8D49001CF827 /* libsdl.a */;
+			productReference = BC0759AD1BEE562200AA8C9A /* libsdl.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -1119,6 +1120,7 @@
 				BCF304B71BED8D49001CF827 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
