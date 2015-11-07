@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:engine/../app/app.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:utility/../engine/engine.xcodeproj">
    </FileRef>
    <FileRef

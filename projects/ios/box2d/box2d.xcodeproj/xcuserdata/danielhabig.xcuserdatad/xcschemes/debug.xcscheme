@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BC075AD21BEE5C3D00AA8C9A"
+               BuildableName = "TheLarkAscending.app"
+               BlueprintName = "TheLarkAscending"
+               ReferencedContainer = "container:../app/app.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BCF30C8F1BED9B76001CF827"
                BuildableName = "libbox2d.a"
                BlueprintName = "box2d"
@@ -93,15 +107,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BCF30C8F1BED9B76001CF827"
-            BuildableName = "libbox2d.a"
-            BlueprintName = "box2d"
-            ReferencedContainer = "container:box2d.xcodeproj">
+            BlueprintIdentifier = "BC075AD21BEE5C3D00AA8C9A"
+            BuildableName = "TheLarkAscending.app"
+            BlueprintName = "TheLarkAscending"
+            ReferencedContainer = "container:../app/app.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
