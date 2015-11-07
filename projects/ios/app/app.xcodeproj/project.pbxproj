@@ -21,6 +21,8 @@
 		BC075B211BEE603E00AA8C9A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC075B201BEE603E00AA8C9A /* CoreGraphics.framework */; };
 		BC075B231BEE604500AA8C9A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC075B221BEE604500AA8C9A /* MobileCoreServices.framework */; };
 		BC075B251BEE604B00AA8C9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC075B241BEE604B00AA8C9A /* ImageIO.framework */; };
+		BC075D1A1BEE6FCF00AA8C9A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D191BEE6FCF00AA8C9A /* assets */; };
+		BC075D1E1BEE700700AA8C9A /* media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D1D1BEE700700AA8C9A /* media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		BC075B201BEE603E00AA8C9A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BC075B221BEE604500AA8C9A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BC075B241BEE604B00AA8C9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		BC075D191BEE6FCF00AA8C9A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+		BC075D1D1BEE700700AA8C9A /* media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 		BC075ACA1BEE5C3D00AA8C9A = {
 			isa = PBXGroup;
 			children = (
+				BC075D1D1BEE700700AA8C9A /* media.xcassets */,
+				BC075D191BEE6FCF00AA8C9A /* assets */,
 				BC075B271BEE60B500AA8C9A /* libs */,
 				BC075B261BEE609F00AA8C9A /* frameworks */,
 				BC075B011BEE5DED00AA8C9A /* info.plist */,
@@ -161,6 +167,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC075D1E1BEE700700AA8C9A /* media.xcassets in Resources */,
+				BC075D1A1BEE6FCF00AA8C9A /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = asdf.TheLarkAscending;
@@ -289,6 +298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = asdf.TheLarkAscending;
