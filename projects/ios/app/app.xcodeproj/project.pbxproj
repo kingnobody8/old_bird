@@ -23,6 +23,7 @@
 		BC075B251BEE604B00AA8C9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC075B241BEE604B00AA8C9A /* ImageIO.framework */; };
 		BC075D1A1BEE6FCF00AA8C9A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D191BEE6FCF00AA8C9A /* assets */; };
 		BC075D1E1BEE700700AA8C9A /* media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D1D1BEE700700AA8C9A /* media.xcassets */; };
+		BC09FC281BEFC3C600984F45 /* libsdl_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC09FC271BEFC3C600984F45 /* libsdl_image.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		BC075B241BEE604B00AA8C9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		BC075D191BEE6FCF00AA8C9A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 		BC075D1D1BEE700700AA8C9A /* media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = media.xcassets; sourceTree = "<group>"; };
+		BC09FC271BEFC3C600984F45 /* libsdl_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsdl_image.a; path = "../sdl_image/build/Debug-iphoneos/libsdl_image.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC09FC281BEFC3C600984F45 /* libsdl_image.a in Frameworks */,
 				BC075B251BEE604B00AA8C9A /* ImageIO.framework in Frameworks */,
 				BC075B231BEE604500AA8C9A /* MobileCoreServices.framework in Frameworks */,
 				BC075B211BEE603E00AA8C9A /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +76,7 @@
 		BC075ACA1BEE5C3D00AA8C9A = {
 			isa = PBXGroup;
 			children = (
+				BC09FC271BEFC3C600984F45 /* libsdl_image.a */,
 				BC075D1D1BEE700700AA8C9A /* media.xcassets */,
 				BC075D191BEE6FCF00AA8C9A /* assets */,
 				BC075B271BEE60B500AA8C9A /* libs */,

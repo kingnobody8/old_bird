@@ -76,6 +76,20 @@
                ReferencedContainer = "container:../utility/utility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BC09FBF41BEFC01700984F45"
+               BuildableName = "libsdl_image.a"
+               BlueprintName = "sdl_image"
+               ReferencedContainer = "container:../sdl_image/sdl_image.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

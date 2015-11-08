@@ -20,6 +20,7 @@
 		BC075AC71BEE592800AA8C9A /* rect_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC075AB71BEE592800AA8C9A /* rect_part.cpp */; };
 		BC075AC81BEE592800AA8C9A /* render_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC075AB91BEE592800AA8C9A /* render_part.cpp */; };
 		BC075AC91BEE592800AA8C9A /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC075ABB1BEE592800AA8C9A /* script.cpp */; };
+		BC09FC2B1BEFC3E900984F45 /* img_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC09FC291BEFC3E900984F45 /* img_part.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,8 @@
 		BC075ABA1BEE592800AA8C9A /* render_part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_part.h; sourceTree = "<group>"; };
 		BC075ABB1BEE592800AA8C9A /* script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = script.cpp; sourceTree = "<group>"; };
 		BC075ABC1BEE592800AA8C9A /* script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
+		BC09FC291BEFC3E900984F45 /* img_part.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = img_part.cpp; sourceTree = "<group>"; };
+		BC09FC2A1BEFC3E900984F45 /* img_part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = img_part.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 		BC075AB61BEE592800AA8C9A /* renderable */ = {
 			isa = PBXGroup;
 			children = (
+				BC09FC291BEFC3E900984F45 /* img_part.cpp */,
+				BC09FC2A1BEFC3E900984F45 /* img_part.h */,
 				BC075AB71BEE592800AA8C9A /* rect_part.cpp */,
 				BC075AB81BEE592800AA8C9A /* rect_part.h */,
 				BC075AB91BEE592800AA8C9A /* render_part.cpp */,
@@ -224,6 +229,7 @@
 				BC075AC11BEE592800AA8C9A /* part.cpp in Sources */,
 				BC075AC91BEE592800AA8C9A /* script.cpp in Sources */,
 				BC075AC81BEE592800AA8C9A /* render_part.cpp in Sources */,
+				BC09FC2B1BEFC3E900984F45 /* img_part.cpp in Sources */,
 				BC075ABF1BEE592800AA8C9A /* component.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +278,9 @@
 					../../../source/engine/,
 					../../../source/,
 					../../../source/box2d/,
+					../../../source/sdl_image/,
+					../../../source/sdl/include/,
+					../../../source/sdl,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -315,6 +324,9 @@
 					../../../source/engine/,
 					../../../source/,
 					../../../source/box2d/,
+					../../../source/sdl_image/,
+					../../../source/sdl/include/,
+					../../../source/sdl,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
