@@ -31,6 +31,7 @@ namespace engine
 
 			VIRTUAL void CImgPart::Init()
 			{
+				IRenderPart::Init();
 				LoadImgPath(m_path);
 			}
 

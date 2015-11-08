@@ -161,7 +161,7 @@ namespace engine
 			if (EPSI(rotation, DEGREE_360) || EPSI(rotation, 0.0f))
 				rotation = 0.0f;
 
-			SDL_RenderCopyEx(pRen, this->texture, &src_rect, &dstRect, rotation, &center, this->flip);
+			SDL_RenderCopyEx(pRen, this->texture, &srcRect, &dstRect, rotation, &center, this->flip);
 
 			//TODO figure out how to make textures look brighter (whiten)
 			//if (realAlpha > 1.0f)
