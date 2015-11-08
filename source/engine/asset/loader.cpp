@@ -50,7 +50,7 @@ namespace engine
 			return ret;
 		}
 
-		const SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath)
+		SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath)
 		{
 			SDL_Texture* ret = IMG_LoadTexture(render::GetSdlRenderer(), szFilePath.c_str());
 			if (ret == NULL)
@@ -60,7 +60,7 @@ namespace engine
 			}
 			return ret;
 		}
-		const SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data)
+		SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data)
 		{
 			__not_implemented(DataLoaderSdlTexture);
 			return null;

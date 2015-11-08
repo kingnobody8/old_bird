@@ -28,6 +28,7 @@
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_node.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\img_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\rect_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_node.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\img_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\rect_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\script.h" />

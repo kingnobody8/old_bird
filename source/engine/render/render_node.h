@@ -75,14 +75,16 @@ namespace engine
 			util::math::vec2	anchor;
 			float				realAlpha;
 
-			util::math::vec3	position;
-			util::math::vec2	scale;
-			float				rotation;
+			util::math::Matrix2D matrix;
 
 		public:
+			CRenderNodeSprite();
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
 			virtual const b2PolygonShape& CalcShape();
-
+			inline void SetMatrix(const util::math::Matrix2D& mat) { matrix = mat; }
+			inline void SetTexture(SDL_Texture* const tex) { texture = tex; }
+			inline const util::math::Matrix2D& GetMatrix() { return matrix; }
+			inline SDL_Texture* const GetTexture() const { return texture; }
 		};
 
 		__todo() //probably this should contain a list of sprites that it allocates & deallocates as it needs them

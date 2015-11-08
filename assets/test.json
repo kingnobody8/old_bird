@@ -92,6 +92,36 @@
                 }
             ],
             "children": [ ]
+        },
+        {
+            "name": "door",
+            "visible": true,
+            "matrix": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "scale": {
+                    "x": 1,
+                    "y": 1
+                },
+                "rotation": 0
+            },
+            "parts": [
+                {
+                    "type": "CImgPart",
+                    "layer": "world_layer",
+                    "path": "assets/image/white_pixel.png",
+                    "color": {
+                        "r": 1.0,
+                        "g": 1.0,
+                        "b": 1.0,
+                        "a": 1.0
+                    }
+                }
+            ],
+            "children": [ ]
         }
     ]
 }

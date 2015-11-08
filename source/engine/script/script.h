@@ -8,6 +8,7 @@ namespace engine
 		{
 			FIRST_PART = 1,
 			RECT_PART,
+			IMG_PART,
 			PRIORITIES_COUNT
 		};
 
