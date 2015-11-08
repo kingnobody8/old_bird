@@ -32,7 +32,7 @@ namespace engine
 				delete (*iter);
 			s_cameras.clear();
 		}
-
+		
 		CCamera::CCamera(const std::string& name)
 			: m_name(name)
 		{

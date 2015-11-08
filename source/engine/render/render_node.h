@@ -4,14 +4,14 @@
 #include "shape/segment.h"
 #include "math/type3.h"
 #include "math/matrix_2d.h"
-#include "platform/inc_sdl.h"
+#include "sdl/include/SDL.h"
 #include "bit_flag.h"
 #include <list>
 #include <map>
 #include "macro.h"
-#include "box2d/include/Box2D/Collision/Shapes/b2PolygonShape.h"
-#include "box2d/include/Box2D/Collision/Shapes/b2EdgeShape.h"
-#include "box2d/include/Box2D/Collision/b2Collision.h"
+#include "Collision/Shapes/b2PolygonShape.h"
+#include "Collision/Shapes/b2EdgeShape.h"
+#include "Collision/b2Collision.h"
 
 #define ORIGIN_IS_CENTER = 1;
 
@@ -75,14 +75,16 @@ namespace engine
 			util::math::vec2	anchor;
 			float				realAlpha;
 
-			util::math::vec3	position;
-			util::math::vec2	scale;
-			float				rotation;
+			util::math::Matrix2D matrix;
 
 		public:
+			CRenderNodeSprite();
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
 			virtual const b2PolygonShape& CalcShape();
-
+			inline void SetMatrix(const util::math::Matrix2D& mat) { matrix = mat; }
+			inline void SetTexture(SDL_Texture* const tex) { texture = tex; }
+			inline const util::math::Matrix2D& GetMatrix() { return matrix; }
+			inline SDL_Texture* const GetTexture() const { return texture; }
 		};
 
 		__todo() //probably this should contain a list of sprites that it allocates & deallocates as it needs them

@@ -6,12 +6,12 @@
 // YYYY:MM:DD:HH:MM:SS:MS
 // 2015:09:04:22:03:46:32
 
-#ifdef WIN
-#include <SDL_image.h>
-#elif MAC
-#include <SDL2/SDL_image.h>
-#elif IOS_SIM
-#include "SDL_image.h"
-#elif IOS_DEV
-#include "SDL_image.h"
-#endif
+//#ifdef WIN
+//#include <SDL_image.h>
+//#elif MAC
+//#include <SDL2/SDL_image.h>
+//#elif IOS_SIM
+//#include "SDL_image.h"
+//#elif IOS_DEV
+//#include "SDL_image.h"
+//#endif

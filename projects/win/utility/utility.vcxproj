@@ -118,26 +118,26 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>../../../build/lib_output/Win32/Debug/;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x86/;../../../api/win/SDL2_image-2.0.0/lib/x86/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>../../../build/lib_output/Win32/Release/;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>../../../build/lib_output/x64/Debug/;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>../../../api/win/SDL2-2.0.3/include/;../../../api/win/SDL2_image-2.0.0/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../api/win/SDL2-2.0.3/lib/x64/;../../../api/win/SDL2_image-2.0.0/lib/x64/;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>../../../build/lib_output/x64/Release/;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\..\build\win\output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\build\win\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -148,14 +148,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -168,14 +168,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -190,7 +190,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -199,7 +199,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -214,7 +214,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../api/win/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -224,7 +224,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>

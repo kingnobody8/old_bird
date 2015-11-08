@@ -32,8 +32,8 @@ namespace engine
 			{
 				for (int y = -half_size.y; y < half_size.y; y += GRID_CELL_SIZE)
 				{
-					tmp.m_min = util::math::vec2(x, y);
-					tmp.m_max = util::math::vec2(x + GRID_CELL_SIZE, y + GRID_CELL_SIZE);
+					tmp.m_min = util::math::vec2((float)x, (float)y);
+					tmp.m_max = util::math::vec2((float)x + GRID_CELL_SIZE, (float)y + GRID_CELL_SIZE);
 					node.SetAABB(tmp);
 					node(s_sdlRen, util::math::Matrix2D());
 				}

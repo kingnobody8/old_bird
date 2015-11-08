@@ -72,6 +72,12 @@ namespace engine
 		}
 
 		//SPRITE
+		CRenderNodeSprite::CRenderNodeSprite()
+			: texture(null)
+			, flip(SDL_RendererFlip::SDL_FLIP_NONE)
+			, blend_mode(SDL_BlendMode::SDL_BLENDMODE_BLEND)
+		{
+		}
 		VIRTUAL const b2PolygonShape& CRenderNodeSprite::CalcShape()
 		{
 			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
@@ -82,6 +88,10 @@ namespace engine
 				int access;
 				util::math::Type2<int> size;
 				SDL_QueryTexture(this->texture, &format, &access, &size.w, &size.h);
+
+				const util::math::vec2 position = matrix.GetPosition();
+				const util::math::vec2 scale = matrix.GetScale();
+				const float rotation = matrix.GetRotationZ();
 
 				//we multiply size by half because we want the extends, not the full size
 				m_shape.SetAsBox((float32)(size.x * scale.x * 0.5f), (float32)(size.y * scale.y * 0.5f),
@@ -97,6 +107,10 @@ namespace engine
 				//Math::Type2<float>	temp_scale = scale;
 				//float				temp_rotation = rotation;
 				util::math::vec2 cam_position = inv_cam.GetPosition();
+
+			util::math::vec2 position = matrix.GetPosition();
+			util::math::vec2 scale = matrix.GetScale();
+			float rotation = matrix.GetRotationZ();
 
 			//Convert to screen coords
 			util::math::Type2<int> logical_size;
@@ -147,7 +161,7 @@ namespace engine
 			if (EPSI(rotation, DEGREE_360) || EPSI(rotation, 0.0f))
 				rotation = 0.0f;
 
-			SDL_RenderCopyEx(pRen, this->texture, &src_rect, &dstRect, rotation, &center, this->flip);
+			SDL_RenderCopyEx(pRen, this->texture, &srcRect, &dstRect, rotation, &center, this->flip);
 
 			//TODO figure out how to make textures look brighter (whiten)
 			//if (realAlpha > 1.0f)

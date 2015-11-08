@@ -1,8 +1,9 @@
 #pragma once
-#include "platform/inc_sdl.h"
+#include "sdl/include/SDL.h"
 #include <list>
 #include "macro.h"
 #include "shape/aabb.h"
+#include <string>
 
 namespace engine
 {

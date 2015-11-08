@@ -1,6 +1,6 @@
 #pragma once
 #include "platform/platform.h"
-#include "platform/inc_sdl.h"
+#include "sdl/include/sdl.h"
 
 #define __internal_stringify(X) #X
 #define __stringify(X) __internal_stringify(X)

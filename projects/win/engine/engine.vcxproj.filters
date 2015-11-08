@@ -52,6 +52,9 @@
     <ClCompile Include="..\..\..\source\engine\script\script.cpp">
       <Filter>script</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\renderable\img_part.cpp">
+      <Filter>script\renderable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -90,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\script.h">
       <Filter>script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\renderable\img_part.h">
+      <Filter>script\renderable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
