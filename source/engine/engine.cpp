@@ -174,12 +174,12 @@ namespace engine
 		util::Time delta = this->m_timer.Delta();
 		
 		__todo()//remove this, this was for testing only
-		component::CObject* obj = m_pRoot->FindObject("woot");
+		component::CObject* obj = m_pRoot->FindObject("door");
 
 		util::math::Matrix2D mat = obj->GetLocalMatrix();
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
-		mat.SetScale(util::math::vec2(use, 1.0f));
-		mat.SetRotationZ(use * 300);
+		//mat.SetScale(util::math::vec2(use, 1.0f));
+		mat.SetRotationZ(this->m_timer.Total().Milli() / 50.0f);
 		obj->SetLocalMatrix(mat);
 
 		/*mat = Matrix2D();

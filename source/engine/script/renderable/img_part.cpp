@@ -41,6 +41,14 @@ namespace engine
 
 				IRenderPart::LoadJson(json);
 				m_path = json["path"].GetString();
+				const SDL_BlendMode blend_mode = (SDL_BlendMode)json["blend_mode"].GetInt();
+				const SDL_RendererFlip flip = (SDL_RendererFlip)json["flip"].GetInt();
+				const util::math::vec2 anchor = ((const util::JSON&)(json["anchor"])).GetVec2();
+
+				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
+				sprite->SetBlendMode(blend_mode);
+				sprite->SetFlip(flip);
+				sprite->SetAnchor(anchor);
 			}
 
 			VIRTUAL void CImgPart::LoadImgPath(const std::string& szPath)

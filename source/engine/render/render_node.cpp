@@ -73,9 +73,10 @@ namespace engine
 
 		//SPRITE
 		CRenderNodeSprite::CRenderNodeSprite()
-			: texture(null)
-			, flip(SDL_RendererFlip::SDL_FLIP_NONE)
-			, blend_mode(SDL_BlendMode::SDL_BLENDMODE_BLEND)
+			: m_pTexture(null)
+			, m_flip(SDL_RendererFlip::SDL_FLIP_NONE)
+			, m_blend_mode(SDL_BlendMode::SDL_BLENDMODE_BLEND)
+			, m_anchor(0.5f, 0.5f)
 		{
 		}
 		VIRTUAL const b2PolygonShape& CRenderNodeSprite::CalcShape()
@@ -87,11 +88,11 @@ namespace engine
 				Uint32 format;
 				int access;
 				util::math::Type2<int> size;
-				SDL_QueryTexture(this->texture, &format, &access, &size.w, &size.h);
+				SDL_QueryTexture(this->m_pTexture, &format, &access, &size.w, &size.h);
 
-				const util::math::vec2 position = matrix.GetPosition();
-				const util::math::vec2 scale = matrix.GetScale();
-				const float rotation = matrix.GetRotationZ();
+				const util::math::vec2 position = m_matrix.GetPosition();
+				const util::math::vec2 scale = m_matrix.GetScale();
+				const float rotation = m_matrix.GetRotationZ();
 
 				//we multiply size by half because we want the extends, not the full size
 				m_shape.SetAsBox((float32)(size.x * scale.x * 0.5f), (float32)(size.y * scale.y * 0.5f),
@@ -108,9 +109,9 @@ namespace engine
 				//float				temp_rotation = rotation;
 				util::math::vec2 cam_position = inv_cam.GetPosition();
 
-			util::math::vec2 position = matrix.GetPosition();
-			util::math::vec2 scale = matrix.GetScale();
-			float rotation = matrix.GetRotationZ();
+			util::math::vec2 position = m_matrix.GetPosition();
+			util::math::vec2 scale = m_matrix.GetScale();
+			float rotation = m_matrix.GetRotationZ();
 
 			//Convert to screen coords
 			util::math::Type2<int> logical_size;
@@ -119,11 +120,11 @@ namespace engine
 			util::math::vec2 screen_pos(origin.x + position.x + cam_position.x, origin.y + position.y + cam_position.y);
 
 			//Set Blend mode
-			SDL_SetTextureBlendMode(this->texture, this->blend_mode);
+			SDL_SetTextureBlendMode(this->m_pTexture, this->m_blend_mode);
 			//Set Alpha mod
-			SDL_SetTextureAlphaMod(this->texture, this->m_clr.a);
+			SDL_SetTextureAlphaMod(this->m_pTexture, this->m_clr.a);
 			//Set Color mod
-			SDL_SetTextureColorMod(this->texture, this->m_clr.r, this->m_clr.g, this->m_clr.b);
+			SDL_SetTextureColorMod(this->m_pTexture, this->m_clr.r, this->m_clr.g, this->m_clr.b);
 
 			//Set Src and Dst rect
 			SDL_Rect srcRect;
@@ -131,9 +132,9 @@ namespace engine
 			Uint32 format;
 			int access;
 			srcRect.x = srcRect.y = 0;
-			SDL_QueryTexture(this->texture, &format, &access, &srcRect.w, &srcRect.h);
-			dstRect.x = (int)round(screen_pos.x - srcRect.w * this->anchor.x * scale.x);
-			dstRect.y = (int)round(screen_pos.y - srcRect.h * this->anchor.y * scale.y);
+			SDL_QueryTexture(this->m_pTexture, &format, &access, &srcRect.w, &srcRect.h);
+			dstRect.x = (int)round(screen_pos.x - srcRect.w * this->m_anchor.x * scale.x);
+			dstRect.y = (int)round(screen_pos.y - srcRect.h * this->m_anchor.y * scale.y);
 
 			__todo() // this is for using only a portion of the texture when rendering (possibly scissor rects)
 				if (false/*pSection != nullptr*/)
@@ -150,8 +151,8 @@ namespace engine
 				}
 
 			SDL_Point center;
-			center.x = (int)round(this->anchor.x * dstRect.w);
-			center.y = (int)round(this->anchor.y * dstRect.h);
+			center.x = (int)round(this->m_anchor.x * dstRect.w);
+			center.y = (int)round(this->m_anchor.y * dstRect.h);
 
 			//Convert from cartesian coords to screen coords
 			dstRect.y = logical_size.h - dstRect.y - dstRect.h;
@@ -161,7 +162,12 @@ namespace engine
 			if (EPSI(rotation, DEGREE_360) || EPSI(rotation, 0.0f))
 				rotation = 0.0f;
 
-			SDL_RenderCopyEx(pRen, this->texture, &srcRect, &dstRect, rotation, &center, this->flip);
+			SDL_RenderCopyEx(pRen, this->m_pTexture, &srcRect, &dstRect, rotation, &center, this->m_flip);
+
+			CRenderNodeRect rect;
+			rect.SetAABB(this->CalcAABB());
+			rect.SetFill(false);
+			rect(pRen, inv_cam);
 
 			//TODO figure out how to make textures look brighter (whiten)
 			//if (realAlpha > 1.0f)

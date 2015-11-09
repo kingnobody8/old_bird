@@ -68,23 +68,30 @@ namespace engine
 		class CRenderNodeSprite : public IRenderNode
 		{
 		private:
-			SDL_Texture*		texture;
-			SDL_RendererFlip	flip;
-			SDL_Rect			src_rect;
-			SDL_BlendMode		blend_mode;
-			util::math::vec2	anchor;
-			float				realAlpha;
+			util::math::Matrix2D m_matrix;
+			util::math::vec2	m_anchor;
+			SDL_Texture*		m_pTexture;
+			SDL_RendererFlip	m_flip;
+			SDL_BlendMode		m_blend_mode;
+			__todo() // add source rect
 
-			util::math::Matrix2D matrix;
 
 		public:
 			CRenderNodeSprite();
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
 			virtual const b2PolygonShape& CalcShape();
-			inline void SetMatrix(const util::math::Matrix2D& mat) { matrix = mat; }
-			inline void SetTexture(SDL_Texture* const tex) { texture = tex; }
-			inline const util::math::Matrix2D& GetMatrix() { return matrix; }
-			inline SDL_Texture* const GetTexture() const { return texture; }
+
+			inline void SetMatrix(const util::math::Matrix2D& mat) { m_matrix = mat; m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY; }
+			inline void SetAnchor(const util::math::vec2& anchor) { m_anchor = anchor; m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY; }
+			inline void SetTexture(SDL_Texture* const tex) { m_pTexture = tex; }
+			inline void SetFlip(const SDL_RendererFlip& flip) { m_flip = flip; m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY; }
+			inline void SetBlendMode(const SDL_BlendMode& blend) { m_blend_mode = blend; }
+			
+			inline const util::math::Matrix2D& GetMatrix() { return m_matrix; }
+			inline const util::math::vec2& GetAnchor() { return m_anchor; }
+			inline SDL_Texture* const GetTexture() const { return m_pTexture; }
+			inline const SDL_RendererFlip& GetFlip() const { return m_flip; }
+			inline const SDL_BlendMode& GetBlendMode() const { return m_blend_mode; }
 		};
 
 		__todo() //probably this should contain a list of sprites that it allocates & deallocates as it needs them
