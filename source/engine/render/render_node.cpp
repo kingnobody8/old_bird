@@ -35,6 +35,7 @@ namespace engine
 			, m_flag(MOVE_DIRTY | CULL_DIRTY)
 			, m_zed(0.0f)
 		{
+			m_clr.a = m_clr.r = m_clr.g = m_clr.b = 255;
 		}
 		VIRTUAL IRenderNode::~IRenderNode()
 		{

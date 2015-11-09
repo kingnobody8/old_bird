@@ -18,6 +18,11 @@ namespace engine
 			private:
 				std::string m_path;
 
+				util::math::vec2	m_anchor;
+				SDL_Texture*		m_pTexture;
+				SDL_RendererFlip	m_flip;
+				SDL_BlendMode		m_blend_mode;
+
 			protected:
 
 				/*Func*/
@@ -32,6 +37,12 @@ namespace engine
 
 				virtual void OnMatrixChanged(void);
 				virtual void OnZedChanged(void);
+
+				void SetAnchor(const util::math::vec2& anchor);
+				void SetFlip(const SDL_RendererFlip& flip);
+				void SetBlendMode(const SDL_BlendMode& blend_mode);
+
+
 			};
 		}
 	}

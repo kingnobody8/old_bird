@@ -8,6 +8,8 @@
 #include "render/render_layer.h"
 #include "render/camera.h"
 #include "component/part.h"
+#include "script/renderable/img_part.h"
+#include "component/object.inl"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -181,6 +183,18 @@ namespace engine
 		//mat.SetScale(util::math::vec2(use, 1.0f));
 		mat.SetRotationZ(this->m_timer.Total().Milli() / 50.0f);
 		obj->SetLocalMatrix(mat);
+
+		static int mode = 0;
+		static util::Time timer;
+		timer += m_timer.Delta();
+		if (timer > 5000)
+		{
+			timer = 0;
+			mode += 1;
+			if (mode > 4)
+				mode = 0;
+			obj->FindPart<script::renderable::CImgPart>()->SetBlendMode((SDL_BlendMode)mode);
+		}
 
 		/*mat = Matrix2D();
 		mat.SetPosition(vec2(this->m_timer.Total().Milli() / 10, 0.0f));

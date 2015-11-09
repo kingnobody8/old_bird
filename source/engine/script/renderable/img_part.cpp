@@ -32,23 +32,30 @@ namespace engine
 			VIRTUAL void CImgPart::Init()
 			{
 				IRenderPart::Init();
+
 				LoadImgPath(m_path);
+				SetAnchor(m_anchor);
+				SetBlendMode(m_blend_mode);
+				SetFlip(m_flip);
 			}
 
 			VIRTUAL void CImgPart::LoadJson(const util::JSON& json)
 			{
+				IRenderPart::LoadJson(json);
+				
 				auto asdf = json.Read();
 
-				IRenderPart::LoadJson(json);
-				m_path = json["path"].GetString();
-				const SDL_BlendMode blend_mode = (SDL_BlendMode)json["blend_mode"].GetInt();
-				const SDL_RendererFlip flip = (SDL_RendererFlip)json["flip"].GetInt();
-				const util::math::vec2 anchor = ((const util::JSON&)(json["anchor"])).GetVec2();
+				assert(json.HasMember("path"));
+				assert(json.HasMember("blend_mode"));
+				assert(json.HasMember("flip"));
+				assert(json.HasMember("anchor"));
 
-				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
-				sprite->SetBlendMode(blend_mode);
-				sprite->SetFlip(flip);
-				sprite->SetAnchor(anchor);
+				m_path = json["path"].GetString();
+				m_blend_mode = (SDL_BlendMode)json["blend_mode"].GetInt();
+				m_flip = (SDL_RendererFlip)json["flip"].GetInt();
+				m_anchor = ((const util::JSON&)(json["anchor"])).GetVec2();
+
+				assert(!m_path.empty());
 			}
 
 			VIRTUAL void CImgPart::LoadImgPath(const std::string& szPath)
@@ -68,6 +75,27 @@ namespace engine
 			{
 				const float wzed = m_pOwner->CalcWorldZed();
 				m_pNode->SetZed(wzed);
+			}
+
+			void CImgPart::SetAnchor(const util::math::vec2& anchor)
+			{
+				m_anchor = anchor;
+				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
+				sprite->SetAnchor(anchor);
+			}
+
+			void CImgPart::SetFlip(const SDL_RendererFlip& flip)
+			{
+				m_flip = flip;
+				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
+				sprite->SetFlip(flip);
+			}
+			
+			void CImgPart::SetBlendMode(const SDL_BlendMode& blend_mode)
+			{
+				m_blend_mode = blend_mode;
+				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
+				sprite->SetBlendMode(blend_mode);
 			}
 		}
 	}
