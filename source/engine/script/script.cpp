@@ -1,6 +1,6 @@
 #include "script.h"
 #include "script/renderable/render_part.h"
-#include "script/renderable/rect_part.h"
+#include "script/renderable/aabb_part.h"
 #include "script/renderable/img_part.h"
 
 namespace engine
@@ -13,7 +13,7 @@ namespace engine
 
 		void RegisterScripts()
 		{
-			REGISTER_PART(CRectPart);
+			REGISTER_PART(CAabbPart);
 			REGISTER_PART(CImgPart);
 		}
 	}

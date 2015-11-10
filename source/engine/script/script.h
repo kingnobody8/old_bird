@@ -9,7 +9,7 @@ namespace engine
 		enum EPriorities
 		{
 			FIRST_PART = 1,
-			RECT_PART,
+			AABB_PART,
 			IMG_PART,
 			PRIORITIES_COUNT
 		};
