@@ -18,6 +18,7 @@ namespace engine
 				std::string m_szLayer;
 				util::Color m_color;
 				render::IRenderNode* m_pNode;
+				bool m_force;
 
 				/*Func*/
 			protected:

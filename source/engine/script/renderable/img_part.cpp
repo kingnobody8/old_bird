@@ -36,10 +36,12 @@ namespace engine
 			{
 				IRenderPart::Init();
 
+				m_force = true;
 				LoadImgFromUri(m_uri);
 				SetAnchor(m_anchor);
 				SetBlendMode(m_blend_mode);
 				SetFlip(m_flip);
+				m_force = false;
 			}
 
 			VIRTUAL void CImgPart::LoadJson(const util::JSON& json)
@@ -61,6 +63,9 @@ namespace engine
 
 			VIRTUAL void CImgPart::LoadImgFromUri(const std::string& uri)
 			{
+				if (!m_force && (m_uri == uri))
+					return;
+
 				m_uri = uri;
 				SDL_Texture* tex = asset::FileLoaderSdlTexture(getResourcePath() + uri);
 				static_cast<render::CRenderNodeSprite*>(m_pNode)->SetTexture(tex);
@@ -69,7 +74,8 @@ namespace engine
 			VIRTUAL void CImgPart::OnMatrixChanged(void)
 			{
 				const util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
-				static_cast<render::CRenderNodeSprite*>(m_pNode)->SetMatrix(wmat);
+				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
+				sprite->SetMatrix(wmat);
 			}
 
 			VIRTUAL void CImgPart::OnZedChanged(void)
@@ -80,6 +86,9 @@ namespace engine
 
 			void CImgPart::SetAnchor(const util::math::vec2& anchor)
 			{
+				if (!m_force && (m_anchor == anchor))
+					return;
+
 				m_anchor = anchor;
 				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
 				sprite->SetAnchor(anchor);
@@ -87,6 +96,9 @@ namespace engine
 
 			void CImgPart::SetFlip(const SDL_RendererFlip& flip)
 			{
+				if (!m_force && (m_flip == flip))
+					return;
+
 				m_flip = flip;
 				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
 				sprite->SetFlip(flip);
@@ -94,6 +106,9 @@ namespace engine
 			
 			void CImgPart::SetBlendMode(const SDL_BlendMode& blend_mode)
 			{
+				if (!m_force && (m_blend_mode = blend_mode))
+					return;
+
 				m_blend_mode = blend_mode;
 				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
 				sprite->SetBlendMode(blend_mode);

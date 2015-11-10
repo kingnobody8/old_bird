@@ -10,6 +10,7 @@ namespace engine
 		{
 			IRenderPart::IRenderPart(void)
 				: m_pNode(null)
+				, m_force(false)
 			{
 			}
 			IRenderPart& IRenderPart::operator = (const IRenderPart& that)
@@ -18,6 +19,7 @@ namespace engine
 				m_color = that.m_color;
 				__todo() //is this ok? dereferencing the node
 				*m_pNode = *that.m_pNode;
+				m_force = that.m_force;
 				return *this;
 			}
 			VIRTUAL	IRenderPart::~IRenderPart(void)
@@ -26,10 +28,12 @@ namespace engine
 
 			VIRTUAL void IRenderPart::Init()
 			{
+				m_force = true;
 				SetLayer(m_szLayer);
 				SetLocalColor(m_color);
 				OnMatrixChanged();
 				OnZedChanged();
+				m_force = false;
 			}
 
 			VIRTUAL void IRenderPart::LoadJson(const util::JSON& json)
@@ -40,6 +44,9 @@ namespace engine
 
 			VIRTUAL void IRenderPart::OnVisibilityChanged(const bool visible)
 			{
+				if (!m_force && (visible == (m_pNode->GetLayer() != null)))
+					return;
+
 				if (visible)
 					m_pNode->Register(m_szLayer);
 				else
@@ -64,12 +71,18 @@ namespace engine
 
 			void IRenderPart::SetLocalColor(const util::Color& clr)
 			{
+				if (!m_force && (m_color == clr))
+					return;
+
 				__todo() //this needs to do a vertical search for ColorModPart and see what colors it applies to us so we can properly set the nod
 				m_color = clr;
 				m_pNode->SetColor(clr.SDL());
 			}
 			void IRenderPart::SetLayer(const std::string& szLayer)
 			{
+				if (!m_force && (m_szLayer == szLayer))
+					return;
+
 				m_szLayer = szLayer;
 				if (m_pOwner->GetWorldVisible())
 					m_pNode->Register(szLayer);

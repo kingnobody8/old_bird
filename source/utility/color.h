@@ -24,6 +24,15 @@ namespace util
 		Color(const Color& that);
 		Color& operator= (const Color& that);
 
+		inline const bool operator==(const Color &v) const
+		{
+			return (EPSI(r, v.r) && EPSI(g, v.g) && EPSI(b, v.b) && EPSI(a, v.a));
+		}
+		inline const bool operator!=(const Color &v) const
+		{
+			return !this->operator==(v);
+		}
+
 		const SDL_Color SDL(void) const;
 		void SDL(const SDL_Color clr);
 		const vec4 HSV(void) const;
