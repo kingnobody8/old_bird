@@ -112,7 +112,7 @@
                 {
                     "type": "CImgPart",
                     "layer": "world_layer",
-                    "path": "assets/image/door.png",
+                    "uri": "assets/image/door.png",
                     "blend_mode": 1,
                     "flip": 0,
                     "anchor": {

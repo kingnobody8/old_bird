@@ -16,7 +16,7 @@ namespace engine
 
 				/*Data*/
 			private:
-				std::string m_path;
+				std::string m_uri;
 
 				util::math::vec2	m_anchor;
 				SDL_Texture*		m_pTexture;
@@ -33,10 +33,12 @@ namespace engine
 			
 				virtual void Init();
 				virtual void LoadJson(const util::JSON& json);
-				virtual void LoadImgPath(const std::string& szPath);
+				virtual void LoadImgFromUri(const std::string& uri);
 
 				virtual void OnMatrixChanged(void);
 				virtual void OnZedChanged(void);
+
+				inline const std::string& GetUri() const { return m_uri; }
 
 				void SetAnchor(const util::math::vec2& anchor);
 				void SetFlip(const SDL_RendererFlip& flip);

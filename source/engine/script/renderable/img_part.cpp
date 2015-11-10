@@ -25,7 +25,10 @@ namespace engine
 			CImgPart& CImgPart::operator = (const CImgPart& that)
 			{
 				IRenderPart::operator=(that);
-				m_path = that.m_path;
+				m_uri = that.m_uri;
+				m_pTexture = that.m_pTexture;
+				m_flip = that.m_flip;
+				m_blend_mode = that.m_blend_mode;
 				return *this;
 			}
 
@@ -33,7 +36,7 @@ namespace engine
 			{
 				IRenderPart::Init();
 
-				LoadImgPath(m_path);
+				LoadImgFromUri(m_uri);
 				SetAnchor(m_anchor);
 				SetBlendMode(m_blend_mode);
 				SetFlip(m_flip);
@@ -43,25 +46,23 @@ namespace engine
 			{
 				IRenderPart::LoadJson(json);
 				
-				auto asdf = json.Read();
-
-				assert(json.HasMember("path"));
+				assert(json.HasMember("uri"));
 				assert(json.HasMember("blend_mode"));
 				assert(json.HasMember("flip"));
 				assert(json.HasMember("anchor"));
 
-				m_path = json["path"].GetString();
+				m_uri = json["uri"].GetString();
 				m_blend_mode = (SDL_BlendMode)json["blend_mode"].GetInt();
 				m_flip = (SDL_RendererFlip)json["flip"].GetInt();
 				m_anchor = ((const util::JSON&)(json["anchor"])).GetVec2();
 
-				assert(!m_path.empty());
+				assert(!m_uri.empty());
 			}
 
-			VIRTUAL void CImgPart::LoadImgPath(const std::string& szPath)
+			VIRTUAL void CImgPart::LoadImgFromUri(const std::string& uri)
 			{
-				m_path = szPath;
-				SDL_Texture* tex = asset::FileLoaderSdlTexture(getResourcePath() + szPath);
+				m_uri = uri;
+				SDL_Texture* tex = asset::FileLoaderSdlTexture(getResourcePath() + uri);
 				static_cast<render::CRenderNodeSprite*>(m_pNode)->SetTexture(tex);
 			}
 
