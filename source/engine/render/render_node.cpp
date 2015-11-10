@@ -34,12 +34,36 @@ namespace engine
 			: m_pLayer(null)
 			, m_flag(MOVE_DIRTY | CULL_DIRTY)
 			, m_zed(0.0f)
+			, m_use_scissor(false)
 		{
 			m_clr.a = m_clr.r = m_clr.g = m_clr.b = 255;
 		}
 		VIRTUAL IRenderNode::~IRenderNode()
 		{
 			Unregister();
+		}
+		void IRenderNode::SetScissorRect(const util::shape::AABB& scissor)
+		{
+			if (scissor.IsInvalid())
+				return;
+			m_scissor = scissor;
+			m_use_scissor = true;
+		}
+		void IRenderNode::ScissorOperation(SDL_Renderer* pRen, const util::math::vec2& origin)
+		{
+			if (m_use_scissor)
+			{
+				SDL_Rect scissor;
+				scissor.x = (int)(origin.x + m_scissor.m_min.x);
+				scissor.y = (int)(origin.y - m_scissor.m_max.y);
+				scissor.w = (int)m_scissor.CalcSize().w;
+				scissor.h = (int)m_scissor.CalcSize().h;
+				SDL_RenderSetClipRect(pRen, &scissor);
+			}
+			else
+			{
+				SDL_RenderSetClipRect(pRen, null);
+			}
 		}
 		const bool IRenderNode::CheckInView(const b2PolygonShape& view)
 		{
@@ -114,6 +138,8 @@ namespace engine
 			util::math::vec2 scale = m_matrix.GetScale();
 			float rotation = m_matrix.GetRotationZ();
 
+
+
 			//Convert to screen coords
 			util::math::Type2<int> logical_size;
 			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
@@ -163,11 +189,14 @@ namespace engine
 			if (EPSI(rotation, DEGREE_360) || EPSI(rotation, 0.0f))
 				rotation = 0.0f;
 
+			ScissorOperation(pRen, origin);
+
 			SDL_RenderCopyEx(pRen, this->m_pTexture, &srcRect, &dstRect, rotation, &center, this->m_flip);
 
 			CRenderNodeRect rect;
 			rect.SetAABB(this->CalcAABB());
 			rect.SetFill(false);
+			rect.SetScissorRect(m_scissor);
 			rect(pRen, inv_cam);
 
 			//TODO figure out how to make textures look brighter (whiten)
@@ -188,6 +217,7 @@ namespace engine
 			//	}
 			//}
 		}
+		
 
 		//LINE
 		void CRenderNodeLine::SetLine(const util::shape::Segment& seg)
@@ -230,6 +260,8 @@ namespace engine
 			p1.y = (int)(origin.y - tmp1.y);
 			p2.x = (int)(origin.x + tmp2.x);
 			p2.y = (int)(origin.y - tmp2.y);
+
+			ScissorOperation(pRen, origin);
 
 			SDL_SetRenderDrawColor(pRen, m_clr.r, m_clr.g, m_clr.b, m_clr.a);
 			SDL_RenderDrawLine(pRen, p1.x, p1.y, p2.x, p2.y);
@@ -274,6 +306,8 @@ namespace engine
 			rect.y = (int)(origin.y - tmp.m_max.y);
 			rect.w = (int)tmp.CalcSize().w;
 			rect.h = (int)tmp.CalcSize().h;
+
+			ScissorOperation(pRen, origin);
 
 			SDL_SetRenderDrawColor(pRen, this->m_clr.r, this->m_clr.g, this->m_clr.b, this->m_clr.a);
 			if (this->m_fill)

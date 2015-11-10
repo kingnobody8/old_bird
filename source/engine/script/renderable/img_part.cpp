@@ -42,6 +42,8 @@ namespace engine
 				SetBlendMode(m_blend_mode);
 				SetFlip(m_flip);
 				m_force = false;
+
+				m_pNode->SetScissorRect(util::shape::AABB(vec2(0, 24), vec2(140, 500)));
 			}
 
 			VIRTUAL void CImgPart::LoadJson(const util::JSON& json)

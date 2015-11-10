@@ -46,19 +46,27 @@ namespace engine
 			b2PolygonShape		m_shape;
 			util::Flag08		m_flag;
 			SDL_Color			m_clr;
+			util::shape::AABB	m_scissor;
+			bool				m_use_scissor;
 			float				m_zed;
 
 		public:
 			IRenderNode(void);
 			virtual ~IRenderNode() = 0;
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam) = 0;
+			void ScissorOperation(SDL_Renderer* pRen, const util::math::vec2& origin);
 			virtual const b2PolygonShape& CalcShape() = 0;
 			const util::shape::AABB CalcAABB();
 			const bool CheckInView(const b2PolygonShape& view);
 			inline void SetColor(const SDL_Color& clr) { m_clr = clr; }
+			void SetScissorRect(const util::shape::AABB& scissor);
+			inline void ClearScissorRect() { m_use_scissor = false; }
 			inline void SetZed(const float& zed) { m_zed = zed; }
+
 			inline const SDL_Color& GetColor() const { return m_clr; }
 			inline CRenderLayer* GetLayer() const { return m_pLayer; }
+			inline const util::shape::AABB& GetScissorRect() const { return (m_use_scissor) ? m_scissor : util::shape::AABB::INVALID_AABB; }
+			inline const bool IsScissorActive() const { return m_use_scissor; }
 			inline const float& GetZed() const { return m_zed; }
 
 			void Register(const std::string& layer);
@@ -68,11 +76,12 @@ namespace engine
 		class CRenderNodeSprite : public IRenderNode
 		{
 		private:
-			util::math::Matrix2D m_matrix;
-			util::math::vec2	m_anchor;
-			SDL_Texture*		m_pTexture;
-			SDL_RendererFlip	m_flip;
-			SDL_BlendMode		m_blend_mode;
+			util::math::Matrix2D	m_matrix;
+			util::math::vec2		m_anchor;
+			
+			SDL_Texture*			m_pTexture;
+			SDL_RendererFlip		m_flip;
+			SDL_BlendMode			m_blend_mode;
 			__todo() // add source rect
 
 

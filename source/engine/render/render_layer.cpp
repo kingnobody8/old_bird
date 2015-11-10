@@ -95,7 +95,7 @@ namespace engine
 
 
 			__todo() //replace this with the nodes found after the cull
-			//also use the actuall camera matrix
+				//also use the actuall camera matrix
 
 			util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)

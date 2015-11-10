@@ -34,6 +34,9 @@ namespace engine
 				m_force = true;
 				SetExtends(m_extends);
 				m_force = false;
+
+				m_pNode->SetScissorRect(util::shape::AABB(vec2(-500, 16), vec2(128, 500)));
+
 			}
 
 
