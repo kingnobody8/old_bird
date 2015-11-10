@@ -11,8 +11,6 @@ namespace engine
 		__todo() //maybe eventually we want to organize things like bvb did with namespaces as part of the part name ie: engine.render.crectpart or engine.ui.button
 		using namespace renderable;
 
-#define REGISTER_PART(CLASS) engine::component::IPart::RegisterPart(#CLASS, CLASS::Type, util::CNewType<CLASS>())
-
 		void RegisterScripts()
 		{
 			REGISTER_PART(CRectPart);
