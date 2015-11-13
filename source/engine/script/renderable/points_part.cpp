@@ -18,7 +18,7 @@ namespace engine
 			}
 			VIRTUAL CPointsPart::~CPointsPart()
 			{
-				delete m_pNode;
+				ClearNodes();
 			}
 			CPointsPart& CPointsPart::operator = (const CPointsPart& that)
 			{
@@ -30,11 +30,9 @@ namespace engine
 			{
 				IRenderPart::Init();
 				m_force = true;
-				SetPoints(m_points);
-				SetRenderMode(m_render_mode);
+				SetPointsAndRenderMode(m_points, m_render_mode);
 				m_force = false;
 			}
-
 
 			VIRTUAL void CPointsPart::LoadJson(const util::JSON& json)
 			{
@@ -49,34 +47,27 @@ namespace engine
 				assert(m_render_mode > INVALID && m_render_mode < COUNT);
 			}
 
-
-			void CPointsPart::SetRenderMode(ERenderMode mode)
+			void CPointsPart::SetPointsAndRenderMode(const std::vector<util::math::vec2>& points, ERenderMode mode)
 			{
-				if (!m_force && (m_render_mode == mode))
+				assert(!points.empty());
+				assert(mode > INVALID && mode < COUNT);
+
+				if (!m_force && (m_render_mode == mode) && (m_points == points))
 					return;
 
 				//stupidity handling
-				if (m_points.size() == 1)
+				if (m_points.size() == 1) // if we only have one point, then we shouldn't draw lines
 					mode = ERenderMode::POINTS;
-				else if (m_points.size() == 2 && mode == ERenderMode::CLOSED_LINE)
+				else if (m_points.size() == 2 && mode == ERenderMode::CLOSED_LINE) //if only have two points and we want to draw a closed line it would just trace back on itself
 					mode = ERenderMode::OPEN_LINE;
 
+				m_points = points;
 				m_render_mode = mode;
+
 				SetupNodes();
 			}
-			void CPointsPart::SetPoints(const std::vector<util::math::vec2>& points)
-			{
-				assert(!points.empty());
 
-				m_points = points;
-
-				m_force = true;
-				SetRenderMode(m_render_mode);
-				m_force = false;
-
-			}
-			
-			void CPointsPart::SetupNodes()
+			void CPointsPart::ClearNodes()
 			{
 				if (!m_nodes.empty())
 				{
@@ -86,6 +77,11 @@ namespace engine
 					}
 					m_nodes.clear();
 				}
+			}
+
+			void CPointsPart::SetupNodes()
+			{
+				ClearNodes();
 
 				switch (m_render_mode)
 				{
@@ -93,7 +89,7 @@ namespace engine
 					SetupPoints();
 					break;
 				case ERenderMode::OPEN_LINE:
-					SetupLines(m_points.size()-1);
+					SetupLines(m_points.size() - 1);
 					break;
 				case ERenderMode::CLOSED_LINE:
 					SetupLines(m_points.size());
@@ -102,19 +98,6 @@ namespace engine
 					assert(false);
 					break;
 				}
-			}
-
-
-			VIRTUAL void CPointsPart::OnZedChanged(void)
-			{
-
-			}
-
-			VIRTUAL void CPointsPart::OnMatrixChanged(void)
-			{
-				m_force = true;
-				SetupNodes();
-				m_force = false;
 			}
 
 			void CPointsPart::SetupPoints()
@@ -158,6 +141,84 @@ namespace engine
 				for (int i = 0; i < m_points.size(); ++i)
 					ret.push_back(util::math::Matrix2D::Vector_Matrix_Multiply(m_points[i], wmat));
 				return ret;
+			}
+
+			//IRenderPart overrides
+
+			VIRTUAL void CPointsPart::OnZedChanged()
+			{
+				const float wzed = m_pOwner->CalcWorldZed();
+				for (int i = 0; i < m_nodes.size(); ++i)
+				{
+					m_nodes[i]->SetZed(wzed);
+				}
+			}
+
+			VIRTUAL void CPointsPart::OnMatrixChanged()
+			{
+				m_force = true;
+				SetPointsAndRenderMode(m_points, m_render_mode); __todo() // i don't really like this, but I cant think of a better solution right now. the closest option is to go through each node grab their positionss revert them to local space, then matrix mult them back into the new world
+				m_force = false;
+			}
+
+			VIRTUAL void CPointsPart::OnVisibilityChanged(const bool visible)
+			{
+				if (!m_force && (visible == (m_pNode->GetLayer() != null)))
+					return;
+
+				if (visible)
+				{
+					for (int i = 0; i < m_nodes.size(); ++i)
+						m_nodes[i]->Register(m_szLayer);
+				}
+				else
+				{
+					for (int i = 0; i < m_nodes.size(); ++i)
+						m_nodes[i]->Unregister();
+				}
+			}
+
+			VIRTUAL const util::shape::AABB CPointsPart::CalcAABB(void)
+			{
+				const std::vector<util::math::vec2> wpoints = CalcWorldPoints();
+
+				util::shape::AABB ret;
+				for (int i = 0; i < wpoints.size(); ++i)
+					ret.Stretch(wpoints[i]);
+				return ret;
+			}
+
+			VIRTUAL const bool CPointsPart::IsRegistered() const
+			{
+				if (m_nodes.empty())
+					return false;
+				return (m_nodes[0]->GetLayer() != null);
+			}
+
+			VIRTUAL void CPointsPart::SetLocalColor(const util::Color& clr)
+			{
+				if (!m_force && (m_color == clr))
+					return;
+
+				__todo() //this needs to do a vertical search for ColorModPart and see what colors it applies to us so we can properly set the nod
+				m_color = clr;
+				for (int i = 0; i < m_nodes.size(); ++i)
+					m_nodes[i]->SetColor(clr.SDL());
+			}
+
+			VIRTUAL void CPointsPart::SetLayer(const std::string& szLayer)
+			{
+				if (!m_force && (m_szLayer == szLayer))
+					return;
+
+				m_szLayer = szLayer;
+				if (m_pOwner->GetWorldVisible())
+				{
+					for (int i = 0; i < m_nodes.size(); ++i)
+					{
+						m_nodes[i]->Register(m_szLayer);
+					}
+				}
 			}
 		}
 	}

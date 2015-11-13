@@ -36,14 +36,14 @@ namespace engine
 				virtual const util::shape::AABB CalcAABB(void);
 				virtual inline const bool IsRenderable(void) const { return true; }
 
+				virtual const bool IsRegistered() const;
+
 				inline const std::string& GetLayer(void) const { return this->m_szLayer; }
-				inline render::IRenderNode* GetRenderNode(void) { return m_pNode; }
-				const bool IsRegistered() const;
 				inline const util::Color GetLocalColor() const { return m_color; }
 				const util::Color GetWorldColor() const;
 
-				void SetLocalColor(const util::Color& clr);
-				void SetLayer(const std::string& szLayer);
+				virtual void SetLocalColor(const util::Color& clr);
+				virtual void SetLayer(const std::string& szLayer);
 			};
 		}
 	}

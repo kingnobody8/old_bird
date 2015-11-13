@@ -29,6 +29,7 @@ namespace engine
 
 				/*Func*/
 			private:
+				void ClearNodes();
 				void SetupNodes();
 				void SetupPoints();
 				void SetupLines(const int& count);
@@ -40,14 +41,21 @@ namespace engine
 				virtual void Init();
 				virtual void LoadJson(const util::JSON& json);
 
-				virtual void OnMatrixChanged(void);
-				virtual void OnZedChanged(void);
+				virtual void OnZedChanged();
+				virtual void OnMatrixChanged();
+				virtual void OnVisibilityChanged(const bool visible);
 
-				void SetRenderMode(ERenderMode mode);
-				void SetPoints(const std::vector<util::math::vec2>& points);
+				virtual const util::shape::AABB CalcAABB(void);
 
-				inline const ERenderMode& GetRenderMode() const { return m_render_mode; }
+				const bool IsRegistered() const;
+
+				void SetLocalColor(const util::Color& clr);
+				void SetLayer(const std::string& szLayer);
+
+				void SetPointsAndRenderMode(const std::vector<util::math::vec2>& points, ERenderMode mode);
+
 				inline const std::vector<util::math::vec2>& GetPoints() const { return m_points; }
+				inline const ERenderMode& GetRenderMode() const { return m_render_mode; }
 				const std::vector<util::math::vec2> CalcWorldPoints() const;
 			};
 		}

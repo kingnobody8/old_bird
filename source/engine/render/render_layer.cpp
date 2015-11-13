@@ -93,7 +93,6 @@ namespace engine
 			cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
 
 
-
 			__todo() //replace this with the nodes found after the cull
 				//also use the actuall camera matrix
 
@@ -102,9 +101,6 @@ namespace engine
 			{
 				(*iter)->operator()(pRen, inv_cam);
 			}
-
-			SDL_SetRenderDrawColor(pRen, 255,25, 50, 255);
-			SDL_RenderDrawPoint(pRen, 0,0);
 		}
 
 		void CRenderLayer::RegisterNode(IRenderNode* pNode)

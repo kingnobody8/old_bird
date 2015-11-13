@@ -17,8 +17,8 @@ namespace engine
 			{
 				m_szLayer = that.m_szLayer;
 				m_color = that.m_color;
-				__todo() //is this ok? dereferencing the node
-				*m_pNode = *that.m_pNode;
+				if (that.m_pNode != null)
+					*m_pNode = *that.m_pNode;
 				m_force = that.m_force;
 				return *this;
 			}
@@ -47,16 +47,12 @@ namespace engine
 
 			VIRTUAL void IRenderPart::OnZedChanged(void)
 			{
-				if (m_pNode == null)
-					return;
 				const float wzed = m_pOwner->CalcWorldZed();
 				m_pNode->SetZed(wzed);
 			}
 
 			VIRTUAL void IRenderPart::OnVisibilityChanged(const bool visible)
 			{
-				if (m_pNode == null)
-					return;
 				if (!m_force && (visible == (m_pNode->GetLayer() != null)))
 					return;
 
@@ -68,45 +64,31 @@ namespace engine
 
 			VIRTUAL const util::shape::AABB IRenderPart::CalcAABB(void)
 			{
-				if (m_pNode == null)
-					return util::shape::AABB::INVALID_AABB;
-
 				return m_pNode->CalcAABB();
 			}
 
-			const bool IRenderPart::IsRegistered() const
+			VIRTUAL const bool IRenderPart::IsRegistered() const
 			{
-				if (m_pNode == null)
-					return false;
-
 				return (m_pNode->GetLayer() != null);
 			}
 			const util::Color IRenderPart::GetWorldColor() const
 			{
-				if (m_pNode == null)
-					return util::Color::WHITE;
-
 				util::Color clr;
 				clr.SDL(m_pNode->GetColor());
 				return clr;
 			}
 
-			void IRenderPart::SetLocalColor(const util::Color& clr)
+			VIRTUAL void IRenderPart::SetLocalColor(const util::Color& clr)
 			{
 				if (!m_force && (m_color == clr))
-					return;
-
-				if (m_pNode == null)
 					return;
 
 				__todo() //this needs to do a vertical search for ColorModPart and see what colors it applies to us so we can properly set the nod
 				m_color = clr;
 				m_pNode->SetColor(clr.SDL());
 			}
-			void IRenderPart::SetLayer(const std::string& szLayer)
+			VIRTUAL void IRenderPart::SetLayer(const std::string& szLayer)
 			{
-				if (m_pNode == null)
-					return;
 				if (!m_force && (m_szLayer == szLayer))
 					return;
 
