@@ -102,6 +102,9 @@ namespace engine
 			{
 				(*iter)->operator()(pRen, inv_cam);
 			}
+
+			SDL_SetRenderDrawColor(pRen, 255,25, 50, 255);
+			SDL_RenderDrawPoint(pRen, 0,0);
 		}
 
 		void CRenderLayer::RegisterNode(IRenderNode* pNode)

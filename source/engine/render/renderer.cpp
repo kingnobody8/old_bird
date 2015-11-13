@@ -118,7 +118,7 @@ namespace engine
 			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			//RenderGrid(half_size);
-			RenderCrossSection(logical_size);
+		//	RenderCrossSection(logical_size);
 			
 			SDL_SetRenderDrawColor(s_sdlRen, 32, 32, 32, 255);
 

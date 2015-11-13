@@ -17,7 +17,7 @@
     "children": [
         {
             "name": "play",
-            "visible": true,
+            "visible": false,
             "matrix": {
                 "position": {
                     "x": 64,
@@ -40,7 +40,7 @@
                         "b": 1.0,
                         "a": 1.0
                     },
-                   "extends": {
+                    "extends": {
                         "x": 32,
                         "y": 32
                     }
@@ -50,7 +50,7 @@
         },
         {
             "name": "woot",
-            "visible": true,
+            "visible": false,
             "matrix": {
                 "position": {
                     "x": 0,
@@ -83,7 +83,7 @@
         },
         {
             "name": "door",
-            "visible": true,
+            "visible": false,
             "matrix": {
                 "position": {
                     "x": 0,
@@ -107,6 +107,58 @@
                         "x": 0.5,
                         "y": 0.5
                     },
+                    "color": {
+                        "r": 1.0,
+                        "g": 1.0,
+                        "b": 1.0,
+                        "a": 0.75
+                    }
+                }
+            ],
+            "children": [ ]
+        },
+        {
+            "name": "points",
+            "visible": true,
+            "matrix": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 2
+                },
+                "scale": {
+                    "x": 1,
+                    "y": 1
+                },
+                "rotation": 0
+            },
+            "parts": [
+                {
+                    "type": "CPointsPart",
+                    "layer": "world_layer",
+                    "render_mode": 1,
+                    "points": [
+                        {
+                            "x": 0,
+                            "y": 0
+                        },
+                        {
+                            "x": 256,
+                            "y": 0
+                        },
+                        {
+                            "x": 256,
+                            "y": 256
+                        },
+                        {
+                            "x": 108,
+                            "y": -329
+                        },
+                        {
+                            "x": -400,
+                            "y": -300
+                        }
+                    ],
                     "color": {
                         "r": 1.0,
                         "g": 1.0,

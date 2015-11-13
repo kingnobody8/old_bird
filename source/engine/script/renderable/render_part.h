@@ -17,7 +17,7 @@ namespace engine
 			protected:
 				std::string m_szLayer;
 				util::Color m_color;
-				render::IRenderNode* m_pNode;
+				render::IRenderNode* m_pNode; __todo() //it may be wise to remove this and have it set on a per child class basis, because points uses an array of nodes, also because i don't think other class should access our node
 				bool m_force;
 
 				/*Func*/
@@ -30,6 +30,7 @@ namespace engine
 				virtual void Init();
 				virtual void LoadJson(const util::JSON& json);
 
+				virtual void OnZedChanged(void);
 				virtual void OnVisibilityChanged(const bool visible);
 
 				virtual const util::shape::AABB CalcAABB(void);

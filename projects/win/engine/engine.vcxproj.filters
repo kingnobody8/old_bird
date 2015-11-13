@@ -55,6 +55,9 @@
     <ClCompile Include="..\..\..\source\engine\script\renderable\aabb_part.cpp">
       <Filter>script\renderable</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp">
+      <Filter>script\renderable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -95,6 +98,9 @@
       <Filter>script\renderable</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\renderable\aabb_part.h">
+      <Filter>script\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h">
       <Filter>script\renderable</Filter>
     </ClInclude>
   </ItemGroup>

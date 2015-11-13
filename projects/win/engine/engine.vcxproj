@@ -30,6 +30,7 @@
     <ClCompile Include="..\..\..\source\engine\render\render_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\img_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\aabb_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
   </ItemGroup>
@@ -46,6 +47,7 @@
     <ClInclude Include="..\..\..\source\engine\render\render_node.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\img_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\aabb_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\script.h" />
   </ItemGroup>

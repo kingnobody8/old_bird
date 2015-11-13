@@ -176,7 +176,7 @@ namespace engine
 		util::Time delta = this->m_timer.Delta();
 		
 		__todo()//remove this, this was for testing only
-		component::CObject* obj = m_pRoot->FindObject("door");
+		component::CObject* obj = m_pRoot->FindObject("points");
 
 		util::math::Matrix2D mat = obj->GetLocalMatrix();
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
@@ -193,7 +193,9 @@ namespace engine
 			mode += 1;
 			if (mode > 4)
 				mode = 0;
-			obj->FindPart<script::renderable::CImgPart>()->SetBlendMode((SDL_BlendMode)mode);
+			script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+			if(pimg)
+				pimg->SetBlendMode((SDL_BlendMode)mode);
 		}
 
 		/*mat = Matrix2D();

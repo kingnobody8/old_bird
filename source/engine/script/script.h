@@ -10,6 +10,7 @@ namespace engine
 		{
 			FIRST_PART = 1,
 			AABB_PART,
+			POINTS_PART,
 			IMG_PART,
 			PRIORITIES_COUNT
 		};
