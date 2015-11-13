@@ -42,8 +42,6 @@ namespace engine
 				SetBlendMode(m_blend_mode);
 				SetFlip(m_flip);
 				m_force = false;
-
-				m_pNode->SetScissorRect(util::shape::AABB(vec2(0, 24), vec2(140, 500)));
 			}
 
 			VIRTUAL void CImgPart::LoadJson(const util::JSON& json)
@@ -78,12 +76,6 @@ namespace engine
 				const util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
 				render::CRenderNodeSprite* sprite = static_cast<render::CRenderNodeSprite*>(m_pNode);
 				sprite->SetMatrix(wmat);
-			}
-
-			VIRTUAL void CImgPart::OnZedChanged(void)
-			{
-				const float wzed = m_pOwner->CalcWorldZed();
-				m_pNode->SetZed(wzed);
 			}
 
 			void CImgPart::SetAnchor(const util::math::vec2& anchor)

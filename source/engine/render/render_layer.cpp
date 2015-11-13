@@ -9,7 +9,7 @@ namespace engine
 	{
 		bool SortNodeFunc(IRenderNode* lhs, IRenderNode* rhs)
 		{
-			return lhs->GetZed() > rhs->GetZed();
+			return lhs->GetZed() < rhs->GetZed();
 		}
 
 		bool SortLayerFunc(const CRenderLayer::Desc& lhs, const CRenderLayer::Desc& rhs)
@@ -75,6 +75,8 @@ namespace engine
 			this->m_vCulledNodes = this->m_vNodes;
 
 			__todo()//TODO actually cull the nodes
+
+			this->m_vNodes.sort(SortNodeFunc);
 		}
 
 		void CRenderLayer::DoRender(SDL_Renderer* pRen)
@@ -110,6 +112,7 @@ namespace engine
 			if (find == this->m_vNodes.end())
 			{
 				this->m_vNodes.push_back(pNode);
+				this->m_vNodes.sort(SortNodeFunc);
 			}
 		}
 

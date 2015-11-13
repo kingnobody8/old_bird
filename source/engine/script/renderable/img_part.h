@@ -36,7 +36,6 @@ namespace engine
 				virtual void LoadImgFromUri(const std::string& uri);
 
 				virtual void OnMatrixChanged(void);
-				virtual void OnZedChanged(void);
 
 				inline const std::string& GetUri() const { return m_uri; }
 
