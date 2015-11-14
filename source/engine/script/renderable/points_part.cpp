@@ -47,6 +47,31 @@ namespace engine
 				assert(m_render_mode > INVALID && m_render_mode < COUNT);
 			}
 
+			void CPointsPart::OnMatrixChangedPoints()
+			{
+				const std::vector<util::math::vec2> wpoints = CalcWorldPoints();
+
+				for (int i = 0; i < m_nodes.size(); ++i)
+				{
+					render::CRenderNodePoint* node = static_cast<render::CRenderNodePoint*>(m_nodes[i]);
+					node->SetPoint(wpoints[i]);
+				}
+			}
+
+			void CPointsPart::OnMatrixChangedLines()
+			{
+				const std::vector<util::math::vec2> wpoints = CalcWorldPoints();
+				for (int i = 0; i < m_nodes.size(); ++i)
+				{
+					const int pindex = (i + 1) % wpoints.size();
+					const util::math::vec2& p1 = wpoints[i];
+					const util::math::vec2& p2 = wpoints[pindex];
+
+					render::CRenderNodeLine* node = static_cast<render::CRenderNodeLine*>(m_nodes[i]);
+					node->SetLine(util::shape::Segment(p1, p2));
+				}
+			}
+
 			void CPointsPart::SetPointsAndRenderMode(const std::vector<util::math::vec2>& points, ERenderMode mode)
 			{
 				assert(!points.empty());
@@ -98,6 +123,7 @@ namespace engine
 					assert(false);
 					break;
 				}
+				IRenderPart::Init(); __todo() //the sets that init does are needed since the nodes are recreated when the points are changed
 			}
 
 			void CPointsPart::SetupPoints()
@@ -108,9 +134,6 @@ namespace engine
 				for (int i = 0; i < wpoints.size(); ++i)
 				{
 					m_nodes.push_back(new render::CRenderNodePoint());
-					m_nodes[i]->Register(m_szLayer);
-					m_nodes[i]->SetColor(m_color.SDL());
-					static_cast<render::CRenderNodePoint*>(m_nodes[i])->SetPoint(wpoints[i]);
 				}
 			}
 
@@ -118,8 +141,7 @@ namespace engine
 			{
 				const std::vector<util::math::vec2> wpoints = CalcWorldPoints();
 
-				m_nodes.reserve(count / 2);
-
+				m_nodes.reserve(count);
 				for (int i = 0; i < count; ++i)
 				{
 					const int pindex = (i + 1) % wpoints.size();
@@ -156,9 +178,19 @@ namespace engine
 
 			VIRTUAL void CPointsPart::OnMatrixChanged()
 			{
-				m_force = true;
-				SetPointsAndRenderMode(m_points, m_render_mode); __todo() // i don't really like this, but I cant think of a better solution right now. the closest option is to go through each node grab their positionss revert them to local space, then matrix mult them back into the new world
-				m_force = false;
+				switch (m_render_mode)
+				{
+				case ERenderMode::POINTS:
+					OnMatrixChangedPoints();
+					break;
+				case ERenderMode::CLOSED_LINE:
+				case ERenderMode::OPEN_LINE:
+					OnMatrixChangedLines();
+					break;
+				default:
+					assert(false);
+					break;
+				}
 			}
 
 			VIRTUAL void CPointsPart::OnVisibilityChanged(const bool visible)

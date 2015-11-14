@@ -29,6 +29,9 @@ namespace engine
 
 				/*Func*/
 			private:
+				void OnMatrixChangedPoints();
+				void OnMatrixChangedLines();
+
 				void ClearNodes();
 				void SetupNodes();
 				void SetupPoints();
