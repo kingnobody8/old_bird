@@ -35,6 +35,7 @@ namespace util
 			virtual const bool Intersect(const IDimOne* const test, math::vec2* result = nullptr) const = 0;
 		};
 
+		__todo() // idea for polygon - vector of points as data representation also add a 'crossover' function to determine if the lines cross over at any point (this would make it a bad shape)
 		class IDimTwo : public IShape //this is for two dimensional shapes [ RECT, AABB, CIRCLE, & POLYGON ]
 		{
 		public:

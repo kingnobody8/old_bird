@@ -106,6 +106,7 @@ namespace engine
 		void DoRender()
 		{
 			//Primer
+			SDL_RenderSetClipRect(s_sdlRen, null);//clear out any scissor rects
 			const SDL_Color background = util::Color::other::AUBURN.SDL();
 			SDL_SetRenderDrawColor(s_sdlRen, background.r, background.g, background.b, background.a);
 			SDL_SetRenderTarget(s_sdlRen, NULL);

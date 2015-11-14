@@ -10,6 +10,8 @@ namespace util
 		STATIC const AABB AABB::INVALID_AABB = AABB(math::vec2(1,1), math::vec2(-1,-1));
 
 		AABB::AABB()
+			: m_min(math::vec2(1, 1))
+			, m_max(math::vec2(-1, -1))
 		{
 			m_eType = IShape::EShape::AABB;
 		}

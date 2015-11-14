@@ -9,7 +9,7 @@ namespace engine
 	{
 		bool SortNodeFunc(IRenderNode* lhs, IRenderNode* rhs)
 		{
-			return lhs->GetZed() > rhs->GetZed();
+			return lhs->GetZed() < rhs->GetZed();
 		}
 
 		bool SortLayerFunc(const CRenderLayer::Desc& lhs, const CRenderLayer::Desc& rhs)
@@ -75,6 +75,8 @@ namespace engine
 			this->m_vCulledNodes = this->m_vNodes;
 
 			__todo()//TODO actually cull the nodes
+
+			this->m_vNodes.sort(SortNodeFunc);
 		}
 
 		void CRenderLayer::DoRender(SDL_Renderer* pRen)
@@ -93,9 +95,8 @@ namespace engine
 			cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
 
 
-
 			__todo() //replace this with the nodes found after the cull
-			//also use the actuall camera matrix
+				//also use the actuall camera matrix
 
 			util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
@@ -111,6 +112,7 @@ namespace engine
 			if (find == this->m_vNodes.end())
 			{
 				this->m_vNodes.push_back(pNode);
+				this->m_vNodes.sort(SortNodeFunc);
 			}
 		}
 

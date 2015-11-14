@@ -17,7 +17,7 @@
     "children": [
         {
             "name": "play",
-            "visible": false,
+            "visible": true,
             "matrix": {
                 "position": {
                     "x": 64,
@@ -32,7 +32,7 @@
             },
             "parts": [
                 {
-                    "type": "CRectPart",
+                    "type": "CAabbPart",
                     "layer": "ui_layer",
                     "color": {
                         "r": 0.0,
@@ -40,15 +40,9 @@
                         "b": 1.0,
                         "a": 1.0
                     },
-                    "aabb": {
-                        "min": {
-                            "x": -64,
-                            "y": -64
-                        },
-                        "max": {
-                            "x": 64,
-                            "y": 64
-                        }
+                    "extends": {
+                        "x": 32,
+                        "y": 32
                     }
                 }
             ],
@@ -56,45 +50,6 @@
         },
         {
             "name": "woot",
-            "visible": false,
-            "matrix": {
-                "position": {
-                    "x": 0,
-                    "y": 0,
-                    "z": 0
-                },
-                "scale": {
-                    "x": 1,
-                    "y": 1
-                },
-                "rotation": 0
-            },
-            "parts": [
-                {
-                    "type": "CRectPart",
-                    "layer": "world_layer",
-                    "color": {
-                        "r": 1.0,
-                        "g": 0.5,
-                        "b": 0.5,
-                        "a": 1.0
-                    },
-                    "aabb": {
-                        "min": {
-                            "x": -64,
-                            "y": -64
-                        },
-                        "max": {
-                            "x": 64,
-                            "y": 64
-                        }
-                    }
-                }
-            ],
-            "children": [ ]
-        },
-        {
-            "name": "door",
             "visible": true,
             "matrix": {
                 "position": {
@@ -110,14 +65,105 @@
             },
             "parts": [
                 {
+                    "type": "CAabbPart",
+                    "layer": "world_layer",
+                    "color": {
+                        "r": 1.0,
+                        "g": 0.5,
+                        "b": 0.5,
+                        "a": 1.0
+                    },
+                    "extends": {
+                        "x": 64,
+                        "y": 64
+                    }
+                }
+            ],
+            "children": [ ]
+        },
+        {
+            "name": "door",
+            "visible": true,
+            "matrix": {
+                "position": {
+                    "x": -300,
+                    "y": 0,
+                    "z": 1
+                },
+                "scale": {
+                    "x": 5,
+                    "y": 5
+                },
+                "rotation": 0
+            },
+            "parts": [
+                {
                     "type": "CImgPart",
                     "layer": "world_layer",
-                    "path": "assets/image/door.png",
+                    "uri": "assets/image/door.png",
+                    "blend_mode": 0,
+                    "flip": 0,
+                    "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
                     "color": {
                         "r": 1.0,
                         "g": 1.0,
                         "b": 1.0,
-                        "a": 1.0
+                        "a": 0.75
+                    }
+                }
+            ],
+            "children": [ ]
+        },
+        {
+            "name": "points",
+            "visible": true,
+            "matrix": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": -2
+                },
+                "scale": {
+                    "x": 1,
+                    "y": 1
+                },
+                "rotation": 45
+            },
+            "parts": [
+                {
+                    "type": "CPointsPart",
+                    "layer": "world_layer",
+                    "render_mode": 2,
+                    "points": [
+                        {
+                            "x": 0,
+                            "y": 0
+                        },
+                        {
+                            "x": 256,
+                            "y": 0
+                        },
+                        {
+                            "x": 256,
+                            "y": 256
+                        },
+                        {
+                            "x": 108,
+                            "y": -329
+                        },
+                        {
+                            "x": -400,
+                            "y": -300
+                        }
+                    ],
+                    "color": {
+                        "r": 1.0,
+                        "g": 1.0,
+                        "b": 1.0,
+                        "a": 0.75
                     }
                 }
             ],

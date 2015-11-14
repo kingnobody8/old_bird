@@ -22,6 +22,9 @@
 #*.a we don't want to ignore this right now because we aren't building this
 #*.lib same here (for SDL)
 
+# Other
+*.ipch
+
 # Executables
 *.exe
 *.out
