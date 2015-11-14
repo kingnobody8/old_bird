@@ -1,7 +1,7 @@
 #pragma once
 #include "types.h"
-#include "util_time.h"
-#include "platform/inc_func.h"
+#include "../util_time.h"
+#include "../func.h"
 
 namespace util
 {

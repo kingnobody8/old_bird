@@ -1,5 +1,5 @@
 #pragma once
-#include "platform/platform.h"
+#include "platform.h"
 #include <string>
 
 

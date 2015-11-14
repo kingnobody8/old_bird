@@ -12,6 +12,13 @@ Purpose:	These are commonly used utility functions and macros
 #include <assert.h>
 #include "sdl.h"
 #include <string>
+#include <functional>
+
+#define BIND0(that, func) (std::bind(func, that))
+#define BIND1(that, func) (std::bind(func, that, std::placeholders::_1))
+#define BIND2(that, func) (std::bind(func, that, std::placeholders::_1, std::placeholders::_2))
+#define BIND3(that, func) (std::bind(func, that, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3))
+#define BIND4(that, func) (std::bind(func, that, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4))
 
 #ifndef Max
 #define Max(a,b)					(((a) > (b)) ? (a) : (b))					//Returns the maximum between 2 numbers

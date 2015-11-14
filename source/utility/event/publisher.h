@@ -1,5 +1,5 @@
 #pragma once
-#include "platform/inc_func.h"
+#include "../func.h"
 #include "../macro.h"
 
 namespace util

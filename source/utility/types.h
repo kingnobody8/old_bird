@@ -1,5 +1,5 @@
 #pragma once
-#include "platform/platform.h"
+#include "platform.h"
 
 #ifndef NULL
 #define NULL 0

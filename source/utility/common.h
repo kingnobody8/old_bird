@@ -1,5 +1,5 @@
 #pragma once
-#include "platform/platform.h"
+#include "platform.h"
 
 // STD
 #include <stdlib.h>
@@ -26,5 +26,4 @@
 #include <sstream>
 #include <memory>
 #include <iomanip>
-#include <unordered_map>
 #include <fstream>

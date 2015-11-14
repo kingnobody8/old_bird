@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\source\utility\bit_flag.h" />
     <ClInclude Include="..\..\..\source\utility\color.h" />
+    <ClInclude Include="..\..\..\source\utility\common.h" />
     <ClInclude Include="..\..\..\source\utility\enums.h" />
     <ClInclude Include="..\..\..\source\utility\event\publisher.h" />
     <ClInclude Include="..\..\..\source\utility\event\subscriber.h" />
@@ -34,11 +35,7 @@
     <ClInclude Include="..\..\..\source\utility\math\type2.h" />
     <ClInclude Include="..\..\..\source\utility\math\type3.h" />
     <ClInclude Include="..\..\..\source\utility\math\type4.h" />
-    <ClInclude Include="..\..\..\source\utility\platform\inc_common.h" />
-    <ClInclude Include="..\..\..\source\utility\platform\inc_func.h" />
-    <ClInclude Include="..\..\..\source\utility\platform\inc_sdl.h" />
-    <ClInclude Include="..\..\..\source\utility\platform\inc_sdl_img.h" />
-    <ClInclude Include="..\..\..\source\utility\platform\platform.h" />
+    <ClInclude Include="..\..\..\source\utility\platform.h" />
     <ClInclude Include="..\..\..\source\utility\shape\aabb.h" />
     <ClInclude Include="..\..\..\source\utility\shape\circle.h" />
     <ClInclude Include="..\..\..\source\utility\shape\line.h" />

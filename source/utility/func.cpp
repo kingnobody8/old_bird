@@ -1,5 +1,4 @@
 #include "func.h"
-#include "platform/inc_sdl.h"
 
 namespace util
 {
