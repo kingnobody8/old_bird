@@ -86,7 +86,7 @@
             "visible": true,
             "matrix": {
                 "position": {
-                    "x": 0,
+                    "x": -300,
                     "y": 0,
                     "z": 1
                 },
@@ -130,7 +130,7 @@
                     "x": 1,
                     "y": 1
                 },
-                "rotation": 0
+                "rotation": 45
             },
             "parts": [
                 {
