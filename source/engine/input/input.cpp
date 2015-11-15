@@ -7,11 +7,15 @@ namespace engine
 	{
 		static SDL_Renderer* s_sdlRen = null;
 
+		//key
 		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyDown;
 		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyUp;
 
+		//mouse
 		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonDown;
 		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonUp;
+		STATIC util::event::Publisher<mouse_events::WheelAction> mouse_events::s_InputMouseScrollWheel;
+
 
 		const util::math::Type2<slong> ConvertPixelToCartesian(int x, int y)
 		{
@@ -75,6 +79,7 @@ namespace engine
 					mouse_events::s_InputMouseButtonUp.Publish(mouse_events::ButtonAction(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), tEvent.button.button, tEvent.button.clicks));
 					break;
 				case SDL_MOUSEWHEEL:
+					mouse_events::s_InputMouseScrollWheel.Publish(mouse_events::WheelAction(tEvent, Type2<slong>(tEvent.wheel.x, tEvent.wheel.y)));
 					break;
 					//JOY event
 				case SDL_JOYAXISMOTION:

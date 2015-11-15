@@ -52,8 +52,19 @@ namespace engine
 				}
 			};
 
+			struct WheelAction : public IEvent
+			{
+				util::math::Type2<slong>	m_scroll;
+
+				WheelAction(const SDL_Event& event, const util::math::Type2<slong> scroll)
+					: IEvent(event), m_scroll(scroll)
+				{
+				}
+			};
+
 			static util::event::Publisher<ButtonAction> s_InputMouseButtonDown;
 			static util::event::Publisher<ButtonAction> s_InputMouseButtonUp;
+			static util::event::Publisher<WheelAction> s_InputMouseScrollWheel;
 
 		};
 

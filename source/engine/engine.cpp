@@ -77,7 +77,7 @@ namespace engine
 
 		util::event::Publisher<input::key_events::KeyAction>* ptr = &input::key_events::s_InputKeyUp;
 		input::key_events::s_InputKeyUp.Subscribe(&sub, BIND1(this, &Engine::OnAKey));
-		input::mouse_events::s_InputMouseButtonUp.Subscribe(&sub, BIND1(this, &Engine::OnMouseBtn));
+		input::mouse_events::s_InputMouseScrollWheel.Subscribe(&sub, BIND1(this, &Engine::OnMouseBtn));
 
 		__todo() //refactor this into the initialization of the app class when it is
 		util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
@@ -279,9 +279,9 @@ namespace engine
 		m_quit = true;
 	}
 
-	void Engine::OnMouseBtn(input::mouse_events::ButtonAction action)
+	void Engine::OnMouseBtn(input::mouse_events::WheelAction action)
 	{
-		if (action.m_clicks ==2 && action.m_button == SDL_BUTTON_RIGHT)
+		if (action.m_scroll.y == 1)
 		{
 			m_quit = true;
 		}
