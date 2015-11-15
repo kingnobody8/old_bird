@@ -5,11 +5,6 @@ namespace util
 {
 	namespace event
 	{
-		Subscriber::Subscriber(void* addr)
-			: m_addr(addr)
-		{
-		}
-
 		Subscriber::~Subscriber()
 		{
 			UnsubscribeAll();
@@ -17,20 +12,20 @@ namespace util
 
 		void Subscriber::UnsubscribeAll()
 		{
-			/*while (!m_pubs.empty())
+			while (!m_pubs.empty())
 			{
-				Publisher* pub = m_pubs.back();
+				IPublisher* pub = m_pubs.back();
 				m_pubs.pop_back();
 				pub->Unsubscribe(this);
-			}*/
+			}
 		}
 
-		void Subscriber::AddPublisher(Publisher* pPub)
+		void Subscriber::AddPublisher(IPublisher* pPub)
 		{
 			m_pubs.push_back(pPub);
 		}
 
-		void Subscriber::RemPublisher(Publisher* pPub)
+		void Subscriber::RemPublisher(IPublisher* pPub)
 		{
 			m_pubs.remove(pPub);
 		}

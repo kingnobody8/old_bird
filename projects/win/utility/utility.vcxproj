@@ -25,6 +25,7 @@
     <ClInclude Include="..\..\..\source\utility\enums.h" />
     <ClInclude Include="..\..\..\source\utility\event\publisher.h" />
     <ClInclude Include="..\..\..\source\utility\event\subscriber.h" />
+    <ClInclude Include="..\..\..\source\utility\event\publisher.inl" />
     <ClInclude Include="..\..\..\source\utility\func.h" />
     <ClInclude Include="..\..\..\source\utility\json.h" />
     <ClInclude Include="..\..\..\source\utility\macro.h" />

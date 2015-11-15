@@ -52,7 +52,7 @@ namespace engine
 
 		//Init all engine scripts
 		script::RegisterScripts();
-
+		
 		//assert(pFirstState);
 
 		//Init SDL
@@ -124,7 +124,21 @@ namespace engine
 
 		//Don't quit
 		m_quit = false;
+
+		pub.Subscribe(&sub, BIND1(this, &Engine::OnMode));
 	}
+
+	void Engine::OnMode(int mode)
+	{
+		component::CObject* obj = m_pRoot->FindObject("door");
+
+		script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+		if (pimg)
+			pimg->SetBlendMode((SDL_BlendMode)(mode));
+
+		//sub.UnsubscribeAll();
+	}
+
 	void Engine::Exit(void)
 	{
 		//Destroy Scene
@@ -187,15 +201,16 @@ namespace engine
 		static int mode = 0;
 		static util::Time timer;
 		timer += m_timer.Delta();
-		if (timer > 5000)
+		if (timer > 2000)
 		{
 			timer = 0;
 			mode += 1;
 			if (mode > 4)
 				mode = 0;
-			script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
-			if(pimg)
-				pimg->SetBlendMode((SDL_BlendMode)mode);
+			//script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+			//if(pimg)
+			//	pimg->SetBlendMode((SDL_BlendMode)mode);
+			pub.Publish(mode);
 		}
 
 		/*mat = Matrix2D();

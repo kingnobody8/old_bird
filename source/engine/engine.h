@@ -2,6 +2,10 @@
 #include "timer.h"
 #include "script/script.h"
 
+#include "event/publisher.h"
+#include "event/publisher.inl"
+#include "event/subscriber.h"
+
 namespace engine
 {
 	//forward declare
@@ -30,6 +34,8 @@ namespace engine
 		void Update();
 		void PushState(IBaseState* const pState);
 
+		void OnMode(int mode);
+
 	public:
 		static Engine* Get(void);
 		static void DeleteInstance(void);
@@ -39,6 +45,9 @@ namespace engine
 		void Exit(void);
 		void RunFrame(void* params);
 
+
+		util::event::IntPublisher pub;
+		util::event::Subscriber sub;
 	};
 
 	static Engine* Get()

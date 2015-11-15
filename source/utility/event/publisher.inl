@@ -1,16 +1,11 @@
 #include "publisher.h"
+
 namespace util
 {
 	namespace event
 	{
-
-		IPublisher::IPublisher()
-			: m_publishing(false)
-			, m_erasure(false)
-		{
-		}
-
-		void VoidPublisher::Publish()
+		template<typename TYPE>
+		void Publisher<TYPE>::Publish(TYPE arg)
 		{
 			assert(!m_publishing);
 			m_publishing = true;
@@ -27,14 +22,15 @@ namespace util
 			m_iter = m_subscriptions.begin();
 			while (m_iter != m_subscriptions.end())
 			{
-				(*m_iter).second();
+				(*m_iter).second(arg);
 				if (!m_erasure)
 					++m_iter;
 			}
 			m_publishing = false;
 		}
 
-		void VoidPublisher::Subscribe(Subscriber* subscriber, VoidCallback callback)
+		template<typename TYPE>
+		void Publisher<TYPE>::Subscribe(Subscriber* subscriber, Callback callback)
 		{
 			assert(subscriber);
 			assert(callback != null);
@@ -45,7 +41,8 @@ namespace util
 			subscriber->AddPublisher(this);
 		}
 
-		void VoidPublisher::Unsubscribe(Subscriber* subscriber)
+		template<typename TYPE>
+		void Publisher<TYPE>::Unsubscribe(Subscriber* subscriber)
 		{
 			for (int i = 0; i < m_pending.size(); ++i)
 			{

@@ -71,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\utility\common.h" />
     <ClInclude Include="..\..\..\source\utility\platform.h" />
+    <ClInclude Include="..\..\..\source\utility\event\publisher.inl">
+      <Filter>event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
