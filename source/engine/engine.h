@@ -35,6 +35,7 @@ namespace engine
 		void PushState(IBaseState* const pState);
 
 		void OnMode(int mode);
+		void OnMode2(int mode);
 
 	public:
 		static Engine* Get(void);

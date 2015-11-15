@@ -4,8 +4,8 @@
 #include "util_time.h"
 #include "json.h"
 #include "types.h"
-#include <list>
 #include "subscriber.h"
+#include <list>
 
 namespace util
 {
@@ -18,7 +18,7 @@ namespace util
 			In regards to SUBSCRIPTION: you may do this, even in the middle of a publish, however if this happens in the middle of a publish they will not be included in the current publish
 			In regards to UNSUBSCRIPTION: you may do this, even in the middle of a publish. howevr if this happens in the middle of a publish and if the subscriber that is unsubscribing has not
 			yet been called in the publish, it will still be removed and then will not be called
-		*/
+			*/
 
 		//forward declare
 		class Subscriber;
@@ -42,16 +42,28 @@ namespace util
 		{
 		public:
 			typedef std::function<void(TYPE)> Callback;
-			typedef std::pair<Subscriber*, Callback> Subscription;
-			typedef typename std::list<Subscription>::iterator SubIter;
+			struct SubStruct
+			{
+				Subscriber* m_subscriber = null;
+				Callback m_callback = null;
+				int m_priority = -1;
+				SubStruct(Subscriber* sub, Callback call, int priority)
+					: m_subscriber(sub)
+					, m_callback(call)
+					, m_priority(priority)
+				{
+				}
+				inline bool operator< (const SubStruct& rhs) const { return m_priority < rhs.m_priority; }
+			};
+			typedef typename std::list<SubStruct>::iterator SubIter;
 
 			void Publish(TYPE arg);
-			void Subscribe(Subscriber* subscriber, Callback callback);
+			void Subscribe(Subscriber* subscriber, Callback callback, const int& priority = -1);
 			virtual void Unsubscribe(Subscriber* subscriber);
 
 		protected:
-			std::list<Subscription> m_subscriptions;
-			std::vector<Subscription> m_pending;
+			std::list<SubStruct> m_subscriptions;
+			std::vector<SubStruct> m_pending;
 			SubIter m_iter;
 		};
 
@@ -61,17 +73,29 @@ namespace util
 		class VoidPublisher : public IPublisher
 		{
 			typedef std::function<void(void)> VoidCallback;
-			typedef std::pair<Subscriber*, VoidCallback> Subscription;
-			typedef std::list<Subscription>::iterator SubIter;
+			struct SubStruct
+			{
+				Subscriber* m_subscriber = null;
+				VoidCallback m_callback = null;
+				int m_priority = -1;
+				SubStruct(Subscriber* sub, VoidCallback call, int priority)
+					: m_subscriber(sub)
+					, m_callback(call)
+					, m_priority(priority)
+				{
+				}
+				inline bool operator< (const SubStruct& rhs) const { return m_priority < rhs.m_priority; }
+			};
+			typedef std::list<SubStruct>::iterator SubIter;
 
 		public:
 			void Publish();
-			void Subscribe(Subscriber* subscriber, VoidCallback callback);
+			void Subscribe(Subscriber* subscriber, VoidCallback callback, const int& priority = -1);
 			virtual void Unsubscribe(Subscriber* subscriber);
 
 		protected:
-			std::list<Subscription> m_subscriptions;
-			std::vector<Subscription> m_pending;
+			std::list<SubStruct> m_subscriptions;
+			std::vector<SubStruct> m_pending;
 			SubIter m_iter;
 		};
 

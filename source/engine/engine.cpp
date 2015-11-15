@@ -126,6 +126,7 @@ namespace engine
 		m_quit = false;
 
 		pub.Subscribe(&sub, BIND1(this, &Engine::OnMode));
+		pub.Subscribe(&sub, BIND1(this, &Engine::OnMode2));
 	}
 
 	void Engine::OnMode(int mode)
@@ -137,6 +138,13 @@ namespace engine
 			pimg->SetBlendMode((SDL_BlendMode)(mode));
 
 		//sub.UnsubscribeAll();
+	}
+
+	void Engine::OnMode2(int mode)
+	{
+		int x = 0;
+		x++;
+		sub.UnsubscribeAll();
 	}
 
 	void Engine::Exit(void)

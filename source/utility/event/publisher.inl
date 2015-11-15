@@ -17,12 +17,13 @@ namespace util
 					m_subscriptions.push_back(m_pending[i]);
 				}
 				m_pending.clear();
+				m_subscriptions.sort();
 			}
 
 			m_iter = m_subscriptions.begin();
 			while (m_iter != m_subscriptions.end())
 			{
-				(*m_iter).second(arg);
+				(*m_iter).m_callback(arg);
 				if (!m_erasure)
 					++m_iter;
 			}
@@ -30,12 +31,12 @@ namespace util
 		}
 
 		template<typename TYPE>
-		void Publisher<TYPE>::Subscribe(Subscriber* subscriber, Callback callback)
+		void Publisher<TYPE>::Subscribe(Subscriber* subscriber, Callback callback, const int& priority)
 		{
 			assert(subscriber);
 			assert(callback != null);
 
-			Subscription subscription(subscriber, callback);
+			SubStruct subscription(subscriber, callback, priority);
 			m_pending.push_back(subscription);
 
 			subscriber->AddPublisher(this);
@@ -46,7 +47,7 @@ namespace util
 		{
 			for (int i = 0; i < m_pending.size(); ++i)
 			{
-				if (m_pending[i].first == subscriber)
+				if (m_pending[i].m_subscriber == subscriber)
 				{
 					subscriber->RemPublisher(this);
 					m_pending.erase(m_pending.begin() + i);
@@ -57,14 +58,14 @@ namespace util
 			SubIter local_iter = m_subscriptions.begin();
 			while (local_iter != m_subscriptions.end())
 			{
-				if ((*local_iter).first == subscriber)
+				if ((*local_iter).m_subscriber == subscriber)
 				{
 					//check for publishing and current iterator
 					if (m_publishing && m_iter == local_iter)
 					{
 						m_erasure = true;
 					}
-					(*local_iter).first->RemPublisher(this);
+					(*local_iter).m_subscriber->RemPublisher(this);
 					local_iter = m_subscriptions.erase(local_iter);
 					if (m_erasure)
 					{
