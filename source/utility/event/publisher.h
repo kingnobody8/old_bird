@@ -15,10 +15,10 @@ namespace util
 		/*
 			--Publisher Usage--
 			In regards to RECURSION: don't do it, publisher will assert if a publish is called while already in the process of a publish
-			In regards to SUBSCRIPTION: you may do this, even in the middle of a publish, however if this happens in the middle of a publish they will not be included in the current publish
-			In regards to UNSUBSCRIPTION: you may do this, even in the middle of a publish. howevr if this happens in the middle of a publish and if the subscriber that is unsubscribing has not
-			yet been called in the publish, it will still be removed and then will not be called
-			*/
+			In regards to SUBSCRIPTION: you may do this, even in the middle of a publish, however if this happens in the middle of a publish the subscription will not be included in the current publish
+			In regards to UNSUBSCRIPTION: you may do this, even in the middle of a publish. however if this happens in the middle of a publish, then be aware that if it hasn't been called back yet, it will be removed
+				and the callback will not fire
+		*/
 
 		//forward declare
 		class Subscriber;
@@ -67,9 +67,7 @@ namespace util
 			SubIter m_iter;
 		};
 
-		
-
-		//explicit void publisher
+		//void publisher
 		class VoidPublisher : public IPublisher
 		{
 			typedef std::function<void(void)> VoidCallback;
@@ -110,6 +108,5 @@ namespace util
 		typedef Publisher<const util::math::vec3&>			Vec3Publisher;
 		typedef Publisher<const util::shape::AABB&>			AabbPublisher;
 		typedef Publisher<const util::math::Matrix2D&>		MatrixPublisher;
-
 	}
 }
