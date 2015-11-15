@@ -10,6 +10,21 @@ namespace engine
 		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyDown;
 		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyUp;
 
+		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonDown;
+		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonUp;
+
+		const util::math::Type2<slong> ConvertPixelToCartesian(int x, int y)
+		{
+			util::math::Type2<int> logical_size;
+			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.w, &logical_size.h);
+
+			util::math::Type2<slong> ret;
+			ret.x = (slong)x;
+			ret.y = (slong)(logical_size.h - y);
+			return ret;
+		}
+
+
 		void Setup(SDL_Renderer* pRen)
 		{
 			assert(pRen);
@@ -52,8 +67,13 @@ namespace engine
 					//MOUSE event
 					break;
 				case SDL_MOUSEMOTION:
+					break;
 				case SDL_MOUSEBUTTONDOWN:
+					mouse_events::s_InputMouseButtonDown.Publish(mouse_events::ButtonAction(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), tEvent.button.button, tEvent.button.clicks));
+					break;
 				case SDL_MOUSEBUTTONUP:
+					mouse_events::s_InputMouseButtonUp.Publish(mouse_events::ButtonAction(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), tEvent.button.button, tEvent.button.clicks));
+					break;
 				case SDL_MOUSEWHEEL:
 					break;
 					//JOY event

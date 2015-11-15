@@ -38,6 +38,7 @@ namespace engine
 		void OnMode(int mode);
 		void OnMode2(int mode);
 		void OnAKey(input::key_events::KeyAction action);
+		void OnMouseBtn(input::mouse_events::ButtonAction action);
 
 	public:
 		static Engine* Get(void);
