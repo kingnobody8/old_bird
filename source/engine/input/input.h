@@ -40,6 +40,18 @@ namespace engine
 
 		struct mouse_events
 		{
+			struct MotionAction : public IEvent
+			{
+				util::math::Type2<slong>	m_pixel;
+				util::math::Type2<slong>	m_delta;
+				__todo() // we may eventually want velocity in here delta_pixels / time_since last motion
+
+				MotionAction(const SDL_Event& event, const util::math::Type2<slong> pixel, const util::math::Type2<slong> delta)
+					: IEvent(event), m_pixel(pixel), m_delta(delta)
+				{
+				}
+			};
+
 			struct ButtonAction : public IEvent
 			{
 				util::math::Type2<slong>	m_pixel;
@@ -62,10 +74,10 @@ namespace engine
 				}
 			};
 
+			static util::event::Publisher<MotionAction> s_InputMouseMotion;
 			static util::event::Publisher<ButtonAction> s_InputMouseButtonDown;
 			static util::event::Publisher<ButtonAction> s_InputMouseButtonUp;
-			static util::event::Publisher<WheelAction> s_InputMouseScrollWheel;
-
+			static util::event::Publisher<WheelAction>	s_InputMouseScrollWheel;
 		};
 
 	}

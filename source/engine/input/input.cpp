@@ -12,6 +12,7 @@ namespace engine
 		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyUp;
 
 		//mouse
+		STATIC util::event::Publisher<mouse_events::MotionAction> mouse_events::s_InputMouseMotion;
 		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonDown;
 		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonUp;
 		STATIC util::event::Publisher<mouse_events::WheelAction> mouse_events::s_InputMouseScrollWheel;
@@ -71,6 +72,7 @@ namespace engine
 					//MOUSE event
 					break;
 				case SDL_MOUSEMOTION:
+					mouse_events::s_InputMouseMotion.Publish(mouse_events::MotionAction(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), util::math::Type2<slong>((slong)tEvent.motion.xrel, (slong)-tEvent.motion.yrel)));
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					mouse_events::s_InputMouseButtonDown.Publish(mouse_events::ButtonAction(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), tEvent.button.button, tEvent.button.clicks));
