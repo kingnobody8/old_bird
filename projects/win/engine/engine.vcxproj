@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
+    <ClCompile Include="..\..\..\source\engine\input\input.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="..\..\..\source\engine\component\object.h" />
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />
+    <ClInclude Include="..\..\..\source\engine\input\input.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />

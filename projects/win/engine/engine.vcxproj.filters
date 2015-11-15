@@ -16,6 +16,9 @@
     <Filter Include="script\renderable">
       <UniqueIdentifier>{8d37b3d5-15fc-45a0-8877-9471e415240c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{2fb19712-f251-478b-9b15-8e97e934d6d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp">
       <Filter>script\renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\input\input.cpp">
+      <Filter>input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h">
       <Filter>script\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\input\input.h">
+      <Filter>input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

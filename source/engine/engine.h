@@ -5,6 +5,7 @@
 #include "event/publisher.h"
 #include "event/publisher.inl"
 #include "event/subscriber.h"
+#include "input/input.h"
 
 namespace engine
 {
@@ -36,6 +37,7 @@ namespace engine
 
 		void OnMode(int mode);
 		void OnMode2(int mode);
+		void OnAKey(input::key_events::KeyAction action);
 
 	public:
 		static Engine* Get(void);

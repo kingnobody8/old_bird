@@ -1,3 +1,4 @@
+#pragma once
 #include "publisher.h"
 
 namespace util

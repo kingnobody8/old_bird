@@ -3,6 +3,7 @@
 #include "component/object.h"
 #include <assert.h>
 #include "render/renderer.h"
+#include "input/input.h"
 #include "asset/loader.h"
 #include "asset/resource_path.h"
 #include "render/render_layer.h"
@@ -70,6 +71,12 @@ namespace engine
 
 		//Initialize the rendering system
 		render::SetupSdl();
+
+		//Initialize the input system
+		input::Setup(render::GetSdlRenderer());
+
+		util::event::Publisher<input::key_events::KeyAction>* ptr = &input::key_events::s_InputKeyUp;
+		input::key_events::s_InputKeyUp.Subscribe(&sub, BIND1(this, &Engine::OnAKey));
 
 		__todo() //refactor this into the initialization of the app class when it is
 		util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
@@ -144,7 +151,7 @@ namespace engine
 	{
 		int x = 0;
 		x++;
-		sub.UnsubscribeAll();
+		pub.Unsubscribe(&sub);
 	}
 
 	void Engine::Exit(void)
@@ -226,15 +233,15 @@ namespace engine
 		render::CCamera::FindCamera("world_cam")->SetMatrix(mat);*/
 
 		//Poll events
-		SDL_Event tEvent;
-		while (SDL_PollEvent(&tEvent))
+		if (!input::PollSdl(delta))
 		{
-			switch (tEvent.type)
-			{
-			case SDL_QUIT:
-				this->m_quit = true;
-			}
+			m_quit = true;
 		}
+		else //if input did not kill the app, then update the current state and scene
+		{
+			component::IPart::UpdateParts(delta);
+		}
+
 
 		////If input did not kill the app, then update the current state and the scene
 		//this->m_bRun = !this->m_cInput.Update(delta);
@@ -266,4 +273,8 @@ namespace engine
 		this->m_pCurrState->Init();*/
 	}
 
+	void Engine::OnAKey(input::key_events::KeyAction action)
+	{
+		m_quit = true;
+	}
 }
