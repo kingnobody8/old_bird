@@ -336,6 +336,12 @@ namespace engine
 			{
 				(*iter)->OnMatrixChanged();
 			}
+
+			list = GetAncestorPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				(*iter)->OnChildMatrixChanged(this);
+			}
 		}
 		void CObject::OnZedChanged(void)
 		{
@@ -344,6 +350,12 @@ namespace engine
 			{
 				(*iter)->OnZedChanged();
 			}
+
+			list = GetAncestorPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				(*iter)->OnChildZedChanged(this);
+			}
 		}
 		void CObject::OnVisibilityChanged(const bool bVisible)
 		{
@@ -351,6 +363,12 @@ namespace engine
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
 				(*iter)->OnVisibilityChanged(GetWorldVisible());
+			}
+
+			list = GetAncestorPartList(this);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				(*iter)->OnChildVisibilityChanged(this);
 			}
 		}
 		void CObject::OnParentVisibilityChanged(const bool bVisible)
@@ -598,6 +616,44 @@ namespace engine
 						list.push_back(vec[i]);
 					}
 				});
+			}
+
+			//Type of sorting function
+			std::function<bool(IPart* lhs, IPart* rhs)> func;
+			if (reverse_priority)
+			{
+				func = [](IPart* lhs, IPart* rhs)
+				{
+					return lhs->GetPriority() > rhs->GetPriority();
+				};
+			}
+			else
+			{
+				func = [](IPart* lhs, IPart* rhs)
+				{
+					return lhs->GetPriority() < rhs->GetPriority();
+				};
+			}
+
+			list.sort(func);
+
+			return list;
+		}
+
+		const PartList GetAncestorPartList(const CObject* const pObj, const bool & reverse_priority)
+		{
+			assert(pObj);
+			PartList list;
+
+			CObject* parent = pObj->GetParent();
+			while (parent != null)
+			{
+				std::vector<IPart*> vec = parent->GetParts();
+				for (ulong i = 0; i < vec.size(); ++i)
+				{
+					list.push_back(vec[i]);
+				}
+				parent = parent->GetParent();
 			}
 
 			//Type of sorting function

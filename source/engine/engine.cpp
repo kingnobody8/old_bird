@@ -281,9 +281,9 @@ namespace engine
 
 	void Engine::OnMouseBtn(input::mouse_events::MotionAction action)
 	{
-		if (action.m_delta.magnitude() > 30)
+		/*if (action.m_delta.magnitude() > 30)
 		{
 			m_quit = true;
-		}
+		}*/
 	}
 }

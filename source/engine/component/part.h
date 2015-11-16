@@ -79,6 +79,10 @@ namespace engine
 			virtual void OnZedChanged(void){};
 			virtual void OnVisibilityChanged(const bool visible){};
 
+			virtual void OnChildMatrixChanged(CObject* child){};
+			virtual void OnChildZedChanged(CObject* child){};
+			virtual void OnChildVisibilityChanged(CObject* child){};
+
 			virtual const util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
 
 			//Gets

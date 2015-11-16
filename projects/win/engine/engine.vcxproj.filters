@@ -19,6 +19,9 @@
     <Filter Include="input">
       <UniqueIdentifier>{2fb19712-f251-478b-9b15-8e97e934d6d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="script\touch">
+      <UniqueIdentifier>{261b71f2-f34a-4806-9a56-2cafa638813a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -63,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\input\input.cpp">
       <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\touch\touch_part.cpp">
+      <Filter>script\touch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +117,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\input\input.h">
       <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\touch\touch_part.h">
+      <Filter>script\touch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
