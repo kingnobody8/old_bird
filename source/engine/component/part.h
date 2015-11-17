@@ -1,5 +1,6 @@
 #pragma once
 #include "component/component.h"
+#include "event/subscriber.h"
 
 namespace engine
 {
@@ -15,7 +16,7 @@ namespace engine
 		*/
 
 
-		class IPart
+		class IPart : public util::event::Subscriber
 		{
 			//Internal
 		private:
