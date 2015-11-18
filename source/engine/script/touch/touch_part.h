@@ -9,15 +9,29 @@ namespace engine
 	{
 		class CTouchPart : public component::IPart
 		{
+		public:
+			typedef std::list<CTouchPart*> TouchPartList;
+			typedef std::list<CTouchPart*>::iterator TouchPartIter;
+
 			//Internal
 		private:
-			static component::PartList s_touchParts;
+			static TouchPartList s_touchParts;
+			static TouchPartList s_pendingTouchParts;
+			static void CleanTouchParts(void);
+			void DisableTouchImmediate(void);
+
 
 			//External
 		public:
 			static void OnMouseButtonDown(const input::mouse_events::ButtonAction& action);
 			static void OnMouseButtonUp(const input::mouse_events::ButtonAction& action);
 			static void OnMouseMotion(const input::mouse_events::MotionAction& action);
+
+		private:
+			bool				m_bTouchEnabled;
+			bool				m_bPendingTouch;
+			u16					m_usTouchIndex;
+
 			//------------------------------------------------------------------------------
 
 		public:
