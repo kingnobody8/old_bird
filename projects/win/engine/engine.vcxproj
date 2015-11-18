@@ -34,7 +34,7 @@
     <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
-    <ClCompile Include="..\..\..\source\engine\script\touch\touch_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
@@ -53,7 +53,7 @@
     <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\script.h" />
-    <ClInclude Include="..\..\..\source\engine\script\touch\touch_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />

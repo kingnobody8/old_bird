@@ -1,6 +1,6 @@
 #include "input.h"
 #include <assert.h>
-#include "script/touch/touch_part.h"
+#include "script/ui/ui_part.h"
 
 namespace engine
 {
@@ -75,21 +75,21 @@ namespace engine
 				case SDL_MOUSEMOTION:
 				{
 					mouse_events::MotionAction action(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), util::math::Type2<slong>((slong)tEvent.motion.xrel, (slong)-tEvent.motion.yrel));
-					script::CTouchPart::OnMouseMotion(action);
+					script::ui::CUiPart::OnMouseMotion(action);
 					mouse_events::s_InputMouseMotion.Publish(action);
 					break;
 				}
 				case SDL_MOUSEBUTTONDOWN:
 				{
 					mouse_events::ButtonAction action(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), tEvent.button.button, tEvent.button.clicks);
-					script::CTouchPart::OnMouseButtonDown(action);
+					script::ui::CUiPart::OnMouseButtonDown(action);
 					mouse_events::s_InputMouseButtonDown.Publish(action);
 					break;
 				}
 				case SDL_MOUSEBUTTONUP:
 				{
 					mouse_events::ButtonAction action(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), tEvent.button.button, tEvent.button.clicks);
-					script::CTouchPart::OnMouseButtonUp(action);
+					script::ui::CUiPart::OnMouseButtonUp(action);
 					mouse_events::s_InputMouseButtonUp.Publish(action);
 					break;
 				}
