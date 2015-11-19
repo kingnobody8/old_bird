@@ -11,20 +11,30 @@ namespace engine
 
 			bool SortFunc(CUiPart* lhs, CUiPart* rhs)
 			{
-				__todo() // this is where we will sort the ui parts by layer then zed, but we need also need to make it so that render layer no longer uses a desc, since all the information about it should reside inside itself
-				render::CRenderLayer* lay;
-				return true;
+				if (lhs->GetLayer() == rhs->GetLayer())
+					return lhs->GetZed() < rhs->GetZed();
+				return lhs->GetLayer()->GetSortRank() > rhs->GetLayer()->GetSortRank();
 			}
 
 			static const u16 INVALID_TOUCH_INDEX = 0xFFFF;
 
-			STATIC CUiPart::UiPartList CUiPart::s_touchParts;
-			STATIC CUiPart::UiPartList CUiPart::s_pendingTouchParts;
+			STATIC std::list<CUiPart::UiLayer> CUiPart::s_uiLayers;
+			STATIC CUiPart::UiPartList CUiPart::s_pendingUiParts;
+
+			STATIC const CUiPart::UiPartList CUiPart::GetUiParts()
+			{
+				UiPartList ret;
+				for (auto iter = s_uiLayers.begin(); iter != s_uiLayers.end(); ++iter)
+				{
+					ret.insert(ret.end(), (*iter).m_uiParts.begin(), (*iter).m_uiParts.end());
+				}
+				return ret;
+			}
 
 			STATIC void CUiPart::CleanTouchParts(void)
 			{
 				bool appended = false;
-				for (UiPartIter iter = s_pendingTouchParts.begin(); iter != s_pendingTouchParts.end(); ++iter)
+				for (UiPartIter iter = s_pendingUiParts.begin(); iter != s_pendingUiParts.end(); ++iter)
 				{
 					CUiPart* part = (*iter);
 					part->m_bPendingTouch = false;
@@ -56,7 +66,7 @@ namespace engine
 						}
 					}
 				}
-				s_pendingTouchParts.clear();
+				s_pendingUiParts.clear();
 
 				if (appended)
 					s_touchParts.sort();
@@ -140,6 +150,16 @@ namespace engine
 				CalculateIntersectionRect();
 			}
 
+			VIRTUAL bool CUiPart::OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action)
+			{
+				return true;
+			}
+
+			VIRTUAL bool CUiPart::OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action)
+			{
+				return true;
+			}
+
 			void CUiPart::Register()
 			{
 				if (m_bTouchEnabled)
@@ -150,7 +170,7 @@ namespace engine
 					return;
 				m_bPendingTouch = true;
 
-				s_pendingTouchParts.push_back(this);
+				s_pendingUiParts.push_back(this);
 			}
 
 			void CUiPart::Unregister()
@@ -163,7 +183,7 @@ namespace engine
 					return;
 				m_bPendingTouch = true;
 
-				s_pendingTouchParts.push_back(this);
+				s_pendingUiParts.push_back(this);
 			}
 
 			void CUiPart::DisableTouchImmediate(void)

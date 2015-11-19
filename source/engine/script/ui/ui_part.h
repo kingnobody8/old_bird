@@ -9,7 +9,6 @@ namespace engine
 	{
 		namespace ui
 		{
-
 			class CUiPart : public component::IPart
 			{
 			public:
@@ -18,14 +17,24 @@ namespace engine
 
 				//Internal
 			private:
-				static UiPartList s_touchParts;
-				static UiPartList s_pendingTouchParts;
+				struct UiLayer
+				{
+					render::CRenderLayer* m_pLayer = null;
+					UiPartList m_uiParts;
+
+					bool OnMouseButtonDown(const input::mouse_events::ButtonAction& action);
+					bool OnMouseButtonUp(const input::mouse_events::ButtonAction& action);
+					bool OnMouseMotion(const input::mouse_events::MotionAction& action);
+				};
+				static std::list<UiLayer> s_uiLayers;
+				static UiPartList s_pendingUiParts;
 				static void CleanTouchParts(void);
 				void DisableTouchImmediate(void);
 
 
 				//External
 			public:
+				static const UiPartList GetUiParts();
 				static void OnMouseButtonDown(const input::mouse_events::ButtonAction& action);
 				static void OnMouseButtonUp(const input::mouse_events::ButtonAction& action);
 				static void OnMouseMotion(const input::mouse_events::MotionAction& action);
@@ -44,15 +53,15 @@ namespace engine
 			private:
 			protected:
 				util::shape::AABB m_aabb;
+				std::string m_szLayer;
 				float m_zed;
-				render::CRenderLayer* m_pLayer;
 
 				/*Func*/
 			protected:
 				void CalculateIntersectionRect();
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action) { return true; }
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action) { return true; }
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action) { return true; }
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos) { return true; }
 
 			public:
 				CUiPart();
@@ -72,6 +81,9 @@ namespace engine
 				/*void SetLayer();
 				void SetZedToTop;
 				void SetZedToBottom;*/
+
+				inline const std::string& GetLayer() const { return m_szLayer; }
+				inline const float& GetZed() const { return m_zed; }
 			};
 		}
 	}
