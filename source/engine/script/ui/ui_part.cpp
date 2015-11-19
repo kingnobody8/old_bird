@@ -13,6 +13,7 @@ namespace engine
 			{
 				__todo() // this is where we will sort the ui parts by layer then zed, but we need also need to make it so that render layer no longer uses a desc, since all the information about it should reside inside itself
 				render::CRenderLayer* lay;
+				return true;
 			}
 
 			static const u16 INVALID_TOUCH_INDEX = 0xFFFF;

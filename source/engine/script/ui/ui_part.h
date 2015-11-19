@@ -50,9 +50,9 @@ namespace engine
 				/*Func*/
 			protected:
 				void CalculateIntersectionRect();
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action) { return true };
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action) { return true };
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action) { return true };
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action) { return true; }
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action) { return true; }
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action) { return true; }
 
 			public:
 				CUiPart();
