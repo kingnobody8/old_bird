@@ -17,7 +17,9 @@ namespace engine
 				/*Data*/
 			private:
 			protected:
-				bool m_bPressed;
+				util::event::Publisher<CButtonPart*> m_publisher; __todo() //should probably break this up into mulitple publishers for the different states (up, down, single, double, triple ect)
+				bool m_bPressed; __todo() //i thought about making this public so we could manually set if a ui instance would absorbe input, but i think that it would be better to hide that from the user and just make sure it works in all situations (i am mainly thinking about btn in scroll list)
+				void* m_pData;
 
 				/*Func*/
 			protected:
@@ -33,6 +35,13 @@ namespace engine
 				virtual void Init();
 				virtual void Exit();
 				virtual void LoadJson(const util::JSON& json);
+
+				void Subscribe(util::event::Subscriber* subscriber, util::event::Publisher<CButtonPart*>::Callback callback, const int& priority = -1);
+				void Unsubscribe(util::event::Subscriber* subscriber);
+				void UnsubscribeAll();
+
+				inline void SetData(const void* const data) { m_pData = m_pData; }
+				inline void* GetData() const { return m_pData; }
 			};
 		}
 	}

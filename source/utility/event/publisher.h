@@ -30,6 +30,7 @@ namespace util
 			IPublisher();
 			virtual ~IPublisher() {}
 			virtual void Unsubscribe(Subscriber* subscriber) = 0;
+			virtual void UnsubscribeAll() = 0;
 
 		protected:
 			bool m_publishing;
@@ -60,6 +61,7 @@ namespace util
 			void Publish(TYPE arg);
 			void Subscribe(Subscriber* subscriber, Callback callback, const int& priority = -1);
 			virtual void Unsubscribe(Subscriber* subscriber);
+			virtual void UnsubscribeAll();
 
 		protected:
 			std::list<SubStruct> m_subscriptions;
@@ -90,6 +92,7 @@ namespace util
 			void Publish();
 			void Subscribe(Subscriber* subscriber, VoidCallback callback, const int& priority = -1);
 			virtual void Unsubscribe(Subscriber* subscriber);
+			virtual void UnsubscribeAll();
 
 		protected:
 			std::list<SubStruct> m_subscriptions;

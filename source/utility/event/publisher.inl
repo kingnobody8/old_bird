@@ -44,7 +44,7 @@ namespace util
 		}
 
 		template<typename TYPE>
-		void Publisher<TYPE>::Unsubscribe(Subscriber* subscriber)
+		VIRTUAL void Publisher<TYPE>::Unsubscribe(Subscriber* subscriber)
 		{
 			for (int i = 0; i < m_pending.size(); ++i)
 			{
@@ -79,5 +79,26 @@ namespace util
 				}
 			}
 		}
+
+		template<typename TYPE>
+		VIRTUAL void Publisher<TYPE>::UnsubscribeAll()
+		{
+			SubIter local_iter = m_subscriptions.begin();
+			while (local_iter != m_subscriptions.end())
+			{
+				//check for publishing and current iterator
+				if (m_publishing && m_iter == local_iter)
+				{
+					m_erasure = true;
+				}
+				(*local_iter).m_subscriber->RemPublisher(this);
+				local_iter = m_subscriptions.erase(local_iter);
+				if (m_erasure)
+				{
+					m_iter = local_iter;
+				}
+			}
+		}
+
 	}
 }

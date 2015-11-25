@@ -7,6 +7,8 @@
 #include "event/subscriber.h"
 #include "input/input.h"
 
+#include "script/ui/button_part.h"
+
 namespace engine
 {
 	//forward declare
@@ -39,6 +41,9 @@ namespace engine
 		void OnMode2(int mode);
 		void OnAKey(input::key_events::KeyAction action);
 		void OnMouseBtn(input::mouse_events::MotionAction action);
+
+		void OnBtn(script::ui::CButtonPart* btn);
+
 
 	public:
 		static Engine* Get(void);

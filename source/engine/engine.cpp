@@ -128,6 +128,12 @@ namespace engine
 		for (component::PartIter iter = parts.begin(); iter != parts.end(); ++iter)
 		{
 			(*iter)->Init();
+
+			if ((*iter)->GetType() == script::ui::CButtonPart::Type)
+			{
+				script::ui::CButtonPart* btn = (script::ui::CButtonPart*)(*iter);
+				btn->Subscribe(&sub, BIND1(this, &Engine::OnBtn));
+			}
 		}
 
 		//Don't quit
@@ -154,6 +160,21 @@ namespace engine
 		x++;
 		pub.Unsubscribe(&sub);
 	}
+
+	void Engine::OnBtn(script::ui::CButtonPart* btn)
+	{
+		static int mode = 0;
+		mode++;
+		if (mode > 4)
+			mode = 0;
+
+		component::CObject* obj = m_pRoot->FindObject("door");
+
+		script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+		if (pimg)
+			pimg->SetBlendMode((SDL_BlendMode)(mode));
+	}
+
 
 	void Engine::Exit(void)
 	{
@@ -212,7 +233,7 @@ namespace engine
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
 		//mat.SetScale(util::math::vec2(use, 1.0f));
 		mat.SetRotationZ(this->m_timer.Total().Milli() / 50.0f);
-		//obj->SetLocalMatrix(mat);
+		obj->SetLocalMatrix(mat);
 
 		static int mode = 0;
 		static util::Time timer;
@@ -226,7 +247,7 @@ namespace engine
 			//script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
 			//if(pimg)
 			//	pimg->SetBlendMode((SDL_BlendMode)mode);
-			pub.Publish(mode);
+			//pub.Publish(mode);
 		}
 
 		/*mat = Matrix2D();

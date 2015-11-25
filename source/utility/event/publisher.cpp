@@ -46,7 +46,7 @@ namespace util
 			subscriber->AddPublisher(this);
 		}
 
-		void VoidPublisher::Unsubscribe(Subscriber* subscriber)
+		VIRTUAL void VoidPublisher::Unsubscribe(Subscriber* subscriber)
 		{
 			for (int i = 0; i < m_pending.size(); ++i)
 			{
@@ -81,5 +81,25 @@ namespace util
 				}
 			}
 		}
+
+		VIRTUAL void VoidPublisher::UnsubscribeAll()
+		{
+			SubIter local_iter = m_subscriptions.begin();
+			while (local_iter != m_subscriptions.end())
+			{
+				//check for publishing and current iterator
+				if (m_publishing && m_iter == local_iter)
+				{
+					m_erasure = true;
+				}
+				(*local_iter).m_subscriber->RemPublisher(this);
+				local_iter = m_subscriptions.erase(local_iter);
+				if (m_erasure)
+				{
+					m_iter = local_iter;
+				}
+			}
+		}
+
 	}
 }

@@ -12,12 +12,14 @@ namespace engine
 
 			CButtonPart::CButtonPart()
 				: m_bPressed(false)
+				, m_pData(nullptr)
 			{
 				m_priority = BUTTON_PART;
 			}
 
 			CButtonPart::~CButtonPart()
 			{
+				m_publisher.UnsubscribeAll();
 			}
 
 			VIRTUAL void CButtonPart::Init()
@@ -33,6 +35,21 @@ namespace engine
 			VIRTUAL void CButtonPart::LoadJson(const util::JSON& json)
 			{
 				CUiPart::LoadJson(json);
+			}
+
+			void CButtonPart::Subscribe(util::event::Subscriber* subscriber, util::event::Publisher<CButtonPart*>::Callback callback, const int& priority)
+			{
+				m_publisher.Subscribe(subscriber, callback, priority);
+			}
+
+			void CButtonPart::Unsubscribe(util::event::Subscriber* subscriber)
+			{
+				m_publisher.Unsubscribe(subscriber);
+			}
+			
+			void CButtonPart::UnsubscribeAll()
+			{
+				m_publisher.UnsubscribeAll();
 			}
 
 			VIRTUAL bool CButtonPart::OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos)
@@ -61,8 +78,7 @@ namespace engine
 					if (intersection)
 					{
 						__todo() //click callback here
-						int x = 0;
-						x++;
+						m_publisher.Publish(this);
 					}
 					return true;
 				}
