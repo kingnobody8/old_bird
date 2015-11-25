@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "type": "CButton",
+                    "type": "CButtonPart",
                     "layer": "world_layer"
                 }
             ],

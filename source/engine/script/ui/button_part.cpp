@@ -1,5 +1,6 @@
 #include "button_part.h"
 #include "component/object.h"
+#include "../script.h"
 
 namespace engine
 {
@@ -7,45 +8,55 @@ namespace engine
 	{
 		namespace ui
 		{
-			DEFINE_PART_TYPE_INFO(CButton);
+			DEFINE_PART_TYPE_INFO(CButtonPart);
 
-			CButton::CButton()
+			CButtonPart::CButtonPart()
 				: m_bPressed(false)
 			{
+				m_priority = BUTTON_PART;
 			}
 
-			CButton::~CButton()
-			{
-				DisableTouchImmediate();
-			}
-
-			VIRTUAL void CButton::Init()
+			CButtonPart::~CButtonPart()
 			{
 			}
 
-			VIRTUAL void CButton::Exit()
+			VIRTUAL void CButtonPart::Init()
 			{
+				CUiPart::Init();
 			}
 
-			VIRTUAL void CButton::LoadJson(const util::JSON& json)
+			VIRTUAL void CButtonPart::Exit()
 			{
+				CUiPart::Exit();
 			}
 
-			VIRTUAL bool CButton::OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action)
+			VIRTUAL void CButtonPart::LoadJson(const util::JSON& json)
 			{
-				if (CUiPart::OnMouseButtonDownInternal(action)) //if no intersection
+				CUiPart::LoadJson(json);
+			}
+
+			VIRTUAL bool CButtonPart::OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos)
+			{
+				if (!CUiPart::OnMouseButtonDownInternal(action, wpos)) //if no intersection
 					return true;
 
-
-
+				return true;
 			}
 		
-			VIRTUAL bool CButton::OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action)
+			VIRTUAL bool CButtonPart::OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos)
 			{
+				if (!CUiPart::OnMouseButtonUpInternal(action, wpos)) //if no intersection
+					return true;
+
+				return true;
 			}
 			
-			VIRTUAL bool CButton::OnMouseMotionInternal(const input::mouse_events::MotionAction& action)
+			VIRTUAL bool CButtonPart::OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos)
 			{
+				if (!CUiPart::OnMouseMotionInternal(action, wpos)) //if no intersection
+					return true;
+
+				return true;
 			}
 
 		

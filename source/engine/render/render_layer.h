@@ -47,6 +47,8 @@ namespace engine
 			inline CCamera* const GetCamera(void) const { return m_pCamera; }
 			inline const std::string& GetName() const { return m_name; }
 			inline const int& GetSortRank() const { return m_sort_rank; }
+			const util::math::vec2 ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point);
+			const util::math::vec2 ConvertPointFromWorldToScreen(util::math::vec2 m_world_point);
 		};
 	}
 }

@@ -11,10 +11,16 @@ namespace engine
 
 			bool SortFunc(CUiPart* lhs, CUiPart* rhs)
 			{
-				if (lhs->GetLayer() == rhs->GetLayer())
-					return lhs->GetZed() < rhs->GetZed();
-				return lhs->GetLayer()->GetSortRank() > rhs->GetLayer()->GetSortRank();
+				return true;
+				//if (lhs->GetLayer() == rhs->GetLayer())
+				//	return lhs->GetZed() < rhs->GetZed();
+				//return lhs->GetLayer()->GetSortRank() > rhs->GetLayer()->GetSortRank();
 			}
+
+			/*bool SortLayerFunc(const CUiPart::UiLayer& lhs, const CUiPart::UiLayer& rhs)
+			{
+
+			}*/
 
 			static const u16 INVALID_TOUCH_INDEX = 0xFFFF;
 
@@ -31,6 +37,21 @@ namespace engine
 				return ret;
 			}
 
+			STATIC const CUiPart::UiPartList CUiPart::GetUiPartsOnLayer(const std::string& szLayer)
+			{
+				UiPartList ret;
+				for (auto iter = s_uiLayers.begin(); iter != s_uiLayers.end(); ++iter)
+				{
+					if ((*iter).m_pLayer->GetName() == szLayer)
+					{
+						ret.insert(ret.end(), (*iter).m_uiParts.begin(), (*iter).m_uiParts.end());
+						break;
+					}
+				}
+				return ret;
+			}
+
+
 			STATIC void CUiPart::CleanTouchParts(void)
 			{
 				bool appended = false;
@@ -38,13 +59,27 @@ namespace engine
 				{
 					CUiPart* part = (*iter);
 					part->m_bPendingTouch = false;
+
+
+					UiPartList* list = null;
+					for (auto iter = s_uiLayers.begin(); iter != s_uiLayers.end(); ++iter)
+					{
+						if ((*iter).m_pLayer->GetName() == part->m_szLayer)
+						{
+							list = &(*iter).m_uiParts;
+							break;
+						}
+					}
+					assert(list != null);
+
+
 					if (part->m_bTouchEnabled) //Enable
 					{
 						// Guard against enabling multiple times
 						if (part->m_usTouchIndex == INVALID_TOUCH_INDEX)
 						{
-							part->m_usTouchIndex = (u16)s_touchParts.size();
-							s_touchParts.push_back(part);
+							part->m_usTouchIndex = (u16)list->size();
+							list->push_back(part);
 							appended = true;
 						}
 					}
@@ -52,14 +87,14 @@ namespace engine
 					{
 						if (part->m_usTouchIndex != INVALID_TOUCH_INDEX)
 						{
-							if (!s_touchParts.empty())
+							if (!list->empty())
 							{
-								UiPartIter ours = s_touchParts.begin();
+								UiPartIter ours = list->begin();
 								std::advance(ours, part->m_usTouchIndex);
-								UiPartIter back = s_touchParts.end();
+								UiPartIter back = list->end();
 								std::advance(back, -1);
 								std::swap(ours, back);
-								s_touchParts.pop_back();
+								list->pop_back();
 							}
 							//Invalidate the index
 							part->m_usTouchIndex = INVALID_TOUCH_INDEX;
@@ -69,18 +104,29 @@ namespace engine
 				s_pendingUiParts.clear();
 
 				if (appended)
-					s_touchParts.sort();
+				{
+					__todo()
+					//Sort the layers
+
+					//Sort the parts in each layer
+				}
 			}
 
 			STATIC void CUiPart::OnMouseButtonDown(const input::mouse_events::ButtonAction& action)
 			{
 				CleanTouchParts();
-				for (UiPartIter part_iter = s_touchParts.begin(); part_iter != s_touchParts.end(); ++part_iter)
+
+				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					if ((*part_iter)->m_bTouchEnabled)
+					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+
+					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
-						if (!(*part_iter)->OnMouseButtonDownInternal(action))
-							return;
+						if ((*part_iter)->m_bTouchEnabled)
+						{
+							if (!(*part_iter)->OnMouseButtonDownInternal(action, wpos))
+								return;
+						}
 					}
 				}
 			}
@@ -88,12 +134,18 @@ namespace engine
 			STATIC void CUiPart::OnMouseButtonUp(const input::mouse_events::ButtonAction& action)
 			{
 				CleanTouchParts();
-				for (UiPartIter part_iter = s_touchParts.begin(); part_iter != s_touchParts.end(); ++part_iter)
+				
+				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					if ((*part_iter)->m_bTouchEnabled)
+					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+
+					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
-						if (!(*part_iter)->OnMouseButtonUpInternal(action))
-							return;
+						if ((*part_iter)->m_bTouchEnabled)
+						{
+							if (!(*part_iter)->OnMouseButtonUpInternal(action, wpos))
+								return;
+						}
 					}
 				}
 			}
@@ -101,12 +153,18 @@ namespace engine
 			STATIC void CUiPart::OnMouseMotion(const input::mouse_events::MotionAction& action)
 			{
 				CleanTouchParts();
-				for (UiPartIter part_iter = s_touchParts.begin(); part_iter != s_touchParts.end(); ++part_iter)
+				
+				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					if ((*part_iter)->m_bTouchEnabled)
+					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+
+					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
-						if (!(*part_iter)->OnMouseMotionInternal(action))
-							return;
+						if ((*part_iter)->m_bTouchEnabled)
+						{
+							if (!(*part_iter)->OnMouseMotionInternal(action, wpos))
+								return;
+						}
 					}
 				}
 			}
@@ -130,6 +188,8 @@ namespace engine
 
 			VIRTUAL void CUiPart::Init()
 			{
+				Register();
+				CalculateIntersectionRect();
 			}
 
 			VIRTUAL void CUiPart::Exit()
@@ -138,6 +198,8 @@ namespace engine
 
 			VIRTUAL void CUiPart::LoadJson(const util::JSON& json)
 			{
+				m_szLayer = json["layer"].GetString();
+				assert(!m_szLayer.empty());
 			}
 
 			VIRTUAL void CUiPart::OnMatrixChanged(void)
@@ -145,19 +207,9 @@ namespace engine
 				CalculateIntersectionRect();
 			}
 
-			VIRTUAL void CUiPart::OnChildMatricChanged(component::CObject* child)
+			VIRTUAL void CUiPart::OnChildMatrixChanged(component::CObject* child)
 			{
 				CalculateIntersectionRect();
-			}
-
-			VIRTUAL bool CUiPart::OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action)
-			{
-				return true;
-			}
-
-			VIRTUAL bool CUiPart::OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action)
-			{
-				return true;
 			}
 
 			void CUiPart::Register()
@@ -171,6 +223,27 @@ namespace engine
 				m_bPendingTouch = true;
 
 				s_pendingUiParts.push_back(this);
+
+				bool found = false;
+				for (auto iter = s_uiLayers.begin(); iter != s_uiLayers.end(); ++iter)
+				{
+					if ((*iter).m_pLayer->GetName() == this->m_szLayer)
+					{
+						found = true;
+						break;
+					}
+				}
+
+				__todo() //initialize these from the render layers themselves, instead of here
+				if (!found)
+				{
+					CUiPart::UiLayer tmp;
+					tmp.m_pLayer = render::CRenderLayer::FindLayer(m_szLayer);
+					assert(tmp.m_pLayer != null);
+					s_uiLayers.push_back(tmp);
+					__todo() //sort the layers
+				}
+
 			}
 
 			void CUiPart::Unregister()
@@ -190,14 +263,26 @@ namespace engine
 			{
 				if (this->m_usTouchIndex != INVALID_TOUCH_INDEX)
 				{
-					if (!s_touchParts.empty())
+					UiPartList* list = null;
+					for (auto iter = s_uiLayers.begin(); iter != s_uiLayers.end(); ++iter)
 					{
-						UiPartIter ours = s_touchParts.begin();
+						if ((*iter).m_pLayer->GetName() == this->m_szLayer)
+						{
+							list = &(*iter).m_uiParts;
+							break;
+						}
+					}
+					assert(list != null);
+
+
+					if (!list->empty())
+					{
+						UiPartIter ours = list->begin();
 						std::advance(ours, this->m_usTouchIndex);
-						UiPartIter back = s_touchParts.end();
+						UiPartIter back = list->end();
 						std::advance(back, -1);
 						std::swap(ours, back);
-						s_touchParts.pop_back();
+						list->pop_back();
 					}
 					//Invalidate the index
 					this->m_usTouchIndex = INVALID_TOUCH_INDEX;

@@ -35,6 +35,7 @@ namespace engine
 				//External
 			public:
 				static const UiPartList GetUiParts();
+				static const UiPartList GetUiPartsOnLayer(const std::string& szLayer);
 				static void OnMouseButtonDown(const input::mouse_events::ButtonAction& action);
 				static void OnMouseButtonUp(const input::mouse_events::ButtonAction& action);
 				static void OnMouseMotion(const input::mouse_events::MotionAction& action);
@@ -59,9 +60,12 @@ namespace engine
 				/*Func*/
 			protected:
 				void CalculateIntersectionRect();
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos) { return true; }
+
+				/*the mouse action internals return a bool to respond if they have handled the event or not (true means handled, false means unhandled) */
+
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
 
 			public:
 				CUiPart();
@@ -73,7 +77,7 @@ namespace engine
 				virtual void LoadJson(const util::JSON& json);
 
 				virtual void OnMatrixChanged(void);
-				virtual void OnChildMatricChanged(component::CObject* child);
+				virtual void OnChildMatrixChanged(component::CObject* child);
 
 				void Register();
 				void Unregister();

@@ -8,10 +8,10 @@ namespace engine
 		namespace ui
 		{
 
-			class CButton : public CUiPart
+			class CButtonPart : public CUiPart
 			{
 			public:
-				DECLARE_PART_TYPE_INFO(CButton);
+				DECLARE_PART_TYPE_INFO(CButtonPart);
 
 				/*Data*/
 			private:
@@ -20,14 +20,14 @@ namespace engine
 
 				/*Func*/
 			protected:
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action);
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action);
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action);
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos);
 
 			public:
-				CButton();
-				virtual ~CButton();
-				CButton& operator= (const CButton& that);
+				CButtonPart();
+				virtual ~CButtonPart();
+				CButtonPart& operator= (const CButtonPart& that);
 
 				virtual void Init();
 				virtual void Exit();

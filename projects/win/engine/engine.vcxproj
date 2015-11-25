@@ -34,6 +34,7 @@
     <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,7 @@
     <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\script.h" />
+    <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "render_layer.h"
 #include "render_node.h"
 #include "camera.h"
+#include "renderer.h"
 #include <algorithm>
 
 namespace engine
@@ -125,6 +126,24 @@ namespace engine
 		{
 			this->m_vCulledNodes.clear();
 			this->m_vNodes.clear();
+		}
+
+		const util::math::vec2 CRenderLayer::ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point)
+		{
+			//get screen info
+			util::math::Type2<int> logical_size;
+			SDL_GetRendererOutputSize(render::GetSdlRenderer(), &logical_size.w, &logical_size.h);
+			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+
+			m_screen_point.x = m_screen_point.x - origin.x;
+			m_screen_point.y = origin.y - m_screen_point.y;
+
+			return util::math::Matrix2D::Vector_Matrix_Multiply(m_screen_point, m_pCamera->GetMatrix());
+		}
+
+		const util::math::vec2 CRenderLayer::ConvertPointFromWorldToScreen(util::math::vec2 m_world_point)
+		{
+			return util::math::Matrix2D::Vector_Matrix_Multiply(m_world_point, util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix()));
 		}
 	}
 }

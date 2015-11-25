@@ -3,6 +3,8 @@
 #include "script/renderable/aabb_part.h"
 #include "script/renderable/points_part.h"
 #include "script/renderable/img_part.h"
+#include "script/ui/ui_part.h"
+#include "script/ui/button_part.h"
 
 namespace engine
 {
@@ -11,12 +13,14 @@ namespace engine
 		//if a script hides behind a namespace we have to set using here so that the register macro can take just the straight class name
 		__todo() //maybe eventually we want to organize things like bvb did with namespaces as part of the part name ie: engine.render.crectpart or engine.ui.button
 		using namespace renderable;
+		using namespace ui;
 
 		void RegisterScripts()
 		{
 			REGISTER_PART(CAabbPart);
 			REGISTER_PART(CPointsPart);
 			REGISTER_PART(CImgPart);
+			REGISTER_PART(CButtonPart);
 		}
 	}
 }

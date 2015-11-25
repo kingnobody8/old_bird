@@ -70,6 +70,9 @@
     <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp">
       <Filter>script\ui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp">
+      <Filter>script\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -119,6 +122,9 @@
       <Filter>input</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h">
+      <Filter>script\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h">
       <Filter>script\ui</Filter>
     </ClInclude>
   </ItemGroup>
