@@ -8,6 +8,7 @@ namespace engine
 		namespace ui
 		{
 
+			__todo() //note that this button class assumes that it is not being transformed while the user is holding the mouse down, we may want to put in code to handle a moving button
 			class CButtonPart : public CUiPart
 			{
 			public:

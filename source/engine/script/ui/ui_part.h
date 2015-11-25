@@ -62,6 +62,7 @@ namespace engine
 				void CalculateIntersectionRect();
 
 				/*the mouse action internals return a bool to respond if they have handled the event or not (true means handled, false means unhandled) */
+				__todo() //maybe make the return an enum with codes for handled/unhandled
 
 				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
 				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
