@@ -212,6 +212,16 @@ namespace engine
 				CalculateIntersectionRect();
 			}
 
+			VIRTUAL void CUiPart::OnChildAppended(component::CObject* child)
+			{
+				CalculateIntersectionRect();
+			}
+
+			VIRTUAL void CUiPart::OnChildRemoved(component::CObject* child)
+			{
+				CalculateIntersectionRect();
+			}
+
 			void CUiPart::Register()
 			{
 				if (m_bTouchEnabled)

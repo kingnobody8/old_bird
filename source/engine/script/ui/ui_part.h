@@ -79,6 +79,8 @@ namespace engine
 
 				virtual void OnMatrixChanged(void);
 				virtual void OnChildMatrixChanged(component::CObject* child);
+				virtual void OnChildAppended(component::CObject* child);
+				virtual void OnChildRemoved(component::CObject* child);
 
 				void Register();
 				void Unregister();

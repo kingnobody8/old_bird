@@ -10,6 +10,11 @@ namespace util
 		{
 		}
 
+		IPublisher::~IPublisher()
+		{
+			UnsubscribeAll();
+		}
+
 		void VoidPublisher::Publish()
 		{
 			assert(!m_publishing);
@@ -84,6 +89,13 @@ namespace util
 
 		VIRTUAL void VoidPublisher::UnsubscribeAll()
 		{
+			for (int i = 0; i < m_pending.size(); ++i)
+			{
+				m_pending[i].m_subscriber->RemPublisher(this);
+				m_pending.erase(m_pending.begin() + i);
+				--i;
+			}
+
 			SubIter local_iter = m_subscriptions.begin();
 			while (local_iter != m_subscriptions.end())
 			{

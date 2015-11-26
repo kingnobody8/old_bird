@@ -83,6 +83,13 @@ namespace util
 		template<typename TYPE>
 		VIRTUAL void Publisher<TYPE>::UnsubscribeAll()
 		{
+			for (int i = 0; i < m_pending.size(); ++i)
+			{
+				m_pending[i].m_subscriber->RemPublisher(this);
+				m_pending.erase(m_pending.begin() + i);
+				--i;
+			}
+
 			SubIter local_iter = m_subscriptions.begin();
 			while (local_iter != m_subscriptions.end())
 			{

@@ -95,11 +95,15 @@ namespace engine
 		}
 		VIRTUAL void CObject::Destroy(void)
 		{
+			if (this->m_pParent)
+				this->m_pParent->RemoveObject(this);
+
 			std::list<IPart*> list = GetPartList(this, true);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
 				(*iter)->Destroy();
 			}
+
 			delete this;
 		}
 
@@ -428,6 +432,12 @@ namespace engine
 			assert(pObj);
 			this->m_vChildren.push_back(pObj);
 			pObj->SetParent(this);
+
+			std::list<IPart*> list = GetAncestorPartList(pObj);
+			for (auto iter = list.begin(); iter != list.end(); ++iter)
+			{
+				(*iter)->OnChildAppended(pObj);
+			}
 		}
 		VIRTUAL bool CGroup::RemoveObject(CObject* const pObj)
 		{
@@ -438,6 +448,13 @@ namespace engine
 				if (this->m_vChildren[i] == pObj)
 				{
 					this->m_vChildren.erase(this->m_vChildren.begin() + i);
+
+					std::list<IPart*> list = GetAncestorPartList(pObj);
+					for (auto iter = list.begin(); iter != list.end(); ++iter)
+					{
+						(*iter)->OnChildAppended(pObj);
+					}
+
 					return true;
 				}
 			}

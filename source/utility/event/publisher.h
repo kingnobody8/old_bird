@@ -28,9 +28,9 @@ namespace util
 		{
 		public:
 			IPublisher();
-			virtual ~IPublisher() {}
+			virtual ~IPublisher();
 			virtual void Unsubscribe(Subscriber* subscriber) = 0;
-			virtual void UnsubscribeAll() = 0;
+			virtual void UnsubscribeAll() {};
 
 		protected:
 			bool m_publishing;
