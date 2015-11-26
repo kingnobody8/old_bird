@@ -44,6 +44,10 @@
                         "x": 32,
                         "y": 32
                     }
+                },
+                {
+                    "type": "CFixturePart",
+                    "body_type": 0
                 }
             ],
             "children": [ ]

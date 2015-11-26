@@ -22,6 +22,9 @@
     <Filter Include="script\ui">
       <UniqueIdentifier>{261b71f2-f34a-4806-9a56-2cafa638813a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="script\box">
+      <UniqueIdentifier>{0f2e197e-7a4a-491b-b9fd-4334a37db5ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -72,6 +75,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp">
       <Filter>script\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\box\box2d_part.cpp">
+      <Filter>script\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\box\fixture_part.cpp">
+      <Filter>script\box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +135,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h">
       <Filter>script\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\box\box2d_part.h">
+      <Filter>script\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\box\fixture_part.h">
+      <Filter>script\box</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
