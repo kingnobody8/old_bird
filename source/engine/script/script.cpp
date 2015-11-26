@@ -5,6 +5,7 @@
 #include "script/renderable/img_part.h"
 #include "script/ui/ui_part.h"
 #include "script/ui/button_part.h"
+#include "script/box_part.h"
 
 namespace engine
 {
@@ -21,6 +22,7 @@ namespace engine
 			REGISTER_PART(CPointsPart);
 			REGISTER_PART(CImgPart);
 			REGISTER_PART(CButtonPart);
+			REGISTER_PART(CBoxPart);
 		}
 	}
 }

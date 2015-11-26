@@ -13,6 +13,7 @@ namespace engine
 			POINTS_PART,
 			IMG_PART,
 			BUTTON_PART,
+			BOX_PART,
 			PRIORITIES_COUNT
 		};
 
