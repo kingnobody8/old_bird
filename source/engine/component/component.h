@@ -1,5 +1,5 @@
 #pragma once
-#include "platform/inc_func.h"
+#include "func.h"
 #include "types.h"
 #include "math/matrix_2d.h"
 #include "shape/aabb.h"

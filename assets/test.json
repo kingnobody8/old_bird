@@ -113,6 +113,10 @@
                         "b": 1.0,
                         "a": 0.75
                     }
+                },
+                {
+                    "type": "CButtonPart",
+                    "layer": "world_layer"
                 }
             ],
             "children": [ ]

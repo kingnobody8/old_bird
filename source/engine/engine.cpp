@@ -3,6 +3,7 @@
 #include "component/object.h"
 #include <assert.h>
 #include "render/renderer.h"
+#include "input/input.h"
 #include "asset/loader.h"
 #include "asset/resource_path.h"
 #include "render/render_layer.h"
@@ -52,7 +53,7 @@ namespace engine
 
 		//Init all engine scripts
 		script::RegisterScripts();
-
+		
 		//assert(pFirstState);
 
 		//Init SDL
@@ -70,6 +71,13 @@ namespace engine
 
 		//Initialize the rendering system
 		render::SetupSdl();
+
+		//Initialize the input system
+		input::Setup(render::GetSdlRenderer());
+
+		util::event::Publisher<input::key_events::KeyAction>* ptr = &input::key_events::s_InputKeyUp;
+		input::key_events::s_InputKeyUp.Subscribe(&sub, BIND1(this, &Engine::OnAKey));
+		input::mouse_events::s_InputMouseMotion.Subscribe(&sub, BIND1(this, &Engine::OnMouseBtn));
 
 		__todo() //refactor this into the initialization of the app class when it is
 		util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
@@ -120,11 +128,54 @@ namespace engine
 		for (component::PartIter iter = parts.begin(); iter != parts.end(); ++iter)
 		{
 			(*iter)->Init();
+
+			if ((*iter)->GetType() == script::ui::CButtonPart::Type)
+			{
+				script::ui::CButtonPart* btn = (script::ui::CButtonPart*)(*iter);
+				btn->Subscribe(&sub, BIND1(this, &Engine::OnBtn));
+			}
 		}
 
 		//Don't quit
 		m_quit = false;
+
+		pub.Subscribe(&sub, BIND1(this, &Engine::OnMode));
+		pub.Subscribe(&sub, BIND1(this, &Engine::OnMode2));
 	}
+
+	void Engine::OnMode(int mode)
+	{
+		component::CObject* obj = m_pRoot->FindObject("door");
+
+		script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+		if (pimg)
+			pimg->SetBlendMode((SDL_BlendMode)(mode));
+
+		//sub.UnsubscribeAll();
+	}
+
+	void Engine::OnMode2(int mode)
+	{
+		int x = 0;
+		x++;
+		pub.Unsubscribe(&sub);
+	}
+
+	void Engine::OnBtn(script::ui::CButtonPart* btn)
+	{
+		static int mode = 0;
+		mode++;
+		if (mode > 4)
+			mode = 0;
+
+		component::CObject* obj = m_pRoot->FindObject("door");
+
+		script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+		if (pimg)
+			pimg->SetBlendMode((SDL_BlendMode)(mode));
+	}
+
+
 	void Engine::Exit(void)
 	{
 		//Destroy Scene
@@ -187,15 +238,16 @@ namespace engine
 		static int mode = 0;
 		static util::Time timer;
 		timer += m_timer.Delta();
-		if (timer > 5000)
+		if (timer > 2000)
 		{
 			timer = 0;
 			mode += 1;
 			if (mode > 4)
 				mode = 0;
-			script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
-			if(pimg)
-				pimg->SetBlendMode((SDL_BlendMode)mode);
+			//script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+			//if(pimg)
+			//	pimg->SetBlendMode((SDL_BlendMode)mode);
+			//pub.Publish(mode);
 		}
 
 		/*mat = Matrix2D();
@@ -203,15 +255,15 @@ namespace engine
 		render::CCamera::FindCamera("world_cam")->SetMatrix(mat);*/
 
 		//Poll events
-		SDL_Event tEvent;
-		while (SDL_PollEvent(&tEvent))
+		if (!input::PollSdl(delta))
 		{
-			switch (tEvent.type)
-			{
-			case SDL_QUIT:
-				this->m_quit = true;
-			}
+			m_quit = true;
 		}
+		else //if input did not kill the app, then update the current state and scene
+		{
+			component::IPart::UpdateParts(delta);
+		}
+
 
 		////If input did not kill the app, then update the current state and the scene
 		//this->m_bRun = !this->m_cInput.Update(delta);
@@ -243,4 +295,16 @@ namespace engine
 		this->m_pCurrState->Init();*/
 	}
 
+	void Engine::OnAKey(input::key_events::KeyAction action)
+	{
+		m_quit = true;
+	}
+
+	void Engine::OnMouseBtn(input::mouse_events::MotionAction action)
+	{
+		/*if (action.m_delta.magnitude() > 30)
+		{
+			m_quit = true;
+		}*/
+	}
 }

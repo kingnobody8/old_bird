@@ -20,6 +20,9 @@
 		BC075AC81BEE592800AA8C9A /* render_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC075AB91BEE592800AA8C9A /* render_part.cpp */; };
 		BC075AC91BEE592800AA8C9A /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC075ABB1BEE592800AA8C9A /* script.cpp */; };
 		BC09FC2B1BEFC3E900984F45 /* img_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC09FC291BEFC3E900984F45 /* img_part.cpp */; };
+		BCBE20971C065BCB00B7D464 /* button_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE20931C065BCB00B7D464 /* button_part.cpp */; };
+		BCBE20981C065BCB00B7D464 /* ui_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE20951C065BCB00B7D464 /* ui_part.cpp */; };
+		BCBE209F1C065C8800B7D464 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE209D1C065C8800B7D464 /* input.cpp */; };
 		BCCD90FD1BF6D42E00EBB5AD /* aabb_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCCD90F91BF6D42E00EBB5AD /* aabb_part.cpp */; };
 		BCCD90FE1BF6D42E00EBB5AD /* points_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCCD90FB1BF6D42E00EBB5AD /* points_part.cpp */; };
 /* End PBXBuildFile section */
@@ -66,6 +69,12 @@
 		BC075ABC1BEE592800AA8C9A /* script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
 		BC09FC291BEFC3E900984F45 /* img_part.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = img_part.cpp; sourceTree = "<group>"; };
 		BC09FC2A1BEFC3E900984F45 /* img_part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = img_part.h; sourceTree = "<group>"; };
+		BCBE20931C065BCB00B7D464 /* button_part.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = button_part.cpp; path = ui/button_part.cpp; sourceTree = "<group>"; };
+		BCBE20941C065BCB00B7D464 /* button_part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = button_part.h; path = ui/button_part.h; sourceTree = "<group>"; };
+		BCBE20951C065BCB00B7D464 /* ui_part.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_part.cpp; path = ui/ui_part.cpp; sourceTree = "<group>"; };
+		BCBE20961C065BCB00B7D464 /* ui_part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui_part.h; path = ui/ui_part.h; sourceTree = "<group>"; };
+		BCBE209D1C065C8800B7D464 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../../source/engine/input/input.cpp; sourceTree = "<group>"; };
+		BCBE209E1C065C8800B7D464 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../../source/engine/input/input.h; sourceTree = "<group>"; };
 		BCCD90F91BF6D42E00EBB5AD /* aabb_part.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aabb_part.cpp; sourceTree = "<group>"; };
 		BCCD90FA1BF6D42E00EBB5AD /* aabb_part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aabb_part.h; sourceTree = "<group>"; };
 		BCCD90FB1BF6D42E00EBB5AD /* points_part.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = points_part.cpp; sourceTree = "<group>"; };
@@ -86,6 +95,7 @@
 		BC075A781BEE58A500AA8C9A = {
 			isa = PBXGroup;
 			children = (
+				BCBE209C1C065C7500B7D464 /* input */,
 				BC075A9C1BEE592800AA8C9A /* asset */,
 				BC075AA21BEE592800AA8C9A /* component */,
 				BC075AAA1BEE592800AA8C9A /* engine.cpp */,
@@ -143,6 +153,7 @@
 		BC075AB51BEE592800AA8C9A /* script */ = {
 			isa = PBXGroup;
 			children = (
+				BCBE20921C065BB700B7D464 /* ui */,
 				BC075AB61BEE592800AA8C9A /* renderable */,
 				BC075ABB1BEE592800AA8C9A /* script.cpp */,
 				BC075ABC1BEE592800AA8C9A /* script.h */,
@@ -164,6 +175,26 @@
 				BC075ABA1BEE592800AA8C9A /* render_part.h */,
 			);
 			path = renderable;
+			sourceTree = "<group>";
+		};
+		BCBE20921C065BB700B7D464 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				BCBE20931C065BCB00B7D464 /* button_part.cpp */,
+				BCBE20941C065BCB00B7D464 /* button_part.h */,
+				BCBE20951C065BCB00B7D464 /* ui_part.cpp */,
+				BCBE20961C065BCB00B7D464 /* ui_part.h */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		BCBE209C1C065C7500B7D464 /* input */ = {
+			isa = PBXGroup;
+			children = (
+				BCBE209D1C065C8800B7D464 /* input.cpp */,
+				BCBE209E1C065C8800B7D464 /* input.h */,
+			);
+			name = input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,11 +254,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC075AC31BEE592800AA8C9A /* camera.cpp in Sources */,
+				BCBE20981C065BCB00B7D464 /* ui_part.cpp in Sources */,
 				BC075ABE1BEE592800AA8C9A /* resource_path.mm in Sources */,
+				BCBE20971C065BCB00B7D464 /* button_part.cpp in Sources */,
 				BC075AC61BEE592800AA8C9A /* renderer.cpp in Sources */,
 				BC075AC21BEE592800AA8C9A /* engine.cpp in Sources */,
 				BC075ABD1BEE592800AA8C9A /* loader.cpp in Sources */,
 				BC075AC51BEE592800AA8C9A /* render_node.cpp in Sources */,
+				BCBE209F1C065C8800B7D464 /* input.cpp in Sources */,
 				BC075AC01BEE592800AA8C9A /* object.cpp in Sources */,
 				BCCD90FE1BF6D42E00EBB5AD /* points_part.cpp in Sources */,
 				BC075AC41BEE592800AA8C9A /* render_layer.cpp in Sources */,

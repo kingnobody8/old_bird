@@ -2,6 +2,13 @@
 #include "timer.h"
 #include "script/script.h"
 
+#include "event/publisher.h"
+#include "event/publisher.inl"
+#include "event/subscriber.h"
+#include "input/input.h"
+
+#include "script/ui/button_part.h"
+
 namespace engine
 {
 	//forward declare
@@ -30,6 +37,14 @@ namespace engine
 		void Update();
 		void PushState(IBaseState* const pState);
 
+		void OnMode(int mode);
+		void OnMode2(int mode);
+		void OnAKey(input::key_events::KeyAction action);
+		void OnMouseBtn(input::mouse_events::MotionAction action);
+
+		void OnBtn(script::ui::CButtonPart* btn);
+
+
 	public:
 		static Engine* Get(void);
 		static void DeleteInstance(void);
@@ -39,6 +54,9 @@ namespace engine
 		void Exit(void);
 		void RunFrame(void* params);
 
+
+		util::event::IntPublisher pub;
+		util::event::Subscriber sub;
 	};
 
 	static Engine* Get()

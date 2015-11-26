@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="platform">
-      <UniqueIdentifier>{89a3480f-596b-4f87-9d95-eee63e1bc404}</UniqueIdentifier>
-    </Filter>
     <Filter Include="math">
       <UniqueIdentifier>{e03783c9-d106-4d51-a0b4-144680a2a5ae}</UniqueIdentifier>
     </Filter>
@@ -15,23 +12,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\source\utility\platform\inc_func.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\platform\inc_sdl.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\platform\inc_sdl_img.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\platform\platform.h">
-      <Filter>platform</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\utility\types.h" />
     <ClInclude Include="..\..\..\source\utility\util_time.h" />
-    <ClInclude Include="..\..\..\source\utility\platform\inc_common.h">
-      <Filter>platform</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\utility\macro.h" />
     <ClInclude Include="..\..\..\source\utility\bit_flag.h" />
     <ClInclude Include="..\..\..\source\utility\math\consts.h">
@@ -86,6 +68,11 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\utility\shape\circle.h">
       <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\common.h" />
+    <ClInclude Include="..\..\..\source\utility\platform.h" />
+    <ClInclude Include="..\..\..\source\utility\event\publisher.inl">
+      <Filter>event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

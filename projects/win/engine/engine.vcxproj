@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
+    <ClCompile Include="..\..\..\source\engine\input\input.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
@@ -33,6 +34,8 @@
     <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
@@ -41,6 +44,7 @@
     <ClInclude Include="..\..\..\source\engine\component\object.h" />
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />
+    <ClInclude Include="..\..\..\source\engine\input\input.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
@@ -50,6 +54,8 @@
     <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\script.h" />
+    <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h" />
+    <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />

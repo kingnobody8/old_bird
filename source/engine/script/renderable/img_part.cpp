@@ -100,7 +100,7 @@ namespace engine
 			
 			void CImgPart::SetBlendMode(const SDL_BlendMode& blend_mode)
 			{
-				if (!m_force && (m_blend_mode = blend_mode))
+				if (!m_force && (m_blend_mode == blend_mode))
 					return;
 
 				m_blend_mode = blend_mode;

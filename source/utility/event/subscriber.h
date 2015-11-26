@@ -6,21 +6,25 @@ namespace util
 	namespace event
 	{
 		//forward declare
+		class IPublisher;
+		template<typename TYPE>
 		class Publisher;
 
 		class Subscriber
 		{
+			friend class VoidPublisher;
+			template<typename TYPE>
+			friend class Publisher;
+
 		public:
-			Subscriber(void* addr);
 			~Subscriber();
 			void UnsubscribeAll();
 
 		private:
-			void AddPublisher(Publisher* pPub);
-			void RemPublisher(Publisher* pPub);
+			void AddPublisher(IPublisher* pPub);
+			void RemPublisher(IPublisher* pPub);
 
-			std::list<Publisher*> m_pubs;
-			void* m_addr;
+			std::list<IPublisher*> m_pubs;
 		};
 	}
 }

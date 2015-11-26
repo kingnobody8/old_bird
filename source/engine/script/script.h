@@ -12,6 +12,7 @@ namespace engine
 			AABB_PART,
 			POINTS_PART,
 			IMG_PART,
+			BUTTON_PART,
 			PRIORITIES_COUNT
 		};
 

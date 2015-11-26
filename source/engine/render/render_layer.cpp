@@ -1,6 +1,7 @@
 #include "render_layer.h"
 #include "render_node.h"
 #include "camera.h"
+#include "renderer.h"
 #include <algorithm>
 
 namespace engine
@@ -12,20 +13,20 @@ namespace engine
 			return lhs->GetZed() < rhs->GetZed();
 		}
 
-		bool SortLayerFunc(const CRenderLayer::Desc& lhs, const CRenderLayer::Desc& rhs)
+		bool SortLayerFunc(CRenderLayer* lhs, CRenderLayer* rhs)
 		{
-			return lhs.m_sort_rank > rhs.m_sort_rank;
+			return lhs->GetSortRank() > rhs->GetSortRank();
 		}
 
-		STATIC std::list<CRenderLayer::Desc> CRenderLayer::s_layers;
+		STATIC std::list<CRenderLayer*> CRenderLayer::s_layers;
 
 		STATIC CRenderLayer* CRenderLayer::FindLayer(const std::string& szLayer)
 		{
 			for (auto iter = s_layers.begin(); iter != s_layers.end(); ++iter)
 			{
-				if ((*iter).m_name == szLayer)
+				if ((*iter)->GetName() == szLayer)
 				{
-					return (*iter).m_pLayer;
+					return (*iter);
 				}
 			}
 			return null;
@@ -35,36 +36,35 @@ namespace engine
 		{
 			assert(!name.empty() || pCam != null);
 
-			CRenderLayer::Desc desc;
-			desc.m_name = name;
-			desc.m_pLayer = new CRenderLayer(name, pCam);
-			desc.m_sort_rank = sort_rank;
-			s_layers.push_back(desc);
+			CRenderLayer* layer = new CRenderLayer(name, sort_rank, pCam);
+			s_layers.push_back(layer);
 			s_layers.sort(SortLayerFunc);
-			return desc.m_pLayer;
+			return layer;
 		}
 
 		STATIC void CRenderLayer::DestroyLayers()
 		{
 			for (auto iter = s_layers.begin(); iter != s_layers.end(); ++iter)
-				delete (*iter).m_pLayer;
+				delete (*iter);
 			s_layers.clear();
 		}
 
 		STATIC void CRenderLayer::RenderAllLayers(SDL_Renderer* pRen)
 		{
 			for (auto iter = s_layers.begin(); iter != s_layers.end(); ++iter)
-				(*iter).m_pLayer->DoRender(pRen);
+				(*iter)->DoRender(pRen);
 		}
 
 		CRenderLayer::CRenderLayer(void)
 			: m_pCamera(null)
+			, m_sort_rank(0)
 		{
 		}
 
-		CRenderLayer::CRenderLayer(const std::string& name, CCamera* const pCam)
+		CRenderLayer::CRenderLayer(const std::string& name, const int& sort_rank, CCamera* const pCam)
 			: m_pCamera(pCam)
 			, m_name(name)
+			, m_sort_rank(sort_rank)
 		{
 		}
 
@@ -126,6 +126,24 @@ namespace engine
 		{
 			this->m_vCulledNodes.clear();
 			this->m_vNodes.clear();
+		}
+
+		const util::math::vec2 CRenderLayer::ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point)
+		{
+			//get screen info
+			util::math::Type2<int> logical_size;
+			SDL_GetRendererOutputSize(render::GetSdlRenderer(), &logical_size.w, &logical_size.h);
+			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+
+			m_screen_point.x = m_screen_point.x - origin.x;
+			m_screen_point.y = origin.y - m_screen_point.y;
+
+			return util::math::Matrix2D::Vector_Matrix_Multiply(m_screen_point, m_pCamera->GetMatrix());
+		}
+
+		const util::math::vec2 CRenderLayer::ConvertPointFromWorldToScreen(util::math::vec2 m_world_point)
+		{
+			return util::math::Matrix2D::Vector_Matrix_Multiply(m_world_point, util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix()));
 		}
 	}
 }

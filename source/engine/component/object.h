@@ -169,6 +169,7 @@ namespace engine
 		void							Update(CObject* const pObj, const util::Time& dt);
 		const bool						IsRenderable(const CObject* const pObj);
 		const PartList					GetPartList(const CObject* const pObj, const bool& reverse_priority = false);
+		const PartList					GetAncestorPartList(const CObject* const pObj, const bool & reverse_priority = false);
 		void							TraverseAncestors(const CObject* const that, std::function<void(CObject*const)> func, const util::EDirection eDirection = util::EDirection::UP);//Traverses through each parent either from 'that' to the root or from the root to 'that'
 		void							TraverseChildren(const CGroup* const that, std::function<void(CObject*const)> func, const int depth = -1); //Traverses through all children up to the specified depth, -1 means do all of them
 		void							TraverseChildrenBreak(CGroup* const that, std::function<bool(CObject*const)> func, const int depth = -1); //Traverse just like the original function, but now the callback can break the loop by returning true

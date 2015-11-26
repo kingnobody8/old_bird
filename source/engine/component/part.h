@@ -1,5 +1,6 @@
 #pragma once
 #include "component/component.h"
+#include "event/subscriber.h"
 
 namespace engine
 {
@@ -15,7 +16,7 @@ namespace engine
 		*/
 
 
-		class IPart
+		class IPart : public util::event::Subscriber
 		{
 			//Internal
 		private:
@@ -78,6 +79,13 @@ namespace engine
 			virtual void OnMatrixChanged(void){};
 			virtual void OnZedChanged(void){};
 			virtual void OnVisibilityChanged(const bool visible){};
+
+			virtual void OnChildMatrixChanged(CObject* child){};
+			virtual void OnChildZedChanged(CObject* child){};
+			virtual void OnChildVisibilityChanged(CObject* child){};
+
+			virtual void OnChildAppended(CObject* child){};
+			virtual void OnChildRemoved(CObject* child){};
 
 			virtual const util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
 
