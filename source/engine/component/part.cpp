@@ -60,7 +60,8 @@ namespace engine
 							std::advance(ours, part->m_usPartIndex);
 							PartIter back = list.end();
 							std::advance(back, -1);
-							std::swap(ours, back);
+							std::iter_swap(ours, back);
+							(*ours)->m_usPartIndex = part->m_usPartIndex; //NOTE this is no longer 'ours' it is now the original 'back'
 							list.pop_back();
 						}
 						//Invalidate the index
@@ -183,7 +184,8 @@ namespace engine
 					std::advance(ours, this->m_usPartIndex);
 					PartIter back = list.end();
 					std::advance(back, -1);
-					std::swap(ours, back);
+					std::iter_swap(ours, back); 
+					(*ours)->m_usPartIndex = this->m_usPartIndex; //NOTE this is no longer 'ours' it is now the original 'back'
 					list.pop_back();
 				}
 				//Invalidate the index

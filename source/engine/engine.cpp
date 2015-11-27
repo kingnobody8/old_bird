@@ -11,6 +11,7 @@
 #include "component/part.h"
 #include "script/renderable/img_part.h"
 #include "component/object.inl"
+#include "script/box/box2d_part.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -74,6 +75,8 @@ namespace engine
 
 		//Initialize the input system
 		input::Setup(render::GetSdlRenderer());
+
+		script::box::IBox2DPart::SetupWorld();
 
 		util::event::Publisher<input::key_events::KeyAction>* ptr = &input::key_events::s_InputKeyUp;
 		input::key_events::s_InputKeyUp.Subscribe(&sub, BIND1(this, &Engine::OnAKey));
@@ -225,6 +228,8 @@ namespace engine
 		//Update the timer
 		this->m_timer.Signal();
 		util::Time delta = this->m_timer.Delta();
+
+		script::box::IBox2DPart::UpdateWorld(delta);
 		
 		__todo()//remove this, this was for testing only
 		component::CObject* obj = m_pRoot->FindObject("door");
@@ -232,7 +237,7 @@ namespace engine
 		util::math::Matrix2D mat = obj->GetLocalMatrix();
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
 		//mat.SetScale(util::math::vec2(use, 1.0f));
-		mat.SetRotationZ(this->m_timer.Total().Milli() / 50.0f);
+		mat.SetRotationZ(this->m_timer.Total().Milli() / -10.0f);
 		obj->SetLocalMatrix(mat);
 
 		static int mode = 0;

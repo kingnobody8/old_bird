@@ -1,5 +1,6 @@
 #include "box2d_part.h"
 #include "script/script.h"
+#include "component/object.h"
 
 namespace engine
 {
@@ -65,6 +66,8 @@ namespace engine
 			{
 				if (m_bSettingMatrix) //we only want to respond to a matrix changed event, if someone else changes our matrix
 					return;
+
+					
 			}
 
 		}

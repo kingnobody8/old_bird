@@ -8,12 +8,13 @@ namespace engine
 	{
 		namespace box
 		{
-			class IBox2DPart : public script::renderable::IRenderPart
+			class IBox2DPart : public component::IPart//script::renderable::IRenderPart
 			{
-			private:
+			protected:
 				static b2World* s_pWorld;
 
 			public:
+				static b2World* GetWorld() { return s_pWorld; }
 				static void SetupWorld();
 				static void DestroyWorld();
 				static void UpdateWorld(const util::Time& dt);

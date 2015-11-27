@@ -28,8 +28,8 @@ namespace engine
 				};
 				static std::list<UiLayer> s_uiLayers;
 				static UiPartList s_pendingUiParts;
-				static void CleanTouchParts(void);
-				void DisableTouchImmediate(void);
+				static void CleanUiParts(void);
+				void DisableUiImmediate(void);
 
 
 				//External
@@ -41,9 +41,9 @@ namespace engine
 				static void OnMouseMotion(const input::mouse_events::MotionAction& action);
 
 			private:
-				bool				m_bTouchEnabled;
-				bool				m_bPendingTouch;
-				u16					m_usTouchIndex;
+				bool				m_bUiEnabled;
+				bool				m_bPendingUi;
+				u16					m_usUiIndex;
 
 				//------------------------------------------------------------------------------
 

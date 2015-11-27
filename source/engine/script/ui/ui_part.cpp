@@ -22,7 +22,7 @@ namespace engine
 
 			}*/
 
-			static const u16 INVALID_TOUCH_INDEX = 0xFFFF;
+			static const u16 INVALID_UI_INDEX = 0xFFFF;
 
 			STATIC std::list<CUiPart::UiLayer> CUiPart::s_uiLayers;
 			STATIC CUiPart::UiPartList CUiPart::s_pendingUiParts;
@@ -52,13 +52,13 @@ namespace engine
 			}
 
 
-			STATIC void CUiPart::CleanTouchParts(void)
+			STATIC void CUiPart::CleanUiParts(void)
 			{
 				bool appended = false;
 				for (UiPartIter iter = s_pendingUiParts.begin(); iter != s_pendingUiParts.end(); ++iter)
 				{
 					CUiPart* part = (*iter);
-					part->m_bPendingTouch = false;
+					part->m_bPendingUi = false;
 
 
 					UiPartList* list = null;
@@ -73,31 +73,32 @@ namespace engine
 					assert(list != null);
 
 
-					if (part->m_bTouchEnabled) //Enable
+					if (part->m_bUiEnabled) //Enable
 					{
 						// Guard against enabling multiple times
-						if (part->m_usTouchIndex == INVALID_TOUCH_INDEX)
+						if (part->m_usUiIndex == INVALID_UI_INDEX)
 						{
-							part->m_usTouchIndex = (u16)list->size();
+							part->m_usUiIndex = (u16)list->size();
 							list->push_back(part);
 							appended = true;
 						}
 					}
 					else //Disable
 					{
-						if (part->m_usTouchIndex != INVALID_TOUCH_INDEX)
+						if (part->m_usUiIndex != INVALID_UI_INDEX)
 						{
 							if (!list->empty())
 							{
 								UiPartIter ours = list->begin();
-								std::advance(ours, part->m_usTouchIndex);
+								std::advance(ours, part->m_usUiIndex);
 								UiPartIter back = list->end();
 								std::advance(back, -1);
-								std::swap(ours, back);
+								std::iter_swap(ours, back);
+								(*ours)->m_usUiIndex = part->m_usUiIndex; //NOTE this is no longer 'ours' it is now the original 'back'
 								list->pop_back();
 							}
 							//Invalidate the index
-							part->m_usTouchIndex = INVALID_TOUCH_INDEX;
+							part->m_usUiIndex = INVALID_UI_INDEX;
 						}
 					}
 				}
@@ -114,7 +115,7 @@ namespace engine
 
 			STATIC void CUiPart::OnMouseButtonDown(const input::mouse_events::ButtonAction& action)
 			{
-				CleanTouchParts();
+				CleanUiParts();
 
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
@@ -122,7 +123,7 @@ namespace engine
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
-						if ((*part_iter)->m_bTouchEnabled)
+						if ((*part_iter)->m_bUiEnabled)
 						{
 							if (!(*part_iter)->OnMouseButtonDownInternal(action, wpos))
 								return;
@@ -133,7 +134,7 @@ namespace engine
 			
 			STATIC void CUiPart::OnMouseButtonUp(const input::mouse_events::ButtonAction& action)
 			{
-				CleanTouchParts();
+				CleanUiParts();
 				
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
@@ -141,7 +142,7 @@ namespace engine
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
-						if ((*part_iter)->m_bTouchEnabled)
+						if ((*part_iter)->m_bUiEnabled)
 						{
 							if (!(*part_iter)->OnMouseButtonUpInternal(action, wpos))
 								return;
@@ -152,7 +153,7 @@ namespace engine
 
 			STATIC void CUiPart::OnMouseMotion(const input::mouse_events::MotionAction& action)
 			{
-				CleanTouchParts();
+				CleanUiParts();
 				
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
@@ -160,7 +161,7 @@ namespace engine
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
-						if ((*part_iter)->m_bTouchEnabled)
+						if ((*part_iter)->m_bUiEnabled)
 						{
 							if (!(*part_iter)->OnMouseMotionInternal(action, wpos))
 								return;
@@ -170,15 +171,15 @@ namespace engine
 			}
 
 			CUiPart::CUiPart()
-				: m_bTouchEnabled(false)
-				, m_bPendingTouch(false)
-				, m_usTouchIndex(INVALID_TOUCH_INDEX)
+				: m_bUiEnabled(false)
+				, m_bPendingUi(false)
+				, m_usUiIndex(INVALID_UI_INDEX)
 			{
 			}
 
 			CUiPart::~CUiPart()
 			{
-				DisableTouchImmediate();
+				DisableUiImmediate();
 			}
 
 			void CUiPart::CalculateIntersectionRect()
@@ -224,13 +225,13 @@ namespace engine
 
 			void CUiPart::Register()
 			{
-				if (m_bTouchEnabled)
+				if (m_bUiEnabled)
 					return;
-				m_bTouchEnabled = true;
+				m_bUiEnabled = true;
 
-				if (m_bPendingTouch)
+				if (m_bPendingUi)
 					return;
-				m_bPendingTouch = true;
+				m_bPendingUi = true;
 
 				s_pendingUiParts.push_back(this);
 
@@ -258,20 +259,20 @@ namespace engine
 
 			void CUiPart::Unregister()
 			{
-				if (!m_bTouchEnabled)
+				if (!m_bUiEnabled)
 					return;
-				m_bTouchEnabled = false;
+				m_bUiEnabled = false;
 
-				if (m_bPendingTouch)
+				if (m_bPendingUi)
 					return;
-				m_bPendingTouch = true;
+				m_bPendingUi = true;
 
 				s_pendingUiParts.push_back(this);
 			}
 
-			void CUiPart::DisableTouchImmediate(void)
+			void CUiPart::DisableUiImmediate(void)
 			{
-				if (this->m_usTouchIndex != INVALID_TOUCH_INDEX)
+				if (this->m_usUiIndex != INVALID_UI_INDEX)
 				{
 					UiPartList* list = null;
 					for (auto iter = s_uiLayers.begin(); iter != s_uiLayers.end(); ++iter)
@@ -288,14 +289,15 @@ namespace engine
 					if (!list->empty())
 					{
 						UiPartIter ours = list->begin();
-						std::advance(ours, this->m_usTouchIndex);
+						std::advance(ours, this->m_usUiIndex);
 						UiPartIter back = list->end();
 						std::advance(back, -1);
-						std::swap(ours, back);
+						std::iter_swap(ours, back);
+						(*ours)->m_usUiIndex = this->m_usUiIndex; //NOTE this is no longer 'ours' it is now the original 'back'
 						list->pop_back();
 					}
 					//Invalidate the index
-					this->m_usTouchIndex = INVALID_TOUCH_INDEX;
+					this->m_usUiIndex = INVALID_UI_INDEX;
 				}
 			}
 		}
