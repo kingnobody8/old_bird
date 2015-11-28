@@ -164,7 +164,7 @@
                         "x": 0,
                         "y": 0
                     },
-                    "angular_velocity": -0.25,
+                    "angular_velocity": -0.5,
                     "linear_damping": 0,
                     "angular_damping": 0,
                     "allow_sleep": true,
