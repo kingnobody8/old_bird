@@ -196,6 +196,8 @@ namespace engine
 
 		render::Destroy();
 
+		script::box::IBox2DPart::DestroyWorld();
+
 		//Engine::Box::CBox::DeleteInstance();
 
 		//Destroy Renderer
@@ -237,7 +239,7 @@ namespace engine
 		util::math::Matrix2D mat = obj->GetLocalMatrix();
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
 		//mat.SetScale(util::math::vec2(use, 1.0f));
-		mat.SetRotationZ(this->m_timer.Total().Milli() / -10.0f);
+		mat.SetRotationZ(this->m_timer.Total().Milli() / -70.0f);
 		obj->SetLocalMatrix(mat);
 
 		static int mode = 0;
