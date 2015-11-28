@@ -20,13 +20,13 @@
             "visible": true,
             "matrix": {
                 "position": {
-                    "x": -400,
+                    "x": -300,
                     "y": 300,
                     "z": 0
                 },
                 "scale": {
-                    "x": 64,
-                    "y": 64
+                    "x": 512,
+                    "y": 32
                 },
                 "rotation": 0
             },
@@ -50,7 +50,20 @@
                 },
                 {
                     "type": "CFixturePart",
-                    "body_type": 2
+                    "linear_velocity": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "angular_velocity": 0,
+                    "linear_damping": 0,
+                    "angular_damping": 0,
+                    "allow_sleep": true,
+                    "awake": true,
+                    "fixed_rotation": false,
+                    "bullet": false,
+                    "body_type": 2,
+                    "active": true,
+                    "gravity_scale": 1
                 }
             ],
             "children": [ ]
@@ -90,7 +103,20 @@
                 },
                 {
                     "type": "CFixturePart",
-                    "body_type": 0
+                   "linear_velocity": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "angular_velocity": 0,
+                    "linear_damping": 0,
+                    "angular_damping": 0,
+                    "allow_sleep": true,
+                    "awake": true,
+                    "fixed_rotation": false,
+                    "bullet": false,
+                    "body_type": 0,
+                    "active": true,
+                    "gravity_scale": 1
                 }
             ],
             "children": [ ]
@@ -101,7 +127,7 @@
             "matrix": {
                 "position": {
                     "x": -290,
-                    "y": 0,
+                    "y": -200,
                     "z": 1
                 },
                 "scale": {
@@ -134,14 +160,27 @@
                 },
                 {
                     "type": "CFixturePart",
-                    "body_type": 1
+                     "linear_velocity": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "angular_velocity": -0.25,
+                    "linear_damping": 0,
+                    "angular_damping": 0,
+                    "allow_sleep": true,
+                    "awake": true,
+                    "fixed_rotation": false,
+                    "bullet": false,
+                    "body_type": 1,
+                    "active": true,
+                    "gravity_scale": 1
                 }
             ],
             "children": [ ]
         },
         {
             "name": "points",
-            "visible": true,
+            "visible": false,
             "matrix": {
                 "position": {
                     "x": 0,

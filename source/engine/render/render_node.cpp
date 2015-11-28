@@ -193,11 +193,11 @@ namespace engine
 
 			SDL_RenderCopyEx(pRen, this->m_pTexture, &srcRect, &dstRect, rotation, &center, this->m_flip);
 
-			/*CRenderNodeRect rect;
+			CRenderNodeRect rect;
 			rect.SetAABB(this->CalcAABB());
 			rect.SetFill(false);
 			rect.SetScissorRect(m_scissor);
-			rect(pRen, inv_cam);*/
+			rect(pRen, inv_cam);
 
 			//TODO figure out how to make textures look brighter (whiten)
 			//if (realAlpha > 1.0f)

@@ -12,7 +12,6 @@ namespace engine
 
 			CFixturePart::CFixturePart()
 				: m_bSettingMatrix(false)
-				, m_bodyType(b2BodyType::b2_dynamicBody)
 			{
 				m_priority = script::FIXTURE_PART;
 			}
@@ -44,15 +43,12 @@ namespace engine
 				shape.Set(b2points, 4);
 				//shape.SetAsBox(float32(aabb.CalcExtends().x * PIX_TO_BOX), float32(aabb.CalcExtends().y * PIX_TO_BOX));
 
-				b2BodyDef bd;
-				bd.type = m_bodyType;
-				bd.fixedRotation;
-				bd.position = b2Vec2(pos.x * PIX_TO_BOX, pos.y * PIX_TO_BOX);
-				bd.angle = wmat.GetRotationZ() * DEG_TO_RAD;
-				m_pBody = s_pWorld->CreateBody(&bd);
+				m_bodyDef.position = b2Vec2(pos.x * PIX_TO_BOX, pos.y * PIX_TO_BOX);
+				m_bodyDef.angle = wmat.GetRotationZ() * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
+				m_pBody = s_pWorld->CreateBody(&m_bodyDef);
 				m_pFixture = m_pBody->CreateFixture(&shape, 1.0f);
 
-				if (m_bodyType == b2BodyType::b2_dynamicBody)
+				if (m_bodyDef.type != b2BodyType::b2_staticBody)
 					EnableUpdate();
 			}
 
@@ -67,7 +63,30 @@ namespace engine
 			{
 				IBox2DPart::LoadJson(json);
 
-				m_bodyType = (b2BodyType)(json["body_type"].GetInt());
+				assert(json.HasMember("linear_velocity"));
+				assert(json.HasMember("angular_velocity"));
+				assert(json.HasMember("linear_damping"));
+				assert(json.HasMember("angular_damping"));
+				assert(json.HasMember("allow_sleep"));
+				assert(json.HasMember("awake"));
+				assert(json.HasMember("fixed_rotation"));
+				assert(json.HasMember("bullet"));
+				assert(json.HasMember("body_type"));
+				assert(json.HasMember("active"));
+				assert(json.HasMember("gravity_scale"));
+
+				const vec2 linearVelocity = ((const util::JSON&)(json["linear_velocity"])).GetVec2();
+				m_bodyDef.linearVelocity = b2Vec2(linearVelocity.x, linearVelocity.y);
+				m_bodyDef.angularVelocity = json["angular_velocity"].GetDouble();
+				m_bodyDef.linearDamping = json["linear_damping"].GetDouble();
+				m_bodyDef.angularDamping = json["angular_damping"].GetDouble();
+				m_bodyDef.allowSleep = json["allow_sleep"].GetBool();
+				m_bodyDef.awake = json["awake"].GetBool();
+				m_bodyDef.fixedRotation = json["fixed_rotation"].GetBool();
+				m_bodyDef.bullet = json["bullet"].GetBool();
+				m_bodyDef.type = (b2BodyType)json["body_type"].GetInt();
+				m_bodyDef.active = json["active"].GetBool();
+				m_bodyDef.gravityScale = json["gravity_scale"].GetDouble();
 			}
 
 			VIRTUAL void CFixturePart::Update(const util::Time& dt)

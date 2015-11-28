@@ -15,12 +15,10 @@ namespace engine
 				/*Data*/
 			private:
 			protected:
+				b2BodyDef m_bodyDef;
 				bool m_bSettingMatrix;
-				b2BodyType m_bodyType;
 				b2Body* m_pBody;
 				b2Fixture* m_pFixture;
-				vec2 c1;
-				vec2 c2;
 
 				/*Func*/
 			public:

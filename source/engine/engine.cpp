@@ -240,7 +240,7 @@ namespace engine
 		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
 		//mat.SetScale(util::math::vec2(use, 1.0f));
 		mat.SetRotationZ(this->m_timer.Total().Milli() / -70.0f);
-		obj->SetLocalMatrix(mat);
+		//obj->SetLocalMatrix(mat);
 
 		static int mode = 0;
 		static util::Time timer;
