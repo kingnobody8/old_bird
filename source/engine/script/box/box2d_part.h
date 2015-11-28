@@ -20,7 +20,7 @@ namespace engine
 				static void UpdateWorld(const util::Time& dt);
 
 				__todo() //will this be screwed up when we scale???
-					static const float PIX_TO_BOX;
+				static const float PIX_TO_BOX;
 				static const float BOX_TO_PIX;
 
 

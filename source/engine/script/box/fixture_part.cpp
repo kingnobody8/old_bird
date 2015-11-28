@@ -43,10 +43,12 @@ namespace engine
 				shape.Set(b2points, 4);
 				//shape.SetAsBox(float32(aabb.CalcExtends().x * PIX_TO_BOX), float32(aabb.CalcExtends().y * PIX_TO_BOX));
 
+				m_bodyDef.userData = this;
 				m_bodyDef.position = b2Vec2(pos.x * PIX_TO_BOX, pos.y * PIX_TO_BOX);
 				m_bodyDef.angle = wmat.GetRotationZ() * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
 				m_pBody = s_pWorld->CreateBody(&m_bodyDef);
 
+				m_fixtureDef.userData = this;
 				m_fixtureDef.shape = &shape;
 				m_pFixture = m_pBody->CreateFixture(&m_fixtureDef);
 
