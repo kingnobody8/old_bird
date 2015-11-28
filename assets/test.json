@@ -50,20 +50,28 @@
                 },
                 {
                     "type": "CFixturePart",
-                    "linear_velocity": {
-                        "x": 0,
-                        "y": 0
+                    "body_def": {
+                        "linear_velocity": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "angular_velocity": 0,
+                        "linear_damping": 0,
+                        "angular_damping": 0,
+                        "allow_sleep": true,
+                        "awake": true,
+                        "fixed_rotation": false,
+                        "bullet": false,
+                        "body_type": 2,
+                        "active": true,
+                        "gravity_scale": 1
                     },
-                    "angular_velocity": 0,
-                    "linear_damping": 0,
-                    "angular_damping": 0,
-                    "allow_sleep": true,
-                    "awake": true,
-                    "fixed_rotation": false,
-                    "bullet": false,
-                    "body_type": 2,
-                    "active": true,
-                    "gravity_scale": 1
+                    "fixture_def": {
+                        "friction": 10,
+                        "restitution": 0,
+                        "density": 1,
+                        "is_sensor": false
+                    }
                 }
             ],
             "children": [ ]
@@ -103,20 +111,28 @@
                 },
                 {
                     "type": "CFixturePart",
-                   "linear_velocity": {
-                        "x": 0,
-                        "y": 0
+                    "body_def": {
+                        "linear_velocity": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "angular_velocity": 0,
+                        "linear_damping": 0,
+                        "angular_damping": 0,
+                        "allow_sleep": true,
+                        "awake": true,
+                        "fixed_rotation": false,
+                        "bullet": false,
+                        "body_type": 0,
+                        "active": true,
+                        "gravity_scale": 1
                     },
-                    "angular_velocity": 0,
-                    "linear_damping": 0,
-                    "angular_damping": 0,
-                    "allow_sleep": true,
-                    "awake": true,
-                    "fixed_rotation": false,
-                    "bullet": false,
-                    "body_type": 0,
-                    "active": true,
-                    "gravity_scale": 1
+                    "fixture_def": {
+                        "friction": 0.2,
+                        "restitution": 0,
+                        "density": 1,
+                        "is_sensor": false
+                    }
                 }
             ],
             "children": [ ]
@@ -160,20 +176,28 @@
                 },
                 {
                     "type": "CFixturePart",
-                     "linear_velocity": {
-                        "x": 0,
-                        "y": 0
+                    "body_def": {
+                        "linear_velocity": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "angular_velocity": -0.5,
+                        "linear_damping": 0,
+                        "angular_damping": 0,
+                        "allow_sleep": true,
+                        "awake": true,
+                        "fixed_rotation": false,
+                        "bullet": false,
+                        "body_type": 1,
+                        "active": true,
+                        "gravity_scale": 1
                     },
-                    "angular_velocity": -0.5,
-                    "linear_damping": 0,
-                    "angular_damping": 0,
-                    "allow_sleep": true,
-                    "awake": true,
-                    "fixed_rotation": false,
-                    "bullet": false,
-                    "body_type": 1,
-                    "active": true,
-                    "gravity_scale": 1
+                    "fixture_def": {
+                        "friction": 0.2,
+                        "restitution": 0,
+                        "density": 1,
+                        "is_sensor": false
+                    }
                 }
             ],
             "children": [ ]

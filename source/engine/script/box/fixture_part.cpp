@@ -46,7 +46,9 @@ namespace engine
 				m_bodyDef.position = b2Vec2(pos.x * PIX_TO_BOX, pos.y * PIX_TO_BOX);
 				m_bodyDef.angle = wmat.GetRotationZ() * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
 				m_pBody = s_pWorld->CreateBody(&m_bodyDef);
-				m_pFixture = m_pBody->CreateFixture(&shape, 1.0f);
+
+				m_fixtureDef.shape = &shape;
+				m_pFixture = m_pBody->CreateFixture(&m_fixtureDef);
 
 				if (m_bodyDef.type != b2BodyType::b2_staticBody)
 					EnableUpdate();
@@ -63,30 +65,46 @@ namespace engine
 			{
 				IBox2DPart::LoadJson(json);
 
-				assert(json.HasMember("linear_velocity"));
-				assert(json.HasMember("angular_velocity"));
-				assert(json.HasMember("linear_damping"));
-				assert(json.HasMember("angular_damping"));
-				assert(json.HasMember("allow_sleep"));
-				assert(json.HasMember("awake"));
-				assert(json.HasMember("fixed_rotation"));
-				assert(json.HasMember("bullet"));
-				assert(json.HasMember("body_type"));
-				assert(json.HasMember("active"));
-				assert(json.HasMember("gravity_scale"));
+				assert(json.HasMember("body_def"));
+				assert(json.HasMember("fixture_def"));
 
-				const vec2 linearVelocity = ((const util::JSON&)(json["linear_velocity"])).GetVec2();
+				const util::JSON body_def = json["body_def"];
+				const util::JSON fixture_def = json["fixture_def"];
+
+				assert(body_def.HasMember("linear_velocity"));
+				assert(body_def.HasMember("angular_velocity"));
+				assert(body_def.HasMember("linear_damping"));
+				assert(body_def.HasMember("angular_damping"));
+				assert(body_def.HasMember("allow_sleep"));
+				assert(body_def.HasMember("awake"));
+				assert(body_def.HasMember("fixed_rotation"));
+				assert(body_def.HasMember("bullet"));
+				assert(body_def.HasMember("body_type"));
+				assert(body_def.HasMember("active"));
+				assert(body_def.HasMember("gravity_scale"));
+
+				assert(fixture_def.HasMember("friction"));
+				assert(fixture_def.HasMember("restitution"));
+				assert(fixture_def.HasMember("density"));
+				assert(fixture_def.HasMember("is_sensor"));
+
+				const vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
 				m_bodyDef.linearVelocity = b2Vec2(linearVelocity.x, linearVelocity.y);
-				m_bodyDef.angularVelocity = json["angular_velocity"].GetDouble();
-				m_bodyDef.linearDamping = json["linear_damping"].GetDouble();
-				m_bodyDef.angularDamping = json["angular_damping"].GetDouble();
-				m_bodyDef.allowSleep = json["allow_sleep"].GetBool();
-				m_bodyDef.awake = json["awake"].GetBool();
-				m_bodyDef.fixedRotation = json["fixed_rotation"].GetBool();
-				m_bodyDef.bullet = json["bullet"].GetBool();
-				m_bodyDef.type = (b2BodyType)json["body_type"].GetInt();
-				m_bodyDef.active = json["active"].GetBool();
-				m_bodyDef.gravityScale = json["gravity_scale"].GetDouble();
+				m_bodyDef.angularVelocity = body_def["angular_velocity"].GetDouble();
+				m_bodyDef.linearDamping = body_def["linear_damping"].GetDouble();
+				m_bodyDef.angularDamping = body_def["angular_damping"].GetDouble();
+				m_bodyDef.allowSleep = body_def["allow_sleep"].GetBool();
+				m_bodyDef.awake = body_def["awake"].GetBool();
+				m_bodyDef.fixedRotation = body_def["fixed_rotation"].GetBool();
+				m_bodyDef.bullet = body_def["bullet"].GetBool();
+				m_bodyDef.type = (b2BodyType)body_def["body_type"].GetInt();
+				m_bodyDef.active = body_def["active"].GetBool();
+				m_bodyDef.gravityScale = body_def["gravity_scale"].GetDouble();
+
+				m_fixtureDef.friction = fixture_def["friction"].GetDouble();
+				m_fixtureDef.restitution = fixture_def["restitution"].GetDouble();
+				m_fixtureDef.density = fixture_def["density"].GetDouble();
+				m_fixtureDef.isSensor = fixture_def["is_sensor"].GetBool();
 			}
 
 			VIRTUAL void CFixturePart::Update(const util::Time& dt)

@@ -16,6 +16,7 @@ namespace engine
 			private:
 			protected:
 				b2BodyDef m_bodyDef;
+				b2FixtureDef m_fixtureDef;
 				bool m_bSettingMatrix;
 				b2Body* m_pBody;
 				b2Fixture* m_pFixture;
