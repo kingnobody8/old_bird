@@ -136,7 +136,7 @@ namespace engine
 			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			m_screen_point.x = m_screen_point.x - origin.x;
-			m_screen_point.y = origin.y - m_screen_point.y;
+			m_screen_point.y = m_screen_point.y - origin.y;
 
 			return util::math::Matrix2D::Vector_Matrix_Multiply(m_screen_point, m_pCamera->GetMatrix());
 		}
