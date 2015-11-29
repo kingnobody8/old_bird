@@ -451,10 +451,13 @@ namespace engine
 		}
 		VIRTUAL void CRenderNodeCircle::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
 		{
+			__todo()// find out if this is really slow
+				//it seems like it might be because i am creating a new render surface, but maybe not
+
 
 			SDL_Surface *surface;
 			Uint32 rmask, gmask, bmask, amask;
-			int width = m_radius * 2;
+			int width = m_radius * 2;  __todo()// why do i have to multiply by 2 twice?
 			int height = m_radius * 2;
 
 			/* SDL interprets each pixel as a 32-bit number, so our masks must depend

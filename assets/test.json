@@ -38,7 +38,42 @@
                         "r": 0.89,
                         "g": 0.69,
                         "b": 0.69,
-                        "a": 0.5
+                        "a": 0.75
+                    },
+                    "center": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "radius": 128,
+                    "fill": true
+                }
+            ],
+            "children": [ ]
+        },
+         {
+            "name": "woot",
+            "visible": true,
+            "matrix": {
+                "position": {
+                    "x": 96,
+                    "y": 0,
+                    "z": -1
+                },
+                "scale": {
+                    "x": 1,
+                    "y": 1
+                },
+                "rotation": 0
+            },
+            "parts": [
+                {
+                    "type": "CCirclePart",
+                    "layer": "world_layer",
+                    "color": {
+                        "r": 0.0,
+                        "g": 0.69,
+                        "b": 0.69,
+                        "a": 1.0
                     },
                     "center": {
                         "x": 0,
