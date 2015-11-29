@@ -1,6 +1,6 @@
 #include "aabb_part.h"
 #include "../script.h"
-#include "render/render_node.h"
+#include "render/node/render_node.h"
 #include "component/object.h"
 
 namespace engine
