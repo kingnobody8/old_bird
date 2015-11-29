@@ -16,10 +16,12 @@ namespace engine
 			SDL_BlendMode			m_blend_mode;
 			__todo() // add source rect
 
+		protected:
+			virtual const b2PolygonShape& CalcShape();
+
 		public:
 			CRenderNodeSprite();
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
-			virtual const b2PolygonShape& CalcShape();
 
 			inline void SetMatrix(const util::math::Matrix2D& mat) { m_matrix = mat; m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY; }
 			inline void SetAnchor(const util::math::vec2& anchor) { m_anchor = anchor; m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY; }
