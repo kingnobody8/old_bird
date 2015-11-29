@@ -123,7 +123,7 @@ namespace engine
 			inline const util::math::vec2& GetPoint() const { return m_point; }
 		};*/
 
-		class CRenderNodeLine : public IRenderNode
+		/*class CRenderNodeLine : public IRenderNode
 		{
 		private:
 			util::shape::Segment m_seg;
@@ -133,7 +133,7 @@ namespace engine
 			virtual const b2PolygonShape& CalcShape();
 			void SetLine(const util::shape::Segment& seg);
 			inline const util::shape::Segment& GetLine() const { return m_seg; }
-		};
+		};*/
 
 		class CRenderNodeCircle : public IRenderNode
 		{
