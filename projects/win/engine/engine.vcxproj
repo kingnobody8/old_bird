@@ -29,6 +29,7 @@
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_node.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\renderable\circle_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\img_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\aabb_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_node.h" />
+    <ClInclude Include="..\..\..\source\engine\script\renderable\circle_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\img_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\aabb_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h" />

@@ -7,9 +7,130 @@ namespace engine
 {
 	namespace render
 	{
-		__todo()// go through and make all the render funcs use the top left corner as origin, so that we don't do the extra calculations
-			//if we want something centered on screen then we should move the camera over it (-half_screen_width, -half_screen_height)
-			//but for now maybe just put the origin offsets in a #debug statement
+		/*
+		* This is a 32-bit pixel function created with help from this
+		* website: http://www.libsdl.org/intro.en/usingvideo.html
+		*
+		* You will need to make changes if you want it to work with
+		* 8-, 16- or 24-bit surfaces.  Consult the above website for
+		* more information.
+		*/
+		void set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+		{
+			Uint8 *target_pixel = (Uint8 *)surface->pixels + y * surface->pitch + x * 4;
+			*(Uint32 *)target_pixel = pixel;
+		}
+
+		/*
+		* This is an implementation of the Midpoint Circle Algorithm
+		* found on Wikipedia at the following link:
+		*
+		*   http://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+		*
+		* The algorithm elegantly draws a circle quickly, using a
+		* set_pixel function for clarity.
+		*/
+		void draw_circle(SDL_Surface *surface, int n_cx, int n_cy, int radius, Uint32 pixel)
+		{
+			// if the first pixel in the screen is represented by (0,0) (which is in sdl)
+			// remember that the beginning of the circle is not in the middle of the pixel
+			// but to the left-top from it:
+
+			double error = (double)-radius;
+			double x = (double)radius - 0.5;
+			double y = (double)0.5;
+			double cx = n_cx - 0.5;
+			double cy = n_cy - 0.5;
+
+			while (x >= y)
+			{
+				set_pixel(surface, (int)(cx + x), (int)(cy + y), pixel);
+				set_pixel(surface, (int)(cx + y), (int)(cy + x), pixel);
+
+				if (x != 0)
+				{
+					set_pixel(surface, (int)(cx - x), (int)(cy + y), pixel);
+					set_pixel(surface, (int)(cx + y), (int)(cy - x), pixel);
+				}
+
+				if (y != 0)
+				{
+					set_pixel(surface, (int)(cx + x), (int)(cy - y), pixel);
+					set_pixel(surface, (int)(cx - y), (int)(cy + x), pixel);
+				}
+
+				if (x != 0 && y != 0)
+				{
+					set_pixel(surface, (int)(cx - x), (int)(cy - y), pixel);
+					set_pixel(surface, (int)(cx - y), (int)(cy - x), pixel);
+				}
+
+				error += y;
+				++y;
+				error += y;
+
+				if (error >= 0)
+				{
+					--x;
+					error -= x;
+					error -= x;
+				}
+			}
+		}
+
+		/*
+		* SDL_Surface 32-bit circle-fill algorithm without using trig
+		*
+		* While I humbly call this "Celdecea's Method", odds are that the
+		* procedure has already been documented somewhere long ago.  All of
+		* the circle-fill examples I came across utilized trig functions or
+		* scanning neighbor pixels.  This algorithm identifies the width of
+		* a semi-circle at each pixel height and draws a scan-line covering
+		* that width.
+		*
+		* The code is not optimized but very fast, owing to the fact that it
+		* alters pixels in the provided surface directly rather than through
+		* function calls.
+		*
+		* WARNING:  This function does not lock surfaces before altering, so
+		* use SDL_LockSurface in any release situation.
+		*/
+		void fill_circle(SDL_Surface *surface, int cx, int cy, int radius, Uint32 pixel)
+		{
+			// Note that there is more to altering the bitrate of this 
+			// method than just changing this value.  See how pixels are
+			// altered at the following web page for tips:
+			//   http://www.libsdl.org/intro.en/usingvideo.html
+			static const int BPP = 4;
+
+			double r = (double)radius;
+
+			for (double dy = 1; dy <= r; dy += 1.0)
+			{
+				// This loop is unrolled a bit, only iterating through half of the
+				// height of the circle.  The result is used to draw a scan line and
+				// its mirror image below it.
+
+				// The following formula has been simplified from our original.  We
+				// are using half of the width of the circle because we are provided
+				// with a center and we need left/right coordinates.
+
+				double dx = floor(sqrt((2.0 * r * dy) - (dy * dy)));
+				int x = cx - dx;
+
+				// Grab a pointer to the left-most pixel for each half of the circle
+				Uint8 *target_pixel_a = (Uint8 *)surface->pixels + ((int)(cy + r - dy)) * surface->pitch + x * BPP;
+				Uint8 *target_pixel_b = (Uint8 *)surface->pixels + ((int)(cy - r + dy)) * surface->pitch + x * BPP;
+
+				for (; x <= cx + dx; x++)
+				{
+					*(Uint32 *)target_pixel_a = pixel;
+					*(Uint32 *)target_pixel_b = pixel;
+					target_pixel_a += BPP;
+					target_pixel_b += BPP;
+				}
+			}
+		}
 
 		void IRenderNode::Register(const std::string& layer)
 		{
@@ -126,7 +247,7 @@ namespace engine
 			}
 			return m_shape;
 		}
-		void CRenderNodeSprite::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
+		VIRTUAL void CRenderNodeSprite::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
 		{
 			__todo() //do real camera inversion to all properties, for now we just use the position (subtracting position is a hack, do real matrix math)
 				//Math::Type3<float>	temp_position = position;
@@ -193,11 +314,11 @@ namespace engine
 
 			SDL_RenderCopyEx(pRen, this->m_pTexture, &srcRect, &dstRect, rotation, &center, this->m_flip);
 
-			CRenderNodeRect rect;
+			/*CRenderNodeRect rect;
 			rect.SetAABB(this->CalcAABB());
 			rect.SetFill(false);
 			rect.SetScissorRect(m_scissor);
-			rect(pRen, inv_cam);
+			rect(pRen, inv_cam);*/
 
 			//TODO figure out how to make textures look brighter (whiten)
 			//if (realAlpha > 1.0f)
@@ -217,7 +338,7 @@ namespace engine
 			//	}
 			//}
 		}
-		
+
 		//POINT
 		void CRenderNodePoint::SetPoint(const util::math::vec2& point)
 		{
@@ -275,7 +396,7 @@ namespace engine
 			}
 			return m_shape;
 		}
-		void CRenderNodeLine::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
+		VIRTUAL void CRenderNodeLine::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
 		{
 			util::math::vec2 tmp1 = m_seg.start;
 			util::math::vec2 tmp2 = m_seg.end;
@@ -302,6 +423,80 @@ namespace engine
 			SDL_RenderDrawLine(pRen, p1.x, p1.y, p2.x, p2.y);
 		}
 
+		//CIRCLE
+		void CRenderNodeCircle::SetCenter(const util::math::vec2& center)
+		{
+			m_center = center;
+			m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY;
+		}
+		void CRenderNodeCircle::SetRadius(const float& radius)
+		{
+			m_radius = radius;
+			m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY;
+		}
+		VIRTUAL const b2PolygonShape& CRenderNodeCircle::CalcShape()
+		{
+			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
+			{
+				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
+
+				util::shape::AABB box;
+				box.m_min = m_center - util::math::vec2(m_radius, m_radius);
+				box.m_max = m_center + util::math::vec2(m_radius, m_radius);
+
+				m_shape.SetAsBox((float32)box.CalcExtends().x, (float32)box.CalcExtends().y,
+					b2Vec2((float32)box.CalcCenter().x, (float32)box.CalcCenter().y), 0);
+			}
+			return m_shape;
+		}
+		VIRTUAL void CRenderNodeCircle::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
+		{
+
+			SDL_Surface *surface;
+			Uint32 rmask, gmask, bmask, amask;
+			int width = m_radius * 2;
+			int height = m_radius * 2;
+
+			/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+			on the endianness (byte order) of the machine */
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+			rmask = 0xff000000;
+			gmask = 0x00ff0000;
+			bmask = 0x0000ff00;
+			amask = 0x000000ff;
+#else
+			rmask = 0x000000ff;
+			gmask = 0x0000ff00;
+			bmask = 0x00ff0000;
+			amask = 0xff000000;
+#endif
+			surface = SDL_CreateRGBSurface(0, width * 2, height * 2, 32, rmask, gmask, bmask, amask);
+
+			if (surface == null)
+				util::CheckSdlError();
+
+			Uint32 pixel;
+			memcpy(&pixel, &m_clr, sizeof(Uint32));
+
+			if (m_fill)
+				fill_circle(surface, width, height, m_radius, pixel);
+			else
+				draw_circle(surface, width, height, m_radius, pixel);
+
+			SDL_Texture* tex = SDL_CreateTextureFromSurface(pRen, surface);
+
+			util::math::Matrix2D mat;
+			mat.SetPosition(m_center);
+			CRenderNodeSprite sprite;
+			sprite.SetBlendMode(SDL_BlendMode::SDL_BLENDMODE_BLEND);
+			sprite.SetColor(m_clr);
+			sprite.SetFlip(SDL_RendererFlip::SDL_FLIP_NONE);
+			sprite.SetTexture(tex);
+			sprite.SetMatrix(mat);
+			sprite(pRen, inv_cam);
+			//SDL_RenderCopyEx(pRen, tex, null, null, 0, null, SDL_FLIP_NONE);
+		}
+
 		//RECT
 		void CRenderNodeRect::SetAABB(const util::shape::AABB& aabb)
 		{
@@ -316,39 +511,45 @@ namespace engine
 				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
 
 				m_shape.SetAsBox((float32)m_aabb.CalcExtends().x, (float32)m_aabb.CalcExtends().h,
-				b2Vec2((float32)m_aabb.CalcCenter().x, (float32)m_aabb.CalcCenter().y), 0);
+					b2Vec2((float32)m_aabb.CalcCenter().x, (float32)m_aabb.CalcCenter().y), 0);
 			}
 			return m_shape;
 		}
-		void CRenderNodeRect::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
+		VIRTUAL void CRenderNodeRect::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
 		{
-			//because sdl only renders rects as aabb, rotation cannot be applied, therefore we will only be using the position and scale part of the inv_cam
-			const util::math::Matrix2D test = util::math::Matrix2D(inv_cam.GetPosition(), inv_cam.GetScale(), 0.0f);
-			util::shape::AABB tmp = m_aabb;
+			////because sdl only renders rects as aabb, rotation cannot be applied, therefore we will only be using the position and scale part of the inv_cam
+			//const util::math::Matrix2D test = util::math::Matrix2D(inv_cam.GetPosition(), inv_cam.GetScale(), 0.0f);
+			//util::shape::AABB tmp = m_aabb;
 
-			//get screen space
-			tmp.m_min = util::math::Matrix2D::Vector_Matrix_Multiply(tmp.m_min, test);
-			tmp.m_max = util::math::Matrix2D::Vector_Matrix_Multiply(tmp.m_max, test);
+			////get screen space
+			//tmp.m_min = util::math::Matrix2D::Vector_Matrix_Multiply(tmp.m_min, test);
+			//tmp.m_max = util::math::Matrix2D::Vector_Matrix_Multiply(tmp.m_max, test);
 
-			//get screen info
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
-			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			////get screen info
+			//util::math::Type2<int> logical_size;
+			//SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
+			//util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
-			//set the sdl rect
-			SDL_Rect rect;
-			rect.x = (int)(origin.x + tmp.m_min.x);
-			rect.y = (int)(origin.y - tmp.m_max.y);
-			rect.w = (int)tmp.CalcSize().w;
-			rect.h = (int)tmp.CalcSize().h;
+			////set the sdl rect
+			//SDL_Rect rect;
+			//rect.x = (int)(origin.x + tmp.m_min.x);
+			//rect.y = (int)(origin.y - tmp.m_max.y);
+			//rect.w = (int)tmp.CalcSize().w;
+			//rect.h = (int)tmp.CalcSize().h;
 
-			ScissorOperation(pRen, origin);
+			//ScissorOperation(pRen, origin);
 
-			SDL_SetRenderDrawColor(pRen, this->m_clr.r, this->m_clr.g, this->m_clr.b, this->m_clr.a);
-			if (this->m_fill)
-				SDL_RenderFillRect(pRen, &rect);
-			else
-				SDL_RenderDrawRect(pRen, &rect);
+			//SDL_SetRenderDrawColor(pRen, this->m_clr.r, this->m_clr.g, this->m_clr.b, this->m_clr.a);
+			//if (this->m_fill)
+			//	SDL_RenderFillRect(pRen, &rect);
+			//else
+			//	SDL_RenderDrawRect(pRen, &rect);
+
+			CRenderNodeCircle circle;
+			circle.SetCenter(m_aabb.CalcCenter());
+			circle.SetRadius(m_aabb.CalcExtends().x);
+			circle.SetColor(m_clr);
+			circle(pRen, inv_cam);
 		}
 	}
 }

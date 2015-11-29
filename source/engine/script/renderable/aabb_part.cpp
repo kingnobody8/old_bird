@@ -36,7 +36,6 @@ namespace engine
 				m_force = false;
 			}
 
-
 			VIRTUAL void CAabbPart::LoadJson(const util::JSON& json)
 			{
 				IRenderPart::LoadJson(json);
