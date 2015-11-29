@@ -58,6 +58,7 @@ namespace engine
 			{
 				m_force = true;
 				SetCenter(m_center);
+				SetRadius(m_radius);
 				m_force = false;
 			}
 
@@ -85,6 +86,12 @@ namespace engine
 			{
 				if (!m_force && (m_radius != radius))
 					return;
+				__todo()//what i think we should do about scaling and rendering the circle surface is this:
+					/*
+						whenever we set the radius or center of the node the node recreates the surface, but then caches it for use over and over (it basically creates and stores a texture)
+						for scaling we give the circle node our matrix which it uses when rendering the texture of the circle, this way we can scale it
+						this means we should set the radius and center directly as is (without matrix adjustments)
+					*/
 
 				m_radius = radius;
 				render::CRenderNodeCircle* circle = static_cast<render::CRenderNodeCircle*>(m_pNode);

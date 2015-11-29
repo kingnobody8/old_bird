@@ -227,13 +227,13 @@ namespace engine
 		util::Time delta = this->m_timer.Delta();
 		
 		//__todo()//remove this, this was for testing only
-		//component::CObject* obj = m_pRoot->FindObject("door");
+		component::CObject* obj = m_pRoot->FindObject("woot");
 
-		//util::math::Matrix2D mat = obj->GetLocalMatrix();
-		//float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
-		////mat.SetScale(util::math::vec2(use, 1.0f));
+		util::math::Matrix2D mat = obj->GetLocalMatrix();
+		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
+		mat.SetScale(util::math::vec2(use, use));
 		//mat.SetRotationZ(this->m_timer.Total().Milli() / 50.0f);
-		//obj->SetLocalMatrix(mat);
+		obj->SetLocalMatrix(mat);
 
 		//static int mode = 0;
 		//static util::Time timer;
