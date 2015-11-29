@@ -85,6 +85,9 @@
     <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp">
       <Filter>render\node</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\point_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -146,6 +149,9 @@
       <Filter>render\node</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\point_node.h">
       <Filter>render\node</Filter>
     </ClInclude>
   </ItemGroup>

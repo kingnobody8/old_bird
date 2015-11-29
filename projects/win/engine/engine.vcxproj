@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
     <ClCompile Include="..\..\..\source\engine\input\input.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\node\point_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\sprite_node.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="..\..\..\source\engine\engine.h" />
     <ClInclude Include="..\..\..\source\engine\input\input.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />
+    <ClInclude Include="..\..\..\source\engine\render\node\point_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\sprite_node.h" />
