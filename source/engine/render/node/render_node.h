@@ -135,7 +135,7 @@ namespace engine
 			inline const util::shape::Segment& GetLine() const { return m_seg; }
 		};*/
 
-		class CRenderNodeCircle : public IRenderNode
+	/*	class CRenderNodeCircle : public IRenderNode
 		{
 		private:
 			util::math::vec2 m_center;
@@ -151,7 +151,7 @@ namespace engine
 			inline const util::math::vec2& GetCenter() const { return m_center; }
 			inline const float& GetRadius() const { return m_radius; }
 			inline const bool GetFill() const { return m_fill; }
-		};
+		};*/
 
 		/*class CRenderNodeRect : public IRenderNode
 		{
