@@ -153,7 +153,7 @@ namespace engine
 			inline const bool GetFill() const { return m_fill; }
 		};
 
-		class CRenderNodeRect : public IRenderNode
+		/*class CRenderNodeRect : public IRenderNode
 		{
 		private:
 			util::shape::AABB m_aabb;
@@ -166,6 +166,6 @@ namespace engine
 			inline const util::shape::AABB& GetAABB() const { return m_aabb; }
 			inline void SetFill(const bool fill) { m_fill = fill; }
 			inline const bool GetFill() const { return m_fill; }
-		};
+		};*/
 	}
 }
