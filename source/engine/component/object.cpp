@@ -157,22 +157,13 @@ namespace engine
 		//Calc
 		const util::math::Matrix2D CObject::CalcWorldMatrix(void) const
 		{
-			//TODO i don't think we need to run through this twice (up then down)
-			//we should be able to run it up and get the final matrix
-			std::vector<Matrix2D> vec;
-			vec.push_back(this->m_cMatLocal);
-			TraverseAncestors(this, [&vec](CObject* pObj)
+			Matrix2D ret = m_cMatLocal;
+			TraverseAncestors(this, [&ret](CObject* pObj)
 			{
-				vec.push_back(pObj->GetLocalMatrix());
+				ret = Matrix2D::Matrix_Matrix_Multiply(ret, pObj->GetLocalMatrix());
 			});
 
-			Matrix2D world;
-			for (int i = (int)vec.size() - 1; i >= 0; --i)
-			{
-				world *= vec[i];
-			}
-
-			return world;
+			return ret;
 		}
 		const float CObject::CalcWorldZed(void) const
 		{
@@ -515,7 +506,7 @@ namespace engine
 		CObject* CGroup::FindObject(const std::string& szName
 			, const int& depth) const
 		{
-			//TODO once we get a depth first traversal func we should use that hereC
+			__todo()// once we get a depth first traversal func we should use that here
 
 			const size_t size = this->m_vChildren.size();
 			for (size_t i = 0; i < size; ++i)
@@ -543,7 +534,7 @@ namespace engine
 		CGroup* CGroup::FindGroup(const std::string& szName
 			, const int& depth) const
 		{
-			//TODO once we get a depth first traversal func we should use that here
+			__todo()// once we get a depth first traversal func we should use that here
 
 			const size_t size = this->m_vChildren.size();
 			for (size_t i = 0; i < size; ++i)
@@ -762,8 +753,8 @@ namespace engine
 			, std::function<bool(CObject*const)> func
 			, const int& depth)
 		{
+			__not_implemented(TraverseChildrenBreak);
 			assert(false);
-			//TODO
 		}
 
 

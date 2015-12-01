@@ -104,7 +104,6 @@ namespace engine
 			inline void								SetWorldScale(const vec2& scale) { this->SetWorldScale(scale.x, scale.y); }
 			void									SetWorldRotationZ(const float& rot);
 
-			__todo() //we need to make a virtual function for this in object and part to notify them only when the zed changed, separate from matrix
 			inline void								SetLocalZed(const float& fZed) { this->m_fZed = fZed; }
 			virtual void							SetVisible(const bool bVis);
 
