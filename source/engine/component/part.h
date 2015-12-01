@@ -27,7 +27,7 @@ namespace engine
 			static PartList			s_vPendingPartList;
 			void DisableUpdateImmediate(void);
 
-		protected: //TODO see if this has to be protected, try to make it private
+		protected:
 			static int s_nextPartTypeId;
 
 			//External
@@ -75,7 +75,7 @@ namespace engine
 			void DisableUpdate(void);
 
 			virtual void LoadJson(const util::JSON& json){};
-			//virtual rapidjson::Document SaveJson(void) const; //TODO
+			virtual const util::JSON SaveJson() const { return util::JSON(); }
 
 			virtual void OnMatrixChanged(void){};
 			virtual void OnZedChanged(void){};

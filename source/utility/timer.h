@@ -11,7 +11,6 @@ namespace util
 		Time	m_total_time;
 		Time	m_delta_time;
 		bool	m_started;
-		__todo() //maybe put a clamp on this
 
 	public:
 		CTimer(void);

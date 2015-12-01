@@ -1,4 +1,6 @@
 #include "publisher.h"
+#include "subscriber.h"
+
 namespace util
 {
 	namespace event
@@ -112,6 +114,5 @@ namespace util
 				}
 			}
 		}
-
 	}
 }

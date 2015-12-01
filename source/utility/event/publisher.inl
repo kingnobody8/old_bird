@@ -1,5 +1,6 @@
 #pragma once
 #include "publisher.h"
+#include "subscriber.h"
 
 namespace util
 {
@@ -106,6 +107,5 @@ namespace util
 				}
 			}
 		}
-
 	}
 }
