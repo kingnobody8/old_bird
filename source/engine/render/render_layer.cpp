@@ -1,5 +1,5 @@
 #include "render_layer.h"
-#include "render_node.h"
+#include "node/render_node.h"
 #include "camera.h"
 #include "renderer.h"
 #include <algorithm>
@@ -88,11 +88,11 @@ namespace engine
 			
 			Cull(view);
 
-			__todo()//remove this when you don't want to see the camera box anymore
-			CRenderNodeRect cam_box;
-			cam_box.SetAABB(m_pCamera->CalcViewAabb(half_dims));
-			cam_box.SetFill(false);
-			cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
+			//__todo()//remove this when you don't want to see the camera box anymore
+			//CRenderNodeRect cam_box;
+			//cam_box.SetAABB(m_pCamera->CalcViewAabb(half_dims));
+			//cam_box.SetFill(false);
+			//cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
 
 
 			__todo() //replace this with the nodes found after the cull
@@ -136,7 +136,7 @@ namespace engine
 			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			m_screen_point.x = m_screen_point.x - origin.x;
-			m_screen_point.y = origin.y - m_screen_point.y;
+			m_screen_point.y = m_screen_point.y - origin.y;
 
 			return util::math::Matrix2D::Vector_Matrix_Multiply(m_screen_point, m_pCamera->GetMatrix());
 		}

@@ -1,6 +1,6 @@
 #include "aabb_part.h"
 #include "../script.h"
-#include "render/render_node.h"
+#include "render/node/rect_node.h"
 #include "component/object.h"
 
 namespace engine
@@ -35,7 +35,6 @@ namespace engine
 				SetExtends(m_extends);
 				m_force = false;
 			}
-
 
 			VIRTUAL void CAabbPart::LoadJson(const util::JSON& json)
 			{

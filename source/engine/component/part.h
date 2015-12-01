@@ -15,6 +15,7 @@ namespace engine
 		sometime later the part's Init func will be called, from here on you may create any new stuff and talk to other classes/instances
 		*/
 
+		__todo() //it might be useful to have an 'active' bool on parts and objects
 
 		class IPart : public util::event::Subscriber
 		{

@@ -31,7 +31,7 @@ namespace util
 			ary[0] = m_min;
 			ary[1] = m_min + math::vec2(0, m_max.y);
 			ary[2] = m_max;
-			ary[4] = m_min + math::vec2(m_max.x, 0);
+			ary[3] = m_min + math::vec2(m_max.x, 0);
 		}
 
 		void AABB::MakeLimits()

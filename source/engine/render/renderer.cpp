@@ -4,7 +4,7 @@
 #include <string>
 #include "func.h"
 #include "macro.h"
-#include "render_node.h"
+#include "node/rect_node.h"
 #include "util_time.h"
 #include "render_layer.h"
 #include "camera.h"
@@ -107,7 +107,9 @@ namespace engine
 		{
 			//Primer
 			SDL_RenderSetClipRect(s_sdlRen, null);//clear out any scissor rects
-			const SDL_Color background = util::Color::other::AUBURN.SDL();
+			SDL_Color background = util::Color::other::AUBURN.SDL();
+			background.r = background.g = background.b = 76;
+			background.a = 255;
 			SDL_SetRenderDrawColor(s_sdlRen, background.r, background.g, background.b, background.a);
 			SDL_SetRenderTarget(s_sdlRen, NULL);
 			SDL_RenderClear(s_sdlRen);

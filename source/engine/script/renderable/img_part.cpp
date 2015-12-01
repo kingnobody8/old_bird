@@ -1,6 +1,6 @@
 #include "img_part.h"
 #include "../script.h"
-#include "render/render_node.h"
+#include "render/node/sprite_node.h"
 #include "component/object.h"
 #include "asset/loader.h"
 #include "asset/resource_path.h"

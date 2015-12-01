@@ -22,6 +22,12 @@
     <Filter Include="script\ui">
       <UniqueIdentifier>{261b71f2-f34a-4806-9a56-2cafa638813a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="script\box">
+      <UniqueIdentifier>{0f2e197e-7a4a-491b-b9fd-4334a37db5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\node">
+      <UniqueIdentifier>{146a1116-6007-403c-8cd6-116ab8e792b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -72,6 +78,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp">
       <Filter>script\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\box\box2d_part.cpp">
+      <Filter>script\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\box\fixture_part.cpp">
+      <Filter>script\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\script\renderable\circle_part.cpp">
+      <Filter>script\renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\sprite_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\point_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\line_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\circle_node.cpp">
+      <Filter>render\node</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +159,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h">
       <Filter>script\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\box\box2d_part.h">
+      <Filter>script\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\box\fixture_part.h">
+      <Filter>script\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\script\renderable\circle_part.h">
+      <Filter>script\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\render_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\sprite_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\point_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\line_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\circle_node.h">
+      <Filter>render\node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
