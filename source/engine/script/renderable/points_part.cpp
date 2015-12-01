@@ -1,6 +1,7 @@
 #include "points_part.h"
 #include "../script.h"
-#include "render/render_node.h"
+#include "render/node/point_node.h"
+#include "render/node/line_node.h"
 #include "component/object.h"
 
 namespace engine
