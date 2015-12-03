@@ -9,15 +9,12 @@ namespace engine
 		class IPart;
 		class CGroup;
 
-		enum VisibilityFlag
-		{
-			SELF = 0x01,
-			PARENT = 0x02
-		};
-
 		class CObject
 		{
 			friend class CGroup;		//This is so that the CGroup class may access private and protected funcs and data for their children
+			static std::vector<CObject*> s_MarkedForDestruction;
+		public:
+			static void Clean();
 
 			/*Data*/
 		private:
@@ -27,12 +24,13 @@ namespace engine
 			std::vector<IPart*>			m_vParts;
 			util::math::Matrix2D		m_cMatLocal;
 			float						m_fZed;
-			util::Flag08				m_bVisible;
+			util::Flag08				m_eFlag;
 		public:
 
 			/*Func*/
 		private:
 		protected:
+			virtual void Nuke(void);								//Destroys all parts, before destroying itself
 		public:
 			CObject(void);											//Ctor
 			virtual ~CObject(void);									//Dtor
@@ -49,7 +47,7 @@ namespace engine
 			virtual CObject* Clone(void);							//Returns a new object that is an exact copy of 'this' object (except the clone's parent is null)
 
 			virtual void Drop(void);								//Tells 'this' object's parent to remove us from their children list (does not destroy the object)
-			virtual void Destroy(void);								//Destroys all parts, before destroying itself
+			void Destroy(void);										//Removes an object from the heiarchy and marks if for deletion
 
 			virtual void AttachPart(IPart* const pPart);			//Attaches a part script to the 'this' object, CALL INIT YOURSELF
 			virtual bool DetachPart(IPart* const pPart);			//Calls the destroy function for the script, then detaches it from the object, return true for success
@@ -63,8 +61,8 @@ namespace engine
 			inline const std::vector<IPart*>&		GetParts(void) const { return this->m_vParts; }
 			inline const util::math::Matrix2D&		GetLocalMatrix(void) const { return this->m_cMatLocal; }
 			inline const float&						GetLocalZed(void) const { return this->m_fZed; }
-			inline const bool						GetLocalVisible(void) const { return this->m_bVisible.Flag(VisibilityFlag::SELF); }
-			inline const bool						GetWorldVisible(void) const { return this->m_bVisible.Flag(VisibilityFlag::SELF | VisibilityFlag::PARENT); }
+			inline const bool						GetLocalVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE); }
+			inline const bool						GetWorldVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE | EFlag::PARENT_VISIBLE); }
 
 			inline const vec2						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
 			inline const vec2						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
@@ -132,6 +130,7 @@ namespace engine
 			/*Func*/
 		private:
 		protected:
+			virtual void Nuke(void);							//Destroys all parts, before destroying itself
 		public:
 			CGroup(void);										//Ctor
 			virtual ~CGroup(void);								//Dtor
@@ -145,8 +144,6 @@ namespace engine
 
 			virtual void AppendObject(CObject* const pObj);		//Appends the 'pObj' to the children list
 			virtual bool RemoveObject(CObject* const pObj);		//Removes an object from the children list, return true for success, CALL EXIT YOURSELF
-
-			virtual void Destroy(void);								//Destroys all parts, before destroying itself
 
 			virtual void LoadJson(const util::JSON& json);
 			virtual const util::JSON SaveJson(void) const;
