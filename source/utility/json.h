@@ -39,7 +39,7 @@ namespace util
 		const shape::AABB		GetAabb() const;
 		const math::Matrix2D	GetMatrix() const;
 		template<typename type>
-		const std::vector<type> GetArray(void) const; __todo() //add in the basic types (int, float, bool, ect)
+		const std::vector<type> GetArray(void) const;
 
 		void SetTime(const Time& val, rapidjson::Document::AllocatorType& allocator);
 		void SetColor(const Color& val, rapidjson::Document::AllocatorType& allocator);

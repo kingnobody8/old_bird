@@ -19,8 +19,6 @@ namespace engine
 			static std::list<CRenderLayer*> s_layers;
 
 		public:
-			__todo() // i don't think we will need/want this
-			//static const std::list<CRenderLayer*>& GetLayers() { return s_pLayers; }
 			static CRenderLayer* FindLayer(const std::string& szLayer);
 			static CRenderLayer* CreateLayer(const std::string& name, const int& sort_rank, CCamera* const pCam);
 			static void DestroyLayers();
