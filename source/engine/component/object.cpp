@@ -113,6 +113,8 @@ namespace engine
 		}
 		void CObject::Destroy(void)
 		{
+			assert(!m_eFlag.Flag(EFlag::NUKED));
+
 			if (this->m_pParent)
 				this->m_pParent->RemoveObject(this);
 

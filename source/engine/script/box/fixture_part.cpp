@@ -25,6 +25,8 @@ namespace engine
 
 			VIRTUAL void CFixturePart::Init()
 			{
+				IBox2DPart::Init();
+
 				util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
 
 				vec2 pos = wmat.GetPosition();
@@ -58,6 +60,8 @@ namespace engine
 
 			VIRTUAL void CFixturePart::Exit()
 			{
+				IBox2DPart::Exit();
+
 				s_pWorld->DestroyBody(m_pBody);
 				m_pBody = nullptr;
 				m_pFixture = nullptr;
