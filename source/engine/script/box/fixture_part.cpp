@@ -85,10 +85,16 @@ namespace engine
 				assert(body_def.HasMember("active"));
 				assert(body_def.HasMember("gravity_scale"));
 
+				assert(fixture_def.HasMember("filter"));
 				assert(fixture_def.HasMember("friction"));
 				assert(fixture_def.HasMember("restitution"));
 				assert(fixture_def.HasMember("density"));
 				assert(fixture_def.HasMember("is_sensor"));
+
+				const util::JSON filter = fixture_def["filter"];
+				assert(filter.HasMember("category_bits"));
+				assert(filter.HasMember("group_index"));
+				assert(filter.HasMember("mask_bits"));
 
 				const vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
 				m_bodyDef.linearVelocity = b2Vec2(linearVelocity.x, linearVelocity.y);
@@ -107,6 +113,9 @@ namespace engine
 				m_fixtureDef.restitution = fixture_def["restitution"].GetDouble();
 				m_fixtureDef.density = fixture_def["density"].GetDouble();
 				m_fixtureDef.isSensor = fixture_def["is_sensor"].GetBool();
+				m_fixtureDef.filter.categoryBits = filter["category_bits"].GetInt();
+				m_fixtureDef.filter.groupIndex = filter["group_index"].GetInt();
+				m_fixtureDef.filter.maskBits = filter["mask_bits"].GetInt();
 			}
 
 			VIRTUAL void CFixturePart::Update(const util::Time& dt)
