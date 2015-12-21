@@ -70,7 +70,12 @@
                         "friction": 10,
                         "restitution": 0,
                         "density": 1,
-                        "is_sensor": false
+                        "is_sensor": false,
+                        "filter": {
+                            "category_bits": 1,
+                            "group_index": 0,
+                            "mask_bits": 65535
+                        }
                     }
                 }
             ],
@@ -131,7 +136,12 @@
                         "friction": 0.2,
                         "restitution": 0,
                         "density": 1,
-                        "is_sensor": false
+                        "is_sensor": false,
+                        "filter": {
+                            "category_bits": 1,
+                            "group_index": 0,
+                            "mask_bits": 65535
+                        }
                     }
                 }
             ],
@@ -196,7 +206,12 @@
                         "friction": 0.2,
                         "restitution": 0,
                         "density": 1,
-                        "is_sensor": false
+                        "is_sensor": false,
+                        "filter": {
+                            "category_bits": 1,
+                            "group_index": 0,
+                            "mask_bits": 65535
+                        }
                     }
                 }
             ],

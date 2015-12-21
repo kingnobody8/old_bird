@@ -7,13 +7,29 @@ namespace engine
 {
 	namespace component
 	{
+		STATIC std::vector<CObject*> CObject::s_MarkedForDestruction;
+
+		static void Nuke(CObject* pObj);
+
+
+		STATIC void CObject::Clean()
+		{
+			for (int i = 0; i < s_MarkedForDestruction.size(); ++i)
+			{
+				s_MarkedForDestruction[i]->Nuke();
+			}
+			s_MarkedForDestruction.clear();
+		}
+
+
+
 		/*------------------------------------------------------------------*/
 		/*								COBJECT								*/
 		/*------------------------------------------------------------------*/
 		CObject::CObject(void)
 			: m_pParent(null)
 			, m_fZed(0.0f)
-			, m_bVisible(VisibilityFlag::SELF | VisibilityFlag::PARENT)
+			, m_eFlag(EFlag::ACTIVE | EFlag::SELF_VISIBLE | EFlag::PARENT_VISIBLE)
 		{
 		}
 		VIRTUAL CObject::~CObject(void)
@@ -39,7 +55,7 @@ namespace engine
 			this->m_pParent = null;
 			this->m_cMatLocal = that.m_cMatLocal;
 			this->m_fZed = that.m_fZed;
-			this->m_bVisible = that.m_bVisible;
+			this->m_eFlag = that.m_eFlag;
 
 			const size_t size = that.m_vParts.size();
 			this->m_vParts.reserve(size);
@@ -58,6 +74,7 @@ namespace engine
 			{
 				(*iter)->Init();
 			}
+			m_eFlag.FlagOn(STARTED);
 		}
 		VIRTUAL void CObject::Exit(void)
 		{
@@ -66,6 +83,7 @@ namespace engine
 			{
 				(*iter)->Exit();
 			}
+			m_eFlag.FlagOn(STOPPED);
 		}
 		VIRTUAL void CObject::Reset(void)
 		{
@@ -93,10 +111,19 @@ namespace engine
 			assert(m_pParent);
 			this->m_pParent->RemoveObject(this);
 		}
-		VIRTUAL void CObject::Destroy(void)
+		void CObject::Destroy(void)
 		{
+			assert(!m_eFlag.Flag(EFlag::NUKED));
+
 			if (this->m_pParent)
 				this->m_pParent->RemoveObject(this);
+
+			m_eFlag.FlagOn(EFlag::NUKED);
+			s_MarkedForDestruction.push_back(this);
+		}
+		VIRTUAL void CObject::Nuke(void)
+		{
+			assert(m_eFlag.Flag(EFlag::NUKED));
 
 			std::list<IPart*> list = GetPartList(this, true);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
@@ -106,6 +133,7 @@ namespace engine
 
 			delete this;
 		}
+
 
 		VIRTUAL void CObject::AttachPart(IPart* const pPart)
 		{
@@ -293,7 +321,7 @@ namespace engine
 
 		VIRTUAL void CObject::SetVisible(const bool bVis)
 		{
-			m_bVisible.FlagBool(VisibilityFlag::SELF, bVis);
+			m_eFlag.FlagBool(EFlag::SELF_VISIBLE, bVis);
 			OnVisibilityChanged(bVis);
 		}
 
@@ -368,7 +396,7 @@ namespace engine
 		}
 		void CObject::OnParentVisibilityChanged(const bool bVisible)
 		{
-			this->m_bVisible.FlagBool(VisibilityFlag::PARENT, bVisible);
+			this->m_eFlag.FlagBool(EFlag::PARENT_VISIBLE, bVisible);
 			std::list<IPart*> list = GetPartList(this);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
@@ -452,8 +480,10 @@ namespace engine
 			return false;
 		}
 
-		VIRTUAL void CGroup::Destroy(void)
+		VIRTUAL void CGroup::Nuke(void)
 		{
+			assert(m_eFlag.Flag(EFlag::NUKED));
+
 			std::list<IPart*> list = GetPartList(this, true);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
@@ -494,7 +524,7 @@ namespace engine
 		//Sets
 		VIRTUAL void CGroup::SetVisible(const bool bVis)
 		{
-			m_bVisible.FlagBool(VisibilityFlag::SELF, bVis);
+			m_eFlag.FlagBool(EFlag::SELF_VISIBLE, bVis);
 			TraverseChildren(this, [&bVis](CObject* pChild)
 			{
 				pChild->OnParentVisibilityChanged(bVis);

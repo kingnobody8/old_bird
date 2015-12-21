@@ -15,12 +15,16 @@ namespace engine
 			STATIC const float IBox2DPart::BOX_TO_PIX = 64.0f;
 
 			STATIC b2World* IBox2DPart::s_pWorld = null;
+			STATIC bool		IBox2DPart::s_bUpdating = false;
+			//STATIC ContactListener IBox2DPart::s_contactListener;
+
 
 			STATIC void IBox2DPart::SetupWorld()
 			{
 				b2Vec2 gravity;
 				gravity.Set(0.0f, -10.0f);
 				s_pWorld = new b2World(gravity);
+				//s_pWorld->SetContactListener(&s_contactListener);
 			}
 
 			STATIC void IBox2DPart::DestroyWorld()
@@ -31,6 +35,7 @@ namespace engine
 
 			STATIC void IBox2DPart::UpdateWorld(const util::Time& dt)
 			{
+				s_bUpdating = true;
 				s_pWorld->SetAllowSleeping(true);
 				s_pWorld->SetWarmStarting(true);
 				s_pWorld->SetContinuousPhysics(true);
@@ -38,6 +43,7 @@ namespace engine
 
 				double delta = dt.ToDouble() / 1000;
 				s_pWorld->Step(delta, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+				s_bUpdating = false;
 			}
 
 			IBox2DPart::IBox2DPart()
@@ -54,6 +60,11 @@ namespace engine
 
 			VIRTUAL void IBox2DPart::Init()
 			{
+			}
+
+			VIRTUAL void IBox2DPart::Exit()
+			{
+				assert(!s_bUpdating && "You shouldn't destroy a box part while the box2d world is being updated");
 			}
 
 			VIRTUAL void IBox2DPart::LoadJson(const util::JSON& json)

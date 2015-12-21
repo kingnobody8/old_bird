@@ -27,5 +27,15 @@ namespace engine
 		class CGroup;
 		typedef std::vector<CObject*> ObjectList;
 		typedef std::vector<CObject*>::iterator ObjectIter;
+
+		enum EFlag
+		{
+			ACTIVE = 0x01,
+			SELF_VISIBLE = 0x02,	//part doesn't use this
+			PARENT_VISIBLE = 0x04,	//part doesn't use this
+			STARTED = 0x08,
+			STOPPED = 0x10,
+			NUKED = 0x20
+		};
 	}
 }

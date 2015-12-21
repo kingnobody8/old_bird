@@ -185,6 +185,7 @@ namespace engine
 		if (this->m_pRoot)
 			this->m_pRoot->Destroy();
 		this->m_pRoot = null;
+		component::CObject::Clean();
 
 		////Destroy State
 		//if (this->m_pCurrState)
@@ -232,6 +233,8 @@ namespace engine
 		util::Time delta = this->m_timer.Delta();
 
 		script::box::IBox2DPart::UpdateWorld(delta);
+
+		component::CObject::Clean(); //clean object graph
 		
 		//__todo()//remove this, this was for testing only
 		component::CObject* obj = m_pRoot->FindObject("woot");
@@ -270,6 +273,8 @@ namespace engine
 		{
 			component::IPart::UpdateParts(delta);
 		}
+
+		component::CObject::Clean(); //clean object graph
 
 
 		////If input did not kill the app, then update the current state and the scene

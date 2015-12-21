@@ -105,6 +105,7 @@ namespace engine
 			, m_bUpdateEnabled(false)
 			, m_bPendingUpdate(false)
 			, m_usPartIndex(INVALID_PART_INDEX)
+			, m_eFlag(EFlag::ACTIVE)
 		{
 		}
 		VIRTUAL IPart::~IPart(void)

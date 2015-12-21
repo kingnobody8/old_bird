@@ -52,6 +52,7 @@ namespace engine
 		protected:
 			CObject*			m_pOwner;
 			ulong				m_priority;
+			util::Flag08		m_eFlag;
 
 		public:
 			IPart();
@@ -59,8 +60,8 @@ namespace engine
 			IPart(const IPart& that);						//Copy Ctor
 			IPart& operator= (const IPart& that);			//Assignment Operator
 
-			virtual void Init(void){};
-			virtual void Exit(void){};
+			virtual void Init(void){ m_eFlag.FlagOn(EFlag::STARTED); }
+			virtual void Exit(void){ m_eFlag.FlagOn(EFlag::STOPPED); }
 			virtual void Reset(void);
 
 			virtual void Copy(IPart* const that);

@@ -8,10 +8,23 @@ namespace engine
 	{
 		namespace box
 		{
+			/*class ContactListener : public b2ContactListener
+			{
+				virtual void BeginContact(b2Contact* contact);
+
+				virtual void EndContact(b2Contact* contact);
+
+				virtual void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
+
+				virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
+			};*/
+
 			class IBox2DPart : public component::IPart//script::renderable::IRenderPart
 			{
 			protected:
 				static b2World* s_pWorld;
+				static bool		s_bUpdating;
+				//static ContactListener s_contactListener;
 
 			public:
 				static b2World* GetWorld() { return s_pWorld; }
@@ -36,6 +49,7 @@ namespace engine
 				IBox2DPart& operator= (const IBox2DPart& that);
 
 				virtual void Init();
+				virtual void Exit();
 				virtual void LoadJson(const util::JSON& json);
 
 				virtual void OnMatrixChanged(void);
