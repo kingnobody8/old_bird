@@ -16,12 +16,15 @@ namespace engine
 
 			STATIC b2World* IBox2DPart::s_pWorld = null;
 			STATIC bool		IBox2DPart::s_bUpdating = false;
+			//STATIC ContactListener IBox2DPart::s_contactListener;
+
 
 			STATIC void IBox2DPart::SetupWorld()
 			{
 				b2Vec2 gravity;
 				gravity.Set(0.0f, -10.0f);
 				s_pWorld = new b2World(gravity);
+				//s_pWorld->SetContactListener(&s_contactListener);
 			}
 
 			STATIC void IBox2DPart::DestroyWorld()

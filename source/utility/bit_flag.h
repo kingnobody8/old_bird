@@ -19,13 +19,8 @@ namespace util
 		{
 		}
 		BitFlag(const type& v)
+			:val(v)
 		{
-			val = v;
-		}
-		BitFlag & operator= (const type& v)
-		{
-			val = v;
-			return *this;
 		}
 
 		/*BIT FUNCS USE 0, 1, 2, 3, ect*/
@@ -62,7 +57,7 @@ namespace util
 			}
 		}
 		//Returns the result of a bit
-		bool Bit(const uchar bit) const
+		bool Bit(const uchar& bit) const
 		{
 			assert(bit < this->GetMaxBit());
 			return (val & (1 << bit)) != 0;
