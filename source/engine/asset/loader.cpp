@@ -1,6 +1,5 @@
 #include "loader.h"
 #include "../render/renderer.h"
-#include "sdl_image/SDL_image.h"
 #include <fstream>
 
 namespace engine
@@ -52,13 +51,14 @@ namespace engine
 
 		SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath)
 		{
-			SDL_Texture* ret = IMG_LoadTexture(render::GetSdlRenderer(), szFilePath.c_str());
+			return null;
+			/*SDL_Texture* ret = IMG_LoadTexture(render::GetSdlRenderer(), szFilePath.c_str());
 			if (ret == NULL)
 			{
 				SDL_Log("Error - IMG_LoadTexture - %s.\n", SDL_GetError());
 				assert(false);
 			}
-			return ret;
+			return ret;*/
 		}
 		SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data)
 		{

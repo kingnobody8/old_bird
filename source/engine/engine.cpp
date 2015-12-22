@@ -82,18 +82,18 @@ namespace engine
 		input::key_events::s_InputKeyUp.Subscribe(&sub, BIND1(this, &Engine::OnAKey));
 		input::mouse_events::s_InputMouseMotion.Subscribe(&sub, BIND1(this, &Engine::OnMouseBtn));
 
-		__todo() //refactor this into the initialization of the app class when it is
-		util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
-		for (int i = 0; i < (int)rconfig["camera_list"].Size(); ++i)
-		{
-			render::CCamera::CreateCamera(rconfig["camera_list"][i].GetString());
-		}
-		for (int i = 0; i < (int)rconfig["render_layer_list"].Size(); ++i)
-		{
-			std::string name = rconfig["render_layer_list"][i]["name"].GetString();
-			std::string camera = rconfig["render_layer_list"][i]["camera"].GetString();
-			render::CRenderLayer::CreateLayer(name, i, render::CCamera::FindCamera(camera));
-		}
+		//__todo() //refactor this into the initialization of the app class when it is
+		//util::JSON rconfig = asset::FileLoaderJson(getResourcePath() + "assets/config/render_config.json");
+		//for (int i = 0; i < (int)rconfig["camera_list"].Size(); ++i)
+		//{
+		//	render::CCamera::CreateCamera(rconfig["camera_list"][i].GetString());
+		//}
+		//for (int i = 0; i < (int)rconfig["render_layer_list"].Size(); ++i)
+		//{
+		//	std::string name = rconfig["render_layer_list"][i]["name"].GetString();
+		//	std::string camera = rconfig["render_layer_list"][i]["camera"].GetString();
+		//	render::CRenderLayer::CreateLayer(name, i, render::CCamera::FindCamera(camera));
+		//}
 
 		//auto mat = cam->GetMatrix();
 		//mat.SetScale(vec2(2.0f,1.0f));
@@ -125,7 +125,7 @@ namespace engine
 		//Start timer
 		this->m_timer.Restart();
 
-		util::JSON doc = asset::FileLoaderJson(getResourcePath() + "assets/test.json");
+		/*util::JSON doc = asset::FileLoaderJson(getResourcePath() + "assets/test.json");
 		m_pRoot = static_cast<component::CGroup*>(component::LoadObjectFromJson(doc));
 		component::PartList parts = component::GetPartList(m_pRoot);
 		for (component::PartIter iter = parts.begin(); iter != parts.end(); ++iter)
@@ -137,7 +137,7 @@ namespace engine
 				script::ui::CButtonPart* btn = (script::ui::CButtonPart*)(*iter);
 				btn->Subscribe(&sub, BIND1(this, &Engine::OnBtn));
 			}
-		}
+		}*/
 
 		//Don't quit
 		m_quit = false;
@@ -237,10 +237,10 @@ namespace engine
 		component::CObject::Clean(); //clean object graph
 		
 		//__todo()//remove this, this was for testing only
-		component::CObject* obj = m_pRoot->FindObject("woot");
+		/*component::CObject* obj = m_pRoot->FindObject("woot");
 
 		util::math::Matrix2D mat = obj->GetLocalMatrix();
-		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;
+		float use = (this->m_timer.Total().Milli() % 1000) / 1000.0f;*/
 		//mat.SetScale(util::math::vec2(use, use));
 		//mat.SetRotationZ(this->m_timer.Total().Milli() / 50.0f);
 		//obj->SetLocalMatrix(mat);

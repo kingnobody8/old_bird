@@ -40,9 +40,6 @@
     <ClCompile Include="..\..\..\source\engine\component\component.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\render_node.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp">
       <Filter>render</Filter>
     </ClCompile>
@@ -117,9 +114,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\component\part.h">
       <Filter>component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\render_node.h">
-      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\renderer.h">
       <Filter>render</Filter>
