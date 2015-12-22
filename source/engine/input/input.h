@@ -9,7 +9,7 @@ namespace engine
 {
 	namespace input
 	{
-		void Setup(SDL_Renderer* pRen);
+		void Setup(SDL_Window* pWin);
 		bool PollSdl(const util::Time& dt);
 
 		struct IEvent

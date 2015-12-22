@@ -74,7 +74,7 @@ namespace engine
 		render::SetupSdl();
 
 		//Initialize the input system
-		input::Setup(render::GetSdlRenderer());
+		input::Setup(render::GetSdlWindow());
 
 		script::box::IBox2DPart::SetupWorld();
 

@@ -6,7 +6,7 @@ namespace engine
 {
 	namespace input
 	{
-		static SDL_Renderer* s_sdlRen = null;
+		static SDL_Window* s_sdlWin = null;
 
 		//key
 		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyDown;
@@ -22,7 +22,7 @@ namespace engine
 		const util::math::Type2<slong> ConvertPixelToCartesian(int x, int y)
 		{
 			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.w, &logical_size.h);
+			SDL_GetWindowSize(s_sdlWin, &logical_size.w, &logical_size.h);
 
 			util::math::Type2<slong> ret;
 			ret.x = (slong)x;
@@ -31,10 +31,10 @@ namespace engine
 		}
 
 
-		void Setup(SDL_Renderer* pRen)
+		void Setup(SDL_Window* pWin)
 		{
-			assert(pRen);
-			s_sdlRen = pRen;
+			assert(pWin);
+			s_sdlWin = pWin;
 		}
 
 		bool PollSdl(const util::Time& dt)
