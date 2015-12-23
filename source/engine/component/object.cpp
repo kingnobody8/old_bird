@@ -202,13 +202,19 @@ namespace engine
 			});
 			return ret;
 		}
-		const util::shape::AABB CObject::CalcAabb(void) const
+		const b2AABB CObject::CalcAabb(void) const
 		{
-			util::shape::AABB aabb =  util::shape::AABB::INVALID_AABB;
+			b2AABB aabb;
+			aabb.lowerBound = b2Vec2(1.0f, 1.0f);
+			aabb.upperBound = b2Vec2(-1.0f, -1.0f);
 			std::list<IPart*> list = GetPartList(this);
 			for (auto iter = list.begin(); iter != list.end(); ++iter)
 			{
-				aabb.Stretch((*iter)->CalcAABB());
+				const b2AABB tmp = (*iter)->CalcAABB();
+				if (!aabb.IsValid() && tmp.IsValid())
+					aabb = tmp;
+				else if (tmp.IsValid())
+					aabb.Combine(tmp);
 			}
 			return aabb;
 		}

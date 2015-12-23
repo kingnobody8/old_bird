@@ -71,11 +71,13 @@ namespace util
 	{
 		return math::vec4((*this)["x"].GetDouble(), (*this)["y"].GetDouble(), (*this)["z"].GetDouble(), (*this)["w"].GetDouble());
 	}
-	const shape::AABB JSON::GetAabb() const
+	const b2AABB JSON::GetAabb() const
 	{
 		const math::vec2 min = static_cast<const JSON>((*this)["min"]).GetVec2();
 		const math::vec2 max = static_cast<const JSON>((*this)["max"]).GetVec2();
-		const shape::AABB ret(min, max);
+		b2AABB ret;
+		ret.lowerBound = b2Vec2(min.x, min.y);
+		ret.upperBound = b2Vec2(max.x, max.y);
 		return ret;
 	}
 	const math::Matrix2D JSON::GetMatrix() const
@@ -245,11 +247,15 @@ namespace util
 		AddMember("z", val.y, allocator);
 		AddMember("w", val.y, allocator);
 	}
-	void JSON::SetAabb(const shape::AABB& val, rapidjson::Document::AllocatorType& allocator)
+	void JSON::SetAabb(const b2AABB& val, rapidjson::Document::AllocatorType& allocator)
 	{
+		vec2 vmin, vmax;
+		vmin = vec2(val.lowerBound.x, val.lowerBound.y);
+		vmax = vec2(val.upperBound.x, val.upperBound.y);
+		
 		JSON min, max;
-		min.SetVec2(val.m_min, allocator);
-		max.SetVec2(val.m_max, allocator);
+		min.SetVec2(vmin, allocator);
+		max.SetVec2(vmax, allocator);
 
 		SetObject();
 		AddMember("min", min, allocator);

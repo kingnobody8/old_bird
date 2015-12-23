@@ -76,7 +76,7 @@ namespace engine
 			inline const util::math::vec2			CalcWorldScale(void) const { return this->CalcWorldMatrix().GetScale(); }
 			inline const float						CalcWorldRotationZ(void) const { return this->CalcWorldMatrix().GetRotationZ(); }
 
-			const util::shape::AABB					CalcAabb(void) const;
+			const b2AABB							CalcAabb(void) const;
 
 			virtual inline bool						IsGroup(void) const { return false; }
 

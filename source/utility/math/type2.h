@@ -3,6 +3,8 @@
 #include "math/consts.h"
 #include <cmath>
 
+#include "glm/glm.hpp"
+
 namespace util
 {
 	namespace math

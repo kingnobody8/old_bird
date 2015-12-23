@@ -8,22 +8,19 @@ namespace engine
 		class CRenderNodeCircle : public IRenderNode
 		{
 		private:
-			util::math::vec2 m_center;
-			float m_radius = 0.0f;
+			b2CircleShape m_circle;
 			bool m_fill = true;
 
 		protected:
-			virtual const b2PolygonShape& CalcShape();
+			virtual void CalcAabbInternal();
 
 		public:
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
 
-			void SetCenter(const util::math::vec2& center);
-			void SetRadius(const float& radius);
+			void SetCircle(const b2CircleShape& circle);
 			inline void SetFill(const bool fill) { m_fill = fill; }
 
-			inline const util::math::vec2& GetCenter() const { return m_center; }
-			inline const float& GetRadius() const { return m_radius; }
+			inline const b2CircleShape& GetCircle() const { return m_circle; }
 			inline const bool GetFill() const { return m_fill; }
 		};
 	}

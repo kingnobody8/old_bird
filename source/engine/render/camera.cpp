@@ -43,16 +43,21 @@ namespace engine
 		{
 		}
 
-		const util::shape::AABB CCamera::CalcViewAabb(const util::math::vec2& half_screen_dims) const
+		const b2AABB CCamera::CalcViewAabb(const util::math::vec2& half_screen_dims) const
 		{
 			//create an aabb with the screen dims
-			util::shape::AABB ret(half_screen_dims * -1, half_screen_dims);
+			b2AABB ret;
+			ret.lowerBound = b2Vec2(-half_screen_dims.x, -half_screen_dims.y);
+			ret.upperBound = b2Vec2(half_screen_dims.y, half_screen_dims.y);
 		
 			//modify the aabb by our inverse matrix
 			util::math::Matrix2D inverse = util::math::Matrix2D::Matrix_Inverse(m_matrix);
-			ret.m_min = util::math::Matrix2D::Vector_Matrix_Multiply(ret.m_min, inverse);
-			ret.m_max = util::math::Matrix2D::Vector_Matrix_Multiply(ret.m_max, inverse);
+			util::math::vec2 min = util::math::Matrix2D::Vector_Matrix_Multiply(util::math::vec2(ret.lowerBound.x, ret.lowerBound.y), inverse);
+			util::math::vec2 max = util::math::Matrix2D::Vector_Matrix_Multiply(util::math::vec2(ret.upperBound.x, ret.upperBound.y), inverse);
 			
+			ret.lowerBound = b2Vec2(Min(min.x, max.x), Min(min.y, max.y));
+			ret.upperBound = b2Vec2(Max(min.x, max.x), Max(min.y, max.y));
+
 			return ret;
 		}
 	}

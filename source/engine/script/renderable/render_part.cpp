@@ -62,7 +62,7 @@ namespace engine
 					m_pNode->Unregister();
 			}
 
-			VIRTUAL const util::shape::AABB IRenderPart::CalcAABB(void)
+			VIRTUAL const b2AABB IRenderPart::CalcAABB(void)
 			{
 				return m_pNode->CalcAABB();
 			}

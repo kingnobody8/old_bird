@@ -89,7 +89,7 @@ namespace engine
 			virtual void OnChildAppended(CObject* child){};
 			virtual void OnChildRemoved(CObject* child){};
 
-			virtual const util::shape::AABB CalcAABB(void) { return util::shape::AABB::INVALID_AABB; }
+			virtual const b2AABB CalcAABB(void) { b2AABB ret; ret.lowerBound = b2Vec2(1.0f, 1.0f); ret.upperBound = b2Vec2(-1.0f, -1.0f); return ret; } //returns an invalid aabb by default
 
 			//Gets
 			inline CObject*				GetOwner(void) const { return this->m_pOwner; }

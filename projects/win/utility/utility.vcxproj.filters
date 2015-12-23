@@ -4,9 +4,6 @@
     <Filter Include="math">
       <UniqueIdentifier>{e03783c9-d106-4d51-a0b4-144680a2a5ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="shape">
-      <UniqueIdentifier>{8dce3430-2d64-46ce-bd95-a20248f1bca9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="event">
       <UniqueIdentifier>{ce4772a1-4091-4789-a90b-138dd7ccf10a}</UniqueIdentifier>
     </Filter>
@@ -48,27 +45,6 @@
     <ClInclude Include="..\..\..\source\utility\event\subscriber.h">
       <Filter>event</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\line.h">
-      <Filter>shape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\ray.h">
-      <Filter>shape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\rect.h">
-      <Filter>shape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\segment.h">
-      <Filter>shape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\shape.h">
-      <Filter>shape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\aabb.h">
-      <Filter>shape</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\shape\circle.h">
-      <Filter>shape</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\utility\common.h" />
     <ClInclude Include="..\..\..\source\utility\platform.h" />
     <ClInclude Include="..\..\..\source\utility\event\publisher.inl">
@@ -95,27 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\utility\event\publisher.cpp">
       <Filter>event</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\ray.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\segment.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\shape.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\aabb.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\circle.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\line.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\shape\rect.cpp">
-      <Filter>shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

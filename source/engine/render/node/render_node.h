@@ -3,9 +3,9 @@
 #include "bit_flag.h"
 #include "sdl/include/SDL.h"
 #include "math/matrix_2d.h"
-#include "shape/aabb.h"
 #include "color.h"
 #include <string>
+#include "box2d/box2d.h"
 
 namespace engine
 {
@@ -24,24 +24,24 @@ namespace engine
 
 		protected:
 			CRenderLayer*		m_pLayer;
-			b2PolygonShape		m_shape;
+			b2AABB				m_aabb;
 			util::Flag08		m_flag;
 			util::Color			m_clr;
-			util::shape::AABB	m_scissor;
+			b2AABB				m_scissor;
 			bool				m_use_scissor;
 			float				m_zed;
 
 		protected:
 			void ScissorOperation(SDL_Renderer* pRen, const util::math::vec2& origin);
-			virtual const b2PolygonShape& CalcShape() = 0;
+			virtual void CalcAabbInternal() = 0;
 
 		public:
 			IRenderNode(void);
 			virtual ~IRenderNode() = 0;
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam) = 0;
 			
-			const util::shape::AABB CalcAABB();
-			const bool CheckInView(const b2PolygonShape& view);
+			const b2AABB CalcAABB();
+			const bool CheckInView(const b2AABB& view);
 
 			inline void SetColor(const util::Color& clr) { m_clr = clr; }
 			inline void SetZed(const float& zed) { m_zed = zed; }
@@ -50,9 +50,9 @@ namespace engine
 			inline const float& GetZed() const { return m_zed; }
 			inline CRenderLayer* GetLayer() const { return m_pLayer; }
 
-			void SetScissorRect(const util::shape::AABB& scissor);
+			void SetScissorRect(const b2AABB& scissor);
 			inline void ClearScissorRect() { m_use_scissor = false; }
-			inline const util::shape::AABB& GetScissorRect() const { return (m_use_scissor) ? m_scissor : util::shape::AABB::INVALID_AABB; }
+			inline const b2AABB& GetScissorRect() const { return /*(m_use_scissor) ?*/ m_scissor /*: util::shape::AABB::INVALID_AABB*/; }
 			inline const bool IsScissorActive() const { return m_use_scissor; }
 
 			void Register(const std::string& layer);

@@ -4,11 +4,11 @@
 #include "math/type2.h"
 #include "math/type3.h"
 #include "math/type4.h"
-#include "shape/aabb.h"
 #include "util_time.h"
 #include "color.h"
 #include "macro.h"
 #include <vector>
+#include "box2d/box2d.h"
 
 namespace util
 {
@@ -39,7 +39,7 @@ namespace util
 		const math::vec2		GetVec2() const;
 		const math::vec3		GetVec3() const;
 		const math::vec4		GetVec4() const;
-		const shape::AABB		GetAabb() const;
+		const b2AABB			GetAabb() const;
 		const math::Matrix2D	GetMatrix() const;
 		template<typename type>
 		const std::vector<type> GetArray(void) const;
@@ -49,7 +49,7 @@ namespace util
 		void SetVec2(const math::vec2& val, rapidjson::Document::AllocatorType& allocator);
 		void SetVec3(const math::vec3& val, rapidjson::Document::AllocatorType& allocator);
 		void SetVec4(const math::vec4& val, rapidjson::Document::AllocatorType& allocator);
-		void SetAabb(const shape::AABB& val, rapidjson::Document::AllocatorType& allocator);
+		void SetAabb(const b2AABB& val, rapidjson::Document::AllocatorType& allocator);
 		void SetMatrix(const math::Matrix2D& val, rapidjson::Document::AllocatorType& allocator);
 		template<typename type>
 		const void WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator); //this is called 'write' because 'setarray' is already used by rapidjson::value

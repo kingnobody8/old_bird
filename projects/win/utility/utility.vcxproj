@@ -37,13 +37,6 @@
     <ClInclude Include="..\..\..\source\utility\math\type3.h" />
     <ClInclude Include="..\..\..\source\utility\math\type4.h" />
     <ClInclude Include="..\..\..\source\utility\platform.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\aabb.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\circle.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\line.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\ray.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\rect.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\segment.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\shape.h" />
     <ClInclude Include="..\..\..\source\utility\timer.h" />
     <ClInclude Include="..\..\..\source\utility\types.h" />
     <ClInclude Include="..\..\..\source\utility\util_time.h" />
@@ -57,13 +50,6 @@
     <ClCompile Include="..\..\..\source\utility\math\interp.cpp" />
     <ClCompile Include="..\..\..\source\utility\math\matrix_2d.cpp" />
     <ClCompile Include="..\..\..\source\utility\math\matrix_stack.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\aabb.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\circle.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\line.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\ray.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\rect.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\segment.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\shape.cpp" />
     <ClCompile Include="..\..\..\source\utility\timer.cpp" />
     <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
   </ItemGroup>

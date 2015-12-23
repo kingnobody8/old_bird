@@ -1,6 +1,5 @@
 #pragma once
 #include "render_node.h"
-#include "shape/segment.h"
 
 namespace engine
 {
@@ -9,17 +8,17 @@ namespace engine
 		class CRenderNodeLine : public IRenderNode
 		{
 		private:
-			util::shape::Segment m_seg;
+			b2EdgeShape m_seg;
 
 		protected:
-			virtual const b2PolygonShape& CalcShape();
+			virtual void CalcAabbInternal();
 
 		public:
 			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
 			
-			void SetLine(const util::shape::Segment& seg);
+			void SetLine(const b2EdgeShape& seg);
 		
-			inline const util::shape::Segment& GetLine() const { return m_seg; }
+			inline const b2EdgeShape& GetLine() const { return m_seg; }
 		};
 	}
 }

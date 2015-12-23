@@ -1,7 +1,7 @@
 #pragma once
-#include "shape/aabb.h"
 #include "math/matrix_2d.h"
 #include <list>
+#include "box2d//Box2D.h"
 #include <string>
 
 namespace engine
@@ -29,7 +29,7 @@ namespace engine
 			inline void SetMatrix(const util::math::Matrix2D& mat) { m_matrix = mat; }
 			inline const util::math::Matrix2D& GetMatrix() const { return m_matrix; }
 			inline const std::string& GetName() const { return m_name; }
-			const util::shape::AABB CalcViewAabb(const util::math::vec2& half_screen_dims) const;
+			const b2AABB CalcViewAabb(const util::math::vec2& half_screen_dims) const;
 		};
 	}
 }

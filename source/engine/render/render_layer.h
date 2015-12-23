@@ -2,7 +2,6 @@
 #include "sdl/include/SDL.h"
 #include <list>
 #include "macro.h"
-#include "shape/aabb.h"
 #include <string>
 
 namespace engine
@@ -32,7 +31,7 @@ namespace engine
 			int m_sort_rank;
 
 		private:
-			void Cull(const util::shape::AABB& view);
+			void Cull(const b2AABB& view);
 
 			CRenderLayer();
 			CRenderLayer(const std::string& name, const int& sort_rank, CCamera* const pCam);
