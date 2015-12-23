@@ -1,48 +1,46 @@
 #pragma once
-#include "math/type4.h"
-#include "func.h"
-#include "sdl.h"
-using namespace util::math;
+#include "glm/glm.hpp"
+#include <string>
 
 //https://en.wikipedia.org/wiki/Lists_of_colors
 
 namespace util
 {
-	struct Color
+	struct Color : public glm::f32vec4
 	{
 	public:
-		union
-		{
-			struct { vec4 type; };							//Float4
-			struct { float r; float g; float b; float a; };	//Easy access as color values
-		};
-	public:
-		Color(void){}
-		Color(const float& r, const float& g, const float& b, const float& a = 1.0f) : type(r, g, b, a){}
-		Color(const vec4& type) : type(type) {}
+		Color();
+		Color(const glm::float32& nR, const glm::float32& g, const glm::float32& b, const glm::float32& a = 1.0f);
+		Color(const glm::f32vec4& vec);
 
-		Color(const Color& that);
-		Color& operator= (const Color& that);
+		const glm::u8vec4 Get8Bit() const;
+		void Set8Bit(const glm::u8vec4& bit);
 
-		inline const bool operator==(const Color &v) const
-		{
-			return (EPSI(r, v.r) && EPSI(g, v.g) && EPSI(b, v.b) && EPSI(a, v.a));
-		}
-		inline const bool operator!=(const Color &v) const
-		{
-			return !this->operator==(v);
-		}
+		const glm::u32 GetHex() const;
+		void SetHex(const glm::u32& hex);
+		
+		const std::string GetHexString() const;
+		void SetHexString(const std::string& szHex);
 
-		const SDL_Color SDL(void) const;
-		void SDL(const SDL_Color clr);
-		const vec4 HSV(void) const;
-		void HSV(const vec4& fHSV);
+		const glm::float32 GetHue() const;
+		void SetHue(const glm::float32& hue);
+
+		const glm::float32 GetSaturation() const;
+		void SetSaturation(const glm::float32& sat);
+
+		const glm::float32 GetValue() const;
+		void SetValue(const glm::float32& val);
+
+		const glm::f32vec4 GetHSV() const;
+		void SetHSV(const glm::f32vec4& hsv);
+
 
 		// STATIC
+
 		//Blends two colors, lerp value is between 0.0f and 1.0f, 0.0f == all one clr, 1.0f == all two clr
-		static Color Blend(const Color& one, const Color& two, float lerp) ;
-		//Modifies a color by each value (rgba) or the modder
-		static Color Mod(const Color& clr, const vec4& modder);
+		static const Color Blend(Color one, Color two, float lerp) ;
+		////Modifies a color by each value (rgba) or the modder
+		//static const Color Mod(const Color& clr, const vec4& modder);
 
 		//Full
 		static const Color WHITE;

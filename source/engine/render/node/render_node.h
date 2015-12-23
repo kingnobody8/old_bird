@@ -4,6 +4,7 @@
 #include "sdl/include/SDL.h"
 #include "math/matrix_2d.h"
 #include "shape/aabb.h"
+#include "color.h"
 #include <string>
 
 namespace engine
@@ -25,7 +26,7 @@ namespace engine
 			CRenderLayer*		m_pLayer;
 			b2PolygonShape		m_shape;
 			util::Flag08		m_flag;
-			SDL_Color			m_clr;
+			util::Color			m_clr;
 			util::shape::AABB	m_scissor;
 			bool				m_use_scissor;
 			float				m_zed;
@@ -42,10 +43,10 @@ namespace engine
 			const util::shape::AABB CalcAABB();
 			const bool CheckInView(const b2PolygonShape& view);
 
-			inline void SetColor(const SDL_Color& clr) { m_clr = clr; }
+			inline void SetColor(const util::Color& clr) { m_clr = clr; }
 			inline void SetZed(const float& zed) { m_zed = zed; }
 
-			inline const SDL_Color& GetColor() const { return m_clr; }
+			inline const util::Color& GetColor() const { return m_clr; }
 			inline const float& GetZed() const { return m_zed; }
 			inline CRenderLayer* GetLayer() const { return m_pLayer; }
 

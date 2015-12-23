@@ -74,7 +74,7 @@ namespace engine
 			const util::Color IRenderPart::GetWorldColor() const
 			{
 				util::Color clr;
-				clr.SDL(m_pNode->GetColor());
+				m_pNode->GetColor();
 				return clr;
 			}
 
@@ -85,7 +85,7 @@ namespace engine
 
 				__todo() //this needs to do a vertical search for ColorModPart and see what colors it applies to us so we can properly set the nod
 				m_color = clr;
-				m_pNode->SetColor(clr.SDL());
+				m_pNode->SetColor(clr);
 			}
 			VIRTUAL void IRenderPart::SetLayer(const std::string& szLayer)
 			{

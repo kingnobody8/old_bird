@@ -17,7 +17,8 @@
 #include <gl\glu.h>
 
 #include "glm/glm.hpp"
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 bool gRenderQuad = true;
 
 namespace engine
@@ -232,7 +233,7 @@ namespace engine
 		void RenderGrid(util::math::Type2<int> half_size) __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
 		{
 			render::CRenderNodeRect node;
-			node.SetColor(util::Color::CYAN.SDL());
+			node.SetColor(util::Color::CYAN);
 			node.SetFill(false);
 			util::shape::AABB tmp;
 
@@ -374,7 +375,7 @@ namespace engine
 
 			//Primer
 			SDL_RenderSetClipRect(s_sdlRen, null);//clear out any scissor rects
-			SDL_Color background = util::Color::other::AUBURN.SDL();
+			util::Color background = util::Color::other::AUBURN;
 			background.r = background.g = background.b = 76;
 			background.a = 255;
 			SDL_SetRenderDrawColor(s_sdlRen, background.r, background.g, background.b, background.a);

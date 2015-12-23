@@ -1,49 +1,117 @@
 #include "color.h"
+#include "func.h"
+#include "macro.h"
+#include <sstream>
 
 namespace util
 {
-	Color::Color(const Color& that)
+	Color::Color()
+		: glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
 	{
-		*this = that;
 	}
-	Color& Color::operator = (const Color& that)
+	Color::Color(const glm::float32& r, const glm::float32& g, const glm::float32& b, const glm::float32& a)
+		: glm::vec4(r, g, b, a)
 	{
-		this->type = that.type;
-		return *this;
+	}
+	Color::Color(const glm::f32vec4& vec)
+		: glm::vec4(vec)
+	{
 	}
 
-	const SDL_Color Color::SDL(void) const
+	const glm::u8vec4 Color::Get8Bit() const
 	{
-		SDL_Color ret;
-		ret.a = Uint8(Clamp(this->a * 255, 0, 255));
-		ret.r = Uint8(Clamp(this->r * 255, 0, 255));
-		ret.g = Uint8(Clamp(this->g * 255, 0, 255));
-		ret.b = Uint8(Clamp(this->b * 255, 0, 255));
+		glm::u8vec4 ret(
+			glm::u8(Clamp(this->r * 255, 0, 255)),
+			glm::u8(Clamp(this->g * 255, 0, 255)),
+			glm::u8(Clamp(this->b * 255, 0, 255)),
+			glm::u8(Clamp(this->a * 255, 0, 255)));
 		return ret;
 	}
-	void Color::SDL(const SDL_Color clr)
+	void Color::Set8Bit(const glm::u8vec4& bit)
 	{
-		this->type = vec4(clr.r / 255.0f, clr.g / 255.0f, clr.b / 255.0f, clr.a / 255.0f);
+		r = bit.r / 255.0f;
+		g = bit.g / 255.0f;
+		b = bit.b / 255.0f;
+		a = bit.a / 255.0f;
 	}
-	const vec4 Color::HSV(void) const
+
+	const glm::u32 Color::GetHex() const
 	{
-		vec4 ret;
+		glm::u32 ret = *(glm::u32*)&Get8Bit();
+		return ret;
+	}
+	void Color::SetHex(const glm::u32& hex)
+	{
+		Set8Bit(*(glm::u8vec4*)&hex);
+	}
+
+	const std::string Color::GetHexString() const
+	{
+		std::stringstream stream;
+		stream << std::hex << GetHex();
+		return stream.str();
+	}
+	void Color::SetHexString(const std::string& szHex)
+	{
+		glm::u32 fin;
+		std::stringstream stream;
+		stream << std::hex << szHex.c_str();
+		stream >> fin;
+		SetHex(fin);
+	}
+
+	const glm::float32 Color::GetHue() const
+	{
+		return GetHSV().x;
+	}
+	void Color::SetHue(const glm::float32& hue)
+	{
+		glm::f32vec4 hsv = GetHSV();
+		hsv.x = hue;
+		SetHSV(hsv);
+	}
+
+	const glm::float32 Color::GetSaturation() const
+	{
+		return GetHSV().y;
+	}
+	void Color::SetSaturation(const glm::float32& sat)
+	{
+		glm::f32vec4 hsv = GetHSV();
+		hsv.y = sat;
+		SetHSV(hsv);
+	}
+
+	const glm::float32 Color::GetValue() const
+	{
+		return GetHSV().z;
+	}
+	void Color::SetValue(const glm::float32& val)
+	{
+		glm::f32vec4 hsv = GetHSV();
+		hsv.z = val;
+		SetHSV(hsv);
+	}
+
+	const glm::f32vec4 Color::GetHSV() const
+	{
+		glm::f32vec4 ret;										// x == hue, y == sat, z == val, w/a == alpha
 		ret.a = this->a;
 
 		float fMin = Min(this->r, Min(this->g, this->b));		//Min. value of RGB
 		float fMax = Max(this->r, Max(this->g, this->b));		//Max. value of RGB
 		float fDelta = fMax - fMin;								//Delta RGB value 
 
-		ret.val = fMax;											//V component
+		ret.z = fMax;											//V component
 
 		if (fDelta == 0)										//This is a gray, no chroma...
 		{
-			ret.hue = 0;										//HSV results from 0 to 1
-			ret.sat = 0;
+			ret.x = 0;											//HSV results from 0 to 1
+			ret.y = 0;
 		}
 		else													//Chromatic data...
 		{
-			ret.sat = fDelta / fMax;							//S component
+			ret.y = fDelta / fMax;								//S component
 
 			float del_R = (((fMax - r) / 6) + (fDelta / 2)) / fDelta;
 			float del_G = (((fMax - g) / 6) + (fDelta / 2)) / fDelta;
@@ -51,70 +119,70 @@ namespace util
 
 
 			if (this->r == fMax)
-				ret.hue = del_B - del_G;
+				ret.x = del_B - del_G;
 			else if (this->g == fMax)
-				ret.hue = (1.0f / 3.0f) + del_R - del_B;
+				ret.x = (1.0f / 3.0f) + del_R - del_B;
 			else if (this->b == fMax)
-				ret.hue = (2.0f / 3.0f) + del_G - del_R;
+				ret.x = (2.0f / 3.0f) + del_G - del_R;
 
-			if (ret.hue < 0)
-				ret.hue += 1.0f;
-			if (ret.hue > 1)
-				ret.hue -= 1.0f;
+			if (ret.x < 0)
+				ret.x += 1.0f;
+			if (ret.x > 1)
+				ret.x -= 1.0f;
 		}
 
 		return ret;
 	}
-	void Color::HSV(const vec4& fHSV)
+	void Color::SetHSV(const glm::f32vec4& hsv)
 	{
 		int i;
 		float f, p, q, t;
 
-		this->a = fHSV.a; //Alpha
+		this->a = hsv.a; //Alpha
 
-		if (fHSV.sat == 0)
+		if (hsv.y == 0)
 		{
 			// achromatic (grey)
-			this->r = this->g = this->b = fHSV.val;
+			this->r = this->g = this->b = hsv.z;
 			return;
 		}
 
-		float h = fHSV.hue * 360.0f;
+		float h = hsv.x * 360.0f;
 		h /= 60;			// sector 0 to 5
 		i = int(floor(h));
 		f = h - i;			// factorial part of h
-		p = fHSV.val * (1.0f - fHSV.sat);
-		q = fHSV.val * (1.0f - fHSV.sat * f);
-		t = fHSV.val * (1.0f - fHSV.sat * (1.0f - f));
+		p = hsv.z * (1.0f - hsv.y);
+		q = hsv.z * (1.0f - hsv.y * f);
+		t = hsv.z * (1.0f - hsv.y * (1.0f - f));
 		switch (i)
 		{
 		case 0:
-			this->r = fHSV.val;
+			this->r = hsv.z;
 			this->g = t;
 			this->b = p;
 			break;
 		case 1:
 			this->r = q;
-			this->g = fHSV.val;
+			this->g = hsv.z;
 			this->b = p;
 			break;
 		case 2:
 			this->r = p;
-			this->g = fHSV.val;
+			this->g = hsv.z;
 			this->b = t;
 			break;
 		case 3:
 			this->r = p;
 			this->g = q;
-			this->b = fHSV.val;
+			this->b = hsv.z;
 			break;
 		case 4:
 			this->r = t;
 			this->g = p;
-			this->b = fHSV.val;
+			this->b = hsv.z;
 			break;
 		default:
-			this->r = fHSV.val;
+			this->r = hsv.z;
 			this->g = p;
 			this->b = q;
 			break;
@@ -122,27 +190,41 @@ namespace util
 	}
 
 	// STATIC
-	STATIC Color Color::Blend(const Color& one, const Color& two, float lerp) //Blends two colors, lerp value is between 0.0f and 1.0f, 0.0f == all one clr, 1.0f == all two clr
+	STATIC const Color Color::Blend(Color one, Color two, float lerp) //Blends two colors, lerp value is between 0.0f and 1.0f, 0.0f == all one clr, 1.0f == all two clr
 	{
 		//Clamp lerp value
 		lerp = Clamp(lerp, 0.0f, 1.0f);
-		//Calculate return color
-		Type4<float> diff = two.type - one.type;
-		Color ret = Color(one.type + diff * lerp);
 
-		//Clamp channels
-		ret.r = Clamp(ret.r, 0.0f, 1.0f);
-		ret.g = Clamp(ret.g, 0.0f, 1.0f);
-		ret.b = Clamp(ret.b, 0.0f, 1.0f);
-		ret.a = Clamp(ret.a, 0.0f, 1.0f);
+		//We are gonna do proper color blending - YEAH : https://www.youtube.com/watch?v=LKnqECcg6Gw
+		
+		//Get the real values by squaring
+		one.r = glm::pow(one.r, 2);
+		one.g = glm::pow(one.g, 2);
+		one.b = glm::pow(one.b, 2);
+		one.a = glm::pow(one.a, 2);
+		two.r = glm::pow(two.r, 2);
+		two.g = glm::pow(two.g, 2);
+		two.b = glm::pow(two.b, 2);
+		two.a = glm::pow(two.a, 2);
+
+		//Perform the blend
+		Color ret = one + (two - one) * lerp;
+
+		//Put the values back to their square root
+		ret.r = glm::sqrt(ret.r);
+		ret.g = glm::sqrt(ret.g);
+		ret.b = glm::sqrt(ret.b);
+		ret.a = glm::sqrt(ret.a);
+
 		return ret;
 	}
-	STATIC Color Color::Mod(const Color& clr, const vec4& modder)
+
+	/*STATIC Color Color::Mod(const Color& clr, const vec4& modder)
 	{
 		Color ret = clr;
 		ret.type *= modder;
 		return ret;
-	}
+	}*/
 
 	//Full
 	STATIC const Color Color::WHITE							= Color(1.0f, 1.0f, 1.0f);
