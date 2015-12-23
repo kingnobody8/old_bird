@@ -3,6 +3,7 @@
 #include "json.h"
 #include "types.h"
 #include <list>
+#include "func.h"
 
 namespace util
 {

@@ -76,7 +76,7 @@ namespace engine
 				m_center = center;
 
 				util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
-				const vec2 tmp = util::math::Matrix2D::Vector_Matrix_Multiply(m_center, wmat);
+				const util::math::vec2 tmp = util::math::Matrix2D::Vector_Matrix_Multiply(m_center, wmat);
 
 				render::CRenderNodeCircle* circle = static_cast<render::CRenderNodeCircle*>(m_pNode);
 				circle->SetCenter(tmp);

@@ -1,6 +1,9 @@
 #pragma once
 #include "func.h"
 #include "types.h"
+#include "math/type2.h"
+#include "math/type3.h"
+#include "math/type4.h"
 #include "math/matrix_2d.h"
 #include "shape/aabb.h"
 #include "json.h"

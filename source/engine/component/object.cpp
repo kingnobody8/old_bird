@@ -185,10 +185,10 @@ namespace engine
 		//Calc
 		const util::math::Matrix2D CObject::CalcWorldMatrix(void) const
 		{
-			Matrix2D ret = m_cMatLocal;
+			util::math::Matrix2D ret = m_cMatLocal;
 			TraverseAncestors(this, [&ret](CObject* pObj)
 			{
-				ret = Matrix2D::Matrix_Matrix_Multiply(ret, pObj->GetLocalMatrix());
+				ret = util::math::Matrix2D::Matrix_Matrix_Multiply(ret, pObj->GetLocalMatrix());
 			});
 
 			return ret;
@@ -227,7 +227,7 @@ namespace engine
 		}
 		void CObject::SetWorldMatrix(const util::math::Matrix2D& mat)
 		{
-			Matrix2D temp = mat;
+			util::math::Matrix2D temp = mat;
 			if (this->m_pParent)
 			{
 				temp = this->m_pParent->CalcWorldMatrix() * util::math::Matrix2D::Matrix_Inverse(mat);
@@ -265,8 +265,8 @@ namespace engine
 		{
 			if (m_pParent)
 			{
-				const Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
-				vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
+				const util::math::Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
+				util::math::vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				float pos_x = x / wmat.GetScale().x - wpos.x;
 				this->SetLocalPosX(pos_x);
 			}
@@ -277,8 +277,8 @@ namespace engine
 		{
 			if (m_pParent)
 			{
-				const Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
-				vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
+				const util::math::Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
+				util::math::vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				float pos_y = y / wmat.GetScale().y - wpos.y;
 				this->SetLocalPosY(pos_y);
 			}
@@ -289,9 +289,9 @@ namespace engine
 		{
 			if (m_pParent)
 			{
-				const Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
-				vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
-				vec2 pos = vec2(x,y) / wmat.GetScale() - wpos;
+				const util::math::Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
+				util::math::vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
+				util::math::vec2 pos = util::math::vec2(x, y) / wmat.GetScale() - wpos;
 				this->SetLocalPosXY(pos);
 			}
 			else
@@ -303,7 +303,7 @@ namespace engine
 		{
 			if (m_pParent)
 			{
-				vec2 wscale = this->m_pParent->CalcWorldMatrix().GetScale();
+				util::math::vec2 wscale = this->m_pParent->CalcWorldMatrix().GetScale();
 				this->SetLocalScale(x - wscale.x, y - wscale.y);
 			}
 			else

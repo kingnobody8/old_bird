@@ -29,9 +29,9 @@ namespace engine
 
 				util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
 
-				vec2 pos = wmat.GetPosition();
+				util::math::vec2 pos = wmat.GetPosition();
 				util::shape::AABB aabb = m_pOwner->CalcAabb();
-				const vec2 extends = aabb.CalcExtends();
+				const util::math::vec2 extends = aabb.CalcExtends();
 
 				const b2Vec2 b2points[4] =
 				{
@@ -100,7 +100,7 @@ namespace engine
 				assert(filter.HasMember("group_index"));
 				assert(filter.HasMember("mask_bits"));
 
-				const vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
+				const util::math::vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
 				m_bodyDef.linearVelocity = b2Vec2(linearVelocity.x, linearVelocity.y);
 				m_bodyDef.angularVelocity = body_def["angular_velocity"].GetDouble();
 				m_bodyDef.linearDamping = body_def["linear_damping"].GetDouble();
@@ -141,7 +141,7 @@ namespace engine
 				__todo()//we may want a soft assert here, because we probably should never be setting a box parts matrix outside of the initial setup
 
 					util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
-				vec2 pos = wmat.GetPosition() * PIX_TO_BOX;
+				util::math::vec2 pos = wmat.GetPosition() * PIX_TO_BOX;
 				m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotationZ() * DEG_TO_RAD);
 				m_pBody->SetLinearVelocity(b2Vec2(0, 0));
 				m_pBody->SetAngularVelocity(0);

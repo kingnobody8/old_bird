@@ -7,6 +7,8 @@
 
 namespace util
 {
+	using namespace math;
+
 	const std::string JSON::Read(void) const
 	{
 		//NOTE (daniel) - if you get the RAPIDJSON_ASSERT(m->name.IsString())

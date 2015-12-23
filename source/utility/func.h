@@ -6,13 +6,13 @@ Purpose:	These are commonly used utility functions and macros
 */
 
 #pragma once
+#include "types.h"
+#include <functional>
 #include <cmath>
 #include <stdlib.h>
-#include "types.h"
 #include <assert.h>
-#include "sdl.h"
 #include <string>
-#include <functional>
+#include "sdl.h"
 
 #define BIND0(that, func) (std::bind(func, that))
 #define BIND1(that, func) (std::bind(func, that, std::placeholders::_1))
@@ -59,15 +59,6 @@ namespace util
 		return (max - min) * (float(rand()) / float(RAND_MAX)) + min;
 	}
 
-	static void CheckSdlError(const char* ignore_error = null)
-	{
-		const char* err = SDL_GetError();
-		if (*err != null)
-			SDL_Log("SDL Error: %s", err);
-		assert(*err == null || std::strcmp(err, ignore_error) == 0);
-		SDL_ClearError();
-	}
-
 	bool BigEndianCheck(void);
 	void TypeCheck(void);
 
@@ -81,4 +72,13 @@ namespace util
 			return new type();
 		}
 	};
+
+	static void CheckSdlError(const char* ignore_error = null)
+	{
+		const char* err = SDL_GetError();
+		if (*err != null)
+			SDL_Log("SDL Error: %s", err);
+		assert(*err == null || std::strcmp(err, ignore_error) == 0);
+		SDL_ClearError();
+	}
 }

@@ -94,7 +94,7 @@ namespace engine
 					break;
 				}
 				case SDL_MOUSEWHEEL:
-					mouse_events::s_InputMouseScrollWheel.Publish(mouse_events::WheelAction(tEvent, Type2<slong>(tEvent.wheel.x, tEvent.wheel.y)));
+					mouse_events::s_InputMouseScrollWheel.Publish(mouse_events::WheelAction(tEvent, util::math::Type2<slong>(tEvent.wheel.x, tEvent.wheel.y)));
 					break;
 					//JOY event
 				case SDL_JOYAXISMOTION:

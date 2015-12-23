@@ -12,6 +12,8 @@
 //THE GOOGLES DO NOTHING!!!
 #define STATIC
 #define VIRTUAL
+#define OUT
+#define IN
 
 #ifdef x32
 //Unsigned
@@ -50,7 +52,7 @@ typedef s64					slonglong;
 
 //Int
 typedef unsigned int		uint;
-typedef signed	int			sint;
+typedef signed int			sint;
 
 //Buffer
 struct TBuffer

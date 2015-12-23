@@ -119,7 +119,7 @@ namespace engine
 
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+					const util::math::vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(util::math::vec2(action.m_pixel.x, action.m_pixel.y));
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
@@ -138,7 +138,7 @@ namespace engine
 				
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+					const util::math::vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(util::math::vec2(action.m_pixel.x, action.m_pixel.y));
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
@@ -157,7 +157,7 @@ namespace engine
 				
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+					const util::math::vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(util::math::vec2(action.m_pixel.x, action.m_pixel.y));
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{

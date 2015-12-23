@@ -1,11 +1,14 @@
 #pragma once
 #include "rapidjson/document.h"
 #include "math/matrix_2d.h"
-#include "util_time.h"
+#include "math/type2.h"
+#include "math/type3.h"
+#include "math/type4.h"
 #include "shape/aabb.h"
+#include "util_time.h"
 #include "color.h"
-#include <vector>
 #include "macro.h"
+#include <vector>
 
 namespace util
 {
@@ -66,13 +69,13 @@ namespace util
 	template<>
 	const void JSON::WriteArray(std::vector<Color> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<vec2> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<math::vec2> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<vec3> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<math::vec3> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<vec4> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<math::vec4> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<Matrix2D> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<math::Matrix2D> val, rapidjson::Document::AllocatorType& allocator);
 
 	/*
 	EXAMPLES

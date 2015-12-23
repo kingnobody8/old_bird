@@ -64,16 +64,16 @@ namespace engine
 			inline const bool						GetLocalVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE); }
 			inline const bool						GetWorldVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE | EFlag::PARENT_VISIBLE); }
 
-			inline const vec2						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
-			inline const vec2						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
+			inline const util::math::vec2			GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
+			inline const util::math::vec2			GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
 			inline const float						GetLocalRotationZ(void) const { return this->m_cMatLocal.GetRotationZ(); }
 
 			//Calcs
 			const util::math::Matrix2D				CalcWorldMatrix(void) const;
 			const float								CalcWorldZed(void) const;
 
-			inline const vec2						CalcWorldPos(void) const { return this->CalcWorldMatrix().GetPosition(); }
-			inline const vec2						CalcWorldScale(void) const { return this->CalcWorldMatrix().GetScale(); }
+			inline const util::math::vec2			CalcWorldPos(void) const { return this->CalcWorldMatrix().GetPosition(); }
+			inline const util::math::vec2			CalcWorldScale(void) const { return this->CalcWorldMatrix().GetScale(); }
 			inline const float						CalcWorldRotationZ(void) const { return this->CalcWorldMatrix().GetRotationZ(); }
 
 			const util::shape::AABB					CalcAabb(void) const;
@@ -89,17 +89,17 @@ namespace engine
 			void									SetLocalPosX(const float& x);
 			void									SetLocalPosY(const float& y);
 			void									SetLocalPosXY(const float& x, const float& y);
-			inline void								SetLocalPosXY(const vec2& pos) { this->SetLocalPosXY(pos.x, pos.y); }
+			inline void								SetLocalPosXY(const util::math::vec2& pos) { this->SetLocalPosXY(pos.x, pos.y); }
 			void									SetLocalScale(const float& x, const float& y);
-			inline void								SetLocalScale(const vec2& scale) { this->SetLocalScale(scale.x, scale.y); }
+			inline void								SetLocalScale(const util::math::vec2& scale) { this->SetLocalScale(scale.x, scale.y); }
 			void									SetLocalRotationZ(const float& rot);
 
 			void									SetWorldPosX(const float& x);
 			void									SetWorldPosY(const float& y);
 			void									SetWorldPosXY(const float& x, const float& y);
-			inline void								SetWorldPosXY(const vec2& pos) { this->SetWorldPosXY(pos.x, pos.y); }
+			inline void								SetWorldPosXY(const util::math::vec2& pos) { this->SetWorldPosXY(pos.x, pos.y); }
 			void									SetWorldScale(const float& x, const float& y);
-			inline void								SetWorldScale(const vec2& scale) { this->SetWorldScale(scale.x, scale.y); }
+			inline void								SetWorldScale(const util::math::vec2& scale) { this->SetWorldScale(scale.x, scale.y); }
 			void									SetWorldRotationZ(const float& rot);
 
 			inline void								SetLocalZed(const float& fZed) { this->m_fZed = fZed; }
