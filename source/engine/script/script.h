@@ -9,10 +9,10 @@ namespace engine
 		enum EPriorities
 		{
 			FIRST_PART = 1,
-			AABB_PART,
+			/*AABB_PART,
 			CIRCLE_PART,
 			POINTS_PART,
-			IMG_PART,
+			IMG_PART,*/
 			BUTTON_PART,
 			FIXTURE_PART,
 			PRIORITIES_COUNT

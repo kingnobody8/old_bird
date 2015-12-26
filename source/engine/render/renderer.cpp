@@ -232,13 +232,13 @@ namespace engine
 
 		void RenderGrid(util::math::Type2<int> half_size) __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
 		{
-			render::CRenderNodeRect node;
+			/*render::CRenderNodeRect node;
 			node.SetColor(util::Color::CYAN);
 			node.SetFill(false);
-			util::shape::AABB tmp;
+			util::shape::AABB tmp;*/
 
 			//Grid
-			for (int x = -half_size.x; x < half_size.x; x += GRID_CELL_SIZE)
+			/*for (int x = -half_size.x; x < half_size.x; x += GRID_CELL_SIZE)
 			{
 				for (int y = -half_size.y; y < half_size.y; y += GRID_CELL_SIZE)
 				{
@@ -247,7 +247,7 @@ namespace engine
 					node.SetAABB(tmp);
 					node(s_sdlRen, util::math::Matrix2D());
 				}
-			}
+			}*/
 		}
 		void RenderCrossSection(util::math::Type2<int> logical_size)
 		{

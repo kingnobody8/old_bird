@@ -9,7 +9,7 @@
 #include "render/render_layer.h"
 #include "render/camera.h"
 #include "component/part.h"
-#include "script/renderable/img_part.h"
+//#include "script/renderable/img_part.h"
 #include "component/object.inl"
 #include "script/box/box2d_part.h"
 
@@ -150,9 +150,9 @@ namespace engine
 	{
 		component::CObject* obj = m_pRoot->FindObject("door");
 
-		script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
-		if (pimg)
-			pimg->SetBlendMode((SDL_BlendMode)(mode));
+		//script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+		//if (pimg)
+		//	pimg->SetBlendMode((SDL_BlendMode)(mode));
 
 		//sub.UnsubscribeAll();
 	}
@@ -173,9 +173,9 @@ namespace engine
 
 		component::CObject* obj = m_pRoot->FindObject("door");
 
-		script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
-		if (pimg)
-			pimg->SetBlendMode((SDL_BlendMode)(mode));
+		//script::renderable::CImgPart* pimg = obj->FindPart<script::renderable::CImgPart>();
+		//if (pimg)
+		//	pimg->SetBlendMode((SDL_BlendMode)(mode));
 	}
 
 

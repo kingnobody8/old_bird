@@ -58,15 +58,6 @@
     <ClCompile Include="..\..\..\source\engine\script\script.cpp">
       <Filter>script</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\script\renderable\img_part.cpp">
-      <Filter>script\renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\script\renderable\aabb_part.cpp">
-      <Filter>script\renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp">
-      <Filter>script\renderable</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\input\input.cpp">
       <Filter>input</Filter>
     </ClCompile>
@@ -82,25 +73,7 @@
     <ClCompile Include="..\..\..\source\engine\script\box\fixture_part.cpp">
       <Filter>script\box</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\script\renderable\circle_part.cpp">
-      <Filter>script\renderable</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp">
-      <Filter>render\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\node\sprite_node.cpp">
-      <Filter>render\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp">
-      <Filter>render\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\node\point_node.cpp">
-      <Filter>render\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\node\line_node.cpp">
-      <Filter>render\node</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\node\circle_node.cpp">
       <Filter>render\node</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,15 +109,6 @@
     <ClInclude Include="..\..\..\source\engine\script\script.h">
       <Filter>script</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\script\renderable\img_part.h">
-      <Filter>script\renderable</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\script\renderable\aabb_part.h">
-      <Filter>script\renderable</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h">
-      <Filter>script\renderable</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\input\input.h">
       <Filter>input</Filter>
     </ClInclude>
@@ -160,25 +124,7 @@
     <ClInclude Include="..\..\..\source\engine\script\box\fixture_part.h">
       <Filter>script\box</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\script\renderable\circle_part.h">
-      <Filter>script\renderable</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h">
-      <Filter>render\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\node\sprite_node.h">
-      <Filter>render\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h">
-      <Filter>render\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\node\point_node.h">
-      <Filter>render\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\node\line_node.h">
-      <Filter>render\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\node\circle_node.h">
       <Filter>render\node</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,8 +30,8 @@ namespace engine
 				util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
 
 				util::math::vec2 pos = wmat.GetPosition();
-				util::shape::AABB aabb = m_pOwner->CalcAabb();
-				const util::math::vec2 extends = aabb.CalcExtends();
+				b2AABB aabb = m_pOwner->CalcAabb();
+				const util::math::vec2 extends = util::math::vec2(aabb.GetExtents().x, aabb.GetExtents().y);
 
 				const b2Vec2 b2points[4] =
 				{

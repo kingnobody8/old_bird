@@ -53,7 +53,7 @@ namespace engine
 				/*Data*/
 			private:
 			protected:
-				util::shape::AABB m_aabb;
+				b2AABB m_aabb;
 				std::string m_szLayer;
 				float m_zed;
 
@@ -64,9 +64,9 @@ namespace engine
 				/*the mouse action internals return a bool to respond if they have handled the event or not (true means handled, false means unhandled) */
 				__todo() //maybe make the return an enum with codes for handled/unhandled
 
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos) { return m_aabb.Intersect(wpos); }
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
 
 			public:
 				CUiPart();

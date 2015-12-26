@@ -69,7 +69,9 @@ namespace engine
 				const util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
 				const util::math::vec2 wpos = wmat.GetPosition();
 				const util::math::vec2 wscale = wmat.GetScale();
-				util::shape::AABB aabb(wpos - extends * wscale, wpos + extends * wscale);
+				const util::math::vec2 min = wpos - extends * wscale;
+				const util::math::vec2 max = wpos + extends * wscale;
+				b2AABB aabb(b2Vec2(min.x, min.y), b2Vec2(max.x, max.y));
 
 				render::CRenderNodeRect* rect = static_cast<render::CRenderNodeRect*>(m_pNode);
 				rect->SetAABB(aabb);

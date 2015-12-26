@@ -3,6 +3,7 @@
 #include <list>
 #include "macro.h"
 #include <string>
+#include "math/type2.h"
 
 namespace engine
 {

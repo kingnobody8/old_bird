@@ -162,6 +162,9 @@ struct b2RayCastOutput
 struct b2AABB
 {
 	/*HABIG - begin edit*/
+	b2AABB()
+	{}
+
 	b2AABB(const b2Vec2& min, const b2Vec2& max)
 		: lowerBound(min), upperBound(max)
 	{}

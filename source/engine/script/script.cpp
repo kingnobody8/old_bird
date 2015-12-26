@@ -1,9 +1,9 @@
 #include "script.h"
 #include "script/renderable/render_part.h"
-#include "script/renderable/aabb_part.h"
-#include "script/renderable/circle_part.h"
-#include "script/renderable/points_part.h"
-#include "script/renderable/img_part.h"
+//#include "script/renderable/aabb_part.h"
+//#include "script/renderable/circle_part.h"
+//#include "script/renderable/points_part.h"
+//#include "script/renderable/img_part.h"
 #include "script/ui/ui_part.h"
 #include "script/ui/button_part.h"
 #include "script/box/box2d_part.h"
@@ -21,10 +21,10 @@ namespace engine
 
 		void RegisterScripts()
 		{
-			REGISTER_PART(CAabbPart);
+			/*REGISTER_PART(CAabbPart);
 			REGISTER_PART(CCirclePart);
 			REGISTER_PART(CPointsPart);
-			REGISTER_PART(CImgPart);
+			REGISTER_PART(CImgPart);*/
 			REGISTER_PART(CButtonPart);
 			REGISTER_PART(CFixturePart);
 		}

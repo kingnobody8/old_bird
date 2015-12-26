@@ -68,7 +68,7 @@ namespace engine
 		{
 		}
 
-		void CRenderLayer::Cull(const util::shape::AABB& view)
+		void CRenderLayer::Cull(const b2AABB& view)
 		{
 			//Copy the real list to the temp list
 			this->m_vCulledNodes.clear();
@@ -84,7 +84,7 @@ namespace engine
 			util::math::Type2<int> logical_size;
 			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
 			util::math::vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
-			const util::shape::AABB view = m_pCamera->CalcViewAabb(half_dims);
+			const b2AABB view = m_pCamera->CalcViewAabb(half_dims);
 			
 			Cull(view);
 

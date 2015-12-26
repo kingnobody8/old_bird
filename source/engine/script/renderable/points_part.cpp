@@ -211,13 +211,18 @@ namespace engine
 				}
 			}
 
-			VIRTUAL const util::shape::AABB CPointsPart::CalcAABB(void)
+			VIRTUAL const b2AABB CPointsPart::CalcAABB(void)
 			{
 				const std::vector<util::math::vec2> wpoints = CalcWorldPoints();
 
-				util::shape::AABB ret;
+				b2AABB ret = INVALID_AABB;
 				for (int i = 0; i < wpoints.size(); ++i)
-					ret.Stretch(wpoints[i]);
+				{
+					if (!ret.IsValid())
+						ret.lowerBound = ret.upperBound = b2Vec2(wpoints[i].x, wpoints[i].y);
+					else
+						ret.Combine(b2Vec2(wpoints[i].x, wpoints[i].y));
+				}
 				return ret;
 			}
 
