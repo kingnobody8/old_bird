@@ -1,14 +1,10 @@
 #pragma once
 #include "rapidjson/document.h"
-#include "math/matrix_2d.h"
-#include "math/type2.h"
-#include "math/type3.h"
-#include "math/type4.h"
 #include "util_time.h"
 #include "color.h"
 #include "macro.h"
+#include "math/math.h"
 #include <vector>
-#include "box2d/box2d.h"
 
 namespace util
 {
@@ -36,21 +32,21 @@ namespace util
 
 		const Time				GetTime() const;
 		const Color				GetColor() const;
-		const math::vec2		GetVec2() const;
-		const math::vec3		GetVec3() const;
-		const math::vec4		GetVec4() const;
+		const vec2				GetVec2() const;
+		const vec3				GetVec3() const;
+		const vec4				GetVec4() const;
 		const b2AABB			GetAabb() const;
-		const math::Matrix2D	GetMatrix() const;
+		const mat4x4			GetMatrix() const;
 		template<typename type>
 		const std::vector<type> GetArray(void) const;
 
 		void SetTime(const Time& val, rapidjson::Document::AllocatorType& allocator);
 		void SetColor(const Color& val, rapidjson::Document::AllocatorType& allocator);
-		void SetVec2(const math::vec2& val, rapidjson::Document::AllocatorType& allocator);
-		void SetVec3(const math::vec3& val, rapidjson::Document::AllocatorType& allocator);
-		void SetVec4(const math::vec4& val, rapidjson::Document::AllocatorType& allocator);
+		void SetVec2(const vec2& val, rapidjson::Document::AllocatorType& allocator);
+		void SetVec3(const vec3& val, rapidjson::Document::AllocatorType& allocator);
+		void SetVec4(const vec4& val, rapidjson::Document::AllocatorType& allocator);
 		void SetAabb(const b2AABB& val, rapidjson::Document::AllocatorType& allocator);
-		void SetMatrix(const math::Matrix2D& val, rapidjson::Document::AllocatorType& allocator);
+		void SetMatrix(const mat4x4& val, rapidjson::Document::AllocatorType& allocator);
 		template<typename type>
 		const void WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator); //this is called 'write' because 'setarray' is already used by rapidjson::value
 

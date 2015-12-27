@@ -16,25 +16,10 @@
     <ClInclude Include="..\..\..\source\utility\math\consts.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\math\type2.h">
-      <Filter>math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\utility\enums.h" />
     <ClInclude Include="..\..\..\source\utility\func.h" />
     <ClInclude Include="..\..\..\source\utility\timer.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type3.h">
-      <Filter>math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\math\type4.h">
-      <Filter>math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\utility\color.h" />
-    <ClInclude Include="..\..\..\source\utility\math\matrix_2d.h">
-      <Filter>math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\utility\math\matrix_stack.h">
-      <Filter>math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\utility\math\interp.h">
       <Filter>math</Filter>
     </ClInclude>
@@ -50,18 +35,15 @@
     <ClInclude Include="..\..\..\source\utility\event\publisher.inl">
       <Filter>event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\math\math.h">
+      <Filter>math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
     <ClCompile Include="..\..\..\source\utility\func.cpp" />
     <ClCompile Include="..\..\..\source\utility\timer.cpp" />
     <ClCompile Include="..\..\..\source\utility\color.cpp" />
-    <ClCompile Include="..\..\..\source\utility\math\matrix_2d.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\utility\math\matrix_stack.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\utility\math\interp.cpp">
       <Filter>math</Filter>
     </ClCompile>

@@ -31,11 +31,7 @@
     <ClInclude Include="..\..\..\source\utility\macro.h" />
     <ClInclude Include="..\..\..\source\utility\math\consts.h" />
     <ClInclude Include="..\..\..\source\utility\math\interp.h" />
-    <ClInclude Include="..\..\..\source\utility\math\matrix_2d.h" />
-    <ClInclude Include="..\..\..\source\utility\math\matrix_stack.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type2.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type3.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type4.h" />
+    <ClInclude Include="..\..\..\source\utility\math\math.h" />
     <ClInclude Include="..\..\..\source\utility\platform.h" />
     <ClInclude Include="..\..\..\source\utility\timer.h" />
     <ClInclude Include="..\..\..\source\utility\types.h" />
@@ -48,8 +44,6 @@
     <ClCompile Include="..\..\..\source\utility\func.cpp" />
     <ClCompile Include="..\..\..\source\utility\json.cpp" />
     <ClCompile Include="..\..\..\source\utility\math\interp.cpp" />
-    <ClCompile Include="..\..\..\source\utility\math\matrix_2d.cpp" />
-    <ClCompile Include="..\..\..\source\utility\math\matrix_stack.cpp" />
     <ClCompile Include="..\..\..\source\utility\timer.cpp" />
     <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
   </ItemGroup>

@@ -7,8 +7,6 @@
 
 namespace util
 {
-	using namespace math;
-
 	const std::string JSON::Read(void) const
 	{
 		//NOTE (daniel) - if you get the RAPIDJSON_ASSERT(m->name.IsString())
@@ -47,46 +45,48 @@ namespace util
 				1.0f);
 		}
 	}
-	const math::vec2 JSON::GetVec2() const
+	const vec2 JSON::GetVec2() const
 	{
 		if (HasMember("x")) // X & Y
-			return math::vec2((*this)["x"].GetDouble(), (*this)["y"].GetDouble());
+			return vec2((*this)["x"].GetDouble(), (*this)["y"].GetDouble());
 		else if (HasMember("w"))// W & H
-			return math::vec2((*this)["w"].GetDouble(), (*this)["h"].GetDouble());
+			return vec2((*this)["w"].GetDouble(), (*this)["h"].GetDouble());
 
 		assert(false);
-		return math::vec2(); //this is for 'not all control paths return a value' warning
+		return vec2(); //this is for 'not all control paths return a value' warning
 	}
-	const math::vec3 JSON::GetVec3() const
+	const vec3 JSON::GetVec3() const
 	{
 		if (HasMember("x")) // X & Y & Z
-			return math::vec3((*this)["x"].GetDouble(), (*this)["y"].GetDouble(), (*this)["z"].GetDouble());
+			return vec3((*this)["x"].GetDouble(), (*this)["y"].GetDouble(), (*this)["z"].GetDouble());
 		else if (HasMember("w")) // W & H & D
-			return math::vec3((*this)["w"].GetDouble(), (*this)["h"].GetDouble(), (*this)["d"].GetDouble());
+			return vec3((*this)["w"].GetDouble(), (*this)["h"].GetDouble(), (*this)["d"].GetDouble());
 
 		assert(false);
-		return math::vec3(); //this is for 'not all control paths return a value' warning
+		return vec3(); //this is for 'not all control paths return a value' warning
 	}
-	const math::vec4 JSON::GetVec4() const
+	const vec4 JSON::GetVec4() const
 	{
 		return math::vec4((*this)["x"].GetDouble(), (*this)["y"].GetDouble(), (*this)["z"].GetDouble(), (*this)["w"].GetDouble());
 	}
 	const b2AABB JSON::GetAabb() const
 	{
-		const math::vec2 min = static_cast<const JSON>((*this)["min"]).GetVec2();
-		const math::vec2 max = static_cast<const JSON>((*this)["max"]).GetVec2();
+		const vec2 min = static_cast<const JSON>((*this)["min"]).GetVec2();
+		const vec2 max = static_cast<const JSON>((*this)["max"]).GetVec2();
 		b2AABB ret;
 		ret.lowerBound = b2Vec2(min.x, min.y);
 		ret.upperBound = b2Vec2(max.x, max.y);
 		return ret;
 	}
-	const math::Matrix2D JSON::GetMatrix() const
+	const mat4x4 JSON::GetMatrix() const
 	{
+		__todo() // change this to be a 3d matrix
+
 		const JSON j = static_cast<const JSON>(((*this)["position"]));
 
-		Matrix2D mat;
-		const util::math::vec2 pos = static_cast<const JSON>((*this)["position"]).GetVec2();
-		const util::math::vec2 scale = static_cast<const JSON>((*this)["scale"]).GetVec2();
+		mat4x4 mat;
+		const vec2 pos = static_cast<const JSON>((*this)["position"]).GetVec2();
+		const vec2 scale = static_cast<const JSON>((*this)["scale"]).GetVec2();
 		const float rot = (double)static_cast<const JSON>((*this)["rotation"]).GetDouble();
 
 		mat.SetPosition(pos);
