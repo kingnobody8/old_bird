@@ -1,10 +1,9 @@
 #include "renderer.h"
-#include "math/type2.h"
+#include "math/math.h"
 #include "color.h"
 #include <string>
 #include "func.h"
 #include "macro.h"
-#include "node/rect_node.h"
 #include "util_time.h"
 #include "render_layer.h"
 #include "camera.h"
@@ -27,7 +26,7 @@ namespace engine
 	{
 		static SDL_Renderer* s_sdlRen = null;
 		static SDL_Window* s_sdlWin = null;
-		const util::math::Type2<int> default_dims = util::math::Type2<int>(1280, 720);
+		const glm::u32vec2 default_dims = glm::u32vec2(1280, 720);
 		const std::string app_name = "The Lark Ascending";
 		const int GRID_CELL_SIZE = 64;
 
@@ -230,7 +229,7 @@ namespace engine
 
 
 
-		void RenderGrid(util::math::Type2<int> half_size) __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
+		void RenderGrid(vec2 half_size) __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
 		{
 			/*render::CRenderNodeRect node;
 			node.SetColor(util::Color::CYAN);
@@ -249,7 +248,7 @@ namespace engine
 				}
 			}*/
 		}
-		void RenderCrossSection(util::math::Type2<int> logical_size)
+		void RenderCrossSection(glm::u32vec2 logical_size)
 		{
 			SDL_SetRenderDrawColor(s_sdlRen, 255, 255, 255, 255);
 			//X-axis
@@ -382,10 +381,10 @@ namespace engine
 			SDL_SetRenderTarget(s_sdlRen, NULL);
 			SDL_RenderClear(s_sdlRen);
 
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.w, &logical_size.h);
-			util::math::Type2<int> half_size = logical_size / 2;
-			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			glm::i32vec2 logical_size;
+			SDL_GetRendererOutputSize(s_sdlRen, &logical_size.x, &logical_size.y);
+			glm::i32vec2 half_size = logical_size / 2;
+			glm::i32vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			//RenderGrid(half_size);
 			RenderCrossSection(logical_size);

@@ -81,9 +81,9 @@ namespace engine
 
 		void CRenderLayer::DoRender(SDL_Renderer* pRen)
 		{
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
-			util::math::vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			glm::i32vec2 logical_size;
+			SDL_GetRendererOutputSize(pRen, &logical_size.x, &logical_size.y);
+			glm::i32vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
 			const b2AABB view = m_pCamera->CalcViewAabb(half_dims);
 			
 			Cull(view);
@@ -98,7 +98,7 @@ namespace engine
 			__todo() //replace this with the nodes found after the cull
 				//also use the actuall camera matrix
 
-			util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix());
+			matrix inv_cam = glm::inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{
 				(*iter)->operator()(pRen, inv_cam);
@@ -128,22 +128,24 @@ namespace engine
 			this->m_vNodes.clear();
 		}
 
-		const util::math::vec2 CRenderLayer::ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point)
+		const vec2 CRenderLayer::ConvertPointFromScreenToWorld(vec2 m_screen_point)
 		{
 			//get screen info
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(render::GetSdlRenderer(), &logical_size.w, &logical_size.h);
-			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			glm::i32vec2 logical_size;
+			SDL_GetRendererOutputSize(render::GetSdlRenderer(), &logical_size.x, &logical_size.y);
+			vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			m_screen_point.x = m_screen_point.x - origin.x;
 			m_screen_point.y = m_screen_point.y - origin.y;
 
-			return util::math::Matrix2D::Vector_Matrix_Multiply(m_screen_point, m_pCamera->GetMatrix());
+			const vec4 tmp = m_pCamera->GetMatrix() * vec4(m_screen_point.x, m_screen_point.y, 0.0f, 1.0f);
+			return vec2(tmp.x, tmp.y);
 		}
 
-		const util::math::vec2 CRenderLayer::ConvertPointFromWorldToScreen(util::math::vec2 m_world_point)
+		const vec2 CRenderLayer::ConvertPointFromWorldToScreen(vec2 m_world_point)
 		{
-			return util::math::Matrix2D::Vector_Matrix_Multiply(m_world_point, util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix()));
+			const vec4& tmp = glm::inverse(m_pCamera->GetMatrix()) * vec4(m_world_point.x, m_world_point.y, 0.0f, 1.0f);
+			return vec2(tmp.x, tmp.y);
 		}
 	}
 }

@@ -183,12 +183,12 @@ namespace engine
 		}
 
 		//Calc
-		const util::math::Matrix2D CObject::CalcWorldMatrix(void) const
+		const matrix CObject::CalcWorldMatrix(void) const
 		{
-			util::math::Matrix2D ret = m_cMatLocal;
+			matrix ret = m_cMatLocal;
 			TraverseAncestors(this, [&ret](CObject* pObj)
 			{
-				ret = util::math::Matrix2D::Matrix_Matrix_Multiply(ret, pObj->GetLocalMatrix());
+				ret *= pObj->GetLocalMatrix();
 			});
 
 			return ret;
@@ -226,17 +226,17 @@ namespace engine
 				this->Drop();
 			this->m_pParent = pParent;
 		}
-		void CObject::SetLocalMatrix(const util::math::Matrix2D& mat)
+		void CObject::SetLocalMatrix(const matrix& mat)
 		{
 			m_cMatLocal = mat;
 			OnMatrixChanged();
 		}
-		void CObject::SetWorldMatrix(const util::math::Matrix2D& mat)
+		void CObject::SetWorldMatrix(const matrix& mat)
 		{
-			util::math::Matrix2D temp = mat;
+			matrix temp = mat;
 			if (this->m_pParent)
 			{
-				temp = this->m_pParent->CalcWorldMatrix() * util::math::Matrix2D::Matrix_Inverse(mat);
+				temp = this->m_pParent->CalcWorldMatrix() * glm::inverse(mat);
 			}
 			this->SetLocalMatrix(temp);
 		}

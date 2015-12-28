@@ -67,7 +67,7 @@ namespace util
 	}
 	const vec4 JSON::GetVec4() const
 	{
-		return math::vec4((*this)["x"].GetDouble(), (*this)["y"].GetDouble(), (*this)["z"].GetDouble(), (*this)["w"].GetDouble());
+		return vec4((*this)["x"].GetDouble(), (*this)["y"].GetDouble(), (*this)["z"].GetDouble(), (*this)["w"].GetDouble());
 	}
 	const b2AABB JSON::GetAabb() const
 	{
@@ -78,13 +78,13 @@ namespace util
 		ret.upperBound = b2Vec2(max.x, max.y);
 		return ret;
 	}
-	const mat4x4 JSON::GetMatrix() const
+	const matrix JSON::GetMatrix() const
 	{
 		__todo() // change this to be a 3d matrix
 
 		const JSON j = static_cast<const JSON>(((*this)["position"]));
 
-		mat4x4 mat;
+		matrix mat;
 		const vec2 pos = static_cast<const JSON>((*this)["position"]).GetVec2();
 		const vec2 scale = static_cast<const JSON>((*this)["scale"]).GetVec2();
 		const float rot = (double)static_cast<const JSON>((*this)["rotation"]).GetDouble();
@@ -199,10 +199,10 @@ namespace util
 		return vec;
 	}
 	template<>
-	const std::vector<Matrix2D> JSON::GetArray<Matrix2D>(void) const
+	const std::vector<matrix> JSON::GetArray<matrix>(void) const
 	{
 		assert(IsArray());
-		std::vector<Matrix2D> vec;
+		std::vector<matrix> vec;
 		vec.reserve(Size());
 		for (int i = 0; i < (int)Size(); ++i)
 			vec.push_back(((JSON)((*this)[i])).GetMatrix());
@@ -223,7 +223,7 @@ namespace util
 		AddMember("b", val.b, allocator);
 		AddMember("a", val.a, allocator);
 	}
-	void JSON::SetVec2(const math::vec2& val, rapidjson::Document::AllocatorType& allocator)
+	void JSON::SetVec2(const vec2& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetObject();
 		rapidjson::Value x, y;
@@ -232,14 +232,14 @@ namespace util
 		AddMember("x", x.Move(), allocator);
 		AddMember("y", y.Move(), allocator);
 	}
-	void JSON::SetVec3(const math::vec3& val, rapidjson::Document::AllocatorType& allocator)
+	void JSON::SetVec3(const vec3& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetObject();
 		AddMember("x", val.x, allocator);
 		AddMember("y", val.y, allocator);
 		AddMember("z", val.y, allocator);
 	}
-	void JSON::SetVec4(const math::vec4& val, rapidjson::Document::AllocatorType& allocator)
+	void JSON::SetVec4(const vec4& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetObject();
 		AddMember("x", val.x, allocator);
@@ -261,7 +261,7 @@ namespace util
 		AddMember("min", min, allocator);
 		AddMember("max", max, allocator);
 	}
-	void JSON::SetMatrix(const math::Matrix2D& val, rapidjson::Document::AllocatorType& allocator)
+	void JSON::SetMatrix(const matrix& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		JSON vpos, vscale, vrot;
 		vpos.SetVec2(val.GetPosition(), allocator);
@@ -332,7 +332,7 @@ namespace util
 		}
 	}
 	template<>
-	const void JSON::WriteArray(std::vector<Matrix2D> val, rapidjson::Document::AllocatorType& allocator)
+	const void JSON::WriteArray(std::vector<mat4x4> val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetArray();
 		for (size_t i = 0; i < val.size(); ++i)

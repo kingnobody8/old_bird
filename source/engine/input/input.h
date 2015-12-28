@@ -1,6 +1,6 @@
 #pragma once
 #include "util_time.h"
-#include "math/type2.h"
+#include "math/math.h"
 #include "event/publisher.h"
 #include "event/publisher.inl"
 #include "SDL.h"
@@ -42,11 +42,11 @@ namespace engine
 		{
 			struct MotionAction : public IEvent
 			{
-				util::math::Type2<slong>	m_pixel;
-				util::math::Type2<slong>	m_delta;
+				vec2	m_pixel;
+				vec2	m_delta;
 				__todo() // we may eventually want velocity in here delta_pixels / time_since last motion
 
-				MotionAction(const SDL_Event& event, const util::math::Type2<slong> pixel, const util::math::Type2<slong> delta)
+				MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
 					: IEvent(event), m_pixel(pixel), m_delta(delta)
 				{
 				}
@@ -54,11 +54,11 @@ namespace engine
 
 			struct ButtonAction : public IEvent
 			{
-				util::math::Type2<slong>	m_pixel;
-				uchar						m_button; //this is SDL_BUTTON_LEFT, SDL_BUTTON_MIDDLE, or SDL_BUTTON_RIGHT
-				uchar						m_clicks;
+				vec2	m_pixel;
+				uchar	m_button; //this is SDL_BUTTON_LEFT, SDL_BUTTON_MIDDLE, or SDL_BUTTON_RIGHT
+				uchar	m_clicks;
 
-				ButtonAction(const SDL_Event& event, const util::math::Type2<slong>& pixel, const uchar& button, const uchar& clicks)
+				ButtonAction(const SDL_Event& event, const vec2& pixel, const uchar& button, const uchar& clicks)
 					: IEvent(event), m_pixel(pixel), m_button(button), m_clicks(clicks)
 				{
 				}
@@ -66,9 +66,9 @@ namespace engine
 
 			struct WheelAction : public IEvent
 			{
-				util::math::Type2<slong>	m_scroll;
+				vec2	m_scroll;
 
-				WheelAction(const SDL_Event& event, const util::math::Type2<slong> scroll)
+				WheelAction(const SDL_Event& event, const vec2 scroll)
 					: IEvent(event), m_scroll(scroll)
 				{
 				}

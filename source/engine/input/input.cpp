@@ -19,14 +19,14 @@ namespace engine
 		STATIC util::event::Publisher<mouse_events::WheelAction> mouse_events::s_InputMouseScrollWheel;
 
 
-		const util::math::Type2<slong> ConvertPixelToCartesian(int x, int y)
+		const vec2 ConvertPixelToCartesian(int x, int y)
 		{
-			util::math::Type2<int> logical_size;
-			SDL_GetWindowSize(s_sdlWin, &logical_size.w, &logical_size.h);
+			glm::i32vec2 logical_size;
+			SDL_GetWindowSize(s_sdlWin, &logical_size.x, &logical_size.y);
 
-			util::math::Type2<slong> ret;
+			vec2 ret;
 			ret.x = (slong)x;
-			ret.y = (slong)(logical_size.h - y);
+			ret.y = (slong)(logical_size.y - y);
 			return ret;
 		}
 
@@ -74,7 +74,7 @@ namespace engine
 					break;
 				case SDL_MOUSEMOTION:
 				{
-					mouse_events::MotionAction action(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), util::math::Type2<slong>((slong)tEvent.motion.xrel, (slong)-tEvent.motion.yrel));
+					mouse_events::MotionAction action(tEvent, ConvertPixelToCartesian(tEvent.motion.x, tEvent.motion.y), vec2(tEvent.motion.xrel, -tEvent.motion.yrel));
 					script::ui::CUiPart::OnMouseMotion(action);
 					mouse_events::s_InputMouseMotion.Publish(action);
 					break;
@@ -94,7 +94,7 @@ namespace engine
 					break;
 				}
 				case SDL_MOUSEWHEEL:
-					mouse_events::s_InputMouseScrollWheel.Publish(mouse_events::WheelAction(tEvent, util::math::Type2<slong>(tEvent.wheel.x, tEvent.wheel.y)));
+					mouse_events::s_InputMouseScrollWheel.Publish(mouse_events::WheelAction(tEvent, vec2(tEvent.wheel.x, tEvent.wheel.y)));
 					break;
 					//JOY event
 				case SDL_JOYAXISMOTION:

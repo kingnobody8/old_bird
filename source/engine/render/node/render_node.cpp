@@ -1,7 +1,6 @@
 #include "render_node.h"
 #include "../render_layer.h"
 #include "func.h"
-#include "sprite_node.h"
 
 namespace engine
 {
@@ -49,7 +48,7 @@ namespace engine
 			m_use_scissor = true;
 		}
 		
-		void IRenderNode::ScissorOperation(SDL_Renderer* pRen, const util::math::vec2& origin)
+		void IRenderNode::ScissorOperation(SDL_Renderer* pRen, const vec2& origin)
 		{
 			if (m_use_scissor)
 			{

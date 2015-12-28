@@ -1,6 +1,7 @@
 #include "fixture_part.h"
 #include "script/script.h"
 #include "component/object.h"
+#include "math/consts.h"
 
 namespace engine
 {
@@ -27,11 +28,11 @@ namespace engine
 			{
 				IBox2DPart::Init();
 
-				util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
+				matrix wmat = m_pOwner->CalcWorldMatrix();
 
-				util::math::vec2 pos = wmat.GetPosition();
+				vec2 pos = wmat.GetPosition();
 				b2AABB aabb = m_pOwner->CalcAabb();
-				const util::math::vec2 extends = util::math::vec2(aabb.GetExtents().x, aabb.GetExtents().y);
+				const vec2 extends = vec2(aabb.GetExtents().x, aabb.GetExtents().y);
 
 				const b2Vec2 b2points[4] =
 				{
@@ -100,7 +101,7 @@ namespace engine
 				assert(filter.HasMember("group_index"));
 				assert(filter.HasMember("mask_bits"));
 
-				const util::math::vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
+				const vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
 				m_bodyDef.linearVelocity = b2Vec2(linearVelocity.x, linearVelocity.y);
 				m_bodyDef.angularVelocity = body_def["angular_velocity"].GetDouble();
 				m_bodyDef.linearDamping = body_def["linear_damping"].GetDouble();
@@ -140,8 +141,8 @@ namespace engine
 
 				__todo()//we may want a soft assert here, because we probably should never be setting a box parts matrix outside of the initial setup
 
-					util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
-				util::math::vec2 pos = wmat.GetPosition() * PIX_TO_BOX;
+				matrix wmat = m_pOwner->CalcWorldMatrix();
+				vec2 pos = wmat.GetPosition() * PIX_TO_BOX;
 				m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotationZ() * DEG_TO_RAD);
 				m_pBody->SetLinearVelocity(b2Vec2(0, 0));
 				m_pBody->SetAngularVelocity(0);

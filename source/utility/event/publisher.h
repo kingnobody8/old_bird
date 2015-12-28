@@ -99,15 +99,16 @@ namespace util
 		};
 
 		//convenience types
-		typedef Publisher<const bool&>						BoolPublisher;
-		typedef Publisher<const int&>						IntPublisher;
-		typedef Publisher<const float&>						FloatPublisher;
-		typedef Publisher<const TBuffer&>					BufferPublisher;
-		typedef Publisher<const b2AABB&>					AabbPublisher;
-		typedef Publisher<const util::Time&>				TimePublisher;
-		typedef Publisher<const std::string&>				StringPublisher;
-		typedef Publisher<const util::math::vec2&>			Vec2Publisher;
-		typedef Publisher<const util::math::vec3&>			Vec3Publisher;
-		typedef Publisher<const util::math::Matrix2D&>		MatrixPublisher;
+		typedef Publisher<const bool&>				BoolPublisher;
+		typedef Publisher<const int&>				IntPublisher;
+		typedef Publisher<const float&>				FloatPublisher;
+		typedef Publisher<const TBuffer&>			BufferPublisher;
+		typedef Publisher<const b2AABB&>			AabbPublisher;
+		typedef Publisher<const util::Time&>		TimePublisher;
+		typedef Publisher<const std::string&>		StringPublisher;
+		typedef Publisher<const vec2&>				Vec2Publisher;
+		typedef Publisher<const vec3&>				Vec3Publisher;
+		typedef Publisher<const vec4&>				Vec4Publisher;
+		typedef Publisher<const matrix&>			MatrixPublisher;
 	}
 }

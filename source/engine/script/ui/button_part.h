@@ -23,9 +23,9 @@ namespace engine
 
 				/*Func*/
 			protected:
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos);
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos);
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const vec2& wpos);
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const vec2& wpos);
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const vec2& wpos);
 
 			public:
 				CButtonPart();

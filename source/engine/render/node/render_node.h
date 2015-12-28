@@ -2,7 +2,7 @@
 #include "Collision/Shapes/b2PolygonShape.h"
 #include "bit_flag.h"
 #include "sdl/include/SDL.h"
-#include "math/matrix_2d.h"
+#include "math/math.h"
 #include "color.h"
 #include <string>
 #include "box2d/box2d.h"
@@ -32,13 +32,13 @@ namespace engine
 			float				m_zed;
 
 		protected:
-			void ScissorOperation(SDL_Renderer* pRen, const util::math::vec2& origin);
+			void ScissorOperation(SDL_Renderer* pRen, const vec2& origin);
 			virtual void CalcAabbInternal() = 0;
 
 		public:
 			IRenderNode(void);
 			virtual ~IRenderNode() = 0;
-			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam) = 0;
+			virtual void operator () (SDL_Renderer* pRen, const matrix& inv_cam) = 0;
 			
 			const b2AABB CalcAABB();
 			const bool CheckInView(const b2AABB& view);

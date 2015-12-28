@@ -13,11 +13,7 @@ Purpose:	Crossplatform Main Interface
 #include "../utility/macro.h"
 #include "../utility/math/consts.h"
 #include "../utility/math/interp.h"
-#include "../utility/math/matrix_2d.h"
-#include "../utility/math/matrix_stack.h"
-#include "../utility/math/type2.h"
-#include "../utility/math/type3.h"
-#include "../utility/math/type4.h"
+#include "../utility/math/math.h"
 #include "../utility/common.h"
 #include "../utility/platform.h"
 #include "../utility/timer.h"
@@ -50,7 +46,7 @@ using namespace util;
 //#include <Box2D/Box2D.h>
 
 #ifdef WIN
-#include <vld.h>
+//#include <vld.h>
 #endif
 
 int main(int argc, char** argv)

@@ -36,7 +36,7 @@ namespace util
 		const vec3				GetVec3() const;
 		const vec4				GetVec4() const;
 		const b2AABB			GetAabb() const;
-		const mat4x4			GetMatrix() const;
+		const matrix			GetMatrix() const;
 		template<typename type>
 		const std::vector<type> GetArray(void) const;
 
@@ -46,7 +46,7 @@ namespace util
 		void SetVec3(const vec3& val, rapidjson::Document::AllocatorType& allocator);
 		void SetVec4(const vec4& val, rapidjson::Document::AllocatorType& allocator);
 		void SetAabb(const b2AABB& val, rapidjson::Document::AllocatorType& allocator);
-		void SetMatrix(const mat4x4& val, rapidjson::Document::AllocatorType& allocator);
+		void SetMatrix(const matrix& val, rapidjson::Document::AllocatorType& allocator);
 		template<typename type>
 		const void WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator); //this is called 'write' because 'setarray' is already used by rapidjson::value
 
@@ -65,13 +65,13 @@ namespace util
 	template<>
 	const void JSON::WriteArray(std::vector<Color> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<math::vec2> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<vec2> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<math::vec3> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<vec3> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<math::vec4> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<vec4> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<math::Matrix2D> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<matrix> val, rapidjson::Document::AllocatorType& allocator);
 
 	/*
 	EXAMPLES

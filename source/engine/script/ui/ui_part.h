@@ -64,9 +64,9 @@ namespace engine
 				/*the mouse action internals return a bool to respond if they have handled the event or not (true means handled, false means unhandled) */
 				__todo() //maybe make the return an enum with codes for handled/unhandled
 
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
 
 			public:
 				CUiPart();

@@ -3,7 +3,7 @@
 #include <list>
 #include "macro.h"
 #include <string>
-#include "math/type2.h"
+#include "math/math.h"
 
 namespace engine
 {
@@ -45,8 +45,8 @@ namespace engine
 			inline CCamera* const GetCamera(void) const { return m_pCamera; }
 			inline const std::string& GetName() const { return m_name; }
 			inline const int& GetSortRank() const { return m_sort_rank; }
-			const util::math::vec2 ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point);
-			const util::math::vec2 ConvertPointFromWorldToScreen(util::math::vec2 m_world_point);
+			const vec2 ConvertPointFromScreenToWorld(vec2 m_screen_point);
+			const vec2 ConvertPointFromWorldToScreen(vec2 m_world_point);
 		};
 	}
 }
