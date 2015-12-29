@@ -29,6 +29,7 @@
     <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\shader_program.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\box\box2d_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\box\fixture_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
@@ -46,8 +47,10 @@
     <ClInclude Include="..\..\..\source\engine\input\input.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h" />
+    <ClInclude Include="..\..\..\source\engine\render\opengl.h" />
     <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
+    <ClInclude Include="..\..\..\source\engine\render\shader_program.h" />
     <ClInclude Include="..\..\..\source\engine\script\box\box2d_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\box\fixture_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
