@@ -97,7 +97,6 @@ namespace engine
 
 			__todo() //replace this with the nodes found after the cull
 				//also use the actuall camera matrix
-
 			matrix inv_cam = glm::inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{
@@ -138,13 +137,13 @@ namespace engine
 			m_screen_point.x = m_screen_point.x - origin.x;
 			m_screen_point.y = m_screen_point.y - origin.y;
 
-			const vec4 tmp = m_pCamera->GetMatrix() * vec4(m_screen_point.x, m_screen_point.y, 0.0f, 1.0f);
+			const vec4 tmp;// = m_pCamera->GetMatrix() * vec4(m_screen_point.x, m_screen_point.y, 0.0f, 1.0f);
 			return vec2(tmp.x, tmp.y);
 		}
 
 		const vec2 CRenderLayer::ConvertPointFromWorldToScreen(vec2 m_world_point)
 		{
-			const vec4& tmp = glm::inverse(m_pCamera->GetMatrix()) * vec4(m_world_point.x, m_world_point.y, 0.0f, 1.0f);
+			const vec4 tmp;// = glm::inverse(m_pCamera->GetMatrix()) * vec4(m_world_point.x, m_world_point.y, 0.0f, 1.0f);
 			return vec2(tmp.x, tmp.y);
 		}
 	}

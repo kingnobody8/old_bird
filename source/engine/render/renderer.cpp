@@ -15,9 +15,6 @@
 #include <SDL_opengl.h>
 #include <gl\glu.h>
 
-#include "glm/glm.hpp"
-#include <glm/gtc/matrix_transform.hpp>
-
 bool gRenderQuad = true;
 
 namespace engine

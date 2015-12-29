@@ -64,17 +64,17 @@ namespace engine
 			inline const bool						GetLocalVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE); }
 			inline const bool						GetWorldVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE | EFlag::PARENT_VISIBLE); }
 
-			inline const vec2						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
-			inline const vec2						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
-			inline const float						GetLocalRotationZ(void) const { return this->m_cMatLocal.GetRotationZ(); }
+			inline const vec3						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
+			inline const vec3						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
+			inline const vec3						GetLocalRotation(void) const { return this->m_cMatLocal.GetRotation(); }
 
 			//Calcs
 			const matrix							CalcWorldMatrix(void) const;
 			const float								CalcWorldZed(void) const;
 
-			inline const vec2						CalcWorldPos(void) const { return this->CalcWorldMatrix().GetPosition(); }
-			inline const vec2						CalcWorldScale(void) const { return this->CalcWorldMatrix().GetScale(); }
-			inline const float						CalcWorldRotationZ(void) const { return this->CalcWorldMatrix().GetRotationZ(); }
+			inline const vec3						CalcWorldPos(void) const { return this->CalcWorldMatrix().GetPosition(); }
+			inline const vec3						CalcWorldScale(void) const { return this->CalcWorldMatrix().GetScale(); }
+			inline const vec3						CalcWorldRotation(void) const { return this->CalcWorldMatrix().GetRotation(); }
 
 			const b2AABB							CalcAabb(void) const;
 

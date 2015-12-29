@@ -61,7 +61,9 @@ namespace glm
 		template <typename U, precision Q>
 		friend tvec4<U, Q> operator/(tvec4<U, Q> const & v, tmat4x4<U, Q> const & m);
 
-	private:
+		/*HABIG - begin edit*/
+	protected:
+		/*HABIG - end edit*/
 		col_type value[4];
 
 	public:

@@ -32,6 +32,7 @@
     <ClInclude Include="..\..\..\source\utility\math\consts.h" />
     <ClInclude Include="..\..\..\source\utility\math\interp.h" />
     <ClInclude Include="..\..\..\source\utility\math\math.h" />
+    <ClInclude Include="..\..\..\source\utility\math\matrix.h" />
     <ClInclude Include="..\..\..\source\utility\platform.h" />
     <ClInclude Include="..\..\..\source\utility\timer.h" />
     <ClInclude Include="..\..\..\source\utility\types.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="..\..\..\source\utility\func.cpp" />
     <ClCompile Include="..\..\..\source\utility\json.cpp" />
     <ClCompile Include="..\..\..\source\utility\math\interp.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\matrix.cpp" />
     <ClCompile Include="..\..\..\source\utility\timer.cpp" />
     <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
   </ItemGroup>

@@ -38,6 +38,9 @@
     <ClInclude Include="..\..\..\source\utility\math\math.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\math\matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\utility\event\publisher.cpp">
       <Filter>event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\utility\math\matrix.cpp">
+      <Filter>math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

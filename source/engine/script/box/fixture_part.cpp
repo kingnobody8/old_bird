@@ -30,7 +30,7 @@ namespace engine
 
 				matrix wmat = m_pOwner->CalcWorldMatrix();
 
-				vec2 pos = wmat.GetPosition();
+				vec3 pos = wmat.GetPosition();
 				b2AABB aabb = m_pOwner->CalcAabb();
 				const vec2 extends = vec2(aabb.GetExtents().x, aabb.GetExtents().y);
 
@@ -48,7 +48,7 @@ namespace engine
 
 				m_bodyDef.userData = this;
 				m_bodyDef.position = b2Vec2(pos.x * PIX_TO_BOX, pos.y * PIX_TO_BOX);
-				m_bodyDef.angle = wmat.GetRotationZ() * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
+				m_bodyDef.angle = wmat.GetRotation().z * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
 				m_pBody = s_pWorld->CreateBody(&m_bodyDef);
 
 				m_fixtureDef.userData = this;
@@ -142,8 +142,8 @@ namespace engine
 				__todo()//we may want a soft assert here, because we probably should never be setting a box parts matrix outside of the initial setup
 
 				matrix wmat = m_pOwner->CalcWorldMatrix();
-				vec2 pos = wmat.GetPosition() * PIX_TO_BOX;
-				m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotationZ() * DEG_TO_RAD);
+				vec3 pos = wmat.GetPosition() * PIX_TO_BOX;
+				m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotation().z * DEG_TO_RAD);
 				m_pBody->SetLinearVelocity(b2Vec2(0, 0));
 				m_pBody->SetAngularVelocity(0);
 				m_pBody->SetAwake(true);

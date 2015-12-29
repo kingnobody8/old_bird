@@ -11,7 +11,6 @@ namespace engine
 
 		static void Nuke(CObject* pObj);
 
-
 		STATIC void CObject::Clean()
 		{
 			for (int i = 0; i < s_MarkedForDestruction.size(); ++i)
@@ -20,7 +19,6 @@ namespace engine
 			}
 			s_MarkedForDestruction.clear();
 		}
-
 
 
 		/*------------------------------------------------------------------*/
@@ -188,7 +186,7 @@ namespace engine
 			matrix ret = m_cMatLocal;
 			TraverseAncestors(this, [&ret](CObject* pObj)
 			{
-				ret *= pObj->GetLocalMatrix();
+				ret = ret * pObj->GetLocalMatrix();
 			});
 
 			return ret;
@@ -253,17 +251,19 @@ namespace engine
 		}
 		void CObject::SetLocalPosXY(const float& x, const float& y)
 		{
-			this->m_cMatLocal.SetPosition(x, y);
+			this->m_cMatLocal.SetPosition(x, y, this->m_cMatLocal.GetPosition().z);
 			OnMatrixChanged();
 		}
 		void CObject::SetLocalScale(const float& x, const float& y)
 		{
-			this->m_cMatLocal.SetScale(x, y);
+			this->m_cMatLocal.SetScale(x, y, this->m_cMatLocal.GetScale().z);
 			OnMatrixChanged();
 		}
 		void CObject::SetLocalRotationZ(const float& rot)
 		{
-			this->m_cMatLocal.SetRotationZ(rot);
+			vec3 rotation = this->m_cMatLocal.GetRotation();
+			rotation.z = rot;
+			this->m_cMatLocal.SetRotation(rotation);
 			OnMatrixChanged();
 		}
 
@@ -271,8 +271,8 @@ namespace engine
 		{
 			if (m_pParent)
 			{
-				const util::math::Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
-				util::math::vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
+				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
+				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				float pos_x = x / wmat.GetScale().x - wpos.x;
 				this->SetLocalPosX(pos_x);
 			}
@@ -283,8 +283,8 @@ namespace engine
 		{
 			if (m_pParent)
 			{
-				const util::math::Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
-				util::math::vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
+				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
+				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				float pos_y = y / wmat.GetScale().y - wpos.y;
 				this->SetLocalPosY(pos_y);
 			}
@@ -293,23 +293,24 @@ namespace engine
 		}
 		void CObject::SetWorldPosXY(const float& x, const float& y)
 		{
-			if (m_pParent)
+			__todo() //fix this
+			/*if (m_pParent)
 			{
-				const util::math::Matrix2D& wmat = this->m_pParent->CalcWorldMatrix();
-				util::math::vec2 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
-				util::math::vec2 pos = util::math::vec2(x, y) / wmat.GetScale() - wpos;
+				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
+				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
+				vec2 pos = vec2(x, y, 1.0f) / wmat.GetScale() - wpos;
 				this->SetLocalPosXY(pos);
 			}
 			else
 			{
 				this->SetLocalPosXY(x, y);
-			}
+			}*/
 		}
 		void CObject::SetWorldScale(const float& x, const float& y)
 		{
 			if (m_pParent)
 			{
-				util::math::vec2 wscale = this->m_pParent->CalcWorldMatrix().GetScale();
+				vec3 wscale = this->m_pParent->CalcWorldMatrix().GetScale();
 				this->SetLocalScale(x - wscale.x, y - wscale.y);
 			}
 			else
@@ -320,7 +321,7 @@ namespace engine
 		void CObject::SetWorldRotationZ(const float& rot)
 		{
 			if (m_pParent)
-				this->SetLocalRotationZ(rot - this->m_pParent->CalcWorldMatrix().GetRotationZ());
+				this->SetLocalRotationZ(rot - this->m_pParent->CalcWorldMatrix().GetRotation().z);
 			else
 				this->SetLocalRotationZ(rot);
 		}

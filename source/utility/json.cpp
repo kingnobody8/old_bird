@@ -80,18 +80,14 @@ namespace util
 	}
 	const matrix JSON::GetMatrix() const
 	{
-		__todo() // change this to be a 3d matrix
-
-		const JSON j = static_cast<const JSON>(((*this)["position"]));
-
 		matrix mat;
-		const vec2 pos = static_cast<const JSON>((*this)["position"]).GetVec2();
-		const vec2 scale = static_cast<const JSON>((*this)["scale"]).GetVec2();
-		const float rot = (double)static_cast<const JSON>((*this)["rotation"]).GetDouble();
+		const vec3 pos = static_cast<const JSON>((*this)["position"]).GetVec3();
+		const vec3 scale = static_cast<const JSON>((*this)["scale"]).GetVec3();
+		const vec3 rot = static_cast<const JSON>((*this)["rotation"]).GetVec3();
 
 		mat.SetPosition(pos);
 		mat.SetScale(scale);
-		mat.SetRotationZ(rot);
+		mat.SetRotation(rot);
 
 		return mat;
 	}
@@ -237,15 +233,15 @@ namespace util
 		SetObject();
 		AddMember("x", val.x, allocator);
 		AddMember("y", val.y, allocator);
-		AddMember("z", val.y, allocator);
+		AddMember("z", val.z, allocator);
 	}
 	void JSON::SetVec4(const vec4& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetObject();
 		AddMember("x", val.x, allocator);
 		AddMember("y", val.y, allocator);
-		AddMember("z", val.y, allocator);
-		AddMember("w", val.y, allocator);
+		AddMember("z", val.z, allocator);
+		AddMember("w", val.w, allocator);
 	}
 	void JSON::SetAabb(const b2AABB& val, rapidjson::Document::AllocatorType& allocator)
 	{
@@ -264,9 +260,9 @@ namespace util
 	void JSON::SetMatrix(const matrix& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		JSON vpos, vscale, vrot;
-		vpos.SetVec2(val.GetPosition(), allocator);
-		vscale.SetVec2(val.GetScale(), allocator);
-		vrot.SetDouble((double)val.GetRotationZ());
+		vpos.SetVec3(val.GetPosition(), allocator);
+		vscale.SetVec3(val.GetScale(), allocator);
+		vrot.SetVec3(val.GetRotation(), allocator);
 
 		SetObject();
 		AddMember("position", vpos, allocator);
@@ -332,12 +328,12 @@ namespace util
 		}
 	}
 	template<>
-	const void JSON::WriteArray(std::vector<mat4x4> val, rapidjson::Document::AllocatorType& allocator)
+	const void JSON::WriteArray(std::vector<matrix> val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetArray();
 		for (size_t i = 0; i < val.size(); ++i)
 		{
-			JSON j;//
+			JSON j;
 			j.SetMatrix(val[i], allocator);
 			PushBack(j, allocator);
 		}
