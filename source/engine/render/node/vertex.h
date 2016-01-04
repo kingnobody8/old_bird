@@ -8,7 +8,7 @@ namespace engine
 		struct VertexColor
 		{
 			vec2 position;
-			vec4 color;
+			//vec4 color;
 		};
 
 		struct VertexTexture

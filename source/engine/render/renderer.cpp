@@ -7,10 +7,12 @@
 #include "util_time.h"
 #include "render_layer.h"
 #include "camera.h"
+#include "shader.h"
 
 #include "opengl.h"
 
 #include "node/polygon_node.h"
+#include "shader/shader_color_polygon.h"
 
 bool gRenderQuad = true;
 
@@ -25,6 +27,7 @@ namespace engine
 		const int GRID_CELL_SIZE = 64;
 
 		PolygonNode node;
+		IShaderProgram* shader = null;
 
 		void RenderGrid() __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
 		{
@@ -128,6 +131,11 @@ namespace engine
 			verts[2].position = vec2(0.5f, 0.5f);
 			verts[3].position = vec2(-0.5f, 0.5f);
 
+			for (int i = 0; i < 4; ++i)
+			{
+			//	verts[i].color = util::Color::WHITE;
+			}
+
 			indicies.resize(4);
 			indicies[0] = 0;
 			indicies[1] = 1;
@@ -135,6 +143,11 @@ namespace engine
 			indicies[3] = 3;
 
 			node.InitVBO(verts, indicies);
+
+			render::RegisterShaders();
+
+			shader = IShaderProgram::CreateShader(ShaderColorPolygon::Type);
+			node.SetShader(shader);
 		}
 		void Destroy()
 		{
@@ -158,6 +171,8 @@ namespace engine
 
 			//go through each layer and render
 			CRenderLayer::RenderAllLayers();
+
+			node(matrix());
 
 			//Update screen
 			SDL_GL_SwapWindow(s_sdlWin);

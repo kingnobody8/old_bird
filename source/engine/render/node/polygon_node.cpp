@@ -1,5 +1,6 @@
 #include "polygon_node.h"
 #include "func.h"
+#include "../shader/shader_color_polygon.h"
 
 namespace engine
 {
@@ -95,15 +96,21 @@ namespace engine
 			//Bind vertex buffer
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 
-
 			//Update vertex buffer data
 			glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertCount * sizeof(VertexColor), m_vVerts);
 
-			//Set texture coordinate data
-			//mTexturedPolygonProgram2D->setTexCoordPointer(sizeof(VertexColor), (GLvoid*)offsetof(LTexturedVertex2D, texCoord));
+			ShaderColorPolygon* pShader = static_cast<ShaderColorPolygon*>(m_pShader);
+
+			pShader->Bind();
+
+			pShader->SetModelViewMatrix(matrix());
+			pShader->SetProjectionMatrix(matrix());
+
+			//Set color vertex data
+			//pShader->SetVertexColorPointer(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, color));
 
 			//Set vertex data
-			//mTexturedPolygonProgram2D->setVertexPointer(sizeof(LTexturedVertex2D), (GLvoid*)offsetof(LTexturedVertex2D, position));
+			pShader->SetVertexPositionPointer(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, position));
 
 			//Draw quad using vertex data and index data
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);

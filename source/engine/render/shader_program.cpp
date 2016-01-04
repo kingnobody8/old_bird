@@ -28,13 +28,17 @@ namespace engine
 		{
 			auto find = IShaderProgram::GetNameMap().find(type);
 			assert(find != IShaderProgram::GetNameMap().end() && "This shader type doesn't exist!");
-			return find->second();
+			IShaderProgram* tmp = find->second();
+			tmp->LoadProgram();
+			return tmp;
 		}
 		STATIC IShaderProgram* IShaderProgram::CreateShader(const int type)
 		{
 			auto find = IShaderProgram::GetKeyMap().find(type);
 			assert(find != IShaderProgram::GetKeyMap().end());
-			return find->second();
+			IShaderProgram* tmp = find->second();
+			tmp->LoadProgram();
+			return tmp;
 		}
 		STATIC void IShaderProgram::RegisterShader(const std::string& typeName, const ShaderTypeKey& key, const ShaderFunctor func)
 		{

@@ -15,6 +15,15 @@ namespace engine
 			virtual ~ShaderColorPolygon();
 			virtual const bool LoadProgram();
 
+			void SetVertexPositionPointer(GLsizei stride, const GLvoid* data);
+			void SetVertexColorPointer(GLsizei stride, const GLvoid* data);
+
+			void DisableVertexPositionPointer();
+			void DisableVertexColorPointer();
+
+			void SetProjectionMatrix(const matrix& projectionMat);
+			void SetModelViewMatrix(const matrix& modelViewMat);
+
 		protected:
 			//Attribute locations
 			GLint m_vertexPositionLocation;

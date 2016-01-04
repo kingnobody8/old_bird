@@ -76,7 +76,7 @@ namespace engine
 		render::Setup();
 
 		//Init all shaders
-		render::RegisterShaders(); __todo() //move this to application project
+		//render::RegisterShaders(); __todo() //move this to application project
 
 		//Initialize the input system
 		input::Setup(render::GetSdlWindow());
