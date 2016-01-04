@@ -22,7 +22,7 @@ namespace engine
 			static CRenderLayer* FindLayer(const std::string& szLayer);
 			static CRenderLayer* CreateLayer(const std::string& name, const int& sort_rank, CCamera* const pCam);
 			static void DestroyLayers();
-			static void RenderAllLayers(SDL_Renderer* pRen);
+			static void RenderAllLayers();
 
 		private:
 			std::list<IRenderNode*> m_vNodes;
@@ -41,7 +41,7 @@ namespace engine
 			void RegisterNode(IRenderNode* pNode);
 			void UnregisterNode(IRenderNode* pNode);
 			void ClearAllNodes(void);
-			void DoRender(SDL_Renderer* pRen);
+			void DoRender();
 			inline CCamera* const GetCamera(void) const { return m_pCamera; }
 			inline const std::string& GetName() const { return m_name; }
 			inline const int& GetSortRank() const { return m_sort_rank; }

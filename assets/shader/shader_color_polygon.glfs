@@ -1,0 +1,11 @@
+//Input pixel color
+in vec4 n_pixelColor;
+
+//Final color
+out vec4 gl_FragColor;
+
+void main()
+{
+	//Set fragment
+	gl_FragColor = n_pixelColor;
+}

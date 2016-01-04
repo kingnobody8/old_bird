@@ -28,6 +28,9 @@
     <Filter Include="render\node">
       <UniqueIdentifier>{146a1116-6007-403c-8cd6-116ab8e792b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="render\shader">
+      <UniqueIdentifier>{0d0f22d4-2108-4d62-81e7-3435c027ad80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -77,6 +80,15 @@
       <Filter>render\node</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\shader_program.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\polygon_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_color_polygon.cpp">
+      <Filter>render\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\shader.cpp">
       <Filter>render</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,6 +146,18 @@
       <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\opengl.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\polygon_node.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\vertex.h">
+      <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_color_polygon.h">
+      <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\shader.h">
       <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>

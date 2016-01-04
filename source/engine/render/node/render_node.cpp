@@ -30,9 +30,11 @@ namespace engine
 			: m_pLayer(null)
 			, m_flag(MOVE_DIRTY | CULL_DIRTY)
 			, m_zed(0.0f)
-			, m_use_scissor(false)
+			, m_vboID(0)
+			, m_iboID(0)
+			, m_pShader(null)
+		//	, m_use_scissor(false)
 		{
-			m_clr.a = m_clr.r = m_clr.g = m_clr.b = 255;
 		}
 		
 		VIRTUAL IRenderNode::~IRenderNode()
@@ -40,7 +42,7 @@ namespace engine
 			Unregister();
 		}
 		
-		void IRenderNode::SetScissorRect(const b2AABB& scissor)
+	/*	void IRenderNode::SetScissorRect(const b2AABB& scissor)
 		{
 			if (scissor.IsValid())
 				return;
@@ -64,7 +66,7 @@ namespace engine
 				SDL_RenderSetClipRect(pRen, null);
 			}
 		}
-		
+		*/
 		const bool IRenderNode::CheckInView(const b2AABB& view)
 		{
 			__todo()

@@ -6,13 +6,58 @@ namespace engine
 {
 	namespace render
 	{
+		STATIC std::map<std::string, ShaderFunctor>& IShaderProgram::GetNameMap()
+		{
+			static std::map<std::string, ShaderFunctor> impl;
+			return impl;
+		}
+		STATIC std::map<ShaderTypeKey, ShaderFunctor>& IShaderProgram::GetKeyMap()
+		{
+			static std::map<ShaderTypeKey, ShaderFunctor> impl;
+			return impl;
+		}
+		STATIC std::map<ShaderTypeKey, IShaderProgram*>& IShaderProgram::GetShaderMap()
+		{
+			static std::map<ShaderTypeKey, IShaderProgram*> impl;
+			return impl;
+		}
+	
+		STATIC int IShaderProgram::s_nextShaderTypeId = 0;
+
+		STATIC IShaderProgram* IShaderProgram::CreateShader(const std::string& type)
+		{
+			auto find = IShaderProgram::GetNameMap().find(type);
+			assert(find != IShaderProgram::GetNameMap().end() && "This shader type doesn't exist!");
+			return find->second();
+		}
+		STATIC IShaderProgram* IShaderProgram::CreateShader(const int type)
+		{
+			auto find = IShaderProgram::GetKeyMap().find(type);
+			assert(find != IShaderProgram::GetKeyMap().end());
+			return find->second();
+		}
+		STATIC void IShaderProgram::RegisterShader(const std::string& typeName, const ShaderTypeKey& key, const ShaderFunctor func)
+		{
+			std::map<std::string, ShaderFunctor>& name_map = IShaderProgram::GetNameMap();
+			std::map<ShaderTypeKey, ShaderFunctor>& key_map = IShaderProgram::GetKeyMap();
+
+			//Each shader should be unique
+			assert(name_map.find(typeName) == name_map.end() && "You have a duplicate part!");
+			assert(key_map.find(key) == key_map.end() && "You have a duplicate part!");
+
+			//int key = ++IPart::s_nextPartTypeId;
+			IShaderProgram::GetNameMap()[typeName] = func;
+			IShaderProgram::GetKeyMap()[key] = func;
+		}
+
+		//------------------------------------------------------------------------------
 
 		IShaderProgram::IShaderProgram()
 			: m_programID(0)
 		{
 		}
 
-		IShaderProgram::~IShaderProgram()
+		VIRTUAL IShaderProgram::~IShaderProgram()
 		{
 			FreeProgram();
 		}
@@ -32,7 +77,8 @@ namespace engine
 			GLenum error = glGetError();
 			if (error != GL_NO_ERROR)
 			{
-				printf("Error binding shader! %s\n", gluErrorString(error));
+				__todo() //figure out this compiler error
+//				SDL_Log((char*)gluErrorString(error));
 				PrintProgramLog(m_programID);
 				return false;
 			}
@@ -66,7 +112,7 @@ namespace engine
 				if (infoLogLength > 0)
 				{
 					//Print Log
-					printf("%s\n", infoLog);
+					SDL_Log("%s\n", infoLog);
 				}
 
 				//Deallocate string
@@ -74,7 +120,7 @@ namespace engine
 			}
 			else
 			{
-				printf("Name %d is not a program\n", program);
+				SDL_Log("Name %d is not a program\n", program);
 			}
 		}
 
@@ -98,7 +144,7 @@ namespace engine
 				if (infoLogLength > 0)
 				{
 					//Print Log
-					printf("%s\n", infoLog);
+					SDL_Log("%s\n", infoLog);
 				}
 
 				//Deallocate string
@@ -106,7 +152,7 @@ namespace engine
 			}
 			else
 			{
-				printf("Name %d is not a shader\n", shader);
+				SDL_Log("Name %d is not a shader\n", shader);
 			}
 		}
 
@@ -128,7 +174,7 @@ namespace engine
 			}
 			else
 			{
-				printf("Unable to open file %s\n", path.c_str());
+				SDL_Log("Unable to open file %s\n", path.c_str());
 			}
 
 			return shaderID;
@@ -153,7 +199,7 @@ namespace engine
 			glGetShaderiv(shaderID, GL_COMPILE_STATUS, &shaderCompiled);
 			if (shaderCompiled != GL_TRUE)
 			{
-				printf("Unable to compile shader %d!\n\nSource:\n%s\n", shaderID, shaderSource);
+				SDL_Log("Unable to compile shader %d!\n\nSource:\n%s\n", shaderID, shaderSource);
 				PrintShaderLog(shaderID);
 				glDeleteShader(shaderID);
 				shaderID = 0;

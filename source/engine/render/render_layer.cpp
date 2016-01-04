@@ -49,10 +49,10 @@ namespace engine
 			s_layers.clear();
 		}
 
-		STATIC void CRenderLayer::RenderAllLayers(SDL_Renderer* pRen)
+		STATIC void CRenderLayer::RenderAllLayers()
 		{
 			for (auto iter = s_layers.begin(); iter != s_layers.end(); ++iter)
-				(*iter)->DoRender(pRen);
+				(*iter)->DoRender();
 		}
 
 		CRenderLayer::CRenderLayer(void)
@@ -79,10 +79,10 @@ namespace engine
 			this->m_vNodes.sort(SortNodeFunc);
 		}
 
-		void CRenderLayer::DoRender(SDL_Renderer* pRen)
+		void CRenderLayer::DoRender()
 		{
 			glm::i32vec2 logical_size;
-			SDL_GetRendererOutputSize(pRen, &logical_size.x, &logical_size.y);
+			SDL_GetWindowSize(GetSdlWindow(), &logical_size.x, &logical_size.y);
 			glm::i32vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
 			const b2AABB view = m_pCamera->CalcViewAabb(half_dims);
 			
@@ -100,7 +100,7 @@ namespace engine
 			matrix inv_cam = glm::inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{
-				(*iter)->operator()(pRen, inv_cam);
+				(*iter)->operator()(inv_cam);
 			}
 		}
 
@@ -131,7 +131,7 @@ namespace engine
 		{
 			//get screen info
 			glm::i32vec2 logical_size;
-			SDL_GetRendererOutputSize(render::GetSdlRenderer(), &logical_size.x, &logical_size.y);
+			SDL_GetWindowSize(render::GetSdlWindow(), &logical_size.x, &logical_size.y);
 			vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			m_screen_point.x = m_screen_point.x - origin.x;

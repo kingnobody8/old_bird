@@ -1,0 +1,140 @@
+#include "polygon_node.h"
+#include "func.h"
+
+namespace engine
+{
+	namespace render
+	{
+		PolygonNode::PolygonNode()
+			: m_vVerts(null)
+			, m_vertCount(0)
+			, m_vIndicies(null)
+			, m_indexCount(0)
+		{
+		}
+
+		VIRTUAL PolygonNode::~PolygonNode()
+		{
+			FreeVBO();
+		}
+
+		void PolygonNode::InitVBO(const std::vector<VertexColor>& verts, const std::vector<int>& indicies)
+		{
+			//early out
+			if (verts.empty())
+				return;
+
+			//Cleanup any old data
+			FreeVBO();
+
+			m_vertCount = verts.size();
+			m_vVerts = new VertexColor[m_vertCount];
+			for (int i = 0; i < m_vertCount; ++i)
+			{
+				m_vVerts[i] = verts[i];
+			}
+
+			m_indexCount = indicies.size();
+			m_vIndicies = new int[m_indexCount];
+			for (int i = 0; i < m_indexCount; i++)
+			{
+				m_vIndicies[i] = indicies[i];
+			}
+
+			//Create VBO
+			glGenBuffers(1, &m_vboID);
+			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
+			glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(VertexColor), m_vVerts, GL_DYNAMIC_DRAW);
+
+			//Create IBO
+			glGenBuffers(1, &m_iboID);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLuint), m_vIndicies, GL_DYNAMIC_DRAW);
+
+			//Unbind buffers
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+		}
+
+		VIRTUAL void PolygonNode::FreeVBO()
+		{
+			if (m_vboID != 0)
+			{
+				glDeleteBuffers(1, &m_vboID);
+				glDeleteBuffers(1, &m_iboID);
+
+				SafeDelete(m_vVerts);
+				m_vertCount = 0;
+				SafeDelete(m_vIndicies);
+				m_indexCount = 0;
+			}
+		}
+
+		VIRTUAL void PolygonNode::CalcAabbInternal()
+		{
+			m_aabb = b2AABB();
+			for (int i = 0; i < m_vertCount; ++i)
+			{
+				vec4 tmp = m_matrix * vec4(m_vVerts[i].position.x, m_vVerts[i].position.y, 0.0f, 1.0f);
+				if (!m_aabb.IsValid())
+				{
+					m_aabb.lowerBound = m_aabb.upperBound = b2Vec2(tmp.x, tmp.y);
+				}
+				else
+				{
+					m_aabb.Combine(b2Vec2(tmp.x, tmp.y));
+				}
+			}
+		}
+
+		VIRTUAL void PolygonNode::operator() (const matrix& inv_cam)
+		{
+			if (m_vboID == 0)
+				return;
+
+			//Bind vertex buffer
+			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
+
+
+			//Update vertex buffer data
+			glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertCount * sizeof(VertexColor), m_vVerts);
+
+			//Set texture coordinate data
+			//mTexturedPolygonProgram2D->setTexCoordPointer(sizeof(VertexColor), (GLvoid*)offsetof(LTexturedVertex2D, texCoord));
+
+			//Set vertex data
+			//mTexturedPolygonProgram2D->setVertexPointer(sizeof(LTexturedVertex2D), (GLvoid*)offsetof(LTexturedVertex2D, position));
+
+			//Draw quad using vertex data and index data
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
+			glDrawElements(GL_TRIANGLE_FAN, m_indexCount, GL_UNSIGNED_INT, NULL);
+
+			//Disable vertex and texture coordinate arrays
+			//mTexturedPolygonProgram2D->disableVertexPointer();
+			//mTexturedPolygonProgram2D->disableTexCoordPointer();
+
+		}
+
+		const std::vector<VertexColor> PolygonNode::GetVerts()
+		{
+			std::vector<VertexColor> ret;
+			ret.resize(m_vertCount);
+			for (int i = 0; i < m_vertCount; ++i)
+			{
+				ret[i] = m_vVerts[i];
+			}
+			return ret;
+		}
+
+		const std::vector<int> PolygonNode::GetIndicies()
+		{
+			std::vector<int> ret;
+			ret.resize(m_indexCount);
+			for (int i = 0; i < m_indexCount; ++i)
+			{
+				ret[i] = m_vIndicies[i];
+			}
+			return ret;
+		}
+	}
+}

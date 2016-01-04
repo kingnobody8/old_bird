@@ -12,6 +12,8 @@
 //#include "script/renderable/img_part.h"
 #include "component/object.inl"
 #include "script/box/box2d_part.h"
+#include "render\shader\shader_color_polygon.h"
+#include "render/shader.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -54,7 +56,7 @@ namespace engine
 
 		//Init all engine scripts
 		script::RegisterScripts();
-		
+
 		//assert(pFirstState);
 
 		//Init SDL
@@ -71,7 +73,10 @@ namespace engine
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 		//Initialize the rendering system
-		render::SetupSdl();
+		render::Setup();
+
+		//Init all shaders
+		render::RegisterShaders(); __todo() //move this to application project
 
 		//Initialize the input system
 		input::Setup(render::GetSdlWindow());
