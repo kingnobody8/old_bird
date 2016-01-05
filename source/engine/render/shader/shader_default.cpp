@@ -6,6 +6,7 @@ namespace engine
 	{
 		DefaultShader::DefaultShader()
 			: m_vertexPos2DLocation(-1)
+			, m_vertexColorLocation(-1)
 		{
 		}
 
@@ -16,7 +17,7 @@ namespace engine
 
 
 			//Get vertex source
-			const std::string vertexShaderSource = "#version 140\nin vec2 LVertexPos2D; void main() { gl_Position = vec4( LVertexPos2D.x, LVertexPos2D.y, 0, 1 ); }";
+			const std::string vertexShaderSource = "#version 140\nin vec2 vertexPos2D; out vec4 vertexColor; void main() { vertexColor = vec4(1.0, 0.5, 0.25, 1.0); gl_Position = vec4( vertexPos2D.x, vertexPos2D.y, 0, 1 ); }";
 			//Load vertex shader
 			GLuint vertexShader = LoadShaderFromString(vertexShaderSource, GL_VERTEX_SHADER);
 			//Check for errors
@@ -32,7 +33,7 @@ namespace engine
 
 
 			//Get fragment source
-			const std::string fragmentShaderSource = "#version 140\nout vec4 LFragment; void main() { LFragment = vec4( 1.0, 1.0, 1.0, 1.0 ); }";
+			const std::string fragmentShaderSource = "#version 140\nin vec4 vertexColor;\nout vec4 gl_FragColor; void main() { gl_FragColor = vertexColor; }";
 			//Create fragment shader
 			GLuint fragmentShader = LoadShaderFromString(fragmentShaderSource, GL_FRAGMENT_SHADER);
 			//Check for errors
@@ -73,8 +74,10 @@ namespace engine
 
 
 			//Get variable locations
-			m_vertexPos2DLocation = glGetAttribLocation(m_programID, "LVertexPos2D");
+			m_vertexPos2DLocation = glGetAttribLocation(m_programID, "vertexPos2D");
 			assert(m_vertexPos2DLocation != -1);
+			//m_vertexColorLocation = glGetAttribLocation(m_programID, "LVertexColor");
+			//assert(m_vertexColorLocation != -1)
 
 			return true;
 		}

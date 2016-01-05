@@ -9,6 +9,7 @@ namespace engine
 		{
 		protected:
 			GLint m_vertexPos2DLocation;
+			GLint m_vertexColorLocation;
 
 		public:
 			DefaultShader();

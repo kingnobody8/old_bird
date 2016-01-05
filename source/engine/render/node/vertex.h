@@ -8,11 +8,11 @@ namespace engine
 		struct VertexColor
 		{
 			vec2 position;
-			//vec4 color;
+			vec4 color;
 
 			VertexColor(){}
-			VertexColor(vec2 pos)
-				: position(pos)
+			VertexColor(vec2 pos, vec4 clr)
+				: position(pos), color(clr)
 			{
 			}
 		};

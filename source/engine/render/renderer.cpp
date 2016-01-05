@@ -48,10 +48,10 @@ namespace engine
 			glClearColor(0.13f, 0.09f, 0.1f, 1.0f);
 
 			std::vector<VertexColor> verts;
-			verts.push_back(VertexColor(vec2(-1.0f, -1.0f)));
-			verts.push_back(VertexColor(vec2(0.5f, -0.5f)));
-			verts.push_back(VertexColor(vec2(1.0f, 1.0f)));
-			verts.push_back(VertexColor(vec2(-0.5f, 0.5f)));
+			verts.push_back(VertexColor(vec2(-1.0f, -1.0f), util::Color::RED));
+			verts.push_back(VertexColor(vec2(0.5f, -0.5f), util::Color::GREEN));
+			verts.push_back(VertexColor(vec2(1.0f, 1.0f), util::Color::BLUE));
+			verts.push_back(VertexColor(vec2(-0.5f, 0.5f), util::Color::YELLOW));
 
 			std::vector<int> indicies;
 			indicies.push_back(0);
