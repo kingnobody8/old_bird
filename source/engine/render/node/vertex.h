@@ -9,6 +9,12 @@ namespace engine
 		{
 			vec2 position;
 			//vec4 color;
+
+			VertexColor(){}
+			VertexColor(vec2 pos)
+				: position(pos)
+			{
+			}
 		};
 
 		struct VertexTexture

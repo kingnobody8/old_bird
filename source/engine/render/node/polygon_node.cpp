@@ -1,6 +1,6 @@
 #include "polygon_node.h"
 #include "func.h"
-#include "../shader/shader_color_polygon.h"
+#include "../shader/shader_default.h"
 
 namespace engine
 {
@@ -90,35 +90,23 @@ namespace engine
 
 		VIRTUAL void PolygonNode::operator() (const matrix& inv_cam)
 		{
-			if (m_vboID == 0)
+			if (m_vboID == 0 || m_pShader == null)
 				return;
 
-			//Bind vertex buffer
+			m_pShader->Bind();
+
+			DefaultShader* dShader = static_cast<DefaultShader*>(m_pShader);
+			dShader->EnableVertexPos2D();
+
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
-
-			//Update vertex buffer data
-			glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertCount * sizeof(VertexColor), m_vVerts);
-
-			ShaderColorPolygon* pShader = static_cast<ShaderColorPolygon*>(m_pShader);
-
-			pShader->Bind();
-
-			pShader->SetModelViewMatrix(matrix());
-			pShader->SetProjectionMatrix(matrix());
-
-			//Set color vertex data
-			//pShader->SetVertexColorPointer(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, color));
-
-			//Set vertex data
-			pShader->SetVertexPositionPointer(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, position));
-
-			//Draw quad using vertex data and index data
+			dShader->SetVertexPos2D(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, position));
+			
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
-			glDrawElements(GL_TRIANGLE_FAN, m_indexCount, GL_UNSIGNED_INT, NULL);
+			glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
 
-			//Disable vertex and texture coordinate arrays
-			//mTexturedPolygonProgram2D->disableVertexPointer();
-			//mTexturedPolygonProgram2D->disableTexCoordPointer();
+			dShader->DisableVertexPos2D();
+
+			m_pShader->Unbind();
 
 		}
 
