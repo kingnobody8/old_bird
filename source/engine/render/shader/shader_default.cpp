@@ -17,7 +17,7 @@ namespace engine
 
 
 			//Get vertex source
-			const std::string vertexShaderSource = "#version 140\nin vec2 vertexPos2D; out vec4 vertexColor; void main() { vertexColor = vec4(1.0, 0.5, 0.25, 1.0); gl_Position = vec4( vertexPos2D.x, vertexPos2D.y, 0, 1 ); }";
+			const std::string vertexShaderSource = "#version 140\nin vec2 in_vertexPos2D;\nin vec4 in_vertexColor; out vec4 vertexColor; void main() { vertexColor = in_vertexColor; gl_Position = vec4( in_vertexPos2D.x, in_vertexPos2D.y, 0, 1 ); }";
 			//Load vertex shader
 			GLuint vertexShader = LoadShaderFromString(vertexShaderSource, GL_VERTEX_SHADER);
 			//Check for errors
@@ -74,10 +74,10 @@ namespace engine
 
 
 			//Get variable locations
-			m_vertexPos2DLocation = glGetAttribLocation(m_programID, "vertexPos2D");
+			m_vertexPos2DLocation = glGetAttribLocation(m_programID, "in_vertexPos2D");
 			assert(m_vertexPos2DLocation != -1);
-			//m_vertexColorLocation = glGetAttribLocation(m_programID, "LVertexColor");
-			//assert(m_vertexColorLocation != -1)
+			m_vertexColorLocation = glGetAttribLocation(m_programID, "in_vertexColor");
+			assert(m_vertexColorLocation != -1);
 
 			return true;
 		}
@@ -95,6 +95,21 @@ namespace engine
 		void DefaultShader::DisableVertexPos2D()
 		{
 			glDisableVertexAttribArray(m_vertexPos2DLocation);
+		}
+	
+		void DefaultShader::EnableVertexColor()
+		{
+			glEnableVertexAttribArray(m_vertexColorLocation);
+		}
+		
+		void DefaultShader::SetVertexColor(GLsizei stride, const GLvoid* data)
+		{
+			glVertexAttribPointer(m_vertexColorLocation, 4, GL_FLOAT, GL_FALSE, stride, data);
+		}
+		
+		void DefaultShader::DisableVertexColor()
+		{
+			glDisableVertexAttribArray(m_vertexColorLocation);
 		}
 	}
 }

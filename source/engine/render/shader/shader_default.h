@@ -19,6 +19,10 @@ namespace engine
 			void SetVertexPos2D(GLsizei stride, const GLvoid* data);
 			void DisableVertexPos2D();
 
+			void EnableVertexColor();
+			void SetVertexColor(GLsizei stride, const GLvoid* data);
+			void DisableVertexColor();
+
 		};
 	}
 }

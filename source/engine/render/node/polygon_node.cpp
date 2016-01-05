@@ -95,16 +95,23 @@ namespace engine
 
 			m_pShader->Bind();
 
+			glEnable(GL_BLEND);
+			glDisable(GL_DEPTH_TEST);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 			DefaultShader* dShader = static_cast<DefaultShader*>(m_pShader);
 			dShader->EnableVertexPos2D();
+			dShader->EnableVertexColor();
 
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 			dShader->SetVertexPos2D(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, position));
+			dShader->SetVertexColor(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, color));
 			
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
 			glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
 
 			dShader->DisableVertexPos2D();
+			dShader->DisableVertexColor();
 
 			m_pShader->Unbind();
 
