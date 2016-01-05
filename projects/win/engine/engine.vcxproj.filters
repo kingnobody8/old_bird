@@ -31,6 +31,9 @@
     <Filter Include="render\shader">
       <UniqueIdentifier>{0d0f22d4-2108-4d62-81e7-3435c027ad80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="state">
+      <UniqueIdentifier>{d6b12ce2-768e-4773-843f-ccd27a7946f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\shader.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\state\base_state.h">
+      <Filter>state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

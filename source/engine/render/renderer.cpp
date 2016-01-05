@@ -29,6 +29,12 @@ namespace engine
 		PolygonNode node;
 		IShaderProgram* shader = null;
 
+		void RenderTestFunc()
+		{
+
+		}
+
+
 		void RenderGrid() __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
 		{
 			vec2 half_size;
@@ -78,7 +84,7 @@ namespace engine
 			SDL_DisplayMode mode;
 			SDL_GetCurrentDisplayMode(0, &mode);
 			//this->m_tPhysicalScreenSize = Type2<slong>(mode.w, mode.h);
-			Uint32 win_flag = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
+			Uint32 win_flag = SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL;
 			s_sdlWin = SDL_CreateWindow(app_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, win_flag);
 #else
 			Uint32 win_flag = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
@@ -100,7 +106,6 @@ namespace engine
 			assert(s_glContext);
 			SDL_Log("Open GL Context Initialized");
 
-
 			//Initialize GLEW
 			glewExperimental = GL_TRUE;
 			GLenum glewError = glewInit();
@@ -119,35 +124,35 @@ namespace engine
 			}
 			SDL_Log("VSYNC Initialized");
 
-
+			SDL_Log("Renderer Initialized");
 			//--------------------------------------
 
-			std::vector<VertexColor> verts;
-			std::vector<int> indicies;
+			//std::vector<VertexColor> verts;
+			//std::vector<int> indicies;
 
-			verts.resize(4);
-			verts[0].position = vec2(-0.5f, -0.5f);
-			verts[1].position = vec2(0.5f, -0.5f);
-			verts[2].position = vec2(0.5f, 0.5f);
-			verts[3].position = vec2(-0.5f, 0.5f);
+			//verts.resize(4);
+			//verts[0].position = vec2(-0.5f, -0.5f);
+			//verts[1].position = vec2(0.5f, -0.5f);
+			//verts[2].position = vec2(0.5f, 0.5f);
+			//verts[3].position = vec2(-0.5f, 0.5f);
 
-			for (int i = 0; i < 4; ++i)
-			{
-			//	verts[i].color = util::Color::WHITE;
-			}
+			//for (int i = 0; i < 4; ++i)
+			//{
+			////	verts[i].color = util::Color::WHITE;
+			//}
 
-			indicies.resize(4);
-			indicies[0] = 0;
-			indicies[1] = 1;
-			indicies[2] = 2;
-			indicies[3] = 3;
+			//indicies.resize(4);
+			//indicies[0] = 0;
+			//indicies[1] = 1;
+			//indicies[2] = 2;
+			//indicies[3] = 3;
 
-			node.InitVBO(verts, indicies);
+			//node.InitVBO(verts, indicies);
 
-			render::RegisterShaders();
+			//render::RegisterShaders();
 
-			shader = IShaderProgram::CreateShader(ShaderColorPolygon::Type);
-			node.SetShader(shader);
+			//shader = IShaderProgram::CreateShader(ShaderColorPolygon::Type);
+			//node.SetShader(shader);
 		}
 		void Destroy()
 		{
@@ -167,12 +172,10 @@ namespace engine
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			//RenderGrid();
-			//RenderCrossSection();
+			RenderCrossSection();
+			RenderTestFunc();
 
-			//go through each layer and render
 			CRenderLayer::RenderAllLayers();
-
-			node(matrix());
 
 			//Update screen
 			SDL_GL_SwapWindow(s_sdlWin);

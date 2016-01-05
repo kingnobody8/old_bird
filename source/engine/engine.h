@@ -1,16 +1,12 @@
 #pragma once
+#include "component/component.h"
 #include "timer.h"
-#include "script/script.h"
-
-#include "event/publisher.h"
-#include "event/publisher.inl"
-#include "event/subscriber.h"
-#include "input/input.h"
-
-#include "script/ui/button_part.h"
 
 namespace engine
 {
+	__todo() //make the different 'systems' (component, input, render, physics) inherit from a base system class so that they can be inited and exited and updated the same
+		//also let client inherit and create systems (physics) should probably be client
+
 	//forward declare
 	class IBaseState;
 	class Engine;
@@ -37,14 +33,6 @@ namespace engine
 		void Update();
 		void PushState(IBaseState* const pState);
 
-		void OnMode(int mode);
-		void OnMode2(int mode);
-		void OnAKey(input::key_events::KeyAction action);
-		void OnMouseBtn(input::mouse_events::MotionAction action);
-
-		void OnBtn(script::ui::CButtonPart* btn);
-
-
 	public:
 		static Engine* Get(void);
 		static void DeleteInstance(void);
@@ -54,15 +42,11 @@ namespace engine
 		void Exit(void);
 		void RunFrame(void* params);
 
-
-		util::event::IntPublisher pub;
-		util::event::Subscriber sub;
+		void TransitionState(IBaseState* const pNextState);
 	};
 
 	static Engine* Get()
 	{
 		return Engine::Get();
 	}
-
-	
 }

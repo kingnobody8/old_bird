@@ -3,7 +3,7 @@
         "ui_cam",
         "world_cam"
     ],
-    "comment": "sort rank is determined base on order of the render layers. Meaning the first is rendered on top and the last is rendered on bottom",
+    "comment": "sort rank is determined based on order of the render layers. Meaning the first is rendered on top and the last is rendered on bottom",
     "render_layer_list": [
         {
             "name": "ui_layer",

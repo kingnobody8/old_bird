@@ -64,6 +64,7 @@
     <ClInclude Include="..\..\..\source\engine\script\script.h" />
     <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h" />
+    <ClInclude Include="..\..\..\source\engine\state\base_state.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />
