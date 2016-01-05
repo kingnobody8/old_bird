@@ -13,6 +13,7 @@
 
 #include "node/polygon_node.h"
 #include "shader/shader_color_polygon.h"
+#include "shader/shader_default.h"
 
 bool gRenderQuad = true;
 
@@ -24,16 +25,135 @@ namespace engine
 		static SDL_GLContext s_glContext = null;
 		const glm::u32vec2 default_dims = glm::u32vec2(1280, 720);
 		const std::string app_name = "The Lark Ascending"; __todo() //move this to app project same for screen size
-		const int GRID_CELL_SIZE = 64;
+			const int GRID_CELL_SIZE = 64;
 
-		PolygonNode node;
-		IShaderProgram* shader = null;
+		//----------------------------------------
+		GLuint gVBO = 0;
+		GLuint gIBO = 0;
+		DefaultShader shader;
+		//-----------------------------------------
 
 		void RenderTestFunc()
 		{
+			//Bind program
+			shader.Bind();
 
+			//Enable vertex position
+			shader.EnableVertexPos2D();
+
+			//Set vertex data
+			glBindBuffer(GL_ARRAY_BUFFER, gVBO);
+			shader.SetVertexPos2D(sizeof(GLfloat) * 2, null);
+
+			//Set index data and render
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
+			glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
+
+			//Disable vertex position
+			shader.DisableVertexPos2D();
+
+			//Unbind program
+			shader.Unbind();
 		}
 
+		void printProgramLog(GLuint program)
+		{
+			//Make sure name is shader
+			if (glIsProgram(program))
+			{
+				//Program log length
+				int infoLogLength = 0;
+				int maxLength = infoLogLength;
+
+				//Get info string length
+				glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+				//Allocate string
+				char* infoLog = new char[maxLength];
+
+				//Get info log
+				glGetProgramInfoLog(program, maxLength, &infoLogLength, infoLog);
+				if (infoLogLength > 0)
+				{
+					//Print Log
+					printf("%s\n", infoLog);
+				}
+
+				//Deallocate string
+				delete[] infoLog;
+			}
+			else
+			{
+				printf("Name %d is not a program\n", program);
+			}
+		}
+
+		void printShaderLog(GLuint shader)
+		{
+			//Make sure name is shader
+			if (glIsShader(shader))
+			{
+				//Shader log length
+				int infoLogLength = 0;
+				int maxLength = infoLogLength;
+
+				//Get info string length
+				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+				//Allocate string
+				char* infoLog = new char[maxLength];
+
+				//Get info log
+				glGetShaderInfoLog(shader, maxLength, &infoLogLength, infoLog);
+				if (infoLogLength > 0)
+				{
+					//Print Log
+					printf("%s\n", infoLog);
+				}
+
+				//Deallocate string
+				delete[] infoLog;
+			}
+			else
+			{
+				printf("Name %d is not a shader\n", shader);
+			}
+		}
+
+		bool initGL()
+		{
+			//Success flag
+			bool success = true;
+
+			shader.LoadProgram();
+
+			//Initialize clear color
+			glClearColor(0.f, 0.f, 0.f, 1.f);
+
+			//VBO data
+			GLfloat vertexData[] =
+			{
+				-0.5f, -0.5f,
+				0.5f, -0.5f,
+				0.5f, 0.5f,
+				-0.5f, 0.5f
+			};
+
+			//IBO data
+			GLuint indexData[] = { 0, 1, 2, 3 };
+
+			//Create VBO
+			glGenBuffers(1, &gVBO);
+			glBindBuffer(GL_ARRAY_BUFFER, gVBO);
+			glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
+
+			//Create IBO
+			glGenBuffers(1, &gIBO);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
+
+			return success;
+		}
 
 		void RenderGrid() __todo() //make some flags that engine can set in the renderer to turn these on and off also maybe choose between foreground and background
 		{
@@ -126,6 +246,8 @@ namespace engine
 
 			SDL_Log("Renderer Initialized");
 			//--------------------------------------
+
+			initGL();
 
 			//std::vector<VertexColor> verts;
 			//std::vector<int> indicies;

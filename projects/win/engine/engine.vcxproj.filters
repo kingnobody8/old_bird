@@ -82,17 +82,20 @@
     <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp">
       <Filter>render\node</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\shader_program.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\node\polygon_node.cpp">
       <Filter>render\node</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\shader\shader_color_polygon.cpp">
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_default.cpp">
       <Filter>render\shader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\shader.cpp">
-      <Filter>render</Filter>
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_program.cpp">
+      <Filter>render\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader.cpp">
+      <Filter>render\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_color_polygon.cpp">
+      <Filter>render\shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,9 +148,6 @@
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h">
       <Filter>render\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\shader_program.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\opengl.h">
       <Filter>render</Filter>
     </ClInclude>
@@ -157,14 +157,20 @@
     <ClInclude Include="..\..\..\source\engine\render\node\vertex.h">
       <Filter>render\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\shader\shader_color_polygon.h">
-      <Filter>render\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\shader.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\state\base_state.h">
       <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_default.h">
+      <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_program.h">
+      <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader.h">
+      <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_color_polygon.h">
+      <Filter>render\shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include "shader/shader_program.h"
+#include "shader_program.h"
 
 namespace engine
 {

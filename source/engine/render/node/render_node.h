@@ -7,7 +7,7 @@
 #include "vertex.h"
 #include <string>
 #include "macro.h"
-#include "../shader_program.h"
+#include "../shader/shader_program.h"
 
 namespace engine
 {

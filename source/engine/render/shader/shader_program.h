@@ -1,5 +1,5 @@
 #pragma once
-#include "opengl.h"
+#include "../opengl.h"
 #include "math/math.h"
 #include "types.h"
 #include <string>

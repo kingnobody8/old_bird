@@ -1,6 +1,6 @@
 #include "shader.h"
 
-#include "shader/shader_color_polygon.h"
+#include "shader_color_polygon.h"
 
 namespace engine
 {
