@@ -45,12 +45,12 @@ namespace engine
 			//Create VBO
 			glGenBuffers(1, &m_vboID);
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
-			glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(VertexColor), m_vVerts, GL_DYNAMIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_vertCount * sizeof(VertexColor), m_vVerts, GL_DYNAMIC_DRAW);
 
 			//Create IBO
 			glGenBuffers(1, &m_iboID);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLuint), m_vIndicies, GL_DYNAMIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexCount * sizeof(GLuint), m_vIndicies, GL_DYNAMIC_DRAW);
 
 			//Unbind buffers
 			glBindBuffer(GL_ARRAY_BUFFER, NULL);
@@ -108,7 +108,7 @@ namespace engine
 			dShader->SetVertexColor(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, color));
 			
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
-			glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
+			glDrawElements(GL_TRIANGLE_FAN, m_indexCount, GL_UNSIGNED_INT, NULL);
 
 			dShader->DisableVertexPos2D();
 			dShader->DisableVertexColor();

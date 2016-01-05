@@ -15,6 +15,8 @@
 #include "shader/shader_color_polygon.h"
 #include "shader/shader_default.h"
 #include "node/rect_node.h"
+#include "node/circle_node.h"
+
 
 bool gRenderQuad = true;
 
@@ -33,7 +35,8 @@ namespace engine
 		//----------------------------------------
 		DefaultShader shader;
 		//PolygonNode node;
-		RectNode node;
+		//RectNode node;
+		CircleNode node;
 		//-----------------------------------------
 
 		void RenderTestFunc()
@@ -65,7 +68,8 @@ namespace engine
 			indicies.push_back(3);
 
 			//node.InitVBO(verts, indicies);
-			node.InitVBO(vec2(1.0, 0.5), util::Color::AZURE);
+			//node.InitVBO(vec2(1.0, 0.5), util::Color::AZURE);
+			node.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
 
 			return true;
 		}
