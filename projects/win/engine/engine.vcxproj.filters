@@ -97,6 +97,9 @@
     <ClCompile Include="..\..\..\source\engine\render\shader\shader_color_polygon.cpp">
       <Filter>render\shader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -171,6 +174,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\shader\shader_color_polygon.h">
       <Filter>render\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h">
+      <Filter>render\node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

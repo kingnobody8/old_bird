@@ -14,6 +14,7 @@
 #include "node/polygon_node.h"
 #include "shader/shader_color_polygon.h"
 #include "shader/shader_default.h"
+#include "node/rect_node.h"
 
 bool gRenderQuad = true;
 
@@ -27,11 +28,12 @@ namespace engine
 		static SDL_GLContext s_glContext = null;
 		const glm::u32vec2 default_dims = glm::u32vec2(1280, 720);
 		const std::string app_name = "The Lark Ascending"; __todo() //move this to app project same for screen size
-			const int GRID_CELL_SIZE = 64;
+		const int GRID_CELL_SIZE = 64;
 
 		//----------------------------------------
 		DefaultShader shader;
-		PolygonNode node;
+		//PolygonNode node;
+		RectNode node;
 		//-----------------------------------------
 
 		void RenderTestFunc()
@@ -62,7 +64,8 @@ namespace engine
 			indicies.push_back(2);
 			indicies.push_back(3);
 
-			node.InitVBO(verts, indicies);
+			//node.InitVBO(verts, indicies);
+			node.InitVBO(vec2(1.0, 0.5), util::Color::AZURE);
 
 			return true;
 		}
