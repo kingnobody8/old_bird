@@ -5,7 +5,7 @@ namespace app
 {
 	namespace state
 	{
-		class SetupState : public engine::IBaseState
+		class SetupState : public engine::state::IBaseState
 		{
 		private:
 

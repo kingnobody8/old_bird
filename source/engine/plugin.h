@@ -11,6 +11,9 @@ namespace engine
 	private:
 		static std::list<IPlugin*> s_pluginList;
 
+	protected:
+		static int s_nextPluginTypeId;
+
 		//External
 	public:
 		static void AddPlugin(IPlugin* const plugin);
@@ -25,7 +28,7 @@ namespace engine
 
 	public:
 		IPlugin();
-		virtual ~IPlugin() = 0;
+		virtual ~IPlugin() {};
 
 		virtual void Init();
 		virtual void Exit();
@@ -36,6 +39,6 @@ namespace engine
 			static const int Type;										\
 			virtual inline int GetType() const { return Type; }			
 #define DEFINE_PLUGIN_TYPE_INFO(CLASS)									\
-			const int CLASS::Type = ++IPart::s_nextPartTypeId;			
+			const int CLASS::Type = ++IPlugin::s_nextPluginTypeId;			
 	};
 }

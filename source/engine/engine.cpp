@@ -6,6 +6,9 @@
 #include "input/input.h"
 #include "state/base_state.h"
 
+#include "plugin.h"
+#include "state/state_plugin.h"
+
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
 {
@@ -28,8 +31,6 @@ namespace engine
 
 	Engine::Engine()
 		: m_quit(true)
-		, m_pCurrState(null)
-		, m_pNextState(null)
 		, m_pRoot(null)
 	{
 	}
@@ -37,7 +38,7 @@ namespace engine
 	{
 	}
 
-	void Engine::Init(IBaseState* const pFirstState)
+	void Engine::Init(state::IBaseState* const pFirstState)
 	{
 		util::TypeCheck();
 
@@ -66,15 +67,18 @@ namespace engine
 		input::Setup(render::GetSdlWindow());
 
 		__todo()
-		//Initialize box2d
-		//script::box::IBox2DPart::SetupWorld();
+			//Initialize box2d
+			//script::box::IBox2DPart::SetupWorld();
 
-		__todo()
-		//Init Asset
-		//Asset::CAsset::Get()->SetSdlRenderer(Render::CRenderer::Get()->GetRen());
+			__todo()
+			//Init Asset
+			//Asset::CAsset::Get()->SetSdlRenderer(Render::CRenderer::Get()->GetRen());
 
-		//Push the first state
-		this->PushState(pFirstState);
+
+		//Init state plugin
+		state::StatePlugin* pStatePlugin = new state::StatePlugin();
+		pStatePlugin->TransitionState(pFirstState);
+		IPlugin::AddPlugin(pStatePlugin);
 
 		//Start timer
 		this->m_timer.Restart();
@@ -95,19 +99,13 @@ namespace engine
 
 	void Engine::Exit(void)
 	{
+		IPlugin::DestroyPlugins();
+
 		//Destroy Scene
 		if (this->m_pRoot)
 			this->m_pRoot->Destroy();
 		this->m_pRoot = null;
 		component::CObject::Clean();
-
-		//Destroy State
-		if (this->m_pCurrState)
-		{
-			this->m_pCurrState->Exit();
-			delete this->m_pCurrState;
-			this->m_pCurrState = null;
-		}
 
 		render::Destroy();
 
@@ -123,7 +121,7 @@ namespace engine
 
 		DeleteInstance();
 	}
-	
+
 	void Engine::RunFrame(void* params)
 	{
 		this->Update();
@@ -135,15 +133,11 @@ namespace engine
 		if (m_quit)
 			return;
 
-		//If a new state is available, then change states
-		if (this->m_pNextState)
-			this->PushState(this->m_pNextState);
-
 		//Update the timer
 		this->m_timer.Signal();
 		util::Time delta = this->m_timer.Delta();
 
-		m_pCurrState->Update(delta);
+		IPlugin::UpdatePlugins(delta);
 
 		//script::box::IBox2DPart::UpdateWorld(delta);
 
@@ -161,29 +155,5 @@ namespace engine
 
 		component::CObject::Clean(); //clean object graph
 	}
-	
-	void Engine::TransitionState(IBaseState* const pNextState)
-	{
-		assert(pNextState);
-		this->m_pNextState = pNextState;
-	}
 
-	void Engine::PushState(IBaseState* pState)
-	{
-		assert(pState);
-
-		this->m_pNextState = null;
-		if (this->m_pCurrState)
-		{
-			this->m_pCurrState->Transition(pState);
-			this->m_pCurrState->Exit();
-			delete this->m_pCurrState;
-			this->m_pCurrState = null;
-		}
-		this->m_pCurrState = pState;
-		this->m_pCurrState->Init();
-
-		if (this->m_pNextState != null) //it is possible that the init of curr state immediately pushes a new state
-			PushState(this->m_pNextState);
-	}
 }

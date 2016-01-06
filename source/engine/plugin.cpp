@@ -5,9 +5,11 @@ namespace engine
 {
 	STATIC std::list<IPlugin*> IPlugin::s_pluginList;
 
+	STATIC int IPlugin::s_nextPluginTypeId = 0;
+
 	STATIC void IPlugin::AddPlugin(IPlugin* const plugin)
 	{
-		assert(FindPlugin(plugin->GetType()));
+		assert(!FindPlugin(plugin->GetType()));
 		plugin->Init();
 		s_pluginList.push_back(plugin);
 	}

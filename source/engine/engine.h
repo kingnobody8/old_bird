@@ -8,8 +8,8 @@ namespace engine
 		//also let client inherit and create systems (physics) should probably be client
 
 	//forward declare
-	class IBaseState;
 	class Engine;
+	namespace state { class IBaseState; }
 	namespace component
 	{
 		class CObject;
@@ -21,8 +21,6 @@ namespace engine
 	{
 	private:
 		util::CTimer m_timer;
-		IBaseState* m_pCurrState;
-		IBaseState* m_pNextState;
 		component::CGroup*		m_pRoot;
 		bool					m_quit;
 
@@ -31,18 +29,15 @@ namespace engine
 		~Engine();
 
 		void Update();
-		void PushState(IBaseState* const pState);
 
 	public:
 		static Engine* Get(void);
 		static void DeleteInstance(void);
 		const bool GetQuit() const { return m_quit; }
 
-		void Init(IBaseState* const pFirstState);
+		void Init(state::IBaseState* const pFirstState);
 		void Exit(void);
 		void RunFrame(void* params);
-
-		void TransitionState(IBaseState* const pNextState);
 	};
 
 	static Engine* Get()

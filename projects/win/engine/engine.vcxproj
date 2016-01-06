@@ -43,6 +43,7 @@
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\state\state_plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
@@ -73,6 +74,7 @@
     <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h" />
     <ClInclude Include="..\..\..\source\engine\state\base_state.h" />
+    <ClInclude Include="..\..\..\source\engine\state\state_plugin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl" />
