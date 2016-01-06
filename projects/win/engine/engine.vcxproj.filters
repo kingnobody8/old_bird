@@ -34,6 +34,9 @@
     <Filter Include="state">
       <UniqueIdentifier>{d6b12ce2-768e-4773-843f-ccd27a7946f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="plugin">
+      <UniqueIdentifier>{0c90b1b3-6914-4c1a-96e3-fdca59ef491b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -103,6 +106,7 @@
     <ClCompile Include="..\..\..\source\engine\render\node\circle_node.cpp">
       <Filter>render\node</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -184,6 +188,7 @@
     <ClInclude Include="..\..\..\source\engine\render\node\circle_node.h">
       <Filter>render\node</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\plugin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl">
