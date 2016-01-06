@@ -4,6 +4,7 @@
 #include "script/script.h"
 #include "render/renderer.h"
 #include "state/base_state.h"
+#include "component/component.h"
 
 #include "plugin.h"
 #include "state/state_plugin.h"
@@ -115,7 +116,6 @@ namespace engine
 
 		//Engine::Box::CBox::DeleteInstance();
 
-		//Destroy Assets
 		//Asset::CAsset::DeleteInstance();
 
 		//Quit SDL

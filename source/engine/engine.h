@@ -1,12 +1,8 @@
 #pragma once
-#include "component/component.h"
 #include "timer.h"
 
 namespace engine
 {
-	__todo() //make the different 'systems' (component, input, render, physics) inherit from a base system class so that they can be inited and exited and updated the same
-		//also let client inherit and create systems (physics) should probably be client
-
 	//forward declare
 	class Engine;
 	namespace state { class IBaseState; }
