@@ -64,9 +64,6 @@
     <ClCompile Include="..\..\..\source\engine\script\script.cpp">
       <Filter>script</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\input\input.cpp">
-      <Filter>input</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp">
       <Filter>script\ui</Filter>
     </ClCompile>
@@ -107,6 +104,12 @@
     <ClCompile Include="..\..\..\source\engine\state\state_plugin.cpp">
       <Filter>state</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\input\input_plugin.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\input\input_event.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -139,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\script.h">
       <Filter>script</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\input\input.h">
-      <Filter>input</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h">
       <Filter>script\ui</Filter>
@@ -191,6 +191,12 @@
     <ClInclude Include="..\..\..\source\engine\plugin.h" />
     <ClInclude Include="..\..\..\source\engine\state\state_plugin.h">
       <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\input\input_plugin.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\input\input_event.h">
+      <Filter>input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

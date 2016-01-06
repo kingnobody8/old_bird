@@ -1,6 +1,5 @@
 #include "state_plugin.h"
 #include "func.h"
-#include <assert.h>
 
 namespace engine
 {
@@ -31,13 +30,14 @@ namespace engine
 			SafeDelete(m_pNextState);
 		}
 		
-		VIRTUAL void StatePlugin::Update(const util::Time& dt)
+		VIRTUAL bool StatePlugin::Update(const util::Time& dt)
 		{
 			if (m_pNextState)
 			{
 				FlushState();
 			}
 			m_pCurrState->Update(dt);
+			return true;
 		}
 
 		void StatePlugin::FlushState()

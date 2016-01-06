@@ -1,43 +1,32 @@
-#include "input.h"
-#include <assert.h>
+#include "input_plugin.h"
+#include "input_event.h"
 #include "script/ui/ui_part.h"
 
 namespace engine
 {
 	namespace input
 	{
-		static SDL_Window* s_sdlWin = null;
+		DEFINE_PLUGIN_TYPE_INFO(InputPlugin);
 
-		//key
-		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyDown;
-		STATIC util::event::Publisher<key_events::KeyAction> key_events::s_InputKeyUp;
-
-		//mouse
-		STATIC util::event::Publisher<mouse_events::MotionAction> mouse_events::s_InputMouseMotion;
-		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonDown;
-		STATIC util::event::Publisher<mouse_events::ButtonAction> mouse_events::s_InputMouseButtonUp;
-		STATIC util::event::Publisher<mouse_events::WheelAction> mouse_events::s_InputMouseScrollWheel;
-
-
-		const vec2 ConvertPixelToCartesian(int x, int y)
+		InputPlugin::InputPlugin()
+			: m_pSdlWin(null)
 		{
-			glm::i32vec2 logical_size;
-			SDL_GetWindowSize(s_sdlWin, &logical_size.x, &logical_size.y);
-
-			vec2 ret;
-			ret.x = (slong)x;
-			ret.y = (slong)(logical_size.y - y);
-			return ret;
 		}
 
-
-		void Setup(SDL_Window* pWin)
+		VIRTUAL InputPlugin::~InputPlugin()
 		{
-			assert(pWin);
-			s_sdlWin = pWin;
 		}
 
-		bool PollSdl(const util::Time& dt)
+		VIRTUAL void InputPlugin::Init()
+		{
+			assert(m_pSdlWin);
+		}
+
+		VIRTUAL void InputPlugin::Exit()
+		{
+		}
+
+		VIRTUAL bool InputPlugin::Update(const util::Time& dt)
 		{
 			SDL_Event tEvent;
 			while (SDL_PollEvent(&tEvent))
@@ -46,7 +35,8 @@ namespace engine
 				{
 					//QUIT event
 				case SDL_QUIT:
-					return false; //NOTE if we get a quit event, then we want to exit ASAP!
+					app_events::s_KillAppEvent.Publish(); //NOTE if we get a quit event, then we want to exit ASAP!
+					return false; 
 					//MOBILE event
 				case SDL_APP_TERMINATING:
 				case SDL_APP_LOWMEMORY:
@@ -140,5 +130,15 @@ namespace engine
 			return true;
 		}
 
+		const vec2 InputPlugin::ConvertPixelToCartesian(int x, int y)
+		{
+			glm::i32vec2 logical_size;
+			SDL_GetWindowSize(m_pSdlWin, &logical_size.x, &logical_size.y);
+
+			vec2 ret;
+			ret.x = x;
+			ret.y = logical_size.y - y;
+			return ret;
+		}
 	}
 }

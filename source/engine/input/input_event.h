@@ -9,9 +9,6 @@ namespace engine
 {
 	namespace input
 	{
-		void Setup(SDL_Window* pWin);
-		bool PollSdl(const util::Time& dt);
-
 		struct IEvent
 		{
 			SDL_Event m_event;
@@ -19,6 +16,11 @@ namespace engine
 				: m_event(event)
 			{
 			}
+		};
+
+		struct app_events
+		{
+			static util::event::VoidPublisher s_KillAppEvent;
 		};
 
 		struct key_events
@@ -46,7 +48,7 @@ namespace engine
 				vec2	m_delta;
 				__todo() // we may eventually want velocity in here delta_pixels / time_since last motion
 
-				MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
+					MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
 					: IEvent(event), m_pixel(pixel), m_delta(delta)
 				{
 				}
@@ -79,6 +81,5 @@ namespace engine
 			static util::event::Publisher<ButtonAction> s_InputMouseButtonUp;
 			static util::event::Publisher<WheelAction>	s_InputMouseScrollWheel;
 		};
-
 	}
 }

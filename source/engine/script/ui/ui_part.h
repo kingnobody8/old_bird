@@ -1,7 +1,7 @@
 #pragma once
 #include "component/part.h"
 #include "render/render_layer.h"
-#include "input/input.h"
+#include "input/input_event.h"
 
 namespace engine
 {

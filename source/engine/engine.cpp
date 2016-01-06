@@ -3,11 +3,11 @@
 #include "component/part.h"
 #include "script/script.h"
 #include "render/renderer.h"
-#include "input/input.h"
 #include "state/base_state.h"
 
 #include "plugin.h"
 #include "state/state_plugin.h"
+#include "input/input_plugin.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -64,7 +64,9 @@ namespace engine
 		render::Setup();
 
 		//Init the input system
-		input::Setup(render::GetSdlWindow());
+		input::InputPlugin* pInputPlugin = new input::InputPlugin();
+		pInputPlugin->SetSdlWin(render::GetSdlWindow());
+		IPlugin::AddPlugin(pInputPlugin);
 
 		__todo()
 			//Initialize box2d
@@ -124,7 +126,7 @@ namespace engine
 
 	void Engine::RunFrame(void* params)
 	{
-		this->Update();
+		Update();
 		render::DoRender();
 	}
 
@@ -137,22 +139,16 @@ namespace engine
 		this->m_timer.Signal();
 		util::Time delta = this->m_timer.Delta();
 
-		IPlugin::UpdatePlugins(delta);
+		//Update the plugins
+		if (!IPlugin::UpdatePlugins(delta))
+		{
+			m_quit = true;
+		}
 
 		//script::box::IBox2DPart::UpdateWorld(delta);
 
 		component::CObject::Clean(); //clean object graph
-
-		//Poll events
-		if (!input::PollSdl(delta))
-		{
-			m_quit = true;
-		}
-		else //if input did not kill the app, then update the current state and scene
-		{
-			component::IPart::UpdateParts(delta);
-		}
-
+		component::IPart::UpdateParts(delta);
 		component::CObject::Clean(); //clean object graph
 	}
 

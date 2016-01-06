@@ -1,6 +1,7 @@
 #pragma once
 #include "utility/util_time.h"
 #include <list>
+#include <assert.h>
 
 namespace engine
 {
@@ -18,7 +19,7 @@ namespace engine
 	public:
 		static void AddPlugin(IPlugin* const plugin);
 		static IPlugin* FindPlugin(const int& type);
-		static void UpdatePlugins(const util::Time& dt);
+		static bool UpdatePlugins(const util::Time& dt);
 		static void DestroyPlugins();
 
 		static const int Type = 0;
@@ -32,7 +33,7 @@ namespace engine
 
 		virtual void Init();
 		virtual void Exit();
-		virtual void Update(const util::Time& dt);
+		virtual bool Update(const util::Time& dt);
 
 #define DECLARE_PLUGIN_TYPE_INFO(CLASS)									\
 			typedef CLASS class_t;										\

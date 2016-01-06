@@ -24,7 +24,7 @@ namespace engine
 
 			virtual void Init();
 			virtual void Exit();
-			virtual void Update(const util::Time& dt);
+			virtual bool Update(const util::Time& dt);
 
 			void TransitionState(IBaseState* const pNextState);
 		};

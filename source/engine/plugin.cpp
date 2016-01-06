@@ -26,12 +26,14 @@ namespace engine
 		return null;
 	}
 
-	STATIC void IPlugin::UpdatePlugins(const util::Time& dt)
+	STATIC bool IPlugin::UpdatePlugins(const util::Time& dt)
 	{
 		for (auto iter = s_pluginList.begin(); iter != s_pluginList.end(); ++iter)
 		{
-			(*iter)->Update(dt);
+			if (!(*iter)->Update(dt)) //if an update returns false - that mean something went wrong (or for input: the game is closing) and we should stop everything
+				return false;
 		}
+		return true;
 	}
 
 	STATIC void IPlugin::DestroyPlugins()
@@ -57,7 +59,8 @@ namespace engine
 	{
 	}
 	
-	VIRTUAL void IPlugin::Update(const util::Time& dt)
+	VIRTUAL bool IPlugin::Update(const util::Time& dt)
 	{
+		return true;
 	}
 }
