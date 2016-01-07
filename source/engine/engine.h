@@ -1,5 +1,6 @@
 #pragma once
 #include "timer.h"
+#include "render/render_plugin.h"
 
 namespace engine
 {
@@ -19,6 +20,7 @@ namespace engine
 		util::CTimer m_timer;
 		component::CGroup*		m_pRoot;
 		bool					m_quit;
+		render::RenderPlugin* m_pRenderPlugin;
 
 		static Engine* s_pInstance;
 		Engine();

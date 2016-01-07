@@ -42,6 +42,7 @@ namespace engine
 		for (auto iter = s_pluginList.begin(); iter != s_pluginList.end(); ++iter)
 		{
 			(*iter)->Exit();
+			delete(*iter);
 		}
 	}
 

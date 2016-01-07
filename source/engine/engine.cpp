@@ -2,7 +2,6 @@
 #include "component/object.h"
 #include "component/part.h"
 #include "script/script.h"
-#include "render/renderer.h"
 #include "state/base_state.h"
 #include "component/component.h"
 
@@ -33,6 +32,7 @@ namespace engine
 	Engine::Engine()
 		: m_quit(true)
 		, m_pRoot(null)
+		, m_pRenderPlugin(null)
 	{
 	}
 	Engine::~Engine()
@@ -61,12 +61,13 @@ namespace engine
 		//Turn off SDL audio
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
-		//Initialize the rendering system
-		render::Setup();
+		//Init the rendering system
+		m_pRenderPlugin = new render::RenderPlugin();
+		IPlugin::AddPlugin(m_pRenderPlugin);
 
 		//Init the input system
 		input::InputPlugin* pInputPlugin = new input::InputPlugin();
-		pInputPlugin->SetSdlWin(render::GetSdlWindow());
+		pInputPlugin->SetSdlWin(m_pRenderPlugin->GetSdlWindow());
 		IPlugin::AddPlugin(pInputPlugin);
 
 		__todo()
@@ -110,8 +111,6 @@ namespace engine
 		this->m_pRoot = null;
 		component::CObject::Clean();
 
-		render::Destroy();
-
 		//script::box::IBox2DPart::DestroyWorld();
 
 		//Engine::Box::CBox::DeleteInstance();
@@ -127,7 +126,7 @@ namespace engine
 	void Engine::RunFrame(void* params)
 	{
 		Update();
-		render::DoRender();
+		m_pRenderPlugin->DoRender();
 	}
 
 	void Engine::Update(void)

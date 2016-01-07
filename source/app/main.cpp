@@ -7,7 +7,7 @@ Purpose:	Crossplatform Main Interface
 #include "state/setup_state.h"
 
 #ifdef WIN
-//#include <vld.h>
+#include <vld.h>
 #endif
 
 int main(int argc, char** argv)

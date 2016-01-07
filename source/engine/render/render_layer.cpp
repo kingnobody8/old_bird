@@ -1,7 +1,6 @@
 #include "render_layer.h"
 #include "node/render_node.h"
 #include "camera.h"
-#include "renderer.h"
 #include <algorithm>
 
 namespace engine
@@ -82,7 +81,7 @@ namespace engine
 		void CRenderLayer::DoRender()
 		{
 			glm::i32vec2 logical_size;
-			SDL_GetWindowSize(GetSdlWindow(), &logical_size.x, &logical_size.y);
+			//SDL_GetWindowSize(GetSdlWindow(), &logical_size.x, &logical_size.y);
 			glm::i32vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
 			const b2AABB view = m_pCamera->CalcViewAabb(half_dims);
 			
@@ -131,7 +130,7 @@ namespace engine
 		{
 			//get screen info
 			glm::i32vec2 logical_size;
-			SDL_GetWindowSize(render::GetSdlWindow(), &logical_size.x, &logical_size.y);
+			//SDL_GetWindowSize(render::GetSdlWindow(), &logical_size.x, &logical_size.y);
 			vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			m_screen_point.x = m_screen_point.x - origin.x;

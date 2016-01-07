@@ -1,5 +1,4 @@
 #include "loader.h"
-#include "../render/renderer.h"
 #include <fstream>
 
 namespace engine

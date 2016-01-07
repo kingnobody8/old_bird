@@ -32,8 +32,8 @@
     <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\polygon_node.cpp" />
-    <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\render_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\shader\shader.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\shader\shader_color_polygon.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\shader\shader_default.cpp" />
@@ -63,8 +63,8 @@
     <ClInclude Include="..\..\..\source\engine\render\node\polygon_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\vertex.h" />
     <ClInclude Include="..\..\..\source\engine\render\opengl.h" />
-    <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
+    <ClInclude Include="..\..\..\source\engine\render\render_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\render\shader\shader.h" />
     <ClInclude Include="..\..\..\source\engine\render\shader\shader_color_polygon.h" />
     <ClInclude Include="..\..\..\source\engine\render\shader\shader_default.h" />

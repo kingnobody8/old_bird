@@ -46,9 +46,6 @@
     <ClCompile Include="..\..\..\source\engine\component\component.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\engine\render\renderer.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\engine\asset\loader.cpp">
       <Filter>asset</Filter>
     </ClCompile>
@@ -110,6 +107,9 @@
     <ClCompile Include="..\..\..\source\engine\input\input_event.cpp">
       <Filter>input</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\render_plugin.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -121,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\component\part.h">
       <Filter>component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\renderer.h">
-      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\asset\loader.h">
       <Filter>asset</Filter>
@@ -197,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\input\input_event.h">
       <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\render_plugin.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
