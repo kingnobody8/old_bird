@@ -5,22 +5,14 @@
 namespace engine
 {
 	//forward declare
-	class Engine;
 	namespace state { class IBaseState; }
-	namespace component
-	{
-		class CObject;
-		class CGroup;
-		class IPart;
-	}
 
 	class Engine
 	{
 	private:
-		util::CTimer m_timer;
-		component::CGroup*		m_pRoot;
+		util::CTimer			m_timer;
+		render::RenderPlugin*	m_pRenderPlugin;
 		bool					m_quit;
-		render::RenderPlugin* m_pRenderPlugin;
 
 		static Engine* s_pInstance;
 		Engine();

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\asset\loader.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\component.cpp" />
+    <ClCompile Include="..\..\..\source\engine\component\component_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
     <ClInclude Include="..\..\..\source\engine\asset\resource_path.h" />
     <ClInclude Include="..\..\..\source\engine\component\component.h" />
+    <ClInclude Include="..\..\..\source\engine\component\component_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\component\object.h" />
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />

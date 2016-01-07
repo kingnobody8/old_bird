@@ -1,13 +1,10 @@
 #include "engine.h"
-#include "component/object.h"
-#include "component/part.h"
-#include "script/script.h"
 #include "state/base_state.h"
-#include "component/component.h"
 
 #include "plugin.h"
 #include "state/state_plugin.h"
 #include "input/input_plugin.h"
+#include "component/component_plugin.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -31,7 +28,6 @@ namespace engine
 
 	Engine::Engine()
 		: m_quit(true)
-		, m_pRoot(null)
 		, m_pRenderPlugin(null)
 	{
 	}
@@ -42,9 +38,6 @@ namespace engine
 	void Engine::Init(state::IBaseState* const pFirstState)
 	{
 		util::TypeCheck();
-
-		//Register all engine scripts
-		script::RegisterScripts();
 
 		assert(pFirstState);
 
@@ -70,14 +63,9 @@ namespace engine
 		pInputPlugin->SetSdlWin(m_pRenderPlugin->GetSdlWindow());
 		IPlugin::AddPlugin(pInputPlugin);
 
-		__todo()
-			//Initialize box2d
-			//script::box::IBox2DPart::SetupWorld();
-
-			__todo()
-			//Init Asset
-			//Asset::CAsset::Get()->SetSdlRenderer(Render::CRenderer::Get()->GetRen());
-
+		//Init the component system
+		component::ComponentPlugin* pComponentPlugin = new component::ComponentPlugin();
+		IPlugin::AddPlugin(pComponentPlugin);
 
 		//Init state plugin
 		state::StatePlugin* pStatePlugin = new state::StatePlugin();
@@ -104,22 +92,7 @@ namespace engine
 	void Engine::Exit(void)
 	{
 		IPlugin::DestroyPlugins();
-
-		//Destroy Scene
-		if (this->m_pRoot)
-			this->m_pRoot->Destroy();
-		this->m_pRoot = null;
-		component::CObject::Clean();
-
-		//script::box::IBox2DPart::DestroyWorld();
-
-		//Engine::Box::CBox::DeleteInstance();
-
-		//Asset::CAsset::DeleteInstance();
-
-		//Quit SDL
 		SDL_Quit();
-
 		DeleteInstance();
 	}
 
@@ -144,11 +117,6 @@ namespace engine
 			m_quit = true;
 		}
 
-		//script::box::IBox2DPart::UpdateWorld(delta);
-
-		component::CObject::Clean(); //clean object graph
-		component::IPart::UpdateParts(delta);
-		component::CObject::Clean(); //clean object graph
 	}
 
 }

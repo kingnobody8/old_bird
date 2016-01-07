@@ -110,6 +110,9 @@
     <ClCompile Include="..\..\..\source\engine\render\render_plugin.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\component\component_plugin.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -197,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\render_plugin.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\component\component_plugin.h">
+      <Filter>component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
