@@ -1,5 +1,6 @@
 #include "camera.h"
 #include "func.h"
+#include "render_plugin.h"
 
 namespace engine
 {
@@ -36,15 +37,18 @@ namespace engine
 		CCamera::CCamera(const std::string& name)
 			: m_name(name)
 		{
-
 		}
 
 		CCamera::~CCamera()
 		{
 		}
 
-		const b2AABB CCamera::CalcViewAabb(const vec2& half_screen_dims) const
+		const b2AABB CCamera::CalcViewAabb() const
 		{
+			__todo();
+			//SDL_GetWindowSize()
+			const vec2 half_screen_dims;
+
 			//create an aabb with the screen dims
 			b2AABB ret;
 			ret.lowerBound = b2Vec2(-half_screen_dims.x, -half_screen_dims.y);

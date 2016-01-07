@@ -74,28 +74,17 @@ namespace engine
 			this->m_vCulledNodes = this->m_vNodes;
 
 			__todo()//TODO actually cull the nodes
-
-			this->m_vNodes.sort(SortNodeFunc);
+			this->m_vCulledNodes.sort(SortNodeFunc);
 		}
 
 		void CRenderLayer::DoRender()
 		{
-			glm::i32vec2 logical_size;
-			//SDL_GetWindowSize(GetSdlWindow(), &logical_size.x, &logical_size.y);
-			glm::i32vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
-			const b2AABB view = m_pCamera->CalcViewAabb(half_dims);
-			
+			if (!m_bVisible)
+				return;
+
+			const b2AABB view = m_pCamera->CalcViewAabb();
 			Cull(view);
 
-			//__todo()//remove this when you don't want to see the camera box anymore
-			//CRenderNodeRect cam_box;
-			//cam_box.SetAABB(m_pCamera->CalcViewAabb(half_dims));
-			//cam_box.SetFill(false);
-			//cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
-
-
-			__todo() //replace this with the nodes found after the cull
-				//also use the actuall camera matrix
 			matrix inv_cam = glm::inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{

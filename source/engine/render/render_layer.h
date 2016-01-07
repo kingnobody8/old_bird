@@ -30,6 +30,7 @@ namespace engine
 			CCamera* m_pCamera;
 			std::string m_name;
 			int m_sort_rank;
+			bool m_bVisible;
 
 		private:
 			void Cull(const b2AABB& view);
@@ -47,6 +48,9 @@ namespace engine
 			inline const int& GetSortRank() const { return m_sort_rank; }
 			const vec2 ConvertPointFromScreenToWorld(vec2 m_screen_point);
 			const vec2 ConvertPointFromWorldToScreen(vec2 m_world_point);
+
+			inline void SetVisible(const bool b) { m_bVisible = b; }
+			inline bool GetVisible() const { return m_bVisible; }
 		};
 	}
 }

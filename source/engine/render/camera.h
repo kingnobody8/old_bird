@@ -29,7 +29,7 @@ namespace engine
 			inline void SetMatrix(const matrix& mat) { m_matrix = mat; }
 			inline const matrix& GetMatrix() const { return m_matrix; }
 			inline const std::string& GetName() const { return m_name; }
-			const b2AABB CalcViewAabb(const vec2& half_screen_dims) const;
+			const b2AABB CalcViewAabb() const;
 		};
 	}
 }
