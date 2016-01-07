@@ -5,6 +5,7 @@
 #include "state/state_plugin.h"
 #include "input/input_plugin.h"
 #include "component/component_plugin.h"
+#include "physics/physics_plugin.h"
 
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
@@ -71,6 +72,10 @@ namespace engine
 		state::StatePlugin* pStatePlugin = new state::StatePlugin();
 		pStatePlugin->TransitionState(pFirstState);
 		IPlugin::AddPlugin(pStatePlugin);
+
+		//Init the physics plugin
+		physics::PhysicsPlugin* pPhysicsPlugin = new physics::PhysicsPlugin();
+		IPlugin::AddPlugin(pPhysicsPlugin);
 
 		//Start timer
 		this->m_timer.Restart();

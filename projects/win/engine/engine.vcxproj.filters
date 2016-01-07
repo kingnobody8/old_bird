@@ -34,6 +34,9 @@
     <Filter Include="state">
       <UniqueIdentifier>{d6b12ce2-768e-4773-843f-ccd27a7946f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{8dd32be1-2843-4fb5-bb89-63d7b797821c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\render\node\line_node.cpp">
       <Filter>render\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\physics\physics_plugin.cpp">
+      <Filter>physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\node\line_node.h">
       <Filter>render\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\physics\physics_plugin.h">
+      <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
