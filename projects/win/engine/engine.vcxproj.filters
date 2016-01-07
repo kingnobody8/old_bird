@@ -113,6 +113,9 @@
     <ClCompile Include="..\..\..\source\engine\component\component_plugin.cpp">
       <Filter>component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\render\node\line_node.cpp">
+      <Filter>render\node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -203,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\component\component_plugin.h">
       <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\node\line_node.h">
+      <Filter>render\node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

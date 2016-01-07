@@ -9,6 +9,7 @@
 #include "shader/shader_default.h"
 #include "node/rect_node.h"
 #include "node/circle_node.h"
+#include "node/line_node.h"
 
 namespace engine
 {
@@ -18,7 +19,8 @@ namespace engine
 		DefaultShader shader;
 		//PolygonNode node;
 		//RectNode node;
-		CircleNode node;
+		//CircleNode node;
+		LineNode node;
 		//-----------------------------------------
 
 		bool initGL()
@@ -46,7 +48,10 @@ namespace engine
 
 			//node.InitVBO(verts, indicies);
 			//node.InitVBO(vec2(1.0, 0.5), util::Color::AZURE);
-			node.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
+			//node.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
+			CircleNode circ;
+			circ.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
+			node.InitVBO(circ.GetVerts());
 
 			return true;
 		}
