@@ -27,6 +27,7 @@
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
     <ClCompile Include="..\..\..\source\engine\input\input_event.cpp" />
     <ClCompile Include="..\..\..\source\engine\input\input_plugin.cpp" />
+    <ClCompile Include="..\..\..\source\engine\physics\debug_draw.cpp" />
     <ClCompile Include="..\..\..\source\engine\physics\physics_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="..\..\..\source\engine\engine.h" />
     <ClInclude Include="..\..\..\source\engine\input\input_event.h" />
     <ClInclude Include="..\..\..\source\engine\input\input_plugin.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\debug_draw.h" />
     <ClInclude Include="..\..\..\source\engine\physics\physics_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\plugin.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />
@@ -67,7 +69,6 @@
     <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\polygon_node.h" />
-    <ClInclude Include="..\..\..\source\engine\render\node\vertex.h" />
     <ClInclude Include="..\..\..\source\engine\render\opengl.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_plugin.h" />

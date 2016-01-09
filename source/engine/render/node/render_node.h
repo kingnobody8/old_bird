@@ -4,7 +4,6 @@
 #include "bit_flag.h"
 #include "math/math.h"
 #include "color.h"
-#include "vertex.h"
 #include <string>
 #include "macro.h"
 #include "../shader/shader_program.h"
@@ -15,6 +14,19 @@ namespace engine
 	{
 		//Forward Declare
 		class CRenderLayer;
+
+		struct Vertex
+		{
+			vec2 position;
+			vec2 tex_coords;
+			vec4 color;
+
+			Vertex(){}
+			Vertex(vec2 pos, vec2 tcoords, vec4 clr)
+				: position(pos), tex_coords(tcoords), color(clr)
+			{
+			}
+		};
 
 		class IRenderNode
 		{

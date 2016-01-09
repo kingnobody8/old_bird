@@ -1,6 +1,7 @@
 #pragma once
 #include "plugin.h"
 #include "box2d/Box2D.h"
+#include "debug_draw.h"
 
 namespace engine
 {
@@ -12,8 +13,8 @@ namespace engine
 			DECLARE_PLUGIN_TYPE_INFO(PhysicsPlugin);
 
 		private:
-			SDL_GLContext m_pGLContext;
-			SDL_Window* m_pSdlWin;
+			b2World* m_pWorld;
+			DebugDraw m_debugDraw;
 
 		public:
 			PhysicsPlugin();

@@ -17,7 +17,17 @@ namespace engine
 
 
 			//Get vertex source
-			const std::string vertexShaderSource = "#version 140\nin vec2 in_vertexPos2D;\nin vec4 in_vertexColor; out vec4 vertexColor; void main() { vertexColor = in_vertexColor; gl_Position = vec4( in_vertexPos2D.x, in_vertexPos2D.y, 0, 1 ); }";
+			const std::string vertexShaderSource = \
+				"#version 140\n"
+				"in vec2 v_position;\n"
+				"in vec2 v_coord;\n"
+				"in vec4 v_color;\n"
+				"out vec4 f_color;\n"
+				"void main()\n"
+				"{\n"
+				"	f_color = v_color;\n"
+				"	gl_Position = vec4( v_position.x, v_position.y, 0, 1 );\n"
+				"}\n";
 			//Load vertex shader
 			GLuint vertexShader = LoadShaderFromString(vertexShaderSource, GL_VERTEX_SHADER);
 			//Check for errors
@@ -33,7 +43,14 @@ namespace engine
 
 
 			//Get fragment source
-			const std::string fragmentShaderSource = "#version 140\nin vec4 vertexColor;\nout vec4 gl_FragColor; void main() { gl_FragColor = vertexColor; }";
+			const std::string fragmentShaderSource = \
+				"#version 140\n"
+				"in vec4 f_color;\n"
+				"out vec4 gl_FragColor;\n"
+				"void main()\n"
+				"{\n"
+				"	gl_FragColor = f_color;\n"
+				"}\n";
 			//Create fragment shader
 			GLuint fragmentShader = LoadShaderFromString(fragmentShaderSource, GL_FRAGMENT_SHADER);
 			//Check for errors
@@ -74,9 +91,9 @@ namespace engine
 
 
 			//Get variable locations
-			m_vertexPos2DLocation = glGetAttribLocation(m_programID, "in_vertexPos2D");
+			m_vertexPos2DLocation = glGetAttribLocation(m_programID, "v_position");
 			assert(m_vertexPos2DLocation != -1);
-			m_vertexColorLocation = glGetAttribLocation(m_programID, "in_vertexColor");
+			m_vertexColorLocation = glGetAttribLocation(m_programID, "v_color");
 			assert(m_vertexColorLocation != -1);
 
 			return true;

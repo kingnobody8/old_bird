@@ -11,12 +11,12 @@ namespace engine
 
 		void RectNode::InitVBO(const vec2& extends, const util::Color& clr)
 		{
-			std::vector<VertexColor> verts;
+			std::vector<Vertex> verts;
 			verts.resize(4);
-			verts[0] = VertexColor(vec2(-extends.x, -extends.y), clr);
-			verts[1] = VertexColor(vec2(-extends.x, extends.y), clr);
-			verts[2] = VertexColor(vec2(extends.x, extends.y), clr);
-			verts[3] = VertexColor(vec2(extends.x, -extends.y), clr);
+			verts[0] = Vertex(vec2(-extends.x, -extends.y), vec2(), clr);
+			verts[1] = Vertex(vec2(-extends.x, extends.y), vec2(), clr);
+			verts[2] = Vertex(vec2(extends.x, extends.y), vec2(), clr);
+			verts[3] = Vertex(vec2(extends.x, -extends.y), vec2(), clr);
 
 			std::vector<int> indicies;
 			indicies.resize(4);

@@ -104,7 +104,7 @@ namespace engine
 	void Engine::RunFrame(void* params)
 	{
 		Update();
-		m_pRenderPlugin->DoRender();
+		//m_pRenderPlugin->DoRender();
 	}
 
 	void Engine::Update(void)

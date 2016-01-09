@@ -17,16 +17,16 @@ namespace engine
 			float32 cosInc = cosf(increment);
 			vec2 inc(cosInc, sinInc);
 
-			std::vector<VertexColor> verts;
+			std::vector<Vertex> verts;
 			verts.resize(segments + 2);
-			verts[0] = VertexColor(vec2(), clr);
+			verts[0] = Vertex(vec2(), vec2(), clr);
 			for (int i = 1; i < segments+2; ++i)
 			{
 				vec2 tmp;
 				tmp.x = sin((float(i - 1) / segments+1) * 360 * DEG_TO_RAD);// cosInc * inc.x - sinInc * inc.y;
 				tmp.y = cos((float(i - 1) / segments+1) * 360 * DEG_TO_RAD);// sinInc * inc.y + cosInc * inc.y;
 				tmp *= radius;
-				verts[i] = VertexColor(tmp, clr);
+				verts[i] = Vertex(tmp, vec2(), clr);
 			}
 
 			std::vector<int> indicies;

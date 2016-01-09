@@ -34,11 +34,11 @@ namespace engine
 			util::Color fade = util::Color::YELLOW;
 			fade.a = 0.0f;
 
-			std::vector<VertexColor> verts;
-			verts.push_back(VertexColor(vec2(-1.0f, -1.0f), util::Color::RED));
-			verts.push_back(VertexColor(vec2(0.5f, -0.5f), util::Color::GREEN));
-			verts.push_back(VertexColor(vec2(1.0f, 1.0f), util::Color::BLUE));
-			verts.push_back(VertexColor(vec2(-0.5f, 0.5f), fade));
+			std::vector<Vertex> verts;
+			verts.push_back(Vertex(vec2(-1.0f, -1.0f), vec2(), util::Color::RED));
+			verts.push_back(Vertex(vec2(0.5f, -0.5f), vec2(), util::Color::GREEN));
+			verts.push_back(Vertex(vec2(1.0f, 1.0f), vec2(), util::Color::BLUE));
+			verts.push_back(Vertex(vec2(-0.5f, 0.5f), vec2(), fade));
 
 			std::vector<int> indicies;
 			indicies.push_back(0);

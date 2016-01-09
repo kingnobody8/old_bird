@@ -9,7 +9,7 @@ namespace engine
 		class LineNode : public IRenderNode
 		{
 		private: __todo() //maybe we should template this class so that we can have different types of verts
-			VertexColor* m_vVerts;
+			Vertex* m_vVerts;
 			int	m_vertCount;
 			int* m_vIndicies;
 			int m_indexCount;
@@ -22,10 +22,10 @@ namespace engine
 			virtual ~LineNode();
 			virtual void operator () (const matrix& inv_cam);
 
-			const std::vector<VertexColor> GetVerts();
+			const std::vector<Vertex> GetVerts();
 			const std::vector<int> GetIndicies();
 
-			void InitVBO(const std::vector<VertexColor>& verts);
+			void InitVBO(const std::vector<Vertex>& verts);
 			virtual void FreeVBO();
 		};
 	}

@@ -19,7 +19,7 @@ namespace engine
 			FreeVBO();
 		}
 
-		void LineNode::InitVBO(const std::vector<VertexColor>& verts)
+		void LineNode::InitVBO(const std::vector<Vertex>& verts)
 		{
 			//early out
 			if (verts.empty())
@@ -29,7 +29,7 @@ namespace engine
 			FreeVBO();
 
 			m_vertCount = verts.size();
-			m_vVerts = new VertexColor[m_vertCount];
+			m_vVerts = new Vertex[m_vertCount];
 			for (int i = 0; i < m_vertCount; ++i)
 			{
 				m_vVerts[i] = verts[i];
@@ -45,7 +45,7 @@ namespace engine
 			//Create VBO
 			glGenBuffers(1, &m_vboID);
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
-			glBufferData(GL_ARRAY_BUFFER, m_vertCount * sizeof(VertexColor), m_vVerts, GL_DYNAMIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_vertCount * sizeof(Vertex), m_vVerts, GL_DYNAMIC_DRAW);
 
 			//Create IBO
 			glGenBuffers(1, &m_iboID);
@@ -104,8 +104,8 @@ namespace engine
 			dShader->EnableVertexColor();
 
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
-			dShader->SetVertexPos2D(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, position));
-			dShader->SetVertexColor(sizeof(VertexColor), (GLvoid*)offsetof(VertexColor, color));
+			dShader->SetVertexPos2D(sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+			dShader->SetVertexColor(sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
 			
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
 			glDrawElements(GL_LINE_LOOP, m_indexCount, GL_UNSIGNED_INT, NULL);
@@ -117,9 +117,9 @@ namespace engine
 
 		}
 
-		const std::vector<VertexColor> LineNode::GetVerts()
+		const std::vector<Vertex> LineNode::GetVerts()
 		{
-			std::vector<VertexColor> ret;
+			std::vector<Vertex> ret;
 			ret.resize(m_vertCount);
 			for (int i = 0; i < m_vertCount; ++i)
 			{

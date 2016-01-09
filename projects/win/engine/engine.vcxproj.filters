@@ -122,6 +122,9 @@
     <ClCompile Include="..\..\..\source\engine\physics\physics_plugin.cpp">
       <Filter>physics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\physics\debug_draw.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -173,9 +176,6 @@
     <ClInclude Include="..\..\..\source\engine\render\node\polygon_node.h">
       <Filter>render\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\node\vertex.h">
-      <Filter>render\node</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\engine\state\base_state.h">
       <Filter>state</Filter>
     </ClInclude>
@@ -217,6 +217,9 @@
       <Filter>render\node</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\physics\physics_plugin.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\physics\debug_draw.h">
       <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
