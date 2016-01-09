@@ -114,7 +114,7 @@ namespace engine
 
 		//Update the timer
 		this->m_timer.Signal();
-		util::Time delta = this->m_timer.Delta();
+		util::Time delta = Min(this->m_timer.Delta(), 16);
 
 		//Update the plugins
 		if (!IPlugin::UpdatePlugins(delta))

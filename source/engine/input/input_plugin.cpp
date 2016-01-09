@@ -132,6 +132,7 @@ namespace engine
 
 		const vec2 InputPlugin::ConvertPixelToCartesian(int x, int y)
 		{
+			return vec2(x, y);
 			glm::i32vec2 logical_size;
 			SDL_GetWindowSize(m_pSdlWin, &logical_size.x, &logical_size.y);
 
