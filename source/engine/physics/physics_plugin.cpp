@@ -223,16 +223,9 @@ namespace engine
 			if (m_bRightMouseBtn)
 			{
 				b2Vec2 diff = pw - lastp;
-				
-				if (diff.Length() > 10)
-				{
-					int x = 0;
-					x++;
-				}
-
 				g_camera.m_center.x -= diff.x;
 				g_camera.m_center.y -= diff.y;
-				lastp = pw;
+				lastp = g_camera.ConvertScreenToWorld(b2Vec2(action.m_pixel.x, action.m_pixel.y));
 				return;
 			}
 
