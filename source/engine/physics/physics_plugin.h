@@ -13,20 +13,35 @@ namespace engine
 		public:
 			DECLARE_PLUGIN_TYPE_INFO(PhysicsPlugin);
 
+			enum EInputState { TESTBED, LARK, };
+
 		private:
 			b2World* m_pWorld;
 			DebugDraw m_debugDraw;
 			util::event::Subscriber m_sub;
 			b2MouseJoint* m_pMouseJoint;
+			b2RopeJoint* m_pRopeJoint;
 			b2Body* m_pGroundBody;
+			b2Body* m_pLark;
+			bool m_bLeftMouseBtn;
 			bool m_bRightMouseBtn;
 			b2Vec2 lastp;
+			EInputState m_state;
 
+			void OnMouseDownTestbed(const input::mouse_events::ButtonAction& action);
+			void OnMouseUpTestbed(const input::mouse_events::ButtonAction& action);
+			void OnMouseMotionTestbed(const input::mouse_events::MotionAction& action);
+
+			void OnMouseDownLark(const input::mouse_events::ButtonAction& action);
+			void OnMouseUpLark(const input::mouse_events::ButtonAction& action);
+			void OnMouseMotionLark(const input::mouse_events::MotionAction& action);
 
 			void OnMouseDown(const input::mouse_events::ButtonAction& action);
 			void OnMouseUp(const input::mouse_events::ButtonAction& action);
 			void OnMouseMotion(const input::mouse_events::MotionAction& action);
 			void OnMouseWheel(const input::mouse_events::WheelAction& action);
+
+			void OnKeyDown(const input::key_events::KeyAction& action);
 
 		public:
 			PhysicsPlugin();
