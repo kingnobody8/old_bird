@@ -37,6 +37,12 @@
     <Filter Include="physics">
       <UniqueIdentifier>{8dd32be1-2843-4fb5-bb89-63d7b797821c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="b2djson">
+      <UniqueIdentifier>{168bdd4a-63fe-4d1d-9bb4-7c70cec25a28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="b2djson\json">
+      <UniqueIdentifier>{37a6e867-57ad-4536-86ee-3058de480422}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -124,6 +130,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\engine\physics\debug_draw.cpp">
       <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage_OpenGL.cpp">
+      <Filter>b2djson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\b2djson\jsoncpp.cpp">
+      <Filter>b2djson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJson.cpp">
+      <Filter>b2djson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage.cpp">
+      <Filter>b2djson</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +239,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\physics\debug_draw.h">
       <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJsonImage_OpenGL.h">
+      <Filter>b2djson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\b2djson\bitmap.h">
+      <Filter>b2djson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJson.h">
+      <Filter>b2djson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJsonImage.h">
+      <Filter>b2djson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\b2djson\json\json.h">
+      <Filter>b2djson\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\b2djson\json\json-forwards.h">
+      <Filter>b2djson\json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\asset\loader.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJson.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage_OpenGL.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\jsoncpp.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\component.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\component_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
@@ -53,6 +57,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
     <ClInclude Include="..\..\..\source\engine\asset\resource_path.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJson.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJsonImage.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJsonImage_OpenGL.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\bitmap.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\json\json-forwards.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\json\json.h" />
     <ClInclude Include="..\..\..\source\engine\component\component.h" />
     <ClInclude Include="..\..\..\source\engine\component\component_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\component\object.h" />

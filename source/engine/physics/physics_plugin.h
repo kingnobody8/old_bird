@@ -3,6 +3,7 @@
 #include "box2d/Box2D.h"
 #include "debug_draw.h"
 #include "../input/input_event.h"
+#include "../b2djson/b2dJson.h"
 
 namespace engine
 {
@@ -27,6 +28,7 @@ namespace engine
 			bool m_bRightMouseBtn;
 			b2Vec2 lastp;
 			EInputState m_state;
+			b2dJson b2d;
 
 			void OnMouseDownTestbed(const input::mouse_events::ButtonAction& action);
 			void OnMouseUpTestbed(const input::mouse_events::ButtonAction& action);

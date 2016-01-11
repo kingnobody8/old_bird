@@ -2,6 +2,9 @@
 #include "func.h"
 #include "../render/opengl.h"
 #include "../render/render_plugin.h"
+#include "../asset/resource_path.h"
+#include "../asset/loader.h"
+#include "b2djson/b2dJsonImage.h"
 
 namespace engine
 {
@@ -54,6 +57,7 @@ namespace engine
 			, m_bLeftMouseBtn(false)
 			, m_state(LARK)
 			, m_pRopeJoint(null)
+			, m_pLark(null)
 		{
 		}
 
@@ -84,74 +88,84 @@ namespace engine
 			flags += false * b2Draw::e_centerOfMassBit;
 			m_debugDraw.SetFlags(flags);
 
+			std::string errorMsg;
+			b2d.readFromFile((getResourcePath() + std::string("assets/images.json")).c_str(), errorMsg, m_pWorld);
+			SDL_Log(errorMsg.c_str());
+
+
 			//creat shape (test)
-			b2BodyDef bd;
-			b2Body* ground = m_pWorld->CreateBody(&bd);
-			b2EdgeShape shapeG;
-			shapeG.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
-			ground->CreateFixture(&shapeG, 0.0f);
+			//b2BodyDef bd;
+			//b2Body* ground = m_pWorld->CreateBody(&bd);
+			//b2EdgeShape shapeG;
+			//shapeG.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
+			//ground->CreateFixture(&shapeG, 0.0f);
 
 
 			b2BodyDef bodyDef;
 			m_pGroundBody = m_pWorld->CreateBody(&bodyDef);
 
+			//lark
 			b2CircleShape shapec;
 			shapec.m_radius = 1.0f;
 			b2BodyDef bdc;
 			bdc.type = b2_dynamicBody;
 			bdc.position.Set(0.0, 20.0f);
 			m_pLark = m_pWorld->CreateBody(&bdc);
-			m_pLark->CreateFixture(&shapec, 10.0f);
+			b2FixtureDef fdef;
+			fdef.density = 10.0f;
+			fdef.restitution = 0.0f;
+			fdef.shape = &shapec;
+			m_pLark->CreateFixture(&fdef);
 
 
-			float32 a = 0.5f;
-			b2PolygonShape shape;
-			shape.SetAsBox(a, a);
+			//float32 a = 0.5f;
+			//b2PolygonShape shape;
+			//shape.SetAsBox(a, a);
 
-			b2Vec2 x(-7.0f, 0.75f);
-			b2Vec2 y;
-			b2Vec2 deltaX(0.5625f, 1.25f);
-			b2Vec2 deltaY(1.125f, 0.0f);
-			int e_count = 20;
+			//b2Vec2 x(-7.0f, 0.75f);
+			//b2Vec2 y;
+			//b2Vec2 deltaX(0.5625f, 1.25f);
+			//b2Vec2 deltaY(1.125f, 0.0f);
+			//int e_count = 20;
 
-			for (int32 i = 0; i < e_count; ++i)
-			{
-				y = x;
+			//for (int32 i = 0; i < e_count; ++i)
+			//{
+			//	y = x;
 
-				for (int32 j = i; j < e_count; ++j)
-				{
-					b2BodyDef bd;
-					bd.type = b2_dynamicBody;
-					bd.position = y;
-					b2Body* body = m_pWorld->CreateBody(&bd);
-					body->CreateFixture(&shape, 5.0f);
+			//	for (int32 j = i; j < e_count; ++j)
+			//	{
+			//		b2BodyDef bd;
+			//		bd.type = b2_dynamicBody;
+			//		bd.position = y;
+			//		b2Body* body = m_pWorld->CreateBody(&bd);
+			//		body->CreateFixture(&shape, 5.0f);
 
-					y += deltaY;
-				}
+			//		y += deltaY;
+			//	}
 
-				x += deltaX;
-			}
+			//	x += deltaX;
+			//}
 
-			for (int32 i = 0; i < e_count; ++i)
-			{
-				y = x;
-				
-				for (int32 j = i; j < e_count; ++j)
-				{
-					if (i % 5 == 0)
-					{
-						b2BodyDef bd;
-						bd.type = b2_staticBody;
-						bd.position = y;
-						b2Body* body = m_pWorld->CreateBody(&bd);
-						body->CreateFixture(&shape, 5.0f);
-					}
+			//for (int32 i = 0; i < e_count; ++i)
+			//{
+			//	y = x;
+			//	
+			//	for (int32 j = i; j < e_count; ++j)
+			//	{
+			//		if (i % 5 == 0)
+			//		{
+			//			b2BodyDef bd;
+			//			bd.type = b2_staticBody;
+			//			bd.position = y;
+			//			b2Body* body = m_pWorld->CreateBody(&bd);
+			//			body->CreateFixture(&shape, 5.0f);
+			//		}
 
-					y += deltaY;
-				}
+			//		y += deltaY;
+			//	}
 
-				x += deltaX;
-			}
+			//	x += deltaX;
+			//}
 		}
 
 		VIRTUAL void PhysicsPlugin::Exit()
@@ -163,9 +177,17 @@ namespace engine
 
 		VIRTUAL bool PhysicsPlugin::Update(const util::Time& dt)
 		{
-			if (m_state == LARK)
+			if (m_state == LARK && m_pLark != null)
 			{
 				g_camera.m_center = m_pLark->GetPosition();
+
+				float goal = Lerp(0.75f, 2.0f, Clamp(m_pLark->GetLinearVelocity().Length() / 10.0f, 0.0, 1.0f));
+				float diff = goal - g_camera.m_zoom;
+				if (diff > 0)
+					g_camera.m_zoom += Min(diff, 0.005f);
+				else
+					g_camera.m_zoom += Max(diff, -0.005f);
+
 				//apply forces
 				if (m_bLeftMouseBtn)
 				{
@@ -197,6 +219,13 @@ namespace engine
 
 				c.Set(0.8f, 0.8f, 0.8f);
 				m_debugDraw.DrawSegment(p1, p2, c);
+			}
+
+			std::vector<b2dJsonImage*> images;
+			b2d.getAllImages(images);
+			for (int i = 0; i < images.size(); ++i)
+			{
+				images[i]->render();
 			}
 
 			m_debugDraw.Flush();
