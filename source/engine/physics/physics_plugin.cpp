@@ -58,6 +58,7 @@ namespace engine
 			, m_state(LARK)
 			, m_pRopeJoint(null)
 			, m_pLark(null)
+			, m_pAttach(null)
 		{
 		}
 
@@ -89,7 +90,7 @@ namespace engine
 			m_debugDraw.SetFlags(flags);
 
 			std::string errorMsg;
-			b2d.readFromFile((getResourcePath() + std::string("assets/images.json")).c_str(), errorMsg, m_pWorld);
+			b2d.readFromFile((getResourcePath() + std::string("assets/test_scene.json")).c_str(), errorMsg, m_pWorld);
 			SDL_Log(errorMsg.c_str());
 
 
@@ -108,6 +109,7 @@ namespace engine
 			b2CircleShape shapec;
 			shapec.m_radius = 1.0f;
 			b2BodyDef bdc;
+			bdc.fixedRotation = true;
 			bdc.type = b2_dynamicBody;
 			bdc.position.Set(0.0, 20.0f);
 			m_pLark = m_pWorld->CreateBody(&bdc);
@@ -116,6 +118,15 @@ namespace engine
 			fdef.restitution = 0.0f;
 			fdef.shape = &shapec;
 			m_pLark->CreateFixture(&fdef);
+
+			float32 a = 0.5f;
+			b2PolygonShape shape;
+			shape.SetAsBox(a, a);
+			b2BodyDef bd;
+			bd.type = b2_dynamicBody;
+			bd.position = m_pLark->GetPosition() + b2Vec2(10, 5);
+			m_pAttach = m_pWorld->CreateBody(&bd);
+			m_pAttach->CreateFixture(&shape, 25.0f);
 
 
 			//float32 a = 0.5f;
@@ -406,15 +417,45 @@ namespace engine
 			}
 			else if (action.m_button == SDL_BUTTON_RIGHT && m_pRopeJoint == null)
 			{
-				b2Body* body = m_pLark;
-				b2RopeJointDef md;
-				md.bodyA = m_pGroundBody;
-				md.bodyB = body;
-				md.localAnchorA = pw;
-				md.localAnchorB.SetZero();
-				md.maxLength = (pw - m_pLark->GetPosition()).Length() * 1.1f, 20.0f;
-				m_pRopeJoint = (b2RopeJoint*)m_pWorld->CreateJoint(&md);
-				body->SetAwake(true);
+				bool connect_anywhere = false;
+				if (!connect_anywhere)
+				{
+
+					RayCastClosestCallback callback;
+					b2Vec2 direction = pw - m_pLark->GetPosition();
+					direction.Normalize();
+					direction *= 100;
+					b2Vec2 point = m_pLark->GetPosition() + direction;
+					m_pWorld->RayCast(&callback, m_pLark->GetPosition(), point);
+
+					if (callback.m_hit)
+					{
+						b2Body* body = callback.m_pFixture->GetBody();
+						b2RopeJointDef md;
+						md.bodyA = m_pLark;
+						md.bodyB = body;
+						md.localAnchorA.SetZero();
+						md.localAnchorB = body->GetLocalPoint(callback.m_point);
+						md.maxLength = (callback.m_point - m_pLark->GetPosition()).Length() * 1.1f;
+						md.collideConnected = true;
+						m_pRopeJoint = (b2RopeJoint*)m_pWorld->CreateJoint(&md);
+						body->SetAwake(true);
+					}
+
+				}
+				else
+				{
+					//conect anywhere
+					b2Body* body = m_pLark;
+					b2RopeJointDef md;
+					md.bodyA = m_pGroundBody;
+					md.bodyB = body;
+					md.localAnchorA = pw;
+					md.localAnchorB.SetZero();
+					md.maxLength = (pw - m_pLark->GetPosition()).Length() * 1.1f;
+					m_pRopeJoint = (b2RopeJoint*)m_pWorld->CreateJoint(&md);
+					body->SetAwake(true);
+				}
 			}
 			else if (action.m_button == SDL_BUTTON_RIGHT)
 			{
