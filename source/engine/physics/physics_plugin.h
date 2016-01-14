@@ -17,6 +17,7 @@ namespace engine
 			enum EInputState { TESTBED, LARK, };
 
 		private:
+			b2dJson m_json;
 			b2World* m_pWorld;
 			DebugDraw m_debugDraw;
 			util::event::Subscriber m_sub;
@@ -28,7 +29,6 @@ namespace engine
 			bool m_bRightMouseBtn;
 			b2Vec2 lastp;
 			EInputState m_state;
-			b2dJson b2d;
 			b2ParticleSystem* m_pParticleSystem;
 
 			void OnMouseDownTestbed(const input::mouse_events::ButtonAction& action);

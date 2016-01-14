@@ -264,6 +264,9 @@
     <ClInclude Include="..\..\..\source\engine\physics\callbacks\raycast_callback.h">
       <Filter>physics\callbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\physics\callbacks\aabb_callback.h">
+      <Filter>physics\callbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl">

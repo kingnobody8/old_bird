@@ -6,43 +6,12 @@
 #include "../asset/loader.h"
 #include "b2djson/b2dJsonImage.h"
 #include "callbacks/raycast_callback.h"
+#include "callbacks/aabb_callback.h"
 
 namespace engine
 {
 	namespace physics
 	{
-		class QueryCallback : public b2QueryCallback
-		{
-		public:
-			QueryCallback(const b2Vec2& point)
-			{
-				m_point = point;
-				m_fixture = NULL;
-			}
-
-			bool ReportFixture(b2Fixture* fixture)
-			{
-				b2Body* body = fixture->GetBody();
-				if (body->GetType() == b2_dynamicBody)
-				{
-					bool inside = fixture->TestPoint(m_point);
-					if (inside)
-					{
-						m_fixture = fixture;
-
-						// We are done, terminate the query.
-						return false;
-					}
-				}
-
-				// Continue the query.
-				return true;
-			}
-
-			b2Vec2 m_point;
-			b2Fixture* m_fixture;
-		};
-
 		const int VELOCITY_ITERATIONS = 8;
 		const int POSITION_ITERATIONS = 3;
 		const b2Vec2 GRAVITY = b2Vec2(0.0f, -10.0f);
@@ -92,7 +61,7 @@ namespace engine
 			m_debugDraw.SetFlags(flags);
 
 			std::string errorMsg;
-			b2d.readFromFile((getResourcePath() + std::string("assets/test_scene.json")).c_str(), errorMsg, m_pWorld);
+			m_json.readFromFile((getResourcePath() + std::string("assets/test_scene.json")).c_str(), errorMsg, m_pWorld);
 			SDL_Log(errorMsg.c_str());
 
 
@@ -108,7 +77,7 @@ namespace engine
 			util::Color clr = util::Color::CYAN;
 			pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
 			b2PolygonShape shapep;
-			shapep.SetAsBox(5.0f, 5.0f, b2Vec2(0.0f, 20.0f), 0.0);
+			shapep.SetAsBox(5.0f, 10.0f, b2Vec2(0.0f, 20.0f), 0.0);
 			pd.shape = &shapep;
 			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
 
@@ -243,7 +212,7 @@ namespace engine
 			}
 
 			std::vector<b2dJsonImage*> images;
-			b2d.getAllImages(images);
+			m_json.getAllImages(images);
 			for (int i = 0; i < images.size(); ++i)
 			{
 				images[i]->render();
@@ -355,12 +324,12 @@ namespace engine
 				aabb.upperBound = pw + d;
 
 				// Query the world for overlapping shapes.
-				QueryCallback callback(pw);
+				callbacks::AabbCallback callback(pw);
 				m_pWorld->QueryAABB(&callback, aabb);
 
-				if (callback.m_fixture)
+				if (callback.m_pFixture)
 				{
-					b2Body* body = callback.m_fixture->GetBody();
+					b2Body* body = callback.m_pFixture->GetBody();
 					b2MouseJointDef md;
 					md.bodyA = m_pGroundBody;
 					md.bodyB = body;
