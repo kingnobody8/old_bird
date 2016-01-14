@@ -70,6 +70,7 @@
     <ClInclude Include="..\..\..\source\engine\engine.h" />
     <ClInclude Include="..\..\..\source\engine\input\input_event.h" />
     <ClInclude Include="..\..\..\source\engine\input\input_plugin.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\callbacks\raycast_callback.h" />
     <ClInclude Include="..\..\..\source\engine\physics\debug_draw.h" />
     <ClInclude Include="..\..\..\source\engine\physics\physics_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\plugin.h" />

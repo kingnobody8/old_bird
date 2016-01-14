@@ -43,6 +43,9 @@
     <Filter Include="b2djson\json">
       <UniqueIdentifier>{37a6e867-57ad-4536-86ee-3058de480422}</UniqueIdentifier>
     </Filter>
+    <Filter Include="physics\callbacks">
+      <UniqueIdentifier>{c5520f2e-ea54-4751-a4b8-56a5b09bbe14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -257,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\b2djson\json\json-forwards.h">
       <Filter>b2djson\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\physics\callbacks\raycast_callback.h">
+      <Filter>physics\callbacks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,50 +9,6 @@ namespace engine
 {
 	namespace physics
 	{
-
-		// This callback finds the closest hit. Polygon 0 is filtered.
-		class RayCastClosestCallback : public b2RayCastCallback
-		{
-		public:
-			RayCastClosestCallback()
-			{
-				m_pFixture = null;
-				m_hit = false;
-			}
-
-			float32 ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction)
-			{
-				b2Body* body = fixture->GetBody();
-				void* userData = body->GetUserData();
-				if (userData)
-				{
-					int32 index = *(int32*)userData;
-					if (index == 0)
-					{
-						// By returning -1, we instruct the calling code to ignore this fixture and
-						// continue the ray-cast to the next fixture.
-						return -1.0f;
-					}
-				}
-
-				m_hit = true;
-				m_point = point;
-				m_normal = normal;
-				m_pFixture = fixture;
-
-				// By returning the current fraction, we instruct the calling code to clip the ray and
-				// continue the ray-cast to the next fixture. WARNING: do not assume that fixtures
-				// are reported in order. However, by clipping, we can always get the closest fixture.
-				return fraction;
-			}
-
-			bool m_hit;
-			b2Vec2 m_point;
-			b2Vec2 m_normal;
-			b2Fixture* m_pFixture;
-		};
-
-
 		class PhysicsPlugin : public IPlugin
 		{
 		public:
@@ -68,7 +24,6 @@ namespace engine
 			b2RopeJoint* m_pRopeJoint;
 			b2Body* m_pGroundBody;
 			b2Body* m_pLark;
-			b2Body* m_pAttach;
 			bool m_bLeftMouseBtn;
 			bool m_bRightMouseBtn;
 			b2Vec2 lastp;

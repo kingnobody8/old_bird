@@ -5,6 +5,7 @@
 #include "../asset/resource_path.h"
 #include "../asset/loader.h"
 #include "b2djson/b2dJsonImage.h"
+#include "callbacks/raycast_callback.h"
 
 namespace engine
 {
@@ -58,7 +59,6 @@ namespace engine
 			, m_state(LARK)
 			, m_pRopeJoint(null)
 			, m_pLark(null)
-			, m_pAttach(null)
 			, m_pParticleSystem(null)
 		{
 		}
@@ -137,15 +137,6 @@ namespace engine
 			fdef.restitution = 0.0f;
 			fdef.shape = &shapec;
 			m_pLark->CreateFixture(&fdef);
-
-			float32 a = 0.5f;
-			b2PolygonShape shape;
-			shape.SetAsBox(a, a);
-			b2BodyDef bd;
-			bd.type = b2_dynamicBody;
-			bd.position = m_pLark->GetPosition() + b2Vec2(10, 5);
-			m_pAttach = m_pWorld->CreateBody(&bd);
-			m_pAttach->CreateFixture(&shape, 25.0f);
 
 
 			//float32 a = 0.5f;
@@ -440,14 +431,14 @@ namespace engine
 				if (!connect_anywhere)
 				{
 
-					RayCastClosestCallback callback;
+					callbacks::RayCastClosestCallback callback;
 					b2Vec2 direction = pw - m_pLark->GetPosition();
 					direction.Normalize();
 					direction *= 100;
 					b2Vec2 point = m_pLark->GetPosition() + direction;
 					m_pWorld->RayCast(&callback, m_pLark->GetPosition(), point);
 
-					if (callback.m_hit)
+					if (callback.m_bHit)
 					{
 						b2Body* body = callback.m_pFixture->GetBody();
 						b2RopeJointDef md;
