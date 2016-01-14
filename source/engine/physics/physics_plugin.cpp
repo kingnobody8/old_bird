@@ -59,6 +59,7 @@ namespace engine
 			, m_pRopeJoint(null)
 			, m_pLark(null)
 			, m_pAttach(null)
+			, m_pParticleSystem(null)
 		{
 		}
 
@@ -87,11 +88,29 @@ namespace engine
 			flags += true * b2Draw::e_jointBit;
 			flags += false * b2Draw::e_aabbBit;
 			flags += false * b2Draw::e_centerOfMassBit;
+			flags += true * b2Draw::e_particleBit;
 			m_debugDraw.SetFlags(flags);
 
 			std::string errorMsg;
 			b2d.readFromFile((getResourcePath() + std::string("assets/test_scene.json")).c_str(), errorMsg, m_pWorld);
 			SDL_Log(errorMsg.c_str());
+
+
+			const b2ParticleSystemDef particleSystemDef;
+			m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
+
+			//create particles
+			m_pParticleSystem->SetRadius(0.1f);
+			m_pParticleSystem->SetDamping(0.2f);
+			m_pParticleSystem->SetDensity(10.0f);
+			b2ParticleGroupDef pd;
+			pd.flags = b2_solidParticleGroup;
+			util::Color clr = util::Color::CYAN;
+			pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
+			b2PolygonShape shapep;
+			shapep.SetAsBox(5.0f, 5.0f, b2Vec2(0.0f, 20.0f), 0.0);
+			pd.shape = &shapep;
+			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
 
 
 			//creat shape (test)

@@ -721,6 +721,126 @@ namespace engine
 			m_lines->Vertex(p2, color);
 		}
 
+		float smoothstep(float x) { return x * x * (3 - 2 * x); }
+		float currentscale = 1;
+		//
+		void DebugDraw::DrawParticles(const b2Vec2 *centers, const b2Vec2 *velocities, float32 radius, const b2ParticleColor *colors, int32 count)
+		{
+			for (int i = 0; i < count; ++i)
+			{
+				b2Vec2 center = centers[i];
+				b2Color color = b2Color(colors[i].r / 255.0f, colors[i].g / 255.0f, colors[i].b / 255.0f);
+
+				/*b2Vec2 vel = velocities[i];
+				vel.Normalize();
+
+				m_lines->Vertex(center - vel, color);
+				m_lines->Vertex(center, color);*/
+
+				const float32 k_segments = 16.0f;
+				const float32 k_increment = 2.0f * b2_pi / k_segments;
+				float32 sinInc = sinf(k_increment);
+				float32 cosInc = cosf(k_increment);
+				b2Vec2 v0 = center;
+				b2Vec2 r1(cosInc, sinInc);
+				b2Vec2 v1 = center + radius * r1;
+				float32 len = velocities[i].Length();
+				float32 mod = len;
+				b2Color fillColor(0.5f * color.r * mod, 0.5f * color.g * mod, 0.5f * color.b * mod, 0.5f);
+				for (int32 i = 0; i < k_segments; ++i)
+				{
+					// Perform rotation to avoid additional trigonometry.
+					b2Vec2 r2;
+					r2.x = cosInc * r1.x - sinInc * r1.y;
+					r2.y = sinInc * r1.x + cosInc * r1.y;
+					b2Vec2 v2 = center + radius * r2;
+					m_triangles->Vertex(v0, fillColor);
+					m_triangles->Vertex(v1, fillColor);
+					m_triangles->Vertex(v2, fillColor);
+					r1 = r2;
+					v1 = v2;
+				}
+			}
+
+			return;
+
+			static unsigned int particle_texture = 0;
+
+			if (!particle_texture ||
+				!glIsTexture(particle_texture)) // Android deletes textures upon sleep etc.
+			{
+				// generate a "gaussian blob" texture procedurally
+				glGenTextures(1, &particle_texture);
+				b2Assert(particle_texture);
+				const int TSIZE = 64;
+				unsigned char tex[TSIZE][TSIZE][4];
+				for (int y = 0; y < TSIZE; y++)
+				{
+					for (int x = 0; x < TSIZE; x++)
+					{
+						float fx = (x + 0.5f) / TSIZE * 2 - 1;
+						float fy = (y + 0.5f) / TSIZE * 2 - 1;
+						float dist = sqrtf(fx * fx + fy * fy);
+						unsigned char intensity = (unsigned char)(dist <= 1 ? smoothstep(1 - dist) * 255 : 0);
+						tex[y][x][0] = tex[y][x][1] = tex[y][x][2] = 128;
+						tex[y][x][3] = intensity;
+					}
+				}
+				glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, particle_texture);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+				glTexParameterf(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TSIZE, TSIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex);
+				glDisable(GL_TEXTURE_2D);
+
+				glEnable(GL_POINT_SMOOTH);
+			}
+
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, particle_texture);
+
+#ifdef __ANDROID__
+			glEnable(GL_POINT_SPRITE_OES);
+			glTexEnvf(GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE);
+#else
+			glEnable(GL_POINT_SPRITE);
+			glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+#endif
+
+			const float particle_size_multiplier = 3;  // because of falloff
+			glPointSize(radius * currentscale * particle_size_multiplier);
+
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glVertexPointer(2, GL_FLOAT, 0, &centers[0].x);
+			if (colors)
+			{
+				glEnableClientState(GL_COLOR_ARRAY);
+				glColorPointer(4, GL_UNSIGNED_BYTE, 0, &colors[0].r);
+			}
+			else
+			{
+				glColor4f(1, 1, 1, 1);
+			}
+
+			glDrawArrays(GL_POINTS, 0, count);
+
+			glDisableClientState(GL_VERTEX_ARRAY);
+			if (colors) glDisableClientState(GL_COLOR_ARRAY);
+
+			glDisable(GL_BLEND);
+			glDisable(GL_TEXTURE_2D);
+#ifdef __ANDROID__
+			glDisable(GL_POINT_SPRITE_OES);
+#endif
+		}
+
+
 		//
 		void DebugDraw::DrawTransform(const b2Transform& xf)
 		{

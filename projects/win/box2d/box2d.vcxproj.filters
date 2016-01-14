@@ -140,6 +140,42 @@
     <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2Shape.h">
       <Filter>Collision\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleAssembly.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleGroup.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleSystem.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2StackQueue.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2VoronoiDiagram.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Common\b2FreeList.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Common\b2GrowableBuffer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Common\b2IntrusiveList.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Common\b2SlabAllocator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Common\b2Stat.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\box2d\Common\b2TrackedBlock.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collision">
@@ -162,6 +198,9 @@
     </Filter>
     <Filter Include="Collision\Shapes">
       <UniqueIdentifier>{ee4efbb9-35e9-44b8-ac6b-8191b7583105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{44209e9e-28a7-470e-b25a-3a6c83412bae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +341,30 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\box2d\Collision\Shapes\b2PolygonShape.cpp">
       <Filter>Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2Particle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleAssembly.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleGroup.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleSystem.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2VoronoiDiagram.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Common\b2FreeList.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Common\b2Stat.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\box2d\Common\b2TrackedBlock.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -32,11 +32,17 @@
     <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2Shape.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2BlockAllocator.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2Draw.h" />
+    <ClInclude Include="..\..\..\source\box2d\Common\b2FreeList.h" />
+    <ClInclude Include="..\..\..\source\box2d\Common\b2GrowableBuffer.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2GrowableStack.h" />
+    <ClInclude Include="..\..\..\source\box2d\Common\b2IntrusiveList.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2Math.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2Settings.h" />
+    <ClInclude Include="..\..\..\source\box2d\Common\b2SlabAllocator.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2StackAllocator.h" />
+    <ClInclude Include="..\..\..\source\box2d\Common\b2Stat.h" />
     <ClInclude Include="..\..\..\source\box2d\Common\b2Timer.h" />
+    <ClInclude Include="..\..\..\source\box2d\Common\b2TrackedBlock.h" />
     <ClInclude Include="..\..\..\source\box2d\Dynamics\b2Body.h" />
     <ClInclude Include="..\..\..\source\box2d\Dynamics\b2ContactManager.h" />
     <ClInclude Include="..\..\..\source\box2d\Dynamics\b2Fixture.h" />
@@ -65,6 +71,12 @@
     <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2RopeJoint.h" />
     <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2WeldJoint.h" />
     <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2WheelJoint.h" />
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2Particle.h" />
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleAssembly.h" />
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleGroup.h" />
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleSystem.h" />
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2StackQueue.h" />
+    <ClInclude Include="..\..\..\source\box2d\Particle\b2VoronoiDiagram.h" />
     <ClInclude Include="..\..\..\source\box2d\Rope\b2Rope.h" />
   </ItemGroup>
   <ItemGroup>
@@ -82,10 +94,13 @@
     <ClCompile Include="..\..\..\source\box2d\Collision\Shapes\b2PolygonShape.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Common\b2BlockAllocator.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Common\b2Draw.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Common\b2FreeList.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Common\b2Math.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Common\b2Settings.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Common\b2Stat.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Common\b2Timer.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Common\b2TrackedBlock.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Dynamics\b2Body.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Dynamics\b2ContactManager.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Dynamics\b2Fixture.cpp" />
@@ -113,6 +128,11 @@
     <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2RopeJoint.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2WheelJoint.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2Particle.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleAssembly.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleGroup.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\source\box2d\Particle\b2VoronoiDiagram.cpp" />
     <ClCompile Include="..\..\..\source\box2d\Rope\b2Rope.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

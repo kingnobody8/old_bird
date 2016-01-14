@@ -94,6 +94,92 @@
         "name" : "Ground",
         "position" : 0,
         "type" : "static"
+      },
+      
+      {
+        "angle" : -0.7853981852531433,
+        "angularVelocity" : 0,
+        "awake" : true,
+        "fixture" : 
+        [
+          
+          {
+            "density" : 1,
+            "friction" : 0.2,
+            "id" : 2,
+            "name" : "fixture1",
+            "shapes" : 
+            [
+              
+              {
+                "type" : "polygon"
+              }
+            ],
+            "vertices" : 
+            {
+              "x" : [ -0.5, 0.5, 0.5, -0.5 ],
+              "y" : 
+              [
+                -7.499981880187988,
+                -7.499981880187988,
+                7.500008583068848,
+                7.500008583068848
+              ]
+            }
+          }
+        ],
+        "id" : 2,
+        "linearVelocity" : 0,
+        "name" : "body0",
+        "position" : 
+        {
+          "x" : 2.709499120712280,
+          "y" : 25.39917373657227
+        },
+        "type" : "static"
+      },
+      
+      {
+        "angle" : 0.7853981852531433,
+        "angularVelocity" : 0,
+        "awake" : true,
+        "fixture" : 
+        [
+          
+          {
+            "density" : 1,
+            "friction" : 0.2,
+            "id" : 3,
+            "name" : "fixture1",
+            "shapes" : 
+            [
+              
+              {
+                "type" : "polygon"
+              }
+            ],
+            "vertices" : 
+            {
+              "x" : [ -0.5, 0.5, 0.5, -0.5 ],
+              "y" : 
+              [
+                -7.499981880187988,
+                -7.499981880187988,
+                7.500008583068848,
+                7.500008583068848
+              ]
+            }
+          }
+        ],
+        "id" : 3,
+        "linearVelocity" : 0,
+        "name" : "left incline",
+        "position" : 
+        {
+          "x" : -14.82604408264160,
+          "y" : 13.68361663818359
+        },
+        "type" : "static"
       }
     ],
     "metaobject" : 
@@ -107,8 +193,8 @@
         "name" : "object0",
         "position" : 
         {
-          "x" : 0,
-          "y" : 10
+          "x" : -222.0097503662109,
+          "y" : 9.902477264404297
         },
         "scale" : 1
       },
@@ -128,7 +214,7 @@
       },
       
       {
-        "angle" : 0,
+        "angle" : 0.7853981852531433,
         "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/gettingStarted.rube",
         "flip" : false,
         "id" : 6,

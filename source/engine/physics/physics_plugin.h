@@ -74,6 +74,7 @@ namespace engine
 			b2Vec2 lastp;
 			EInputState m_state;
 			b2dJson b2d;
+			b2ParticleSystem* m_pParticleSystem;
 
 			void OnMouseDownTestbed(const input::mouse_events::ButtonAction& action);
 			void OnMouseUpTestbed(const input::mouse_events::ButtonAction& action);
