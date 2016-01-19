@@ -54,6 +54,9 @@ namespace engine
 			virtual void Exit();
 			virtual bool Update(const util::Time& dt);
 
+			void Reload();
+			bool rel;
+
 		};
 	}
 }

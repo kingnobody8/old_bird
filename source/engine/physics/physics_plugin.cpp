@@ -29,6 +29,7 @@ namespace engine
 			, m_pRopeJoint(null)
 			, m_pLark(null)
 			, m_pParticleSystem(null)
+			, rel(false)
 		{
 		}
 
@@ -163,10 +164,22 @@ namespace engine
 			m_sub.UnsubscribeAll();
 			m_debugDraw.Destroy();
 			SafeDelete(m_pWorld);
+			m_pParticleSystem = null;
+			m_pLark = null;
+			m_pRopeJoint = null;
+			m_pMouseJoint = null;
+			m_pGroundBody = null;
 		}
 
 		VIRTUAL bool PhysicsPlugin::Update(const util::Time& dt)
 		{
+			if (rel)
+			{
+				Reload();
+				rel = false;
+				return true;
+			}
+
 			if (m_state == LARK && m_pLark != null)
 			{
 				g_camera.m_center = m_pLark->GetPosition();
@@ -226,6 +239,12 @@ namespace engine
 			return true;
 		}
 
+		void PhysicsPlugin::Reload()
+		{
+			Exit();
+			Init();
+		}
+
 		void PhysicsPlugin::OnKeyDown(const input::key_events::KeyAction& action)
 		{
 			switch (action.m_code)
@@ -240,6 +259,9 @@ namespace engine
 					m_state = LARK;
 				break;
 			}
+			case SDLK_r:
+				rel = true; //todo can't unsubscribe then subscribe to same event again while in the middle of callback
+				break;
 			}
 		}
 
