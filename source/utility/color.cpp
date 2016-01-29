@@ -37,7 +37,8 @@ namespace util
 
 	const glm::u32 Color::GetHex() const
 	{
-		glm::u32 ret = *(glm::u32*)&Get8Bit();
+		const glm::u8vec4 tmp = Get8Bit();
+		glm::u32 ret = *(glm::u32*)&tmp;
 		return ret;
 	}
 	void Color::SetHex(const glm::u32& hex)

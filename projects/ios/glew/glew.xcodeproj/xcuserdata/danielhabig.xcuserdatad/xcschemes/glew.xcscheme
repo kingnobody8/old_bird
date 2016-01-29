@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC09FBF41BEFC01700984F45"
-               BuildableName = "libsdl_image.a"
-               BlueprintName = "sdl_image"
-               ReferencedContainer = "container:sdl_image.xcodeproj">
+               BlueprintIdentifier = "BC4B4A241C5B0DA90012C25C"
+               BuildableName = "libglew.a"
+               BlueprintName = "glew"
+               ReferencedContainer = "container:glew.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BC09FBF41BEFC01700984F45"
-            BuildableName = "libsdl_image.a"
-            BlueprintName = "sdl_image"
-            ReferencedContainer = "container:sdl_image.xcodeproj">
+            BlueprintIdentifier = "BC4B4A241C5B0DA90012C25C"
+            BuildableName = "libglew.a"
+            BlueprintName = "glew"
+            ReferencedContainer = "container:glew.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BC09FBF41BEFC01700984F45"
-            BuildableName = "libsdl_image.a"
-            BlueprintName = "sdl_image"
-            ReferencedContainer = "container:sdl_image.xcodeproj">
+            BlueprintIdentifier = "BC4B4A241C5B0DA90012C25C"
+            BuildableName = "libglew.a"
+            BlueprintName = "glew"
+            ReferencedContainer = "container:glew.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

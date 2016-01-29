@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:sdl_image/sdl_image.xcodeproj">
+      location = "group:glew/glew.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:engine/../app/app.xcodeproj">

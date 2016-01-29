@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
+               BlueprintIdentifier = "BC4B495C1C5B0C320012C25C"
                BuildableName = "libutility.a"
                BlueprintName = "utility"
                ReferencedContainer = "container:utility.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
+            BlueprintIdentifier = "BC4B495C1C5B0C320012C25C"
             BuildableName = "libutility.a"
             BlueprintName = "utility"
             ReferencedContainer = "container:utility.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
+            BlueprintIdentifier = "BC4B495C1C5B0C320012C25C"
             BuildableName = "libutility.a"
             BlueprintName = "utility"
             ReferencedContainer = "container:utility.xcodeproj">

@@ -84,9 +84,12 @@ namespace engine
 #ifdef MOBILE
 			SDL_DisplayMode mode;
 			SDL_GetCurrentDisplayMode(0, &mode);
+			
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 			//this->m_tPhysicalScreenSize = Type2<slong>(mode.w, mode.h);
 			Uint32 win_flag = SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL;
-			s_sdlWin = SDL_CreateWindow(app_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, win_flag);
+			m_pSdlWin = SDL_CreateWindow(app_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, win_flag);
 #else
 			Uint32 win_flag = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
 			m_pSdlWin = SDL_CreateWindow(app_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, default_dims.x, default_dims.y, win_flag);
@@ -117,6 +120,7 @@ namespace engine
 			}
 			SDL_Log("GLEW Initialized");
 
+#ifndef MOBILE
 			//Use Vsync
 			if (SDL_GL_SetSwapInterval(1) < 0)
 			{
@@ -124,6 +128,7 @@ namespace engine
 				assert(false);
 			}
 			SDL_Log("VSYNC Initialized");
+#endif
 
 			SDL_Log("Renderer Initialized");
 			//--------------------------------------

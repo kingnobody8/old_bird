@@ -23,7 +23,8 @@
 		BC075B251BEE604B00AA8C9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC075B241BEE604B00AA8C9A /* ImageIO.framework */; };
 		BC075D1A1BEE6FCF00AA8C9A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D191BEE6FCF00AA8C9A /* assets */; };
 		BC075D1E1BEE700700AA8C9A /* media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D1D1BEE700700AA8C9A /* media.xcassets */; };
-		BC09FC281BEFC3C600984F45 /* libsdl_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC09FC271BEFC3C600984F45 /* libsdl_image.a */; };
+		BC4B4A3D1C5B105F0012C25C /* setup_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */; };
+		BC4B4A421C5B11000012C25C /* libglew.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4B4A411C5B11000012C25C /* libglew.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +46,9 @@
 		BC075B241BEE604B00AA8C9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		BC075D191BEE6FCF00AA8C9A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 		BC075D1D1BEE700700AA8C9A /* media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = media.xcassets; sourceTree = "<group>"; };
-		BC09FC271BEFC3C600984F45 /* libsdl_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsdl_image.a; path = "../sdl_image/build/Debug-iphoneos/libsdl_image.a"; sourceTree = "<group>"; };
+		BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup_state.cpp; sourceTree = "<group>"; };
+		BC4B4A3C1C5B105F0012C25C /* setup_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_state.h; sourceTree = "<group>"; };
+		BC4B4A411C5B11000012C25C /* libglew.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglew.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC09FC281BEFC3C600984F45 /* libsdl_image.a in Frameworks */,
 				BC075B251BEE604B00AA8C9A /* ImageIO.framework in Frameworks */,
 				BC075B231BEE604500AA8C9A /* MobileCoreServices.framework in Frameworks */,
 				BC075B211BEE603E00AA8C9A /* CoreGraphics.framework in Frameworks */,
@@ -67,6 +69,7 @@
 				BC075B111BEE5F9D00AA8C9A /* libengine.a in Frameworks */,
 				BC075B121BEE5F9D00AA8C9A /* libsdl.a in Frameworks */,
 				BC075B131BEE5F9D00AA8C9A /* libutility.a in Frameworks */,
+				BC4B4A421C5B11000012C25C /* libglew.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +79,7 @@
 		BC075ACA1BEE5C3D00AA8C9A = {
 			isa = PBXGroup;
 			children = (
+				BC4B4A3A1C5B105F0012C25C /* state */,
 				BC075D1D1BEE700700AA8C9A /* media.xcassets */,
 				BC075D191BEE6FCF00AA8C9A /* assets */,
 				BC075B271BEE60B500AA8C9A /* libs */,
@@ -105,13 +109,23 @@
 		BC075B271BEE60B500AA8C9A /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				BC09FC271BEFC3C600984F45 /* libsdl_image.a */,
+				BC4B4A411C5B11000012C25C /* libglew.a */,
 				BC075B0C1BEE5F9D00AA8C9A /* libbox2d.a */,
 				BC075B0D1BEE5F9D00AA8C9A /* libengine.a */,
 				BC075B0E1BEE5F9D00AA8C9A /* libsdl.a */,
 				BC075B0F1BEE5F9D00AA8C9A /* libutility.a */,
 			);
 			name = libs;
+			sourceTree = "<group>";
+		};
+		BC4B4A3A1C5B105F0012C25C /* state */ = {
+			isa = PBXGroup;
+			children = (
+				BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */,
+				BC4B4A3C1C5B105F0012C25C /* setup_state.h */,
+			);
+			name = state;
+			path = ../../../source/app/state;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC075B001BEE5D8500AA8C9A /* main.cpp in Sources */,
+				BC4B4A3D1C5B105F0012C25C /* setup_state.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +310,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = asdf.TheLarkAscending;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -307,6 +326,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = asdf.TheLarkAscending;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

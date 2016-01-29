@@ -19,11 +19,11 @@
 #ifndef B2DJSONIMAGE_OPENGL_H
 #define B2DJSONIMAGE_OPENGL_H
 
-#ifdef __APPLE__
-	#include <GLUT/glut.h>
-#else
+//#ifdef __APPLE__
+//	#include <GLUT/glut.h>
+//#else
 	#include "../glew/include/GL/glew.h"
-#endif
+//#endif
 
 #include "b2dJsonImage.h"
 

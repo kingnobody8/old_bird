@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC0759B71BEE565200AA8C9A"
+               BlueprintIdentifier = "BC4B495C1C5B0C320012C25C"
                BuildableName = "libutility.a"
                BlueprintName = "utility"
                ReferencedContainer = "container:../utility/utility.xcodeproj">
@@ -84,10 +84,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC09FBF41BEFC01700984F45"
-               BuildableName = "libsdl_image.a"
-               BlueprintName = "sdl_image"
-               ReferencedContainer = "container:../sdl_image/sdl_image.xcodeproj">
+               BlueprintIdentifier = "BC4B4A241C5B0DA90012C25C"
+               BuildableName = "libglew.a"
+               BlueprintName = "glew"
+               ReferencedContainer = "container:../glew/glew.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

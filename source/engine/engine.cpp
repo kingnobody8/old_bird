@@ -85,7 +85,7 @@ namespace engine
 
 #ifdef MOBILE
 		//Set Render Callback
-		SDL_iPhoneSetAnimationCallback(render::GetSdlWindow(), 1, IosCallback, nullptr);
+		SDL_iPhoneSetAnimationCallback(m_pRenderPlugin->GetSdlWindow(), 1, IosCallback, nullptr);
 		//SDL_SetI(render::GetSdlWindow(), 1, [this](void* params)
 		//{
 		//	this->Render();

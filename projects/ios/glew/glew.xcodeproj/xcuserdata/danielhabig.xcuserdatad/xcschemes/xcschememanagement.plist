@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>sdl_image.xcscheme</key>
+		<key>glew.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>BC09FBF41BEFC01700984F45</key>
+		<key>BC4B4A241C5B0DA90012C25C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
