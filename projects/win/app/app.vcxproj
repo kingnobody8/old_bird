@@ -106,7 +106,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;sdl_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -125,7 +125,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;sdl_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -149,7 +149,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;sdl_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -175,7 +175,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;sdl_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>engine.lib;utility.lib;box2d.lib;sdl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
