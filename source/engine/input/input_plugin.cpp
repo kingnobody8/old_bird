@@ -20,6 +20,15 @@ namespace engine
 		VIRTUAL void InputPlugin::Init()
 		{
 			assert(m_pSdlWin);
+
+			int flag = SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS;
+#if PC
+			flag |= SDL_INIT_HAPTIC;
+#endif
+
+			int result = SDL_Init(flag);
+			util::CheckSdlError();
+			assert(result == 0);
 		}
 
 		VIRTUAL void InputPlugin::Exit()

@@ -80,6 +80,11 @@ namespace engine
 
 		VIRTUAL void RenderPlugin::Init()
 		{
+			//Initialization
+			int result = SDL_Init(SDL_INIT_VIDEO);
+			util::CheckSdlError();
+			assert(result == 0);
+
 			//Create Window
 #ifdef MOBILE
 			SDL_DisplayMode mode;

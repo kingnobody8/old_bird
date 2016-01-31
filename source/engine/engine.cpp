@@ -42,19 +42,6 @@ namespace engine
 
 		assert(pFirstState);
 
-		//Init SDL
-		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-		{
-#ifdef MOBILE
-			util::CheckSdlError("SDL not built with haptic (force feedback) support");
-#else
-			util::CheckSdlError();
-#endif
-		}
-
-		//Turn off SDL audio
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-
 		//Init the rendering system
 		m_pRenderPlugin = new render::RenderPlugin();
 		IPlugin::AddPlugin(m_pRenderPlugin);
@@ -83,14 +70,8 @@ namespace engine
 		//Don't quit
 		m_quit = false;
 
-#ifdef MOBILE
-		//Set Render Callback
+#ifdef MOBILE //Set frame callback
 		SDL_iPhoneSetAnimationCallback(m_pRenderPlugin->GetSdlWindow(), 1, IosCallback, nullptr);
-		//SDL_SetI(render::GetSdlWindow(), 1, [this](void* params)
-		//{
-		//	this->Render();
-		//});
-		//SDL_iPhoneSetAnimationCallback(pWin, 1, render_callback, this);
 #endif
 	}
 
