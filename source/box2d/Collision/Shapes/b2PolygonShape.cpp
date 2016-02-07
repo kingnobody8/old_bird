@@ -1,6 +1,5 @@
 /*
 * Copyright (c) 2006-2009 Erin Catto http://www.box2d.org
-* Copyright (c) 2013 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
 * warranty.  In no event will the authors be held liable for any damages
@@ -72,6 +71,8 @@ int32 b2PolygonShape::GetChildCount() const
 	return 1;
 }
 
+#include <stdio.h>
+
 static b2Vec2 ComputeCentroid(const b2Vec2* vs, int32 count)
 {
 	b2Assert(count >= 3);
@@ -110,12 +111,17 @@ static b2Vec2 ComputeCentroid(const b2Vec2* vs, int32 count)
 
 		// Area weighted centroid
 		c += triangleArea * inv3 * (p1 + p2 + p3);
-	}
+    }
 
 	// Centroid
-	b2Assert(area > b2_epsilon);
-	c *= 1.0f / area;
-	return c;
+    //b2Assert(area > b2_epsilon);
+    if ( area > b2_epsilon ) {
+        c *= 1.0f / area;
+        return c;
+    }
+    else {
+        return inv3 * (vs[0] + vs[1] + vs[2]);
+    }
 }
 
 void b2PolygonShape::Set(const b2Vec2* vertices, int32 count)
@@ -129,36 +135,11 @@ void b2PolygonShape::Set(const b2Vec2* vertices, int32 count)
 	
 	int32 n = b2Min(count, b2_maxPolygonVertices);
 
-	// Perform welding and copy vertices into local buffer.
+	// Copy vertices into local buffer
 	b2Vec2 ps[b2_maxPolygonVertices];
-	int32 tempCount = 0;
 	for (int32 i = 0; i < n; ++i)
 	{
-		b2Vec2 v = vertices[i];
-
-		bool unique = true;
-		for (int32 j = 0; j < tempCount; ++j)
-		{
-			if (b2DistanceSquared(v, ps[j]) < 0.5f * b2_linearSlop)
-			{
-				unique = false;
-				break;
-			}
-		}
-
-		if (unique)
-		{
-			ps[tempCount++] = v;
-		}
-	}
-
-	n = tempCount;
-	if (n < 3)
-	{
-		// Polygon is degenerate.
-		b2Assert(false);
-		SetAsBox(1.0f, 1.0f);
-		return;
+		ps[i] = vertices[i];
 	}
 
 	// Create the convex hull using the Gift wrapping algorithm
@@ -167,7 +148,7 @@ void b2PolygonShape::Set(const b2Vec2* vertices, int32 count)
 	// Find the right most point on the hull
 	int32 i0 = 0;
 	float32 x0 = ps[0].x;
-	for (int32 i = 1; i < n; ++i)
+	for (int32 i = 1; i < count; ++i)
 	{
 		float32 x = ps[i].x;
 		if (x > x0 || (x == x0 && ps[i].y < ps[i0].y))
