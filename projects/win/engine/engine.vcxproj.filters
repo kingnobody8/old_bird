@@ -46,6 +46,9 @@
     <Filter Include="physics\callbacks">
       <UniqueIdentifier>{c5520f2e-ea54-4751-a4b8-56a5b09bbe14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bridge">
+      <UniqueIdentifier>{aff64e7b-a4dc-47ec-a285-f65fc1be88c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
@@ -146,6 +149,9 @@
     <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage.cpp">
       <Filter>b2djson</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\bridge\win\bridge-gl-win.cc">
+      <Filter>bridge</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -190,9 +196,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h">
       <Filter>render\node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\engine\render\opengl.h">
-      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\engine\render\node\polygon_node.h">
       <Filter>render\node</Filter>
@@ -267,10 +270,22 @@
     <ClInclude Include="..\..\..\source\engine\physics\callbacks\aabb_callback.h">
       <Filter>physics\callbacks</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\render\render_core.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\bridge\win\GL\glext.h">
+      <Filter>bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\bridge\win\bridge-gl-win.h">
+      <Filter>bridge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\engine\component\object.inl">
       <Filter>component</Filter>
+    </None>
+    <None Include="..\..\..\source\bridge\win\bridge-gl-win.inl">
+      <Filter>bridge</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "render_plugin.h"
 #include "func.h"
-#include "opengl.h"
+#include "render_core.h"
 #include "camera.h"
 #include "render_layer.h"
 
@@ -86,12 +86,13 @@ namespace engine
 			assert(result == 0);
 
 			//Create Window
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 #ifdef MOBILE
 			SDL_DisplayMode mode;
 			SDL_GetCurrentDisplayMode(0, &mode);
 			
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 			//this->m_tPhysicalScreenSize = Type2<slong>(mode.w, mode.h);
 			Uint32 win_flag = SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL;
 			m_pSdlWin = SDL_CreateWindow(app_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, win_flag);
@@ -104,26 +105,11 @@ namespace engine
 			assert(m_pSdlWin);
 			SDL_Log("SDL Window Initialized");
 
-			//Use OpenGL 3.1 core
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
 			//Create context
 			m_pGLContext = SDL_GL_CreateContext(m_pSdlWin);
 			util::CheckSdlError();
 			assert(m_pGLContext);
 			SDL_Log("Open GL Context Initialized");
-
-			//Initialize GLEW
-			glewExperimental = GL_TRUE;
-			GLenum glewError = glewInit();
-			if (glewError != GLEW_OK)
-			{
-				SDL_Log((char*)glewGetErrorString(glewError));
-				assert(false);
-			}
-			SDL_Log("GLEW Initialized");
 
 #ifndef MOBILE
 			//Use Vsync

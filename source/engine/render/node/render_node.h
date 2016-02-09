@@ -1,6 +1,6 @@
 #pragma once
 #include "Collision/Shapes/b2PolygonShape.h"
-#include "../opengl.h"
+#include "../render_core.h"
 #include "bit_flag.h"
 #include "math/math.h"
 #include "color.h"

@@ -18,11 +18,10 @@ namespace engine
 
 			//Get vertex source
 			const std::string vertexShaderSource = \
-				"#version 140\n"
-				"in vec2 v_position;\n"
-				"in vec2 v_coord;\n"
-				"in vec4 v_color;\n"
-				"out vec4 f_color;\n"
+				"attribute vec2 v_position;\n"
+				"attribute vec2 v_coord;\n"
+				"attribute vec4 v_color;\n"
+				"varying vec4 f_color;\n"
 				"void main()\n"
 				"{\n"
 				"	f_color = v_color;\n"
@@ -41,12 +40,10 @@ namespace engine
 			glAttachShader(m_programID, vertexShader);
 
 
-
 			//Get fragment source
 			const std::string fragmentShaderSource = \
-				"#version 140\n"
-				"in vec4 f_color;\n"
-				"out vec4 gl_FragColor;\n"
+				"precision highp float; \n"
+				"varying vec4 f_color;\n"
 				"void main()\n"
 				"{\n"
 				"	gl_FragColor = f_color;\n"

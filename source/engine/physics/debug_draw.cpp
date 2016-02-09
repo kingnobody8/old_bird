@@ -1,6 +1,6 @@
 
 #include "debug_draw.h"
-#include "../render/opengl.h"
+#include "../render/render_core.h"
 #include "math/matrix.h"
 
 namespace engine
