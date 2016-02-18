@@ -83,12 +83,12 @@ namespace engine
 			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
 
 
-			//creat shape (test)
-			//b2BodyDef bd;
-			//b2Body* ground = m_pWorld->CreateBody(&bd);
-			//b2EdgeShape shapeG;
-			//shapeG.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
-			//ground->CreateFixture(&shapeG, 0.0f);
+			//create shape (test)
+			b2BodyDef bd;
+			b2Body* ground = m_pWorld->CreateBody(&bd);
+			b2EdgeShape shapeG;
+			shapeG.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
+			ground->CreateFixture(&shapeG, 0.0f);
 
 
 			b2BodyDef bodyDef;
@@ -109,54 +109,54 @@ namespace engine
 			m_pLark->CreateFixture(&fdef);
 
 
-			//float32 a = 0.5f;
-			//b2PolygonShape shape;
-			//shape.SetAsBox(a, a);
+			/*float32 a = 0.5f;
+			b2PolygonShape shape;
+			shape.SetAsBox(a, a);
 
-			//b2Vec2 x(-7.0f, 0.75f);
-			//b2Vec2 y;
-			//b2Vec2 deltaX(0.5625f, 1.25f);
-			//b2Vec2 deltaY(1.125f, 0.0f);
-			//int e_count = 20;
+			b2Vec2 x(-7.0f, 0.75f);
+			b2Vec2 y;
+			b2Vec2 deltaX(0.5625f, 1.25f);
+			b2Vec2 deltaY(1.125f, 0.0f);
+			int e_count = 20;
 
-			//for (int32 i = 0; i < e_count; ++i)
-			//{
-			//	y = x;
+			for (int32 i = 0; i < e_count; ++i)
+			{
+				y = x;
 
-			//	for (int32 j = i; j < e_count; ++j)
-			//	{
-			//		b2BodyDef bd;
-			//		bd.type = b2_dynamicBody;
-			//		bd.position = y;
-			//		b2Body* body = m_pWorld->CreateBody(&bd);
-			//		body->CreateFixture(&shape, 5.0f);
+				for (int32 j = i; j < e_count; ++j)
+				{
+					b2BodyDef bd;
+					bd.type = b2_dynamicBody;
+					bd.position = y;
+					b2Body* body = m_pWorld->CreateBody(&bd);
+					body->CreateFixture(&shape, 5.0f);
 
-			//		y += deltaY;
-			//	}
+					y += deltaY;
+				}
 
-			//	x += deltaX;
-			//}
+				x += deltaX;
+			}
 
-			//for (int32 i = 0; i < e_count; ++i)
-			//{
-			//	y = x;
-			//	
-			//	for (int32 j = i; j < e_count; ++j)
-			//	{
-			//		if (i % 5 == 0)
-			//		{
-			//			b2BodyDef bd;
-			//			bd.type = b2_staticBody;
-			//			bd.position = y;
-			//			b2Body* body = m_pWorld->CreateBody(&bd);
-			//			body->CreateFixture(&shape, 5.0f);
-			//		}
+			for (int32 i = 0; i < e_count; ++i)
+			{
+				y = x;
+				
+				for (int32 j = i; j < e_count; ++j)
+				{
+					if (i % 5 == 0)
+					{
+						b2BodyDef bd;
+						bd.type = b2_staticBody;
+						bd.position = y;
+						b2Body* body = m_pWorld->CreateBody(&bd);
+						body->CreateFixture(&shape, 5.0f);
+					}
 
-			//		y += deltaY;
-			//	}
+					y += deltaY;
+				}
 
-			//	x += deltaX;
-			//}
+				x += deltaX;
+			}*/
 		}
 
 		VIRTUAL void PhysicsPlugin::Exit()
@@ -208,6 +208,7 @@ namespace engine
 			//Clear color buffer
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			int count = m_pWorld->GetBodyCount();
 			m_pWorld->DrawDebugData();
 
 			if (m_pMouseJoint)

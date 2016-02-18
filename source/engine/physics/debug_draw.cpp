@@ -130,13 +130,23 @@ namespace engine
 			glShaderSource(res, 1, sources, NULL);
 			glCompileShader(res);
 			GLint compile_ok = GL_FALSE;
-			glGetShaderiv(res, GL_COMPILE_STATUS, &compile_ok);
-			if (compile_ok == GL_FALSE)
+
+			//Shader log length
+			int infoLogLength = 0;
+			int maxLength = infoLogLength;
+
+			//Get info string length
+			glGetShaderiv(res, GL_INFO_LOG_LENGTH, &maxLength);
+
+			//Allocate string
+			char* infoLog = new char[maxLength];
+
+			//Get info log
+			glGetShaderInfoLog(res, maxLength, &infoLogLength, infoLog);
+			if (infoLogLength > 0)
 			{
-				fprintf(stderr, "Error compiling shader of type %d!\n", type);
-				sPrintLog(res);
-				glDeleteShader(res);
-				return 0;
+				//Print Log
+				SDL_Log("%s\n", infoLog);
 			}
 
 			return res;
@@ -152,7 +162,6 @@ namespace engine
 			GLuint programId = glCreateProgram();
 			glAttachShader(programId, vsId);
 			glAttachShader(programId, fsId);
-			glBindFragDataLocation(programId, 0, "color");
 			glLinkProgram(programId);
 
 			glDeleteShader(vsId);
@@ -171,26 +180,24 @@ namespace engine
 			void Create()
 			{
 				const char* vs = \
-					"#version 400\n"
 					"uniform mat4 projectionMatrix;\n"
-					"layout(location = 0) in vec2 v_position;\n"
-					"layout(location = 1) in vec4 v_color;\n"
-					"layout(location = 2) in float v_size;\n"
-					"out vec4 f_color;\n"
+					"attribute vec2 v_position;\n"
+					"attribute vec4 v_color;\n"
+					"attribute float v_size;\n"
+					"varying vec4 f_color;\n"
 					"void main(void)\n"
 					"{\n"
 					"	f_color = v_color;\n"
-					"	gl_Position = projectionMatrix * vec4(v_position, 0.0f, 1.0f);\n"
+					"	gl_Position = projectionMatrix * vec4(v_position, 0.0, 1.0);\n"
 					"   gl_PointSize = v_size;\n"
 					"}\n";
 
 				const char* fs = \
-					"#version 400\n"
-					"in vec4 f_color;\n"
-					"out vec4 color;\n"
+					"precision highp float; \n"
+					"varying vec4 f_color;\n"
 					"void main(void)\n"
 					"{\n"
-					"	color = f_color;\n"
+					"	gl_FragColor = f_color;\n"
 					"}\n";
 
 				m_programId = sCreateShaderProgram(vs, fs);
@@ -200,10 +207,10 @@ namespace engine
 				m_sizeAttribute = 2;
 
 				// Generate
-				glGenVertexArrays(1, &m_vaoId);
+				//glGenBuffers(1, &m_vaoId);
 				glGenBuffers(3, m_vboIds);
 
-				glBindVertexArray(m_vaoId);
+			//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 				glEnableVertexAttribArray(m_vertexAttribute);
 				glEnableVertexAttribArray(m_colorAttribute);
 				glEnableVertexAttribArray(m_sizeAttribute);
@@ -225,19 +232,19 @@ namespace engine
 
 				// Cleanup
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glBindVertexArray(0);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 				m_count = 0;
 			}
 
 			void Destroy()
 			{
-				if (m_vaoId)
-				{
-					glDeleteVertexArrays(1, &m_vaoId);
+				//if (m_vaoId)
+				//{
+					//glDeleteBuffers(1, &m_vaoId);
 					glDeleteBuffers(2, m_vboIds);
-					m_vaoId = 0;
-				}
+				//	m_vaoId = 0;
+				//}
 
 				if (m_programId)
 				{
@@ -269,7 +276,7 @@ namespace engine
 
 				glUniformMatrix4fv(m_projectionUniform, 1, GL_FALSE, proj);
 
-				glBindVertexArray(m_vaoId);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
 				glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_vertices);
@@ -287,7 +294,7 @@ namespace engine
 				sCheckGLError();
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glBindVertexArray(0);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				glUseProgram(0);
 
 				m_count = 0;
@@ -300,7 +307,7 @@ namespace engine
 
 			int32 m_count;
 
-			GLuint m_vaoId;
+			//GLuint m_vaoId;
 			GLuint m_vboIds[3];
 			GLuint m_programId;
 			GLint m_projectionUniform;
@@ -315,24 +322,22 @@ namespace engine
 			void Create()
 			{
 				const char* vs = \
-					"#version 400\n"
 					"uniform mat4 projectionMatrix;\n"
-					"layout(location = 0) in vec2 v_position;\n"
-					"layout(location = 1) in vec4 v_color;\n"
-					"out vec4 f_color;\n"
+					"attribute vec2 v_position;\n"
+					"attribute vec4 v_color;\n"
+					"varying vec4 f_color;\n"
 					"void main(void)\n"
 					"{\n"
 					"	f_color = v_color;\n"
-					"	gl_Position = projectionMatrix * vec4(v_position, 0.0f, 1.0f);\n"
+					"	gl_Position = projectionMatrix * vec4(v_position, 0.0, 1.0);\n"
 					"}\n";
 
 				const char* fs = \
-					"#version 400\n"
-					"in vec4 f_color;\n"
-					"out vec4 color;\n"
+					"precision highp float; \n"
+					"varying vec4 f_color;\n"
 					"void main(void)\n"
 					"{\n"
-					"	color = f_color;\n"
+					"	gl_FragColor = f_color;\n"
 					"}\n";
 
 				m_programId = sCreateShaderProgram(vs, fs);
@@ -341,39 +346,39 @@ namespace engine
 				m_colorAttribute = 1;
 
 				// Generate
-				glGenVertexArrays(1, &m_vaoId);
+				//glGenBuffers(1, &m_vaoId);
 				glGenBuffers(2, m_vboIds);
 
-				glBindVertexArray(m_vaoId);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 				glEnableVertexAttribArray(m_vertexAttribute);
 				glEnableVertexAttribArray(m_colorAttribute);
 
 				// Vertex buffer
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
 				glVertexAttribPointer(m_vertexAttribute, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-				glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_DYNAMIC_DRAW);
+				//glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_DYNAMIC_DRAW);
 
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
 				glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-				glBufferData(GL_ARRAY_BUFFER, sizeof(m_colors), m_colors, GL_DYNAMIC_DRAW);
+				//glBufferData(GL_ARRAY_BUFFER, sizeof(m_colors), m_colors, GL_DYNAMIC_DRAW);
 
 				sCheckGLError();
 
 				// Cleanup
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glBindVertexArray(0);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 				m_count = 0;
 			}
 
 			void Destroy()
 			{
-				if (m_vaoId)
-				{
-					glDeleteVertexArrays(1, &m_vaoId);
+				//if (m_vaoId)
+				//{
+					//glDeleteBuffers(1, &m_vaoId);
 					glDeleteBuffers(2, m_vboIds);
-					m_vaoId = 0;
-				}
+					//m_vaoId = 0;
+				//}
 
 				if (m_programId)
 				{
@@ -404,20 +409,26 @@ namespace engine
 
 				glUniformMatrix4fv(m_projectionUniform, 1, GL_FALSE, proj);
 
-				glBindVertexArray(m_vaoId);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 
-				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
-				glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_vertices);
+				glEnableVertexAttribArray(m_vertexAttribute);
+				glEnableVertexAttribArray(m_colorAttribute);
 
-				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
-				glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Color), m_colors);
+				// Vertex buffer
+				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
+				//glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_vertices);
+				glVertexAttribPointer(m_vertexAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(b2Vec2), m_vertices);
+
+				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
+				//glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Color), m_colors);
+				glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, sizeof(b2Color), m_colors);
 
 				glDrawArrays(GL_LINES, 0, m_count);
 
 				sCheckGLError();
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glBindVertexArray(0);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				glUseProgram(0);
 
 				m_count = 0;
@@ -429,7 +440,7 @@ namespace engine
 
 			int32 m_count;
 
-			GLuint m_vaoId;
+			//GLuint m_vaoId;
 			GLuint m_vboIds[2];
 			GLuint m_programId;
 			GLint m_projectionUniform;
@@ -443,24 +454,22 @@ namespace engine
 			void Create()
 			{
 				const char* vs = \
-					"#version 400\n"
 					"uniform mat4 projectionMatrix;\n"
-					"layout(location = 0) in vec2 v_position;\n"
-					"layout(location = 1) in vec4 v_color;\n"
-					"out vec4 f_color;\n"
+					"attribute vec2 v_position;\n"
+					"attribute vec4 v_color;\n"
+					"varying vec4 f_color;\n"
 					"void main(void)\n"
 					"{\n"
 					"	f_color = v_color;\n"
-					"	gl_Position = projectionMatrix * vec4(v_position, 0.0f, 1.0f);\n"
+					"	gl_Position = projectionMatrix * vec4(v_position, 0.0, 1.0);\n"
 					"}\n";
 
 				const char* fs = \
-					"#version 400\n"
-					"in vec4 f_color;\n"
-					"out vec4 color;\n"
+					"precision highp float; \n"
+					"varying vec4 f_color;\n"
 					"void main(void)\n"
 					"{\n"
-					"	color = f_color;\n"
+					"	gl_FragColor = f_color;\n"
 					"}\n";
 
 				m_programId = sCreateShaderProgram(vs, fs);
@@ -469,39 +478,39 @@ namespace engine
 				m_colorAttribute = 1;
 
 				// Generate
-				glGenVertexArrays(1, &m_vaoId);
+				//glGenBuffers(1, &m_vaoId);
 				glGenBuffers(2, m_vboIds);
 
-				glBindVertexArray(m_vaoId);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 				glEnableVertexAttribArray(m_vertexAttribute);
 				glEnableVertexAttribArray(m_colorAttribute);
 
 				// Vertex buffer
-				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
+				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
 				glVertexAttribPointer(m_vertexAttribute, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-				glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_DYNAMIC_DRAW);
+				//glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_DYNAMIC_DRAW);
 
-				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
+				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
 				glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-				glBufferData(GL_ARRAY_BUFFER, sizeof(m_colors), m_colors, GL_DYNAMIC_DRAW);
+				//glBufferData(GL_ARRAY_BUFFER, sizeof(m_colors), m_colors, GL_DYNAMIC_DRAW);
 
 				sCheckGLError();
 
 				// Cleanup
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glBindVertexArray(0);
+			//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 				m_count = 0;
 			}
 
 			void Destroy()
 			{
-				if (m_vaoId)
-				{
-					glDeleteVertexArrays(1, &m_vaoId);
+				//if (m_vaoId)
+				//{
+				//	glDeleteBuffers(1, &m_vaoId);
 					glDeleteBuffers(2, m_vboIds);
-					m_vaoId = 0;
-				}
+				//	m_vaoId = 0;
+				//}
 
 				if (m_programId)
 				{
@@ -532,13 +541,15 @@ namespace engine
 
 				glUniformMatrix4fv(m_projectionUniform, 1, GL_FALSE, proj);
 
-				glBindVertexArray(m_vaoId);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 
-				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
-				glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_vertices);
+				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
+				//glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_vertices);
+				glVertexAttribPointer(m_vertexAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(b2Vec2), m_vertices);
 
-				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
-				glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Color), m_colors);
+				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
+				//glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Color), m_colors);
+				glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, sizeof(b2Color), m_colors);
 
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -548,7 +559,7 @@ namespace engine
 				sCheckGLError();
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glBindVertexArray(0);
+				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				glUseProgram(0);
 
 				m_count = 0;
@@ -560,7 +571,7 @@ namespace engine
 
 			int32 m_count;
 
-			GLuint m_vaoId;
+//			GLuint m_vaoId;
 			GLuint m_vboIds[2];
 			GLuint m_programId;
 			GLint m_projectionUniform;

@@ -19,12 +19,7 @@
 #ifndef B2DJSONIMAGE_OPENGL_H
 #define B2DJSONIMAGE_OPENGL_H
 
-//#ifdef __APPLE__
-//	#include <GLUT/glut.h>
-//#else
-	#include "../glew/include/GL/glew.h"
-//#endif
-
+#include "render/render_core.h"
 #include "b2dJsonImage.h"
 
 class b2dJsonImage_OpenGL : public b2dJsonImage {

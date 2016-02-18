@@ -61,8 +61,8 @@ namespace engine
 		IPlugin::AddPlugin(pStatePlugin);
 
 		//Init the physics plugin
-		//physics::PhysicsPlugin* pPhysicsPlugin = new physics::PhysicsPlugin();
-		//IPlugin::AddPlugin(pPhysicsPlugin);
+		physics::PhysicsPlugin* pPhysicsPlugin = new physics::PhysicsPlugin();
+		IPlugin::AddPlugin(pPhysicsPlugin);
 
 		//Start timer
 		this->m_timer.Restart();
@@ -85,7 +85,7 @@ namespace engine
 	void Engine::RunFrame(void* params)
 	{
 		Update();
-		m_pRenderPlugin->DoRender();
+		//m_pRenderPlugin->DoRender();
 	}
 
 	void Engine::Update(void)

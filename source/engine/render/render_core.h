@@ -1,10 +1,7 @@
 #pragma once
 #include "platform.h"
 
-#define GL_GLEXT_PROTOTYPES
-
 #include <SDL.h>
-//#include <SDL_opengl.h>
 
 #if WIN
 #include <Windows.h>
