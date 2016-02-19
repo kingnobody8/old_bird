@@ -91,7 +91,7 @@ namespace engine
 			GLenum errCode = glGetError();
 			if (errCode != GL_NO_ERROR)
 			{
-				fprintf(stderr, "OpenGL error = %d\n", errCode);
+				SDL_Log("OpenGL error = %d\n", errCode);
 				assert(false);
 			}
 		}
@@ -106,7 +106,7 @@ namespace engine
 				glGetProgramiv(object, GL_INFO_LOG_LENGTH, &log_length);
 			else
 			{
-				fprintf(stderr, "printlog: Not a shader or a program\n");
+				SDL_Log("printlog: Not a shader or a program\n");
 				return;
 			}
 
@@ -117,7 +117,7 @@ namespace engine
 			else if (glIsProgram(object))
 				glGetProgramInfoLog(object, log_length, NULL, log);
 
-			fprintf(stderr, "%s", log);
+			SDL_Log("%s", log);
 			free(log);
 		}
 
