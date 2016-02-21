@@ -12,11 +12,13 @@
 #include "TargetConditionals.h"
 #if TARGET_OS_IPHONE && TARGET_IPHONE_SIMULATOR // define something for simulator
 #define IOS_SIM 1
+#define IOS 1
 #define MOBILE 1
 #define APPLE 1
 #define x64 1
 #elif TARGET_OS_IPHONE // define something for iphone
 #define IOS_DEV 1
+#define IOS 1
 #define MOBILE 1
 #define APPLE 1
 #define x64 1

@@ -16,8 +16,13 @@ namespace engine
 				m_center.Set(0.0f, 20.0f);
 				m_extent = 25.0f;
 				m_zoom = 1.0f;
-				m_width = 1280;
-				m_height = 720;
+//#ifdef WIN
+//				m_width = 1280;
+//				m_height = 720;
+//#elif IOS
+				m_width = 640;
+				m_height = 1136;
+//#endif
 			}
 
 			b2Vec2 ConvertScreenToWorld(const b2Vec2& screenPoint);

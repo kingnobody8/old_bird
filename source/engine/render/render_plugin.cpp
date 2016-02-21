@@ -17,10 +17,10 @@ namespace engine
 	{
 		//----------------------------------------
 		DefaultShader shader;
-		//PolygonNode node;
-		//RectNode node;
+		PolygonNode node;
+		//b2PolygonShape.cpp
 		//CircleNode node;
-		LineNode node;
+		//LineNode node;
 		//-----------------------------------------
 
 		bool initGL()
@@ -46,12 +46,12 @@ namespace engine
 			indicies.push_back(2);
 			indicies.push_back(3);
 
-			//node.InitVBO(verts, indicies);
+			node.InitVBO(verts, indicies);
 			//node.InitVBO(vec2(1.0, 0.5), util::Color::AZURE);
 			//node.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
-			CircleNode circ;
-			circ.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
-			node.InitVBO(circ.GetVerts());
+			//CircleNode circ;
+			//circ.InitVBO(1.0f, 16, util::Color::SPRING_GREEN);
+			//node.InitVBO(circ.GetVerts());
 
 			return true;
 		}
@@ -108,13 +108,20 @@ namespace engine
 			util::CheckSdlError();
 			assert(m_pSdlWin);
 			SDL_Log("SDL Window Initialized");
+			
+			glm::ivec2 size;
+			SDL_GetWindowSize(m_pSdlWin, &size.x, &size.y);
+			SDL_Log("Window Size: %d x %d", size.x, size.y);
 
 			//Create context
 			m_pGLContext = SDL_GL_CreateContext(m_pSdlWin);
 			util::CheckSdlError();
 			assert(m_pGLContext);
 			SDL_Log("Open GL Context Initialized");
-
+			
+			glViewport(0, 0, size.x, size.y);
+			
+			
 #ifndef MOBILE
 			//Use Vsync
 			if (SDL_GL_SetSwapInterval(1) < 0)
@@ -145,6 +152,16 @@ namespace engine
 		{
 			if (m_pGLContext == null || m_pSdlWin == null)
 				return;
+			
+			static util::Color clr = util::Color::CYAN;
+			
+			glClearColor(clr.r, clr.g, clr.b, 1.0);
+			auto hsv = clr.GetHSV();
+			hsv.x += 0.001f;
+			hsv.z = 0.5f;
+			if(hsv.x > 1.0f)
+				hsv.x = 0.0f;
+			clr.SetHSV(hsv);
 
 			//Clear color buffer
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -153,7 +170,7 @@ namespace engine
 			//RenderCrossSection();
 			RenderTestFunc();
 
-			CRenderLayer::RenderAllLayers();
+			//CRenderLayer::RenderAllLayers();
 
 			//Update screen
 			SDL_GL_SwapWindow(m_pSdlWin);

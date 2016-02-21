@@ -241,11 +241,11 @@ bool b2PolygonShape::TestPoint(const b2Transform& xf, const b2Vec2& p) const
 void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const
 {
 	B2_NOT_USED(childIndex);
-
+	
 	b2Vec2 pLocal = b2MulT(xf.q, p - xf.p);
 	float32 maxDistance = -FLT_MAX;
 	b2Vec2 normalForMaxDistance = pLocal;
-
+	
 	for (int32 i = 0; i < m_count; ++i)
 	{
 		float32 dot = b2Dot(m_normals[i], pLocal - m_vertices[i]);
@@ -255,7 +255,7 @@ void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, flo
 			normalForMaxDistance = m_normals[i];
 		}
 	}
-
+	
 	if (maxDistance > 0)
 	{
 		b2Vec2 minDistance = normalForMaxDistance;
@@ -270,7 +270,7 @@ void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, flo
 				minDistance2 = distance2;
 			}
 		}
-
+		
 		*distance = b2Sqrt(minDistance2);
 		*normal = b2Mul(xf.q, minDistance);
 		normal->Normalize();
@@ -281,6 +281,7 @@ void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, flo
 		*normal = b2Mul(xf.q, normalForMaxDistance);
 	}
 }
+
 
 bool b2PolygonShape::RayCast(b2RayCastOutput* output, const b2RayCastInput& input,
 								const b2Transform& xf, int32 childIndex) const

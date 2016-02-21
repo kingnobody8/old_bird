@@ -102,14 +102,23 @@ namespace engine
 			DefaultShader* dShader = static_cast<DefaultShader*>(m_pShader);
 			dShader->EnableVertexPos2D();
 			dShader->EnableVertexColor();
+			
+			GLenum err = glGetError();
 
 			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 			dShader->SetVertexPos2D(sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
 			dShader->SetVertexColor(sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
 			
+			err = glGetError();
+			
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
 			glDrawElements(GL_TRIANGLE_FAN, m_indexCount, GL_UNSIGNED_INT, NULL);
 
+			err = glGetError();
+			
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+			
 			dShader->DisableVertexPos2D();
 			dShader->DisableVertexColor();
 

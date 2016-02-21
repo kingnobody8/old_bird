@@ -24,7 +24,6 @@
 		BC075D1A1BEE6FCF00AA8C9A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D191BEE6FCF00AA8C9A /* assets */; };
 		BC075D1E1BEE700700AA8C9A /* media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D1D1BEE700700AA8C9A /* media.xcassets */; };
 		BC4B4A3D1C5B105F0012C25C /* setup_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */; };
-		BC4B4A421C5B11000012C25C /* libglew.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4B4A411C5B11000012C25C /* libglew.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +47,6 @@
 		BC075D1D1BEE700700AA8C9A /* media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = media.xcassets; sourceTree = "<group>"; };
 		BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup_state.cpp; sourceTree = "<group>"; };
 		BC4B4A3C1C5B105F0012C25C /* setup_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_state.h; sourceTree = "<group>"; };
-		BC4B4A411C5B11000012C25C /* libglew.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglew.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +67,6 @@
 				BC075B111BEE5F9D00AA8C9A /* libengine.a in Frameworks */,
 				BC075B121BEE5F9D00AA8C9A /* libsdl.a in Frameworks */,
 				BC075B131BEE5F9D00AA8C9A /* libutility.a in Frameworks */,
-				BC4B4A421C5B11000012C25C /* libglew.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,7 +106,6 @@
 		BC075B271BEE60B500AA8C9A /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				BC4B4A411C5B11000012C25C /* libglew.a */,
 				BC075B0C1BEE5F9D00AA8C9A /* libbox2d.a */,
 				BC075B0D1BEE5F9D00AA8C9A /* libengine.a */,
 				BC075B0E1BEE5F9D00AA8C9A /* libsdl.a */,

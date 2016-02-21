@@ -341,24 +341,32 @@ namespace engine
 					"}\n";
 
 				m_programId = sCreateShaderProgram(vs, fs);
+				sCheckGLError();
 				m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
+				sCheckGLError();
 				m_vertexAttribute = 0;
 				m_colorAttribute = 1;
 
 				// Generate
 				//glGenBuffers(1, &m_vaoId);
 				glGenBuffers(2, m_vboIds);
-
+sCheckGLError();
+				
 				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 				glEnableVertexAttribArray(m_vertexAttribute);
+				sCheckGLError();
 				glEnableVertexAttribArray(m_colorAttribute);
-
+sCheckGLError();
+				
 				// Vertex buffer
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
+				sCheckGLError();
 				glVertexAttribPointer(m_vertexAttribute, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+				sCheckGLError();
 				//glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_DYNAMIC_DRAW);
 
 				glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
+				sCheckGLError();
 				glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 				//glBufferData(GL_ARRAY_BUFFER, sizeof(m_colors), m_colors, GL_DYNAMIC_DRAW);
 
@@ -402,34 +410,40 @@ namespace engine
 				if (m_count == 0)
 					return;
 
+				GLint drawFboID = 0;
+				glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFboID);
+				
 				glUseProgram(m_programId);
 
 				float32 proj[16] = { 0.0f };
 				g_camera.BuildProjectionMatrix(proj, 0.1f);
-
+				
 				glUniformMatrix4fv(m_projectionUniform, 1, GL_FALSE, proj);
-
+sCheckGLError();
 				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vaoId);
 
 				glEnableVertexAttribArray(m_vertexAttribute);
+				sCheckGLError();
 				glEnableVertexAttribArray(m_colorAttribute);
-
+sCheckGLError();
 				// Vertex buffer
 				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
 				//glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_vertices);
 				glVertexAttribPointer(m_vertexAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(b2Vec2), m_vertices);
-
+sCheckGLError();
 				//glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
 				//glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Color), m_colors);
 				glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, sizeof(b2Color), m_colors);
-
+sCheckGLError();
 				glDrawArrays(GL_LINES, 0, m_count);
 
 				sCheckGLError();
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
+				sCheckGLError();
 				//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				glUseProgram(0);
+				sCheckGLError();
 
 				m_count = 0;
 			}

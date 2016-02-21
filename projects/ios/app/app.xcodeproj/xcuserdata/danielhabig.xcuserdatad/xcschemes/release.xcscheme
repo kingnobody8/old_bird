@@ -76,20 +76,6 @@
                ReferencedContainer = "container:../utility/utility.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC4B4A241C5B0DA90012C25C"
-               BuildableName = "libglew.a"
-               BlueprintName = "glew"
-               ReferencedContainer = "container:../glew/glew.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

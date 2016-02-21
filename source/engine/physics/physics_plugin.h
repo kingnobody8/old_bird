@@ -4,6 +4,7 @@
 #include "debug_draw.h"
 #include "../input/input_event.h"
 #include "../b2djson/b2dJson.h"
+#include "../render/render_core.h"
 
 namespace engine
 {

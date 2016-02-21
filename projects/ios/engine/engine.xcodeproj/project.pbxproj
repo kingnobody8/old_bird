@@ -107,7 +107,6 @@
 		BC4B49C71C5B0D150012C25C /* rect_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect_node.h; sourceTree = "<group>"; };
 		BC4B49C81C5B0D150012C25C /* render_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_node.cpp; sourceTree = "<group>"; };
 		BC4B49C91C5B0D150012C25C /* render_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_node.h; sourceTree = "<group>"; };
-		BC4B49CA1C5B0D150012C25C /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
 		BC4B49CB1C5B0D150012C25C /* render_layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_layer.cpp; sourceTree = "<group>"; };
 		BC4B49CC1C5B0D150012C25C /* render_layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_layer.h; sourceTree = "<group>"; };
 		BC4B49CD1C5B0D150012C25C /* render_plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_plugin.cpp; sourceTree = "<group>"; };
@@ -136,6 +135,7 @@
 		BC4B49F21C5B0D150012C25C /* base_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_state.h; sourceTree = "<group>"; };
 		BC4B49F31C5B0D150012C25C /* state_plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = state_plugin.cpp; sourceTree = "<group>"; };
 		BC4B49F41C5B0D150012C25C /* state_plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state_plugin.h; sourceTree = "<group>"; };
+		BCD5EDC31C7580AA00ACE436 /* render_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_core.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,10 +260,10 @@
 		BC4B49BC1C5B0D150012C25C /* render */ = {
 			isa = PBXGroup;
 			children = (
+				BCD5EDC31C7580AA00ACE436 /* render_core.h */,
 				BC4B49BD1C5B0D150012C25C /* camera.cpp */,
 				BC4B49BE1C5B0D150012C25C /* camera.h */,
 				BC4B49BF1C5B0D150012C25C /* node */,
-				BC4B49CA1C5B0D150012C25C /* opengl.h */,
 				BC4B49CB1C5B0D150012C25C /* render_layer.cpp */,
 				BC4B49CC1C5B0D150012C25C /* render_layer.h */,
 				BC4B49CD1C5B0D150012C25C /* render_plugin.cpp */,

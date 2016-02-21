@@ -7,6 +7,8 @@
 #include "b2djson/b2dJsonImage.h"
 #include "callbacks/raycast_callback.h"
 #include "callbacks/aabb_callback.h"
+#include "../render/node/rect_node.h"
+#include "../render/shader/shader_default.h"
 
 namespace engine
 {
@@ -15,6 +17,9 @@ namespace engine
 		const int VELOCITY_ITERATIONS = 8;
 		const int POSITION_ITERATIONS = 3;
 		const b2Vec2 GRAVITY = b2Vec2(0.0f, -10.0f);
+		
+		render::RectNode node;
+		render::DefaultShader shader;
 
 
 		DEFINE_PLUGIN_TYPE_INFO(PhysicsPlugin);
@@ -25,7 +30,7 @@ namespace engine
 			, m_pGroundBody(null)
 			, m_bRightMouseBtn(false)
 			, m_bLeftMouseBtn(false)
-			, m_state(LARK)
+			, m_state(TESTBED)
 			, m_pRopeJoint(null)
 			, m_pLark(null)
 			, m_pParticleSystem(null)
@@ -39,6 +44,12 @@ namespace engine
 
 		VIRTUAL void PhysicsPlugin::Init()
 		{
+			util::Time t = util::Time::GetTimeSinceEpoch();
+			SDL_Log("Physics Init Begun.");
+			
+			node.InitVBO( vec2(0.5f, 0.5f), util::Color::SPRING_GREEN);
+			shader.LoadProgram();
+			
 			input::mouse_events::s_InputMouseButtonDown.Subscribe(&m_sub, BIND1(this, &PhysicsPlugin::OnMouseDown));
 			input::mouse_events::s_InputMouseButtonUp.Subscribe(&m_sub, BIND1(this, &PhysicsPlugin::OnMouseUp));
 			input::mouse_events::s_InputMouseMotion.Subscribe(&m_sub, BIND1(this, &PhysicsPlugin::OnMouseMotion));
@@ -70,17 +81,17 @@ namespace engine
 			m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
 
 			//create particles
-			m_pParticleSystem->SetRadius(0.1f);
-			m_pParticleSystem->SetDamping(0.2f);
-			m_pParticleSystem->SetDensity(10.0f);
-			b2ParticleGroupDef pd;
-			pd.flags = b2_solidParticleGroup;
-			util::Color clr = util::Color::CYAN;
-			pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
-			b2PolygonShape shapep;
-			shapep.SetAsBox(5.0f, 10.0f, b2Vec2(0.0f, 20.0f), 0.0);
-			pd.shape = &shapep;
-			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+			//m_pParticleSystem->SetRadius(0.1f);
+			//m_pParticleSystem->SetDamping(0.2f);
+			//m_pParticleSystem->SetDensity(10.0f);
+			//b2ParticleGroupDef pd;
+			//pd.flags = b2_solidParticleGroup;
+			//util::Color clr = util::Color::CYAN;
+			//pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
+			//b2PolygonShape shapep;
+			//shapep.SetAsBox(5.0f, 10.0f, b2Vec2(0.0f, 20.0f), 0.0);
+			//pd.shape = &shapep;
+			//b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
 
 
 			//create shape (test)
@@ -157,6 +168,9 @@ namespace engine
 
 				x += deltaX;
 			}*/
+			
+			util::Time diff = util::Time::GetTimeSinceEpoch() - t;
+			SDL_Log("Physics Loaded - Time: %d milli-secs", diff.Milli());
 		}
 
 		VIRTUAL void PhysicsPlugin::Exit()
@@ -173,6 +187,16 @@ namespace engine
 
 		VIRTUAL bool PhysicsPlugin::Update(const util::Time& dt)
 		{
+			static util::Color clr = util::Color::CYAN;
+			
+			glClearColor(clr.r, clr.g, clr.b, 1.0);
+			auto hsv = clr.GetHSV();
+			hsv.x += 0.001f;
+			hsv.z = 0.5f;
+			if(hsv.x > 1.0f)
+				hsv.x = 0.0f;
+			clr.SetHSV(hsv);
+			
 			if (rel)
 			{
 				Reload();
@@ -207,6 +231,12 @@ namespace engine
 
 			//Clear color buffer
 			glClear(GL_COLOR_BUFFER_BIT);
+			
+			engine::render::RenderPlugin* plug = static_cast<engine::render::RenderPlugin*>(engine::IPlugin::FindPlugin(engine::render::RenderPlugin::Type));
+			
+			glm::ivec2 size;
+			SDL_GetWindowSize(plug->GetSdlWindow(), &size.x, &size.y);
+			glViewport(0, 0, size.x, size.y);
 
 			int count = m_pWorld->GetBodyCount();
 			m_pWorld->DrawDebugData();
@@ -233,8 +263,11 @@ namespace engine
 			}
 
 			m_debugDraw.Flush();
+			
+			//node.SetShader(&shader);
+			//node(matrix());
 
-			engine::render::RenderPlugin* plug = static_cast<engine::render::RenderPlugin*>(engine::IPlugin::FindPlugin(engine::render::RenderPlugin::Type));
+			
 			SDL_GL_SwapWindow(plug->GetSdlWindow());
 
 			return true;
