@@ -19,7 +19,7 @@ namespace engine
 			float32 v = (h - ps.y) / h;
 
 			float32 ratio = w / h;
-			b2Vec2 extents(ratio * 25.0f, 25.0f);
+			b2Vec2 extents(ratio * m_extent, m_extent);
 			extents *= m_zoom;
 
 			b2Vec2 lower = m_center - extents;
@@ -36,7 +36,7 @@ namespace engine
 			float32 w = float32(m_width);
 			float32 h = float32(m_height);
 			float32 ratio = w / h;
-			b2Vec2 extents(ratio * 25.0f, 25.0f);
+			b2Vec2 extents(ratio * m_extent, m_extent);
 			extents *= m_zoom;
 
 			b2Vec2 lower = m_center - extents;
@@ -58,7 +58,7 @@ namespace engine
 			float32 w = float32(m_width);
 			float32 h = float32(m_height);
 			float32 ratio = w / h;
-			b2Vec2 extents(ratio * 25.0f, 25.0f);
+			b2Vec2 extents(ratio * m_extent, m_extent);
 			extents *= m_zoom;
 
 			b2Vec2 lower = m_center - extents;

@@ -296,6 +296,12 @@ namespace engine
 			case SDLK_r:
 				rel = true; //todo can't unsubscribe then subscribe to same event again while in the middle of callback
 				break;
+			case SDLK_UP:
+				g_camera.m_extent += 1.0f;
+				break;
+			case SDLK_DOWN:
+				g_camera.m_extent -= 1.0f;
+				break;
 			}
 		}
 
