@@ -1,18 +1,18 @@
 #pragma once
-#include "platform.h"
+#include "utility/helper/platform.h"
 
 #include <SDL.h>
 
-#if WIN
+#if IS_WIN
 #include <Windows.h>
 #include <GL/gl.h>
 #include "bridge/win/GL/glext.h"
 #include "bridge/win/bridge-gl-win.h"
-#elif MAC
+#elif IS_MAC
 #include <OpenGL/gl.h>
 #include <OpenGL/glext.h>
 #include "bridge/mac/bridge-gl-mac.h"
-#elif IOS
+#elif IS_IOS
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 #endif

@@ -37,12 +37,12 @@ namespace engine
 				CUiPart::LoadJson(json);
 			}
 
-			void CButtonPart::Subscribe(util::event::Subscriber* subscriber, util::event::Publisher<CButtonPart*>::Callback callback, const int& priority)
+			void CButtonPart::Subscribe(util::Subscriber* subscriber, util::Publisher<CButtonPart*>::Callback callback, const int& priority)
 			{
 				m_publisher.Subscribe(subscriber, callback, priority);
 			}
 
-			void CButtonPart::Unsubscribe(util::event::Subscriber* subscriber)
+			void CButtonPart::Unsubscribe(util::Subscriber* subscriber)
 			{
 				m_publisher.Unsubscribe(subscriber);
 			}

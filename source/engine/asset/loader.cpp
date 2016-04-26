@@ -8,7 +8,7 @@ namespace engine
 		__todo() //do some research, but these might be move useful as inherited members of a file type
 			//also should assert if fail or should return empty product???
 
-		const TBuffer FileLoaderData(const std::string& szFilePath)
+		/*STATIC const TBuffer FileLoaderData(const std::string& szFilePath)
 		{
 			TBuffer ret;
 			std::fstream stream;
@@ -29,7 +29,7 @@ namespace engine
 			return ret;
 		}
 
-		const util::JSON FileLoaderJson(const std::string& szFilePath)
+		STATIC const util::JSON FileLoaderJson(const std::string& szFilePath)
 		{
 			TBuffer data = FileLoaderData(szFilePath);
 			if (data.size == 0)
@@ -39,30 +39,30 @@ namespace engine
 			delete[] data.buffer;
 			return ret;
 		}
-		const util::JSON DataLoaderJson(const TBuffer& data)
+		STATIC const util::JSON DataLoaderJson(const TBuffer& data)
 		{
 			util::JSON ret;
 			ret.Parse(reinterpret_cast<char*>(data.buffer));
 			auto asdf = ret.Read();
 			assert(!ret.HasParseError());
 			return ret;
-		}
+		}*/
 
-		SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath)
-		{
-			return null;
-			/*SDL_Texture* ret = IMG_LoadTexture(render::GetSdlRenderer(), szFilePath.c_str());
-			if (ret == NULL)
-			{
-				SDL_Log("Error - IMG_LoadTexture - %s.\n", SDL_GetError());
-				assert(false);
-			}
-			return ret;*/
-		}
-		SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data)
-		{
-			__not_implemented(DataLoaderSdlTexture);
-			return null;
-		}
+		//SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath)
+		//{
+		//	return null;
+		//	/*SDL_Texture* ret = IMG_LoadTexture(render::GetSdlRenderer(), szFilePath.c_str());
+		//	if (ret == NULL)
+		//	{
+		//		SDL_Log("Error - IMG_LoadTexture - %s.\n", SDL_GetError());
+		//		assert(false);
+		//	}
+		//	return ret;*/
+		//}
+		//SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data)
+		//{
+		//	__not_implemented(DataLoaderSdlTexture);
+		//	return null;
+		//}
 	}
 }

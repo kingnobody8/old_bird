@@ -181,9 +181,9 @@ namespace engine
 		}
 
 		//Calc
-		const matrix CObject::CalcWorldMatrix(void) const
+		const util::matrix CObject::CalcWorldMatrix(void) const
 		{
-			matrix ret = m_cMatLocal;
+			util::matrix ret = m_cMatLocal;
 			TraverseAncestors(this, [&ret](CObject* pObj)
 			{
 				ret = ret * pObj->GetLocalMatrix();
@@ -224,14 +224,14 @@ namespace engine
 				this->Drop();
 			this->m_pParent = pParent;
 		}
-		void CObject::SetLocalMatrix(const matrix& mat)
+		void CObject::SetLocalMatrix(const util::matrix& mat)
 		{
 			m_cMatLocal = mat;
 			OnMatrixChanged();
 		}
-		void CObject::SetWorldMatrix(const matrix& mat)
+		void CObject::SetWorldMatrix(const util::matrix& mat)
 		{
-			matrix temp = mat;
+			util::matrix temp = mat;
 			if (this->m_pParent)
 			{
 				temp = this->m_pParent->CalcWorldMatrix() * glm::inverse(mat);
@@ -241,35 +241,35 @@ namespace engine
 
 		void CObject::SetLocalPosX(const float& x)
 		{
-			this->m_cMatLocal.SetPositionX(x);
+			//this->m_cMatLocal.SetPositionX(x);
 			OnMatrixChanged();
 		}
 		void CObject::SetLocalPosY(const float& y)
 		{
-			this->m_cMatLocal.SetPositionY(y);
+			//this->m_cMatLocal.SetPositionY(y);
 			OnMatrixChanged();
 		}
 		void CObject::SetLocalPosXY(const float& x, const float& y)
 		{
-			this->m_cMatLocal.SetPosition(x, y, this->m_cMatLocal.GetPosition().z);
+			//this->m_cMatLocal.SetPosition(x, y, this->m_cMatLocal.GetPosition().z);
 			OnMatrixChanged();
 		}
 		void CObject::SetLocalScale(const float& x, const float& y)
 		{
-			this->m_cMatLocal.SetScale(x, y, this->m_cMatLocal.GetScale().z);
+			//this->m_cMatLocal.SetScale(x, y, this->m_cMatLocal.GetScale().z);
 			OnMatrixChanged();
 		}
 		void CObject::SetLocalRotationZ(const float& rot)
 		{
-			vec3 rotation = this->m_cMatLocal.GetRotation();
-			rotation.z = rot;
-			this->m_cMatLocal.SetRotation(rotation);
+			//util::vec3 rotation = this->m_cMatLocal.GetRotation();
+			//rotation.z = rot;
+			//this->m_cMatLocal.SetRotation(rotation);
 			OnMatrixChanged();
 		}
 
 		void CObject::SetWorldPosX(const float& x)
 		{
-			if (m_pParent)
+			/*if (m_pParent)
 			{
 				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
 				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
@@ -277,11 +277,11 @@ namespace engine
 				this->SetLocalPosX(pos_x);
 			}
 			else
-				this->SetLocalPosX(x);
+				this->SetLocalPosX(x);*/
 		}
 		void CObject::SetWorldPosY(const float& y)
 		{
-			if (m_pParent)
+			/*if (m_pParent)
 			{
 				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
 				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
@@ -289,7 +289,7 @@ namespace engine
 				this->SetLocalPosY(pos_y);
 			}
 			else
-				this->SetLocalPosY(y);
+				this->SetLocalPosY(y);*/
 		}
 		void CObject::SetWorldPosXY(const float& x, const float& y)
 		{
@@ -308,7 +308,7 @@ namespace engine
 		}
 		void CObject::SetWorldScale(const float& x, const float& y)
 		{
-			if (m_pParent)
+			/*if (m_pParent)
 			{
 				vec3 wscale = this->m_pParent->CalcWorldMatrix().GetScale();
 				this->SetLocalScale(x - wscale.x, y - wscale.y);
@@ -316,14 +316,14 @@ namespace engine
 			else
 			{
 				this->SetLocalScale(x, y);
-			}
+			}*/
 		}
 		void CObject::SetWorldRotationZ(const float& rot)
 		{
-			if (m_pParent)
+			/*if (m_pParent)
 				this->SetLocalRotationZ(rot - this->m_pParent->CalcWorldMatrix().GetRotation().z);
 			else
-				this->SetLocalRotationZ(rot);
+				this->SetLocalRotationZ(rot);*/
 		}
 
 		VIRTUAL void CObject::SetVisible(const bool bVis)

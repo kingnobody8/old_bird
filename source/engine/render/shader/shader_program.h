@@ -1,11 +1,11 @@
 #pragma once
 #include "../render_core.h"
-#include "math/math.h"
-#include "types.h"
+#include "utility/math/math.h"
+#include "utility/types/types.h"
 #include <string>
 #include <list>
-#include "macro.h"
-#include "func.h"
+#include "utility/helper/macro.h"
+#include "utility/helper/func.h"
 #include <map>
 
 namespace engine

@@ -6,4 +6,4 @@
 typedef glm::f32vec2		vec2;
 typedef glm::f32vec3		vec3;
 typedef glm::f32vec4		vec4;
-typedef util::math::Matrix	matrix;
+typedef util::Matrix		matrix;

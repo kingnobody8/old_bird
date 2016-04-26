@@ -1,9 +1,9 @@
 #pragma once
 #include "sdl/include/SDL.h"
 #include <list>
-#include "macro.h"
+#include "utility/helper/macro.h"
 #include <string>
-#include "math/math.h"
+#include "utility/math/math.h"
 
 namespace engine
 {

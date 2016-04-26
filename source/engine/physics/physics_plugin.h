@@ -21,7 +21,7 @@ namespace engine
 			b2dJson m_json;
 			b2World* m_pWorld;
 			DebugDraw m_debugDraw;
-			util::event::Subscriber m_sub;
+			util::Subscriber m_sub;
 			b2MouseJoint* m_pMouseJoint;
 			b2RopeJoint* m_pRopeJoint;
 			b2Body* m_pGroundBody;

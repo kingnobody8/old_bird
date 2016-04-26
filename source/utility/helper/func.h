@@ -57,9 +57,8 @@ namespace util
 	bool BigEndianCheck(void);
 	//void TypeCheck(void);
 
-	//TODO is this even ever used?
 	//Functor CNewType - returns a new instance of the defined type
-	/*template<typename type>
+	template<typename type>
 	class CNewType
 	{
 	public:
@@ -67,7 +66,5 @@ namespace util
 		{
 			return new type();
 		}
-	};*/
-
-	
+	};
 }

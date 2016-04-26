@@ -1,11 +1,11 @@
 #pragma once
 #include "Collision/Shapes/b2PolygonShape.h"
 #include "../render_core.h"
-#include "bit_flag.h"
+#include "utility/types/bit_flag.h"
 #include "math/math.h"
-#include "color.h"
+#include "utility/types/color.h"
 #include <string>
-#include "macro.h"
+#include "utility/helper/macro.h"
 #include "../shader/shader_program.h"
 
 namespace engine

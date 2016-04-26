@@ -10,93 +10,90 @@
 
 namespace util
 {
-	namespace resource
+	//this class extends the functionality of rapidjson::Document for use with our custom types
+	class JSON : public rapidjson::Document
 	{
-		//this class extends the functionality of rapidjson::Document for use with our custom types
-		class JSON : public rapidjson::Document
+	public:
+		JSON() : ptr_alloc(null){}
+		JSON(const JSON& that) : ptr_alloc(null) { *this = that; }
+		JSON(const rapidjson::Document& that) : ptr_alloc(null) { this->CopyFrom(that, GetAllocator()); }
+		JSON(const rapidjson::Value& that) : ptr_alloc(null) { this->CopyFrom(that, GetAllocator()); }
+		JSON& operator= (const JSON& that)
 		{
-		public:
-			JSON() : ptr_alloc(null){}
-			JSON(const JSON& that) : ptr_alloc(null) { *this = that; }
-			JSON(const rapidjson::Document& that) : ptr_alloc(null) { this->CopyFrom(that, GetAllocator()); }
-			JSON(const rapidjson::Value& that) : ptr_alloc(null) { this->CopyFrom(that, GetAllocator()); }
-			JSON& operator= (const JSON& that)
-			{
-				if (this == &that) //self assignment check
-					return *this;
-				if (that.ptr_alloc == null)
-					this->CopyFrom(that, GetAllocator());
-				else
-					this->CopyFrom(that, *(that.ptr_alloc));
-				this->ptr_alloc = that.ptr_alloc;
+			if (this == &that) //self assignment check
 				return *this;
-			}
-
-			const std::string Read() const;
-
-			const Time				GetTime() const;
-			const types::Color		GetColor() const;
-			const math::vec2		GetVec2() const;
-			const math::vec3		GetVec3() const;
-			const math::vec4		GetVec4() const;
-			const math::AABB		GetAabb() const;
-			const math::matrix		GetMatrix() const;
-			template<typename type>
-			const std::vector<type> GetArray(void) const;
-
-			void SetTime(const Time& val, rapidjson::Document::AllocatorType& allocator);
-			void SetColor(const types::Color& val, rapidjson::Document::AllocatorType& allocator);
-			void SetVec2(const math::vec2& val, rapidjson::Document::AllocatorType& allocator);
-			void SetVec3(const math::vec3& val, rapidjson::Document::AllocatorType& allocator);
-			void SetVec4(const math::vec4& val, rapidjson::Document::AllocatorType& allocator);
-			void SetAabb(const math::AABB& val, rapidjson::Document::AllocatorType& allocator);
-			void SetMatrix(const math::matrix& val, rapidjson::Document::AllocatorType& allocator);
-			template<typename type>
-			const void WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator); //this is called 'write' because 'setarray' is already used by rapidjson::value
-
-			rapidjson::Document::AllocatorType* ptr_alloc;
-		};
-
-		template<typename type>
-		const void JSON::WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator)
-		{
-			SetArray();
-			for (size_t i = 0; i < val.size(); ++i)
-				PushBack(val[i], allocator);
+			if (that.ptr_alloc == null)
+				this->CopyFrom(that, GetAllocator());
+			else
+				this->CopyFrom(that, *(that.ptr_alloc));
+			this->ptr_alloc = that.ptr_alloc;
+			return *this;
 		}
-		template<>
-		const void JSON::WriteArray(std::vector<Time> val, rapidjson::Document::AllocatorType& allocator);
-		template<>
-		const void JSON::WriteArray(std::vector<types::Color> val, rapidjson::Document::AllocatorType& allocator);
-		template<>
-		const void JSON::WriteArray(std::vector<math::vec2> val, rapidjson::Document::AllocatorType& allocator);
-		template<>
-		const void JSON::WriteArray(std::vector<math::vec3> val, rapidjson::Document::AllocatorType& allocator);
-		template<>
-		const void JSON::WriteArray(std::vector<math::vec4> val, rapidjson::Document::AllocatorType& allocator);
-		template<>
-		const void JSON::WriteArray(std::vector<math::matrix> val, rapidjson::Document::AllocatorType& allocator);
 
-		/*
-		EXAMPLES
+		const std::string Read() const;
 
-		//READING
-		JSON json;
-		json.Parse("{\"name\": \"play\"}");
-		bool success = !json.HasParseError();
+		const Time				GetTime() const;
+		const Color				GetColor() const;
+		const vec2				GetVec2() const;
+		const vec3				GetVec3() const;
+		const vec4				GetVec4() const;
+		const AABB				GetAabb() const;
+		const matrix			GetMatrix() const;
+		template<typename type>
+		const std::vector<type> GetArray(void) const;
 
-		//WRITING - allways use the root json instance's allocator
-		JSON temp;
-		temp.SetObject();
-		temp.AddMember("key1", "value1", json.GetAllocator());
-		temp.AddMember("key2", "value2", json.GetAllocator());
-		json.SetObject();
-		json.Set(temp, json.GetAllocator());
+		void SetTime(const Time& val, rapidjson::Document::AllocatorType& allocator);
+		void SetColor(const Color& val, rapidjson::Document::AllocatorType& allocator);
+		void SetVec2(const vec2& val, rapidjson::Document::AllocatorType& allocator);
+		void SetVec3(const vec3& val, rapidjson::Document::AllocatorType& allocator);
+		void SetVec4(const vec4& val, rapidjson::Document::AllocatorType& allocator);
+		void SetAabb(const AABB& val, rapidjson::Document::AllocatorType& allocator);
+		void SetMatrix(const matrix& val, rapidjson::Document::AllocatorType& allocator);
+		template<typename type>
+		const void WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator); //this is called 'write' because 'setarray' is already used by rapidjson::value
 
-		//ARRAY - allways use the root json instance's allocator
-		json.SetArray();
+		rapidjson::Document::AllocatorType* ptr_alloc;
+	};
+
+	template<typename type>
+	const void JSON::WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator)
+	{
+		SetArray();
 		for (size_t i = 0; i < val.size(); ++i)
-		json.PushBack(val[i], json.GetAllocator);
-		*/
+			PushBack(val[i], allocator);
 	}
+	template<>
+	const void JSON::WriteArray(std::vector<Time> val, rapidjson::Document::AllocatorType& allocator);
+	template<>
+	const void JSON::WriteArray(std::vector<Color> val, rapidjson::Document::AllocatorType& allocator);
+	template<>
+	const void JSON::WriteArray(std::vector<vec2> val, rapidjson::Document::AllocatorType& allocator);
+	template<>
+	const void JSON::WriteArray(std::vector<vec3> val, rapidjson::Document::AllocatorType& allocator);
+	template<>
+	const void JSON::WriteArray(std::vector<vec4> val, rapidjson::Document::AllocatorType& allocator);
+	template<>
+	const void JSON::WriteArray(std::vector<matrix> val, rapidjson::Document::AllocatorType& allocator);
+
+	/*
+	EXAMPLES
+
+	//READING
+	JSON json;
+	json.Parse("{\"name\": \"play\"}");
+	bool success = !json.HasParseError();
+
+	//WRITING - allways use the root json instance's allocator
+	JSON temp;
+	temp.SetObject();
+	temp.AddMember("key1", "value1", json.GetAllocator());
+	temp.AddMember("key2", "value2", json.GetAllocator());
+	json.SetObject();
+	json.Set(temp, json.GetAllocator());
+
+	//ARRAY - allways use the root json instance's allocator
+	json.SetArray();
+	for (size_t i = 0; i < val.size(); ++i)
+	json.PushBack(val[i], json.GetAllocator);
+	*/
 }

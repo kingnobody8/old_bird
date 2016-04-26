@@ -1,10 +1,10 @@
 #pragma once
-#include "func.h"
-#include "types.h"
-#include "utility/json.h"
-#include "bit_flag.h"
-#include "enums.h"
-#include "math/math.h"
+#include "utility/helper/func.h"
+#include "utility/types/types.h"
+#include "utility/resource/json.h"
+#include "utility/types/bit_flag.h"
+#include "utility/math/util_math.h"
+#include "utility/helper/enums.h"
 #include <map>
 #include <list>
 #include <vector>

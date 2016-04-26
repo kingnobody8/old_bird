@@ -98,6 +98,9 @@
     <ClInclude Include="..\..\..\source\utility\event\subscriber.h">
       <Filter>event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\helper\enums.h">
+      <Filter>helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\utility\types\color.def">

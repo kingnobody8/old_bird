@@ -1,8 +1,8 @@
 #pragma once
-#include "util_time.h"
-#include "math/math.h"
-#include "event/publisher.h"
-#include "event/publisher.inl"
+#include "utility/time/util_time.h"
+#include "utility/math/math.h"
+#include "utility/event/publisher.h"
+#include "utility/event/publisher.inl"
 #include "SDL.h"
 
 namespace engine
@@ -20,7 +20,7 @@ namespace engine
 
 		struct app_events
 		{
-			static util::event::VoidPublisher s_KillAppEvent;
+			static util::VoidPublisher s_KillAppEvent;
 		};
 
 		struct key_events
@@ -36,8 +36,8 @@ namespace engine
 				}
 			};
 
-			static util::event::Publisher<KeyAction> s_InputKeyDown;
-			static util::event::Publisher<KeyAction> s_InputKeyUp;
+			static util::Publisher<KeyAction> s_InputKeyDown;
+			static util::Publisher<KeyAction> s_InputKeyUp;
 		};
 
 		struct mouse_events
@@ -76,10 +76,10 @@ namespace engine
 				}
 			};
 
-			static util::event::Publisher<MotionAction> s_InputMouseMotion;
-			static util::event::Publisher<ButtonAction> s_InputMouseButtonDown;
-			static util::event::Publisher<ButtonAction> s_InputMouseButtonUp;
-			static util::event::Publisher<WheelAction>	s_InputMouseScrollWheel;
+			static util::Publisher<MotionAction> s_InputMouseMotion;
+			static util::Publisher<ButtonAction> s_InputMouseButtonDown;
+			static util::Publisher<ButtonAction> s_InputMouseButtonUp;
+			static util::Publisher<WheelAction>	s_InputMouseScrollWheel;
 		};
 	}
 }

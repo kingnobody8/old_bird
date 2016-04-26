@@ -1,5 +1,5 @@
 #include "render_plugin.h"
-#include "func.h"
+#include "utility/helper/func.h"
 #include "render_core.h"
 #include "camera.h"
 #include "render_layer.h"
@@ -82,7 +82,7 @@ namespace engine
 		{
 			//Initialization
 			int result = SDL_Init(SDL_INIT_VIDEO);
-			util::CheckSdlError();
+			//util::CheckSdlError();
 			assert(result == 0);
 
 			//Create Window
@@ -105,7 +105,7 @@ namespace engine
 			m_pSdlWin = SDL_CreateWindow(app_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, default_dims.x, default_dims.y, win_flag);
 #endif
 			//Error check
-			util::CheckSdlError();
+			//util::CheckSdlError();
 			assert(m_pSdlWin);
 			SDL_Log("SDL Window Initialized");
 			
@@ -115,7 +115,7 @@ namespace engine
 
 			//Create context
 			m_pGLContext = SDL_GL_CreateContext(m_pSdlWin);
-			util::CheckSdlError();
+			//util::CheckSdlError();
 			assert(m_pGLContext);
 			SDL_Log("Open GL Context Initialized");
 			
@@ -126,7 +126,7 @@ namespace engine
 			//Use Vsync
 			if (SDL_GL_SetSwapInterval(1) < 0)
 			{
-				util::CheckSdlError();
+				//util::CheckSdlError();
 				assert(false);
 			}
 			SDL_Log("VSYNC Initialized");

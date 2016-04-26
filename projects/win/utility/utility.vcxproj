@@ -33,6 +33,7 @@
     <ClInclude Include="..\..\..\source\utility\event\publisher.h" />
     <ClInclude Include="..\..\..\source\utility\event\subscriber.h" />
     <ClInclude Include="..\..\..\source\utility\helper\common.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\enums.h" />
     <ClInclude Include="..\..\..\source\utility\helper\func.h" />
     <ClInclude Include="..\..\..\source\utility\helper\macro.h" />
     <ClInclude Include="..\..\..\source\utility\helper\platform.h" />

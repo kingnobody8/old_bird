@@ -17,7 +17,7 @@ namespace engine
 
 		__todo() //it might be useful to have an 'active' bool on parts and objects
 
-		class IPart : public util::event::Subscriber
+		class IPart : public util::Subscriber
 		{
 			//Internal
 		private:

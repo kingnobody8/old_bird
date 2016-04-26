@@ -1,5 +1,5 @@
 #include "camera.h"
-#include "func.h"
+#include "utility/helper/func.h"
 #include "render_plugin.h"
 
 namespace engine
@@ -61,8 +61,8 @@ namespace engine
 			matrix inverse = glm::inverse(m_matrix);
 			vec4 min;// = inverse * vec4(ret.lowerBound.x, ret.lowerBound.y, 0.0f, 1.0f);
 			vec4 max;// = inverse * vec4(ret.upperBound.x, ret.upperBound.y, 0.0f, 1.0f);
-			//	util::math::Matrix2D::Vector_Matrix_Multiply(util::math::vec2(ret.lowerBound.x, ret.lowerBound.y), inverse);
-			//vec2 max = util::math::Matrix2D::Vector_Matrix_Multiply(util::math::vec2(ret.upperBound.x, ret.upperBound.y), inverse);
+			//	util::Matrix2D::Vector_Matrix_Multiply(util::vec2(ret.lowerBound.x, ret.lowerBound.y), inverse);
+			//vec2 max = util::Matrix2D::Vector_Matrix_Multiply(util::vec2(ret.upperBound.x, ret.upperBound.y), inverse);
 
 			ret.lowerBound = b2Vec2(Min(min.x, max.x), Min(min.y, max.y));
 			ret.upperBound = b2Vec2(Max(min.x, max.x), Max(min.y, max.y));

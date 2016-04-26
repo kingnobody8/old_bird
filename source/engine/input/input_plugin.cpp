@@ -27,7 +27,7 @@ namespace engine
 #endif
 
 			int result = SDL_Init(flag);
-			util::CheckSdlError();
+			//util::CheckSdlError();
 			assert(result == 0);
 		}
 

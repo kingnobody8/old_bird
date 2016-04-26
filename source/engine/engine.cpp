@@ -10,7 +10,7 @@
 __todo() //why in God's name does this have to be not a class function. why won't SDL_SetIphoneANimation take a binded function like normal AHHHHHH!
 void IosCallback(void* params)
 {
-	engine::Get()->RunFrame(params);
+	engine::Engine::Get()->RunFrame(params);
 }
 
 namespace engine
@@ -38,7 +38,7 @@ namespace engine
 
 	void Engine::Init(state::IBaseState* const pFirstState)
 	{
-		util::TypeCheck();
+		//util::TypeCheck();
 
 		assert(pFirstState);
 

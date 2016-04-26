@@ -1,11 +1,11 @@
 #pragma once
-#include "platform.h"
+#include "utility/helper/platform.h"
 #include <string>
 
 
-#ifdef WIN
+#ifdef IS_WIN
 		static const std::string getResourcePath(void) { return "../../../"; }
-#elif APPLE
+#elif IS_APPLE
 		std::string getResourcePath(void);
 #endif
 

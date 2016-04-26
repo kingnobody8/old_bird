@@ -1,17 +1,16 @@
 #pragma once
-#include "types.h"
-#include "utility/json.h"
+#include "utility/types/types.h"
+#include "utility/resource/json.h"
 
 namespace engine
 {
 	namespace asset
 	{
-		const TBuffer FileLoaderData(const std::string& szFilePath);
+		/*static const TBuffer FileLoaderData(const std::string& szFilePath);
+		static const util::JSON FileLoaderJson(const std::string& szFilePath);
+		static const util::JSON DataLoaderJson(const TBuffer& data);*/
 
-		const util::JSON FileLoaderJson(const std::string& szFilePath);
-		const util::JSON DataLoaderJson(const TBuffer& data);
-
-		SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath);
-		SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data);
+		//SDL_Texture* const FileLoaderSdlTexture(const std::string& szFilePath);
+		//SDL_Texture* const DataLoaderSdlTexture(const TBuffer& data);
 	}
 }
