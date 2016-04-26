@@ -6,13 +6,8 @@ Purpose:	These are commonly used utility functions and macros
 */
 
 #pragma once
-#include "types.h"
+#include "types/types.h"
 #include <functional>
-#include <cmath>
-#include <stdlib.h>
-#include <assert.h>
-#include <string>
-#include "sdl.h"
 
 #define BIND0(that, func) (std::bind(func, that))
 #define BIND1(that, func) (std::bind(func, that, std::placeholders::_1))
@@ -60,10 +55,11 @@ namespace util
 	}
 
 	bool BigEndianCheck(void);
-	void TypeCheck(void);
+	//void TypeCheck(void);
 
+	//TODO is this even ever used?
 	//Functor CNewType - returns a new instance of the defined type
-	template<typename type>
+	/*template<typename type>
 	class CNewType
 	{
 	public:
@@ -71,14 +67,7 @@ namespace util
 		{
 			return new type();
 		}
-	};
+	};*/
 
-	static void CheckSdlError(const char* ignore_error = null)
-	{
-		const char* err = SDL_GetError();
-		if (*err != null)
-			SDL_Log("SDL Error: %s", err);
-		assert(*err == null || std::strcmp(err, ignore_error) == 0);
-		SDL_ClearError();
-	}
+	
 }

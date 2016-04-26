@@ -1,6 +1,5 @@
 #pragma once
-#include "types.h"
-#include "macro.h"
+#include "types/types.h"
 
 namespace util
 {

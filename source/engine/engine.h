@@ -35,3 +35,17 @@ namespace engine
 		return Engine::Get();
 	}
 }
+
+
+/*HABIG BEGIN*/
+//#include <string>
+//#include <assert.h>
+//static void CheckSdlError(const char* ignore_error = nullptr)
+//{
+//	const char* err = SDL_GetError();
+//	if (*err != 0)
+//		SDL_Log("SDL Error: %s", err);
+//	assert(*err == 0 || std::strcmp(err, ignore_error) == 0);
+//	SDL_ClearError();
+//}
+/*HABIG END*/

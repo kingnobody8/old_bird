@@ -12,7 +12,7 @@ namespace util
 		return bint.c[0] == 1;
 	}
 
-	void TypeCheck(void)
+	/*void TypeCheck(void)
 	{
 		SDL_Log("Printing sizeof standard types.\n");
 		SDL_Log("Sizeof - char: \t\t%d\n", sizeof(char));
@@ -35,5 +35,5 @@ namespace util
 			SDL_Log("Big Endian\n");
 		else
 			SDL_Log("Lil Endian\n");
-	}
+	}*/
 }

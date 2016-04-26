@@ -2,6 +2,7 @@
 #include "types.h"
 #include "../util_time.h"
 #include "../func.h"
+#include "util_math.h"
 
 namespace util
 {

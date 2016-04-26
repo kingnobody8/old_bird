@@ -1,5 +1,6 @@
 #pragma once
-#include "platform.h"
+#include "helper/platform.h"
+#include "helper/macro.h"
 
 #ifndef NULL
 #define NULL 0
@@ -15,7 +16,7 @@
 #define OUT
 #define IN
 
-#ifdef x32
+#ifdef IS_x32
 //Unsigned
 typedef unsigned char		u08;
 typedef unsigned short int	u16;
@@ -26,7 +27,7 @@ typedef signed char			s08;
 typedef signed short int	s16;
 typedef signed long int		s32;
 typedef signed long long	s64;
-#elif x64
+#elif IS_x64
 //Unsigned
 typedef unsigned char		u08;
 typedef unsigned short int	u16;

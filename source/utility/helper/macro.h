@@ -1,6 +1,6 @@
 #pragma once
 #include "platform.h"
-#include "sdl.h"
+//#include "sdl.h"
 
 #define __internal_stringify(X) #X
 #define __stringify(X) __internal_stringify(X)
@@ -13,4 +13,5 @@
 #endif
 
 // Flag a function as not implemented
-#define __not_implemented(ROUTINE) __todo(); SDL_LogCritical(SDL_LOG_CATEGORY_ERROR, "NOT IMPLEMENTED "#ROUTINE)
+#define __not_implemented(ROUTINE) __todo(); 
+//SDL_LogCritical(SDL_LOG_CATEGORY_ERROR, "NOT IMPLEMENTED "#ROUTINE)

@@ -200,7 +200,7 @@ const Date Time::ToUtc() const
 	time_t tmp = m_time / 1000;
 	ret.milli = (int)(m_time - (tmp * 1000));
 	tm ts;
-#ifdef WIN
+#ifdef IS_WIN
 	gmtime_s(&ts, &tmp);
 #else
 	gmtime_r(&tmp, &ts);
@@ -220,7 +220,7 @@ const Date Time::ToLocal() const
 	Date ret;
 	time_t tmp = m_time / 1000;
 	tm ts;
-#ifdef WIN
+#ifdef IS_WIN
 	localtime_s(&ts, &tmp);
 #else
 	localtime_r(&tmp, &ts);
