@@ -49,6 +49,12 @@ namespace engine
 			
 			node.InitVBO( vec2(0.5f, 0.5f), util::Color::SPRING_GREEN);
 			shader.LoadProgram();
+
+			engine::render::RenderPlugin* plug = static_cast<engine::render::RenderPlugin*>(engine::IPlugin::FindPlugin(engine::render::RenderPlugin::Type));
+			glm::ivec2 size;
+			SDL_GetWindowSize(plug->GetSdlWindow(), &size.x, &size.y);
+			g_camera.m_width = size.x;
+			g_camera.m_height = size.y;
 			
 			input::mouse_events::s_InputMouseButtonDown.Subscribe(&m_sub, BIND1(this, &PhysicsPlugin::OnMouseDown));
 			input::mouse_events::s_InputMouseButtonUp.Subscribe(&m_sub, BIND1(this, &PhysicsPlugin::OnMouseUp));

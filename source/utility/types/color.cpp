@@ -58,7 +58,11 @@ namespace util
 	}
 	void Color::SetHex(const glm::u32& hex)
 	{
-		Set8Bit(*(glm::u8vec4*)&hex);
+		glm::u8vec4 vec = *(glm::u8vec4*)&hex;
+		//swap values because of byte order
+		std::swap(vec.r, vec.a);
+		std::swap(vec.g, vec.b);
+		Set8Bit(vec);
 	}
 
 	const std::string Color::GetHexString() const
