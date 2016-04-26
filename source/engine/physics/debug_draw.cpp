@@ -201,9 +201,9 @@ namespace engine
 
 				m_programId = sCreateShaderProgram(vs, fs);
 				m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
-				m_vertexAttribute = 0;
-				m_colorAttribute = 1;
-				m_sizeAttribute = 2;
+				m_vertexAttribute = glGetAttribLocation(m_programId, "v_position");
+				m_colorAttribute = glGetAttribLocation(m_programId, "v_color");
+				m_sizeAttribute = glGetAttribLocation(m_programId, "v_size");
 
 				// Generate
 				//glGenBuffers(1, &m_vaoId);
@@ -343,8 +343,8 @@ namespace engine
 				sCheckGLError();
 				m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
 				sCheckGLError();
-				m_vertexAttribute = 0;
-				m_colorAttribute = 1;
+				m_vertexAttribute = glGetAttribLocation(m_programId, "v_position");
+				m_colorAttribute = glGetAttribLocation(m_programId, "v_color");
 
 				// Generate
 				//glGenBuffers(1, &m_vaoId);
@@ -487,8 +487,8 @@ sCheckGLError();
 
 				m_programId = sCreateShaderProgram(vs, fs);
 				m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
-				m_vertexAttribute = 0;
-				m_colorAttribute = 1;
+				m_vertexAttribute = glGetAttribLocation(m_programId, "v_position");
+				m_colorAttribute = glGetAttribLocation(m_programId, "v_color");
 
 				// Generate
 				//glGenBuffers(1, &m_vaoId);

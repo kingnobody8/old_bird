@@ -100,7 +100,7 @@ namespace util
 		{
 			float lerp = curr_time / lerp_time;
 			float dist = end - beg;
-			float ret = -dist * cos(lerp * math::PI / 2.0f) + dist + beg;
+			float ret = -dist * cos(lerp * PI / 2.0f) + dist + beg;
 			return ret;
 		}
 		/**

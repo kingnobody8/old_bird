@@ -45,14 +45,14 @@ Purpose:	These are commonly used utility functions and macros
 
 namespace util
 {
-	static slong RandomSlong(slong min, slong max)
-	{
-		return rand() % ulong(max - min + 1) + min;
-	}
-	static float RandomFloat(float min, float max)
-	{
-		return (max - min) * (float(rand()) / float(RAND_MAX)) + min;
-	}
+	//static slong RandomSlong(slong min, slong max)
+	//{
+	//	return rand() % ulong(max - min + 1) + min;
+	//}
+	//static float RandomFloat(float min, float max)
+	//{
+	//	return (max - min) * (float(rand()) / float(RAND_MAX)) + min;
+	//}
 
 	bool BigEndianCheck(void);
 	//void TypeCheck(void);

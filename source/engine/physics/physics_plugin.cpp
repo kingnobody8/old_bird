@@ -30,7 +30,7 @@ namespace engine
 			, m_pGroundBody(null)
 			, m_bRightMouseBtn(false)
 			, m_bLeftMouseBtn(false)
-			, m_state(TESTBED)
+			, m_state(LARK)
 			, m_pRopeJoint(null)
 			, m_pLark(null)
 			, m_pParticleSystem(null)
@@ -81,17 +81,17 @@ namespace engine
 			m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
 
 			//create particles
-			//m_pParticleSystem->SetRadius(0.1f);
-			//m_pParticleSystem->SetDamping(0.2f);
-			//m_pParticleSystem->SetDensity(10.0f);
-			//b2ParticleGroupDef pd;
-			//pd.flags = b2_solidParticleGroup;
-			//util::Color clr = util::Color::CYAN;
-			//pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
-			//b2PolygonShape shapep;
-			//shapep.SetAsBox(5.0f, 10.0f, b2Vec2(0.0f, 20.0f), 0.0);
-			//pd.shape = &shapep;
-			//b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+			m_pParticleSystem->SetRadius(0.1f);
+			m_pParticleSystem->SetDamping(0.2f);
+			m_pParticleSystem->SetDensity(5.0f);
+			b2ParticleGroupDef pd;
+			pd.flags = b2_solidParticleGroup;
+			util::Color clr = util::Color::CYAN;
+			pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
+			b2PolygonShape shapep;
+			shapep.SetAsBox(5.0f, 10.0f, b2Vec2(0.0f, 20.0f), 0.0);
+			pd.shape = &shapep;
+			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
 
 
 			//create shape (test)
@@ -189,7 +189,7 @@ namespace engine
 		{
 			static util::Color clr = util::Color::CYAN;
 			
-			glClearColor(clr.r, clr.g, clr.b, 1.0);
+			//glClearColor(clr.r, clr.g, clr.b, 1.0);
 			auto hsv = clr.GetHSV();
 			hsv.x += 0.001f;
 			hsv.z = 0.5f;
@@ -452,11 +452,11 @@ namespace engine
 		{
 			b2Vec2 pw = g_camera.ConvertScreenToWorld(b2Vec2(action.m_pixel.x, action.m_pixel.y));
 
-			if (action.m_button == SDL_BUTTON_LEFT)
+			if (action.m_button == SDL_BUTTON_LEFT && action.m_clicks == 1)
 			{
 				m_bLeftMouseBtn = false;
 			}
-			else if (action.m_button == SDL_BUTTON_RIGHT && m_pRopeJoint == null)
+			else if ((action.m_button == SDL_BUTTON_RIGHT || action.m_clicks >= 2) && m_pRopeJoint == null)
 			{
 				bool connect_anywhere = false;
 				if (!connect_anywhere)
@@ -498,7 +498,7 @@ namespace engine
 					body->SetAwake(true);
 				}
 			}
-			else if (action.m_button == SDL_BUTTON_RIGHT)
+			else if (action.m_button == SDL_BUTTON_RIGHT || action.m_clicks >= 2)
 			{
 				m_pWorld->DestroyJoint(m_pRopeJoint);
 				m_pRopeJoint = NULL;

@@ -127,7 +127,7 @@ namespace engine
 			if (SDL_GL_SetSwapInterval(1) < 0)
 			{
 				//util::CheckSdlError();
-				assert(false);
+				//assert(false);
 			}
 			SDL_Log("VSYNC Initialized");
 #endif
