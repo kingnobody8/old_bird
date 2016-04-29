@@ -461,11 +461,10 @@ sCheckGLError();
 			GLint m_colorAttribute;
 		};
 
-		//
-		struct GLRenderTriangles
-		{
-			void Create()
+			void GLRenderTriangles::Create()
 			{
+				useCamera = true;
+
 				const char* vs = \
 					"uniform mat4 projectionMatrix;\n"
 					"attribute vec2 v_position;\n"
@@ -516,7 +515,7 @@ sCheckGLError();
 				m_count = 0;
 			}
 
-			void Destroy()
+			void GLRenderTriangles::Destroy()
 			{
 				//if (m_vaoId)
 				//{
@@ -532,7 +531,7 @@ sCheckGLError();
 				}
 			}
 
-			void Vertex(const b2Vec2& v, const b2Color& c)
+			void GLRenderTriangles::Vertex(const b2Vec2& v, const b2Color& c)
 			{
 				if (m_count == e_maxVertices)
 					Flush();
@@ -542,7 +541,7 @@ sCheckGLError();
 				++m_count;
 			}
 
-			void Flush()
+			void GLRenderTriangles::Flush()
 			{
 				if (m_count == 0)
 					return;
@@ -551,6 +550,24 @@ sCheckGLError();
 
 				float32 proj[16] = { 0.0f };
 				g_camera.BuildProjectionMatrix(proj, 0.2f);
+
+				if (!useCamera)
+				{
+					for (int x = 0; x < 4; ++x)
+					{
+						for (int y = 0; y < 4; ++y)
+						{
+							if (x == y)
+							{
+								proj[y * 4 + x] = 1;
+							}
+							else
+							{
+								proj[y * 4 + x] = 0;
+							}
+						}
+					}
+				}
 
 				glUniformMatrix4fv(m_projectionUniform, 1, GL_FALSE, proj);
 
@@ -578,19 +595,7 @@ sCheckGLError();
 				m_count = 0;
 			}
 
-			enum { e_maxVertices = 3 * 512 };
-			b2Vec2 m_vertices[e_maxVertices];
-			b2Color m_colors[e_maxVertices];
-
-			int32 m_count;
-
-//			GLuint m_vaoId;
-			GLuint m_vboIds[2];
-			GLuint m_programId;
-			GLint m_projectionUniform;
-			GLint m_vertexAttribute;
-			GLint m_colorAttribute;
-		};
+			
 
 		//
 		DebugDraw::DebugDraw()

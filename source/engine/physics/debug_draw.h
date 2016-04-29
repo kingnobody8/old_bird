@@ -1,5 +1,6 @@
 #pragma once
 #include "Box2D/Box2D.h"
+#include "../render/render_core.h"
 
 namespace engine
 {
@@ -7,7 +8,27 @@ namespace engine
 	{
 		struct GLRenderPoints;
 		struct GLRenderLines;
-		struct GLRenderTriangles;
+		struct GLRenderTriangles
+		{
+			void Create();
+			void Destroy();
+			void Vertex(const b2Vec2& v, const b2Color& c);
+			void Flush();
+
+			enum { e_maxVertices = 3 * 512 };
+			b2Vec2 m_vertices[e_maxVertices];
+			b2Color m_colors[e_maxVertices];
+
+			int32 m_count;
+
+			//			GLuint m_vaoId;
+			GLuint m_vboIds[2];
+			GLuint m_programId;
+			GLint m_projectionUniform;
+			GLint m_vertexAttribute;
+			GLint m_colorAttribute;
+			bool useCamera;
+		};
 
 		struct Camera
 		{

@@ -16,6 +16,7 @@ namespace engine
 			DECLARE_PLUGIN_TYPE_INFO(PhysicsPlugin);
 
 			enum EInputState { TESTBED, LARK, };
+			enum ELarkClick { PUSH, LINE, BLAST, COUNT };
 
 		private:
 			b2dJson m_json;
@@ -30,6 +31,7 @@ namespace engine
 			bool m_bRightMouseBtn;
 			b2Vec2 lastp;
 			EInputState m_state;
+			int m_clickType;
 			b2ParticleSystem* m_pParticleSystem;
 
 			void OnMouseDownTestbed(const input::mouse_events::ButtonAction& action);
@@ -57,6 +59,9 @@ namespace engine
 
 			void Reload();
 			bool rel;
+
+			GLRenderTriangles tris;
+			util::Color affectClr;
 
 		};
 	}

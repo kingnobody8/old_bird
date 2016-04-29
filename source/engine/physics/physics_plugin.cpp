@@ -31,6 +31,7 @@ namespace engine
 			, m_bRightMouseBtn(false)
 			, m_bLeftMouseBtn(false)
 			, m_state(LARK)
+			, m_clickType(PUSH)
 			, m_pRopeJoint(null)
 			, m_pLark(null)
 			, m_pParticleSystem(null)
@@ -46,6 +47,10 @@ namespace engine
 		{
 			util::Time t = util::Time::GetTimeSinceEpoch();
 			SDL_Log("Physics Init Begun.");
+
+			tris.Create();
+			tris.useCamera = false;
+			affectClr = util::Color::CYAN;
 			
 			node.InitVBO( vec2(0.5f, 0.5f), util::Color::SPRING_GREEN);
 			shader.LoadProgram();
@@ -82,12 +87,35 @@ namespace engine
 			m_json.readFromFile((getResourcePath() + std::string("assets/test_scene.json")).c_str(), errorMsg, m_pWorld);
 			SDL_Log(errorMsg.c_str());
 
+			std::vector<b2Body*> vBodies;
+			m_json.getBodiesByCustomBool("particle_shape", true, vBodies);
 
-			const b2ParticleSystemDef particleSystemDef;
-			m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
+			for (int i = 0; i < vBodies.size(); ++i)
+			{
+				const b2ParticleSystemDef particleSystemDef;
+				m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
+				m_pParticleSystem->SetRadius(0.1f);
+				m_pParticleSystem->SetDamping(0.2f);
+				m_pParticleSystem->SetDensity(10.0f);
+				b2ParticleGroupDef pd;
+				pd.flags = b2_solidParticleGroup;
+				util::Color clr = util::Color::CYAN;
+				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
+				b2Shape* bodyShape = vBodies[i]->GetFixtureList()[0].GetShape();
+				b2PolygonShape* shapep = (b2PolygonShape*)bodyShape;
+				pd.shape = shapep;
+				pd.position = vBodies[i]->GetPosition();
+				//pd.shape = vBodies[i]->GetFixtureList()[0].GetShape();
+
+				b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+				m_pWorld->DestroyBody(vBodies[i]);
+			}
+
+
+			
 
 			//create particles
-			m_pParticleSystem->SetRadius(0.1f);
+			/*m_pParticleSystem->SetRadius(0.1f);
 			m_pParticleSystem->SetDamping(0.2f);
 			m_pParticleSystem->SetDensity(5.0f);
 			b2ParticleGroupDef pd;
@@ -97,7 +125,7 @@ namespace engine
 			b2PolygonShape shapep;
 			shapep.SetAsBox(5.0f, 10.0f, b2Vec2(0.0f, 20.0f), 0.0);
 			pd.shape = &shapep;
-			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+			b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);*/
 
 
 			//create shape (test)
@@ -273,6 +301,12 @@ namespace engine
 			//node.SetShader(&shader);
 			//node(Matrix());
 
+
+			tris.Vertex(b2Vec2(1.0f, 1.0f), b2Color(affectClr.r, affectClr.g, affectClr.b, affectClr.a));
+			tris.Vertex(b2Vec2(1.0f, 0.75f), b2Color(affectClr.r, affectClr.g, affectClr.b, affectClr.a));
+			tris.Vertex(b2Vec2(0.75f, 1.0f), b2Color(affectClr.r, affectClr.g, affectClr.b, affectClr.a));
+			tris.Flush();
+
 			
 			SDL_GL_SwapWindow(plug->GetSdlWindow());
 
@@ -446,7 +480,7 @@ namespace engine
 		{
 			b2Vec2 pw = g_camera.ConvertScreenToWorld(b2Vec2(action.m_pixel.x, action.m_pixel.y));
 
-			if (action.m_button == SDL_BUTTON_LEFT && !m_bLeftMouseBtn)
+			if (action.m_button == SDL_BUTTON_LEFT && !m_bLeftMouseBtn && m_clickType == ELarkClick::PUSH)
 			{
 				m_bLeftMouseBtn = true;
 				lastp = pw;
@@ -456,13 +490,51 @@ namespace engine
 		}
 		void PhysicsPlugin::OnMouseUpLark(const input::mouse_events::ButtonAction& action)
 		{
+
+			if (action.m_pixel.x > 0.85 * g_camera.m_width && action.m_pixel.y < 0.15 * g_camera.m_height)
+			{
+				m_bLeftMouseBtn = false;
+				if (m_pRopeJoint)
+				{
+					m_pWorld->DestroyJoint(m_pRopeJoint);
+					m_pRopeJoint = NULL;
+				}
+				m_clickType++;
+				if (m_clickType >= ELarkClick::COUNT)
+				{
+					m_clickType = ELarkClick::PUSH;
+				}
+
+				switch (m_clickType)
+				{
+				case ELarkClick::PUSH:
+					affectClr = util::Color::CYAN;
+					break;
+				case ELarkClick::LINE:
+					affectClr = util::Color::MAGENTA;
+					break;
+				case ELarkClick::BLAST:
+					affectClr = util::Color::YELLOW;
+					break;
+				}
+				return;
+			}
+
+
 			b2Vec2 pw = g_camera.ConvertScreenToWorld(b2Vec2(action.m_pixel.x, action.m_pixel.y));
 
-			if (action.m_button == SDL_BUTTON_LEFT && action.m_clicks == 1)
+			if (action.m_button == SDL_BUTTON_LEFT && m_clickType == ELarkClick::PUSH)
 			{
 				m_bLeftMouseBtn = false;
 			}
-			else if ((action.m_button == SDL_BUTTON_RIGHT || action.m_event.tfinger.fingerId >= 2) && m_pRopeJoint == null)
+			else if (action.m_button == SDL_BUTTON_LEFT && m_clickType == ELarkClick::BLAST)
+			{
+				b2Vec2 direction = pw - m_pLark->GetPosition();
+				direction.Normalize();
+				direction *= -100000;
+				m_pLark->ApplyForceToCenter(direction, true);
+			}
+			else if ((action.m_button == SDL_BUTTON_LEFT && m_clickType == ELarkClick::LINE) && m_pRopeJoint == null)
 			{
 				bool connect_anywhere = false;
 				if (!connect_anywhere)
@@ -503,11 +575,12 @@ namespace engine
 					body->SetAwake(true);
 				}
 			}
-			else if (action.m_button == SDL_BUTTON_RIGHT || action.m_event.tfinger.fingerId >= 2)
+			else if (action.m_button == SDL_BUTTON_LEFT && m_clickType == ELarkClick::LINE)
 			{
 				m_pWorld->DestroyJoint(m_pRopeJoint);
 				m_pRopeJoint = NULL;
 			}
+
 		}
 		void PhysicsPlugin::OnMouseMotionLark(const input::mouse_events::MotionAction& action)
 		{

@@ -97,50 +97,7 @@
       },
       
       {
-        "angle" : -0.7853981852531433,
-        "angularVelocity" : 0,
-        "awake" : true,
-        "fixture" : 
-        [
-          
-          {
-            "density" : 1,
-            "friction" : 0.2,
-            "id" : 2,
-            "name" : "fixture1",
-            "shapes" : 
-            [
-              
-              {
-                "type" : "polygon"
-              }
-            ],
-            "vertices" : 
-            {
-              "x" : [ -0.5, 0.5, 0.5, -0.5 ],
-              "y" : 
-              [
-                -7.499981880187988,
-                -7.499981880187988,
-                7.500008583068848,
-                7.500008583068848
-              ]
-            }
-          }
-        ],
-        "id" : 2,
-        "linearVelocity" : 0,
-        "name" : "body0",
-        "position" : 
-        {
-          "x" : 2.709499120712280,
-          "y" : 25.39917373657227
-        },
-        "type" : "static"
-      },
-      
-      {
-        "angle" : 0.7853981852531433,
+        "angle" : 1.570796370506287,
         "angularVelocity" : 0,
         "awake" : true,
         "fixture" : 
@@ -160,114 +117,185 @@
             ],
             "vertices" : 
             {
-              "x" : [ -0.5, 0.5, 0.5, -0.5 ],
+              "x" : 
+              [
+                -0.6281546950340271,
+                0.6281514763832092,
+                0.6281542181968689,
+                -0.6281519532203674
+              ],
               "y" : 
               [
-                -7.499981880187988,
-                -7.499981880187988,
-                7.500008583068848,
-                7.500008583068848
+                -31.59878540039063,
+                -31.59878730773926,
+                31.59889793395996,
+                31.59889984130859
               ]
             }
           }
         ],
         "id" : 3,
         "linearVelocity" : 0,
-        "name" : "body0",
+        "name" : "left incline",
         "position" : 
         {
-          "x" : -14.82604408264160,
-          "y" : 13.68361663818359
+          "x" : 0,
+          "y" : 5
         },
         "type" : "static"
-      }
-    ],
-    "metaobject" : 
-    [
-      
-      {
-        "angle" : 0,
-        "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/bike.rube",
-        "flip" : false,
-        "id" : 2,
-        "name" : "object0",
-        "position" : 
-        {
-          "x" : -222.0097503662109,
-          "y" : 9.902477264404297
-        },
-        "scale" : 1
-      },
-      
-      {
-        "angle" : 0,
-        "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/car.rube",
-        "flip" : false,
-        "id" : 4,
-        "name" : "object1",
-        "position" : 
-        {
-          "x" : -160.6970062255859,
-          "y" : 5.774551391601563
-        },
-        "scale" : 1
       },
       
       {
         "angle" : 0.7853981852531433,
-        "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/gettingStarted.rube",
-        "flip" : false,
-        "id" : 6,
-        "name" : "object2",
+        "angularVelocity" : 0,
+        "awake" : true,
+        "fixture" : 
+        [
+          
+          {
+            "density" : 1,
+            "friction" : 0.2,
+            "id" : 4,
+            "name" : "fixture1",
+            "shapes" : 
+            [
+              
+              {
+                "type" : "polygon"
+              }
+            ],
+            "vertices" : 
+            {
+              "x" : [ -0.5, 0.4999989867210388, 0.5000010132789612, -0.4999989867210388 ],
+              "y" : [ -20.0, -20.0, 20.0, 20.0 ]
+            }
+          }
+        ],
+        "id" : 4,
+        "linearVelocity" : 0,
+        "name" : "body0",
         "position" : 
         {
-          "x" : -74.15451812744141,
-          "y" : 6.870597839355469
+          "x" : -45.06504440307617,
+          "y" : 18.80487632751465
         },
-        "scale" : 1
+        "type" : "static"
+      },
+      
+      {
+        "angle" : -0.7853981852531433,
+        "angularVelocity" : 0,
+        "awake" : true,
+        "fixture" : 
+        [
+          
+          {
+            "density" : 1,
+            "friction" : 0.2,
+            "id" : 5,
+            "name" : "fixture1",
+            "shapes" : 
+            [
+              
+              {
+                "type" : "polygon"
+              }
+            ],
+            "vertices" : 
+            {
+              "x" : [ -0.5, 0.4999989867210388, 0.5000010132789612, -0.4999989867210388 ],
+              "y" : [ -20.0, -20.0, 20.0, 20.0 ]
+            }
+          }
+        ],
+        "id" : 5,
+        "linearVelocity" : 0,
+        "name" : "body0",
+        "position" : 
+        {
+          "x" : 44.96760177612305,
+          "y" : 18.86178588867188
+        },
+        "type" : "static"
       },
       
       {
         "angle" : 0,
-        "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/images.rube",
-        "flip" : false,
+        "angularVelocity" : 0,
+        "awake" : true,
+        "fixture" : 
+        [
+          
+          {
+            "density" : 1,
+            "friction" : 0.2,
+            "id" : 7,
+            "name" : "fixture2",
+            "shapes" : 
+            [
+              
+              {
+                "type" : "polygon"
+              }
+            ],
+            "vertices" : 
+            {
+              "x" : [ -0.5, 0.5, 0.5, -0.5 ],
+              "y" : [ -0.5, -0.5, 0.5, 0.5 ]
+            }
+          }
+        ],
         "id" : 7,
-        "name" : "object3",
+        "linearVelocity" : 0,
+        "name" : "body1",
         "position" : 
         {
-          "x" : -126.1620025634766,
-          "y" : 13.79870033264160
+          "x" : -40.0,
+          "y" : 60.0
         },
-        "scale" : 1
+        "type" : "static"
       },
       
       {
         "angle" : 0,
-        "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/jointTypes.rube",
-        "flip" : false,
+        "angularVelocity" : 1.570796370506287,
+        "awake" : true,
+        "fixture" : 
+        [
+          
+          {
+            "density" : 1,
+            "friction" : 0.2,
+            "id" : 8,
+            "name" : "fixture3",
+            "restitution" : 0.5,
+            "shapes" : 
+            [
+              
+              {
+                "type" : "polygon"
+              }
+            ],
+            "vertices" : 
+            {
+              "x" : [ -0.5, 0.5, 0.5, -0.5 ],
+              "y" : [ -10.50, -10.50, 10.50010013580322, 10.50010013580322 ]
+            }
+          }
+        ],
         "id" : 8,
-        "name" : "object4",
+        "linearVelocity" : 0,
+        "name" : "body2",
         "position" : 
         {
-          "x" : -32.22618103027344,
-          "y" : 22.47350311279297
+          "x" : 0.4821052551269531,
+          "y" : 39.57809448242188
         },
-        "scale" : 1
-      },
-      
-      {
-        "angle" : 0,
-        "file" : "../../../Program Files (x86)/rube-win32-1.7.3/sampleScenes/rubegoldberg.rube",
-        "flip" : false,
-        "id" : 9,
-        "name" : "object5",
-        "position" : 
-        {
-          "x" : -210.0312805175781,
-          "y" : 13.64306259155273
-        },
-        "scale" : 1
-      },
+        "type" : "kinematic"
+      }
+    ],
+    "metaobject" : 
+    [
       
       {
         "angle" : 0,
@@ -277,7 +305,7 @@
         "name" : "object6",
         "position" : 
         {
-          "x" : -570.4163818359375,
+          "x" : -374.031250,
           "y" : 12.98735046386719
         },
         "scale" : 1
@@ -291,8 +319,8 @@
         "name" : "object7",
         "position" : 
         {
-          "x" : 290.8926391601563,
-          "y" : 12.34431838989258
+          "x" : 4.153991699218750,
+          "y" : 14.82905483245850
         },
         "scale" : 1
       }
