@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\..\source\utility\event\publisher.cpp">
       <Filter>event</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\utility\math\matrix.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\utility\time\tick.h">
@@ -101,6 +104,15 @@
     <ClInclude Include="..\..\..\source\utility\helper\enums.h">
       <Filter>helper</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\helper\hierarchy.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\math\matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\utility\math\box.h">
+      <Filter>math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\utility\types\color.def">
@@ -108,6 +120,9 @@
     </None>
     <None Include="..\..\..\source\utility\event\publisher.inl">
       <Filter>event</Filter>
+    </None>
+    <None Include="..\..\..\source\utility\helper\hierarchy.inl">
+      <Filter>helper</Filter>
     </None>
   </ItemGroup>
 </Project>

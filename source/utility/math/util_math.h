@@ -9,7 +9,7 @@ namespace util
 	typedef glm::f32vec2		vec2;
 	typedef glm::f32vec3		vec3;
 	typedef glm::f32vec4		vec4;
-	typedef glm::f32mat4x4		matrix;
+//	typedef glm::f32mat4x4		Matrix;
 
 	typedef b2AABB				AABB;
 

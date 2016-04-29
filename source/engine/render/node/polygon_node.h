@@ -20,7 +20,7 @@ namespace engine
 		public:
 			PolygonNode();
 			virtual ~PolygonNode();
-			virtual void operator () (const matrix& inv_cam);
+			virtual void operator () (const util::Matrix& inv_cam);
 
 			const std::vector<Vertex> GetVerts();
 			const std::vector<int> GetIndicies();

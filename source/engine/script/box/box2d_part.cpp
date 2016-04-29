@@ -75,7 +75,7 @@ namespace engine
 
 			VIRTUAL void IBox2DPart::OnMatrixChanged(void)
 			{
-				if (m_bSettingMatrix) //we only want to respond to a matrix changed event, if someone else changes our matrix
+				if (m_bSettingMatrix) //we only want to respond to a Matrix changed event, if someone else changes our Matrix
 					return;
 
 					

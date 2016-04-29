@@ -108,7 +108,7 @@ namespace util
 	typedef Publisher<const vec2&>				Vec2Publisher;
 	typedef Publisher<const vec3&>				Vec3Publisher;
 	typedef Publisher<const vec4&>				Vec4Publisher;
-	typedef Publisher<const matrix&>			MatrixPublisher;
+	typedef Publisher<const Matrix&>			MatrixPublisher;
 	//typedef Publisher<const Transform&>	TransformPublisher;
 }
 

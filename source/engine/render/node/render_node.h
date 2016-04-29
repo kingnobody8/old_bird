@@ -3,6 +3,7 @@
 #include "../render_core.h"
 #include "utility/types/bit_flag.h"
 #include "math/math.h"
+#include "utility/math/matrix.h"
 #include "utility/types/color.h"
 #include <string>
 #include "utility/helper/macro.h"
@@ -37,7 +38,7 @@ namespace engine
 			};
 
 		protected:
-			matrix				m_matrix;
+			util::Matrix		m_matrix;
 			CRenderLayer*		m_pLayer;
 			b2AABB				m_aabb;
 			util::Flag08		m_flag;
@@ -57,7 +58,7 @@ namespace engine
 		public:
 			IRenderNode(void);
 			virtual ~IRenderNode() = 0;
-			virtual void operator () (const matrix& inv_cam) = 0;
+			virtual void operator () (const util::Matrix& inv_cam) = 0;
 
 			inline void SetShader(IShaderProgram* const shader) { m_pShader = shader; }
 			inline IShaderProgram* const GetShader() const { return m_pShader; }

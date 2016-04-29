@@ -78,11 +78,11 @@ namespace util
 		ret.upperBound = b2Vec2(max.x, max.y);
 		return ret;
 	}
-	const matrix JSON::GetMatrix() const
+	const Matrix JSON::GetMatrix() const
 	{
 		__not_implemented(JSON::GetMatrix);
 
-		matrix mat;
+		Matrix mat;
 		//const vec3 pos = static_cast<const JSON>((*this)["position"]).GetVec3();
 		//const vec3 scale = static_cast<const JSON>((*this)["scale"]).GetVec3();
 		//const vec3 rot = static_cast<const JSON>((*this)["rotation"]).GetVec3();
@@ -197,10 +197,10 @@ namespace util
 		return vec;
 	}
 	template<>
-	const std::vector<matrix> JSON::GetArray<matrix>(void) const
+	const std::vector<Matrix> JSON::GetArray<Matrix>(void) const
 	{
 		assert(IsArray());
-		std::vector<matrix> vec;
+		std::vector<Matrix> vec;
 		vec.reserve(Size());
 		for (int i = 0; i < (int)Size(); ++i)
 			vec.push_back(((JSON)((*this)[i])).GetMatrix());
@@ -259,7 +259,7 @@ namespace util
 		AddMember("min", min, allocator);
 		AddMember("max", max, allocator);
 	}
-	void JSON::SetMatrix(const matrix& val, rapidjson::Document::AllocatorType& allocator)
+	void JSON::SetMatrix(const Matrix& val, rapidjson::Document::AllocatorType& allocator)
 	{
 		__not_implemented(JSON::SetMatrix);
 		//JSON vpos, vscale, vrot;
@@ -331,7 +331,7 @@ namespace util
 		}
 	}
 	template<>
-	const void JSON::WriteArray(std::vector<matrix> val, rapidjson::Document::AllocatorType& allocator)
+	const void JSON::WriteArray(std::vector<Matrix> val, rapidjson::Document::AllocatorType& allocator)
 	{
 		SetArray();
 		for (size_t i = 0; i < val.size(); ++i)

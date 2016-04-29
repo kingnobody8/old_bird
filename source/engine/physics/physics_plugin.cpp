@@ -214,7 +214,7 @@ namespace engine
 			{
 				g_camera.m_center = m_pLark->GetPosition();
 
-				float goal = Lerp(0.75f, 2.0f, Clamp(m_pLark->GetLinearVelocity().Length() / 10.0f, 0.0, 1.0f));
+				float goal = Lerp(0.5f, 1.5f, Clamp(m_pLark->GetLinearVelocity().Length() / 10.0f, 0.0, 1.0f));
 				float diff = goal - g_camera.m_zoom;
 				if (diff > 0)
 					g_camera.m_zoom += Min(diff, 0.005f);
@@ -271,7 +271,7 @@ namespace engine
 			m_debugDraw.Flush();
 			
 			//node.SetShader(&shader);
-			//node(matrix());
+			//node(Matrix());
 
 			
 			SDL_GL_SwapWindow(plug->GetSdlWindow());
@@ -462,7 +462,7 @@ namespace engine
 			{
 				m_bLeftMouseBtn = false;
 			}
-			else if ((action.m_button == SDL_BUTTON_RIGHT || action.m_clicks >= 2) && m_pRopeJoint == null)
+			else if ((action.m_button == SDL_BUTTON_RIGHT || action.m_event.tfinger.fingerId >= 2) && m_pRopeJoint == null)
 			{
 				bool connect_anywhere = false;
 				if (!connect_anywhere)
@@ -488,7 +488,6 @@ namespace engine
 						m_pRopeJoint = (b2RopeJoint*)m_pWorld->CreateJoint(&md);
 						body->SetAwake(true);
 					}
-
 				}
 				else
 				{
@@ -504,7 +503,7 @@ namespace engine
 					body->SetAwake(true);
 				}
 			}
-			else if (action.m_button == SDL_BUTTON_RIGHT || action.m_clicks >= 2)
+			else if (action.m_button == SDL_BUTTON_RIGHT || action.m_event.tfinger.fingerId >= 2)
 			{
 				m_pWorld->DestroyJoint(m_pRopeJoint);
 				m_pRopeJoint = NULL;

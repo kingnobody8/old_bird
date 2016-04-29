@@ -4,9 +4,10 @@
 #include "types/color.h"
 #include "helper/macro.h"
 #include "math/util_math.h"
+#include "math/Matrix.h"
 #include <vector>
 
-//TODO - change out matrix for transform
+//TODO - change out Matrix for transform
 
 namespace util
 {
@@ -38,7 +39,7 @@ namespace util
 		const vec3				GetVec3() const;
 		const vec4				GetVec4() const;
 		const AABB				GetAabb() const;
-		const matrix			GetMatrix() const;
+		const Matrix			GetMatrix() const;
 		template<typename type>
 		const std::vector<type> GetArray(void) const;
 
@@ -48,7 +49,7 @@ namespace util
 		void SetVec3(const vec3& val, rapidjson::Document::AllocatorType& allocator);
 		void SetVec4(const vec4& val, rapidjson::Document::AllocatorType& allocator);
 		void SetAabb(const AABB& val, rapidjson::Document::AllocatorType& allocator);
-		void SetMatrix(const matrix& val, rapidjson::Document::AllocatorType& allocator);
+		void SetMatrix(const Matrix& val, rapidjson::Document::AllocatorType& allocator);
 		template<typename type>
 		const void WriteArray(std::vector<type> val, rapidjson::Document::AllocatorType& allocator); //this is called 'write' because 'setarray' is already used by rapidjson::value
 
@@ -73,7 +74,7 @@ namespace util
 	template<>
 	const void JSON::WriteArray(std::vector<vec4> val, rapidjson::Document::AllocatorType& allocator);
 	template<>
-	const void JSON::WriteArray(std::vector<matrix> val, rapidjson::Document::AllocatorType& allocator);
+	const void JSON::WriteArray(std::vector<Matrix> val, rapidjson::Document::AllocatorType& allocator);
 
 	/*
 	EXAMPLES

@@ -77,4 +77,13 @@ namespace util
 		}
 		return rads;
 	}
+
+	STATIC Angle Angle::FromDegrees(float deg)
+	{
+		return Angle(WrapRadians(deg * DEG_TO_RAD));
+	}
+	STATIC Angle Angle::FromRadians(float rad)
+	{
+		return Angle(WrapRadians(rad));
+	}
 }

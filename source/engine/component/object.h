@@ -22,7 +22,7 @@ namespace engine
 			std::string					m_szName;
 			CGroup*						m_pParent;
 			std::vector<IPart*>			m_vParts;
-			util::matrix			m_cMatLocal;
+			util::Matrix			m_cMatLocal;
 			float						m_fZed;
 			util::Flag08			m_eFlag;
 		public:
@@ -59,7 +59,7 @@ namespace engine
 			inline const std::string&				GetName(void) const { return this->m_szName; }
 			inline CGroup*							GetParent(void) const { return this->m_pParent; }
 			inline const std::vector<IPart*>&		GetParts(void) const { return this->m_vParts; }
-			inline const util::matrix&					GetLocalMatrix(void) const { return this->m_cMatLocal; }
+			inline const util::Matrix&					GetLocalMatrix(void) const { return this->m_cMatLocal; }
 			inline const float&						GetLocalZed(void) const { return this->m_fZed; }
 			inline const bool						GetLocalVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE); }
 			inline const bool						GetWorldVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE | EFlag::PARENT_VISIBLE); }
@@ -70,7 +70,7 @@ namespace engine
 			inline const util::vec3						GetLocalRotation(void) const { return  util::vec3(); }//this->m_cMatLocal.GetRotation(); }
 
 			//Calcs
-			const util::matrix							CalcWorldMatrix(void) const;
+			const util::Matrix							CalcWorldMatrix(void) const;
 			const float								CalcWorldZed(void) const;
 
 			inline const util::vec3						CalcWorldPos(void) const { return  util::vec3(); }//this->CalcWorldMatrix().GetPosition(); }
@@ -84,8 +84,8 @@ namespace engine
 			//Sets
 			inline void								SetName(const std::string& szName) { this->m_szName = szName; }
 			void									SetParent(CGroup* const pParent);
-			void									SetLocalMatrix(const util::matrix& mat);
-			void									SetWorldMatrix(const util::matrix& mat);
+			void									SetLocalMatrix(const util::Matrix& mat);
+			void									SetWorldMatrix(const util::Matrix& mat);
 
 			void									SetLocalPosX(const float& x);
 			void									SetLocalPosY(const float& y);

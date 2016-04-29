@@ -88,7 +88,7 @@ namespace engine
 			}
 		}
 
-		VIRTUAL void PolygonNode::operator() (const matrix& inv_cam)
+		VIRTUAL void PolygonNode::operator() (const util::Matrix& inv_cam)
 		{
 			if (m_vboID == 0 || m_pShader == null)
 				return;

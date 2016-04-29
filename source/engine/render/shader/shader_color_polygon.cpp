@@ -111,13 +111,13 @@ namespace engine
 			glDisableVertexAttribArray(m_vertexColorLocation);
 		}
 
-		void ShaderColorPolygon::SetProjectionMatrix(const matrix& projectionMat)
+		void ShaderColorPolygon::SetProjectionMatrix(const util::Matrix& projectionMat)
 		{
 			m_projectionMatrix = projectionMat;
 			//glUniformMatrix4fv(m_projectionMatrixLocation, 1, GL_FALSE, (float*)&m_projectionMatrix);
 		}
 
-		void ShaderColorPolygon::SetModelViewMatrix(const matrix& modelViewMat)
+		void ShaderColorPolygon::SetModelViewMatrix(const util::Matrix& modelViewMat)
 		{
 			m_modelViewMatrix = modelViewMat;
 			//glUniformMatrix4fv(m_modelViewMatrixLocation, 1, GL_FALSE, (float*)&m_modelViewMatrix);

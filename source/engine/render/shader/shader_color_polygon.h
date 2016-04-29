@@ -21,20 +21,20 @@ namespace engine
 			void DisableVertexPositionPointer();
 			void DisableVertexColorPointer();
 
-			void SetProjectionMatrix(const matrix& projectionMat);
-			void SetModelViewMatrix(const matrix& modelViewMat);
+			void SetProjectionMatrix(const util::Matrix& projectionMat);
+			void SetModelViewMatrix(const util::Matrix& modelViewMat);
 
 		protected:
 			//Attribute locations
 			GLint m_vertexPositionLocation;
 			GLint m_vertexColorLocation;
 
-			//Projection matrix
-			matrix m_projectionMatrix;
+			//Projection Matrix
+			util::Matrix m_projectionMatrix;
 			GLint m_projectionMatrixLocation;
 
-			//Modelview matrix
-			matrix m_modelViewMatrix;
+			//Modelview Matrix
+			util::Matrix m_modelViewMatrix;
 			GLint m_modelViewMatrixLocation;
 
 		};

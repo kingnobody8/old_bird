@@ -59,7 +59,7 @@ namespace engine
 		void RenderTestFunc()
 		{
 			node.SetShader(&shader);
-			node(matrix());
+			node(util::Matrix());
 		}
 
 

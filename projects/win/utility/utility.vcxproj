@@ -23,6 +23,7 @@
     <ClCompile Include="..\..\..\source\utility\event\subscriber.cpp" />
     <ClCompile Include="..\..\..\source\utility\helper\func.cpp" />
     <ClCompile Include="..\..\..\source\utility\math\angle.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\matrix.cpp" />
     <ClCompile Include="..\..\..\source\utility\math\transform.cpp" />
     <ClCompile Include="..\..\..\source\utility\resource\json.cpp" />
     <ClCompile Include="..\..\..\source\utility\time\util_time.cpp" />
@@ -35,9 +36,12 @@
     <ClInclude Include="..\..\..\source\utility\helper\common.h" />
     <ClInclude Include="..\..\..\source\utility\helper\enums.h" />
     <ClInclude Include="..\..\..\source\utility\helper\func.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\hierarchy.h" />
     <ClInclude Include="..\..\..\source\utility\helper\macro.h" />
     <ClInclude Include="..\..\..\source\utility\helper\platform.h" />
     <ClInclude Include="..\..\..\source\utility\math\angle.h" />
+    <ClInclude Include="..\..\..\source\utility\math\box.h" />
+    <ClInclude Include="..\..\..\source\utility\math\matrix.h" />
     <ClInclude Include="..\..\..\source\utility\math\transform.h" />
     <ClInclude Include="..\..\..\source\utility\math\util_math.h" />
     <ClInclude Include="..\..\..\source\utility\resource\json.h" />
@@ -50,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\utility\event\publisher.inl" />
+    <None Include="..\..\..\source\utility\helper\hierarchy.inl" />
     <None Include="..\..\..\source\utility\types\color.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

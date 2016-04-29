@@ -28,7 +28,7 @@ namespace engine
 			{
 				IBox2DPart::Init();
 
-				util::matrix wmat = m_pOwner->CalcWorldMatrix();
+				util::Matrix wmat = m_pOwner->CalcWorldMatrix();
 
 				util::vec3 pos;// = wmat.GetPosition();
 				util::AABB aabb = m_pOwner->CalcAabb();
@@ -136,12 +136,12 @@ namespace engine
 
 			VIRTUAL void CFixturePart::OnMatrixChanged()
 			{
-				if (m_bSettingMatrix) //we only want to respond to a matrix changed event, if someone else changes our matrix
+				if (m_bSettingMatrix) //we only want to respond to a Matrix changed event, if someone else changes our Matrix
 					return;
 
-				__todo()//we may want a soft assert here, because we probably should never be setting a box parts matrix outside of the initial setup
+				__todo()//we may want a soft assert here, because we probably should never be setting a box parts Matrix outside of the initial setup
 
-				util::matrix wmat = m_pOwner->CalcWorldMatrix();
+				util::Matrix wmat = m_pOwner->CalcWorldMatrix();
 				util::vec3 pos;// = wmat.GetPosition() * PIX_TO_BOX;
 				//m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotation().z * DEG_TO_RAD);
 				m_pBody->SetLinearVelocity(b2Vec2(0, 0));

@@ -1,11 +1,18 @@
 #pragma once
+#include "util_math.h"
 #include "glm/glm.hpp"
-#include "glm/matrix.hpp"
+#include "glm/Matrix.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/matrix_decompose.hpp"
+#include "angle.h"
 
 namespace util
 {
+	// | a b c 0 |
+	// | d e f 0 |
+	// | 0 0 1 0 |
+	// | 0 0 0 1 |
+
 	class Matrix : public glm::f32mat4x4
 	{
 	public:
@@ -17,20 +24,13 @@ namespace util
 			return *this;
 		}
 
-		const glm::f32vec3 GetPosition() const;
-		const glm::f32vec3 GetRotation() const;
-		const glm::f32vec3 GetScale() const;
+		Matrix& BuildTransformationMatrix(const vec2& translation, const vec2& scale, const Angle& rotation, const vec2& pivot);
 
-		const void SetPosition(const glm::f32vec3& pos);
-		const void SetRotation(const glm::f32vec3& rot);
-		const void SetScale(const glm::f32vec3& scale);
+		const vec2 GetTranslation() const;
+		const vec2 CalculateScale() const;
+		const Angle CalculateRotation() const;
 
-		const void SetPosition(const glm::f32& x, const glm::f32& y, const glm::f32& z);
-		const void SetRotation(const glm::f32& x, const glm::f32& y, const glm::f32& z);
-		const void SetScale(const glm::f32& x, const glm::f32& y, const glm::f32& z);
 
-		const void SetPositionX(const glm::f32& x);
-		const void SetPositionY(const glm::f32& y);
-		const void SetPositionZ(const glm::f32& z);
+		Matrix& SelfMultiply(const Matrix& mat);
 	};
 }

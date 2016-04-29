@@ -162,8 +162,8 @@ namespace engine
 			this->m_szName = json["name"].GetString();
 			bool visible = json["visible"].GetBool();
 			SetVisible(visible);
-			this->m_fZed = json["matrix"]["position"]["z"].GetDouble();
-			this->SetLocalMatrix(((const util::JSON)(json["matrix"])).GetMatrix());
+			this->m_fZed = json["Matrix"]["position"]["z"].GetDouble();
+			this->SetLocalMatrix(((const util::JSON)(json["Matrix"])).GetMatrix());
 			const std::vector<util::JSON> parts = ((const util::JSON)(json["parts"])).GetArray<util::JSON>();
 			//Parts
 			for (ulong i = 0; i < parts.size(); ++i)
@@ -181,9 +181,9 @@ namespace engine
 		}
 
 		//Calc
-		const util::matrix CObject::CalcWorldMatrix(void) const
+		const util::Matrix CObject::CalcWorldMatrix(void) const
 		{
-			util::matrix ret = m_cMatLocal;
+			util::Matrix ret = m_cMatLocal;
 			TraverseAncestors(this, [&ret](CObject* pObj)
 			{
 				ret = ret * pObj->GetLocalMatrix();
@@ -224,14 +224,14 @@ namespace engine
 				this->Drop();
 			this->m_pParent = pParent;
 		}
-		void CObject::SetLocalMatrix(const util::matrix& mat)
+		void CObject::SetLocalMatrix(const util::Matrix& mat)
 		{
 			m_cMatLocal = mat;
 			OnMatrixChanged();
 		}
-		void CObject::SetWorldMatrix(const util::matrix& mat)
+		void CObject::SetWorldMatrix(const util::Matrix& mat)
 		{
-			util::matrix temp = mat;
+			util::Matrix temp = mat;
 			if (this->m_pParent)
 			{
 				temp = this->m_pParent->CalcWorldMatrix() * glm::inverse(mat);
@@ -271,7 +271,7 @@ namespace engine
 		{
 			/*if (m_pParent)
 			{
-				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
+				const Matrix& wmat = this->m_pParent->CalcWorldMatrix();
 				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				float pos_x = x / wmat.GetScale().x - wpos.x;
 				this->SetLocalPosX(pos_x);
@@ -283,7 +283,7 @@ namespace engine
 		{
 			/*if (m_pParent)
 			{
-				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
+				const Matrix& wmat = this->m_pParent->CalcWorldMatrix();
 				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				float pos_y = y / wmat.GetScale().y - wpos.y;
 				this->SetLocalPosY(pos_y);
@@ -296,7 +296,7 @@ namespace engine
 			__todo() //fix this
 			/*if (m_pParent)
 			{
-				const matrix& wmat = this->m_pParent->CalcWorldMatrix();
+				const Matrix& wmat = this->m_pParent->CalcWorldMatrix();
 				vec3 wpos = this->m_pParent->CalcWorldMatrix().GetPosition();
 				vec2 pos = vec2(x, y, 1.0f) / wmat.GetScale() - wpos;
 				this->SetLocalPosXY(pos);

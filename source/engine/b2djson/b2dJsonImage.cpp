@@ -208,7 +208,7 @@ b2AABB b2dJsonImage::getAABB()
         m = _b2Mul(r,t);
     }
     else
-        m = b2Mat33( b2Vec3(1,0,0), b2Vec3(0,1,0), b2Vec3(0,0,1) ); //identity matrix
+        m = b2Mat33( b2Vec3(1,0,0), b2Vec3(0,1,0), b2Vec3(0,0,1) ); //identity Matrix
 
     b2AABB aabb;
     aabb.lowerBound.Set(FLT_MAX, FLT_MAX);
