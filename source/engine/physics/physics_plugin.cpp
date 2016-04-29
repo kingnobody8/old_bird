@@ -494,11 +494,11 @@ namespace engine
 			if (action.m_pixel.x > 0.85 * g_camera.m_width && action.m_pixel.y < 0.15 * g_camera.m_height)
 			{
 				m_bLeftMouseBtn = false;
-				if (m_pRopeJoint)
+				/*if (m_pRopeJoint)
 				{
 					m_pWorld->DestroyJoint(m_pRopeJoint);
 					m_pRopeJoint = NULL;
-				}
+				}*/
 				m_clickType++;
 				if (m_clickType >= ELarkClick::COUNT)
 				{
