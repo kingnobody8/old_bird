@@ -191,7 +191,7 @@ namespace util
 			node = node->m_sibling;
 		}
 
-		assert(node == this, "Hierarchy", "could not find sibling node in parent's list of children");
+		//assert(node == this, "Hierarchy", "could not find sibling node in parent's list of children");
 
 		return prev;
 	}
