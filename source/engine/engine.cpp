@@ -47,7 +47,7 @@ namespace engine
 		IPlugin::AddPlugin(m_pRenderPlugin);
 
 		//Init the input system
-		input::InputPlugin* pInputPlugin = new input::InputPlugin();
+		InputPlugin* pInputPlugin = new InputPlugin();
 		pInputPlugin->SetSdlWin(m_pRenderPlugin->GetSdlWindow());
 		IPlugin::AddPlugin(pInputPlugin);
 

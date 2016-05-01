@@ -33,6 +33,7 @@
     <ClCompile Include="..\..\..\source\engine\input\input_event.cpp" />
     <ClCompile Include="..\..\..\source\engine\input\input_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\physics\debug_draw.cpp" />
+    <ClCompile Include="..\..\..\source\engine\physics\lark_controller.cpp" />
     <ClCompile Include="..\..\..\source\engine\physics\physics_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="..\..\..\source\engine\physics\callbacks\aabb_callback.h" />
     <ClInclude Include="..\..\..\source\engine\physics\callbacks\raycast_callback.h" />
     <ClInclude Include="..\..\..\source\engine\physics\debug_draw.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\lark_controller.h" />
     <ClInclude Include="..\..\..\source\engine\physics\physics_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\plugin.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />

@@ -5,6 +5,7 @@
 #include "../input/input_event.h"
 #include "../b2djson/b2dJson.h"
 #include "../render/render_core.h"
+#include "lark_controller.h"
 
 namespace engine
 {
@@ -15,8 +16,8 @@ namespace engine
 		public:
 			DECLARE_PLUGIN_TYPE_INFO(PhysicsPlugin);
 
-			enum EInputState { TESTBED, LARK, };
-			enum ELarkClick { PUSH, LINE, BLAST, COUNT };
+			/*enum EInputState { TESTBED, LARK, };
+			enum ELarkClick { PUSH, LINE, BLAST, COUNT };*/
 
 		private:
 			b2dJson m_json;
@@ -24,30 +25,28 @@ namespace engine
 			DebugDraw m_debugDraw;
 			util::Subscriber m_sub;
 			b2MouseJoint* m_pMouseJoint;
-			b2RopeJoint* m_pRopeJoint;
 			b2Body* m_pGroundBody;
-			b2Body* m_pLark;
 			bool m_bLeftMouseBtn;
 			bool m_bRightMouseBtn;
 			b2Vec2 lastp;
-			EInputState m_state;
-			int m_clickType;
 			b2ParticleSystem* m_pParticleSystem;
+			LarkController m_LarkController;
+			bool m_bIsTestbed;
 
-			void OnMouseDownTestbed(const input::mouse_events::ButtonAction& action);
-			void OnMouseUpTestbed(const input::mouse_events::ButtonAction& action);
-			void OnMouseMotionTestbed(const input::mouse_events::MotionAction& action);
+			void OnMouseDownTestbed(const mouse_events::ButtonAction& action);
+			void OnMouseUpTestbed(const mouse_events::ButtonAction& action);
+			void OnMouseMotionTestbed(const mouse_events::MotionAction& action);
 
-			void OnMouseDownLark(const input::mouse_events::ButtonAction& action);
-			void OnMouseUpLark(const input::mouse_events::ButtonAction& action);
-			void OnMouseMotionLark(const input::mouse_events::MotionAction& action);
+			void OnMouseDownLark(const mouse_events::ButtonAction& action);
+			void OnMouseUpLark(const mouse_events::ButtonAction& action);
+			void OnMouseMotionLark(const mouse_events::MotionAction& action);
 
-			void OnMouseDown(const input::mouse_events::ButtonAction& action);
-			void OnMouseUp(const input::mouse_events::ButtonAction& action);
-			void OnMouseMotion(const input::mouse_events::MotionAction& action);
-			void OnMouseWheel(const input::mouse_events::WheelAction& action);
+			void OnMouseDown(const mouse_events::ButtonAction& action);
+			void OnMouseUp(const mouse_events::ButtonAction& action);
+			void OnMouseMotion(const mouse_events::MotionAction& action);
+			void OnMouseWheel(const mouse_events::WheelAction& action);
 
-			void OnKeyDown(const input::key_events::KeyAction& action);
+			void OnKeyDown(const key_events::KeyAction& action);
 
 		public:
 			PhysicsPlugin();
@@ -59,10 +58,6 @@ namespace engine
 
 			void Reload();
 			bool rel;
-
-			GLRenderTriangles tris;
-			util::Color affectClr;
-
 		};
 	}
 }

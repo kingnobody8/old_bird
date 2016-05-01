@@ -22,9 +22,9 @@ namespace engine
 					render::CRenderLayer* m_pLayer = null;
 					UiPartList m_uiParts;
 
-					bool OnMouseButtonDown(const input::mouse_events::ButtonAction& action);
-					bool OnMouseButtonUp(const input::mouse_events::ButtonAction& action);
-					bool OnMouseMotion(const input::mouse_events::MotionAction& action);
+					bool OnMouseButtonDown(const mouse_events::ButtonAction& action);
+					bool OnMouseButtonUp(const mouse_events::ButtonAction& action);
+					bool OnMouseMotion(const mouse_events::MotionAction& action);
 				};
 				static std::list<UiLayer> s_uiLayers;
 				static UiPartList s_pendingUiParts;
@@ -36,9 +36,9 @@ namespace engine
 			public:
 				static const UiPartList GetUiParts();
 				static const UiPartList GetUiPartsOnLayer(const std::string& szLayer);
-				static void OnMouseButtonDown(const input::mouse_events::ButtonAction& action);
-				static void OnMouseButtonUp(const input::mouse_events::ButtonAction& action);
-				static void OnMouseMotion(const input::mouse_events::MotionAction& action);
+				static void OnMouseButtonDown(const mouse_events::ButtonAction& action);
+				static void OnMouseButtonUp(const mouse_events::ButtonAction& action);
+				static void OnMouseMotion(const mouse_events::MotionAction& action);
 
 			private:
 				bool				m_bUiEnabled;
@@ -64,9 +64,9 @@ namespace engine
 				/*the mouse action internals return a bool to respond if they have handled the event or not (true means handled, false means unhandled) */
 				__todo() //maybe make the return an enum with codes for handled/unhandled
 
-				virtual bool OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
-				virtual bool OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
-				virtual bool OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseButtonDownInternal(const mouse_events::ButtonAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseButtonUpInternal(const mouse_events::ButtonAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
+				virtual bool OnMouseMotionInternal(const mouse_events::MotionAction& action, const vec2& wpos) { return m_aabb.Contains(b2Vec2(wpos.x, wpos.y)); }
 
 			public:
 				CUiPart();

@@ -7,79 +7,76 @@
 
 namespace engine
 {
-	namespace input
+	struct IEvent
 	{
-		struct IEvent
+		SDL_Event m_event;
+		IEvent(const SDL_Event& event)
+			: m_event(event)
 		{
-			SDL_Event m_event;
-			IEvent(const SDL_Event& event)
-				: m_event(event)
+		}
+	};
+
+	struct app_events
+	{
+		static util::VoidPublisher s_KillAppEvent;
+	};
+
+	struct key_events
+	{
+		struct KeyAction : public IEvent
+		{
+			SDL_Keycode		m_code;
+			bool			m_repeat;
+
+			KeyAction(const SDL_Event& event, const SDL_Keycode& code, const bool repeat)
+				: IEvent(event), m_code(code), m_repeat(repeat)
 			{
 			}
 		};
 
-		struct app_events
+		static util::Publisher<KeyAction> s_InputKeyDown;
+		static util::Publisher<KeyAction> s_InputKeyUp;
+	};
+
+	struct mouse_events
+	{
+		struct MotionAction : public IEvent
 		{
-			static util::VoidPublisher s_KillAppEvent;
+			vec2	m_pixel;
+			vec2	m_delta;
+			__todo() // we may eventually want velocity in here delta_pixels / time_since last motion
+
+				MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
+				: IEvent(event), m_pixel(pixel), m_delta(delta)
+			{
+			}
 		};
 
-		struct key_events
+		struct ButtonAction : public IEvent
 		{
-			struct KeyAction : public IEvent
+			vec2	m_pixel;
+			uchar	m_button; //this is SDL_BUTTON_LEFT, SDL_BUTTON_MIDDLE, or SDL_BUTTON_RIGHT
+			uchar	m_clicks;
+
+			ButtonAction(const SDL_Event& event, const vec2& pixel, const uchar& button, const uchar& clicks)
+				: IEvent(event), m_pixel(pixel), m_button(button), m_clicks(clicks)
 			{
-				SDL_Keycode		m_code;
-				bool			m_repeat;
-
-				KeyAction(const SDL_Event& event, const SDL_Keycode& code, const bool repeat)
-					: IEvent(event), m_code(code), m_repeat(repeat)
-				{
-				}
-			};
-
-			static util::Publisher<KeyAction> s_InputKeyDown;
-			static util::Publisher<KeyAction> s_InputKeyUp;
+			}
 		};
 
-		struct mouse_events
+		struct WheelAction : public IEvent
 		{
-			struct MotionAction : public IEvent
+			vec2	m_scroll;
+
+			WheelAction(const SDL_Event& event, const vec2 scroll)
+				: IEvent(event), m_scroll(scroll)
 			{
-				vec2	m_pixel;
-				vec2	m_delta;
-				__todo() // we may eventually want velocity in here delta_pixels / time_since last motion
-
-					MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
-					: IEvent(event), m_pixel(pixel), m_delta(delta)
-				{
-				}
-			};
-
-			struct ButtonAction : public IEvent
-			{
-				vec2	m_pixel;
-				uchar	m_button; //this is SDL_BUTTON_LEFT, SDL_BUTTON_MIDDLE, or SDL_BUTTON_RIGHT
-				uchar	m_clicks;
-
-				ButtonAction(const SDL_Event& event, const vec2& pixel, const uchar& button, const uchar& clicks)
-					: IEvent(event), m_pixel(pixel), m_button(button), m_clicks(clicks)
-				{
-				}
-			};
-
-			struct WheelAction : public IEvent
-			{
-				vec2	m_scroll;
-
-				WheelAction(const SDL_Event& event, const vec2 scroll)
-					: IEvent(event), m_scroll(scroll)
-				{
-				}
-			};
-
-			static util::Publisher<MotionAction> s_InputMouseMotion;
-			static util::Publisher<ButtonAction> s_InputMouseButtonDown;
-			static util::Publisher<ButtonAction> s_InputMouseButtonUp;
-			static util::Publisher<WheelAction>	s_InputMouseScrollWheel;
+			}
 		};
-	}
+
+		static util::Publisher<MotionAction> s_InputMouseMotion;
+		static util::Publisher<ButtonAction> s_InputMouseButtonDown;
+		static util::Publisher<ButtonAction> s_InputMouseButtonUp;
+		static util::Publisher<WheelAction>	s_InputMouseScrollWheel;
+	};
 }

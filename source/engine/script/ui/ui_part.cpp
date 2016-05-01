@@ -113,7 +113,7 @@ namespace engine
 				}
 			}
 
-			STATIC void CUiPart::OnMouseButtonDown(const input::mouse_events::ButtonAction& action)
+			STATIC void CUiPart::OnMouseButtonDown(const mouse_events::ButtonAction& action)
 			{
 				CleanUiParts();
 
@@ -132,7 +132,7 @@ namespace engine
 				}
 			}
 			
-			STATIC void CUiPart::OnMouseButtonUp(const input::mouse_events::ButtonAction& action)
+			STATIC void CUiPart::OnMouseButtonUp(const mouse_events::ButtonAction& action)
 			{
 				CleanUiParts();
 				
@@ -151,7 +151,7 @@ namespace engine
 				}
 			}
 
-			STATIC void CUiPart::OnMouseMotion(const input::mouse_events::MotionAction& action)
+			STATIC void CUiPart::OnMouseMotion(const mouse_events::MotionAction& action)
 			{
 				CleanUiParts();
 				

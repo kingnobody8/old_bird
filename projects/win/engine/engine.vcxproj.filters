@@ -152,6 +152,9 @@
     <ClCompile Include="..\..\..\source\bridge\win\bridge-gl-win.cc">
       <Filter>bridge</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\engine\physics\lark_controller.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\engine\engine.h" />
@@ -278,6 +281,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\bridge\win\bridge-gl-win.h">
       <Filter>bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\engine\physics\lark_controller.h">
+      <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
