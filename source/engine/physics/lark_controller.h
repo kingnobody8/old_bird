@@ -23,16 +23,15 @@ namespace engine
 		}
 
 	private:
-		void OnMouseDown(const mouse_events::ButtonAction& action);
-		void OnMouseUp(const mouse_events::ButtonAction& action);
-		void OnMouseMotion(const mouse_events::MotionAction& action);
-		void OnFingerDown(const finger_events::TouchAction& action);
-
 		void ActivatePush();
 		void DeactivatePush();
 		void OnRopeEvent(const vec2& screenPos);
 
 #ifdef IS_MOBILE
+		void OnTouchDown(const touch_event::TouchAction& action);
+		void OnTouchUp(const touch_event::TouchAction& action);
+		void OnTouchMotion(const touch_event::MotionAction& action);
+
 		void PushCheck(const int& fingerId);
 
 		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 1, eSecondFinger, eThirdFinger, eFingerCount };
@@ -46,6 +45,10 @@ namespace engine
 			bool m_bDown = false;
 		};
 #elif IS_PC
+		void OnMouseDown(const mouse_events::ButtonAction& action);
+		void OnMouseUp(const mouse_events::ButtonAction& action);
+		void OnMouseMotion(const mouse_events::MotionAction& action);
+
 		enum EMouseDefs { eInvalidButton = -1, eLeftButton, eRightButton, eButtonCount };
 		struct MouseInfo
 		{

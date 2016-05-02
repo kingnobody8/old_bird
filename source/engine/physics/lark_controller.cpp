@@ -24,17 +24,22 @@ namespace engine
 		m_pWorld = pWorld;
 		m_pLarkBody = pLarkBody;
 
+#ifdef IS_MOBILE
+		touch_events::s_InputTouchDown.Subscribe(&m_sub, BIND1(this, &LarkController::OnTouchDown));
+		touch_events::s_InputTouchUp.Subscribe(&m_sub, BIND1(this, &LarkController::OnTouchUp));
+		touch_events::s_InputTouchMotion.Subscribe(&m_sub, BIND1(this, &LarkController::OnTouchMotion));
+#elif IS_PC
 		mouse_events::s_InputMouseButtonDown.Subscribe(&m_sub, BIND1(this, &LarkController::OnMouseDown));
 		mouse_events::s_InputMouseButtonUp.Subscribe(&m_sub, BIND1(this, &LarkController::OnMouseUp));
 		mouse_events::s_InputMouseMotion.Subscribe(&m_sub, BIND1(this, &LarkController::OnMouseMotion));
-		finger_events::s_InputFingerDown.Subscribe(&m_sub, BIND1(this, &LarkController::OnFingerDown));
+#endif
 	}
 
 	void LarkController::Update(const util::Time& dt)
 	{
 		if (!m_bIsPushActive)
 			return;
-	
+
 		vec2 screenPos;
 
 #ifdef IS_MOBILE
@@ -64,20 +69,12 @@ namespace engine
 	{
 	}
 
-	void LarkController::OnFingerDown(const finger_events::TouchAction& action)
+#ifdef IS_MOBILE
+	void LarkController::OnTouchDown(const finger_events::TouchAction& action)
 	{
-		int fingerId = action.m_fingerId;
-		
-		int x = 0;
-		x++;
-	}
-	
-	void LarkController::OnMouseDown(const mouse_events::ButtonAction& action)
-	{
-		if(m_bIsTestbed)
+		if (m_bIsTestbed)
 			return;
 
-#ifdef IS_MOBILE
 		int fingerId = action.m_event.tfinger.fingerId;
 		//don't use more than 3 fingers
 		if (fingerId > EFingerDefs::eFingerCount)
@@ -92,28 +89,13 @@ namespace engine
 
 		//push check
 		PushCheck(fingerId);
-#elif IS_PC
-
-		if (action.m_button == SDL_BUTTON_LEFT)
-		{
-			m_vMouseInfo[eLeftButton].m_bDown = true;
-			m_vMouseInfo[eLeftButton].m_position = action.m_pixel;
-			ActivatePush();
-		}
-		else if (action.m_button == SDL_BUTTON_RIGHT)
-		{
-			m_vMouseInfo[eRightButton].m_bDown = true;
-			m_vMouseInfo[eRightButton].m_position = action.m_pixel;
-		}
-#endif
 	}
 
-	void LarkController::OnMouseUp(const mouse_events::ButtonAction& action)
+	void LarkController::OnTouchUp(const touch_events::TouchAction action)
 	{
-		if(m_bIsTestbed)
+		if (m_bIsTestbed)
 			return;
 
-#ifdef IS_MOBILE
 		int fingerId = action.m_event.tfinger.fingerId;
 		//don't use more than 3 fingers
 		if (fingerId > EFingerDefs::eFingerCount)
@@ -145,29 +127,13 @@ namespace engine
 		//set values (pt2)
 		info.m_time = 0;
 		info.m_type = EFingerTypes::eInvalidType;
-#elif IS_PC
-
-		if (action.m_button == SDL_BUTTON_LEFT)
-		{
-			m_vMouseInfo[eLeftButton].m_bDown = false;
-			m_vMouseInfo[eLeftButton].m_position = action.m_pixel;
-			DeactivatePush();
-		}
-		else if (action.m_button == SDL_BUTTON_RIGHT)
-		{
-			m_vMouseInfo[eRightButton].m_bDown = false;
-			m_vMouseInfo[eRightButton].m_position = action.m_pixel;
-			OnRopeEvent(action.m_pixel);
-		}
-#endif
 	}
 
-	void LarkController::OnMouseMotion(const mouse_events::MotionAction& action)
+	void LarkController::OnTouchMotion(const touch_events::MotionAction& action)
 	{
-		if(m_bIsTestbed)
+		if (m_bIsTestbed)
 			return;
 
-#ifdef IS_MOBILE
 		int fingerId = action.m_event.tfinger.fingerId;
 		//don't use more than 3 fingers
 		if (fingerId > EFingerDefs::eFingerCount)
@@ -176,15 +142,8 @@ namespace engine
 		//set values
 		FingerInfo& info = m_vFingerInfo[fingerId];
 		info.m_position = action.m_pixel;
-#elif IS_PC
-		for (int i = 0; i < EMouseDefs::eButtonCount; ++i)
-		{
-			m_vMouseInfo[i].m_position = action.m_pixel;
-		}
-#endif
 	}
 
-#ifdef IS_MOBILE
 	void LarkController::PushCheck(const int& fingerId)
 	{
 		FingerInfo& info = m_vFingerInfo[fingerId];
@@ -215,7 +174,57 @@ namespace engine
 			ActivatePush();
 		}
 	}
+
+#elif IS_PC
+	void LarkController::OnMouseDown(const mouse_events::ButtonAction& action)
+	{
+		if (m_bIsTestbed)
+			return;
+
+		if (action.m_button == SDL_BUTTON_LEFT)
+		{
+			m_vMouseInfo[eLeftButton].m_bDown = true;
+			m_vMouseInfo[eLeftButton].m_position = action.m_pixel;
+			ActivatePush();
+		}
+		else if (action.m_button == SDL_BUTTON_RIGHT)
+		{
+			m_vMouseInfo[eRightButton].m_bDown = true;
+			m_vMouseInfo[eRightButton].m_position = action.m_pixel;
+		}
+}
+
+	void LarkController::OnMouseUp(const mouse_events::ButtonAction& action)
+	{
+		if (m_bIsTestbed)
+			return;
+
+		if (action.m_button == SDL_BUTTON_LEFT)
+		{
+			m_vMouseInfo[eLeftButton].m_bDown = false;
+			m_vMouseInfo[eLeftButton].m_position = action.m_pixel;
+			DeactivatePush();
+		}
+		else if (action.m_button == SDL_BUTTON_RIGHT)
+		{
+			m_vMouseInfo[eRightButton].m_bDown = false;
+			m_vMouseInfo[eRightButton].m_position = action.m_pixel;
+			OnRopeEvent(action.m_pixel);
+		}
+	}
+
+	void LarkController::OnMouseMotion(const mouse_events::MotionAction& action)
+	{
+		if (m_bIsTestbed)
+			return;
+
+		for (int i = 0; i < EMouseDefs::eButtonCount; ++i)
+		{
+			m_vMouseInfo[i].m_position = action.m_pixel;
+		}
+	}
 #endif
+
 
 	void LarkController::ActivatePush()
 	{

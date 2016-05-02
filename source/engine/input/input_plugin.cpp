@@ -113,14 +113,25 @@ namespace engine
 				//TOUCH event
 			case SDL_FINGERDOWN:
 			{
-				finger_events::TouchAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				touch_events::TouchAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
 				//script::ui::CuiPart::OnFingerDown(action);
-				finger_events::s_InputFingerDown.Publish(action);
+				touch_events::s_InputTouchDown.Publish(action);
 				break;
 			}
 			case SDL_FINGERUP:
-			case SDL_FINGERMOTION:
+			{
+				touch_events::TouchAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				//script::ui::CuiPart::OnFingerDown(action);
+				touch_events::s_InputTouchDown.Publish(action);
 				break;
+			}
+			case SDL_FINGERMOTION:
+			{
+				touch_events::MotionAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), vec2(tEvent.tfinger.dx, -tEvent.tfinger.dy));
+				//script::ui::CuiPart::OnFingerDown(action);
+				touch_events::s_InputTouchMotion.Publish(action);
+				break;
+			}
 				//GESTURE event
 			case SDL_DOLLARGESTURE:
 			case SDL_DOLLARRECORD:
