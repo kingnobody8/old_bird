@@ -37,12 +37,17 @@ namespace engine
 
 	void LarkController::Update(const util::Time& dt)
 	{
-		if (!m_bIsPushActive)
-			return;
-
 		vec2 screenPos;
 
 #ifdef IS_MOBILE
+		for(int i = 0; i < EFingerDefs::eFingerCount; ++i)
+		{
+			m_vFingerInfo[i].m_time += dt;
+		}
+		
+		if (!m_bIsPushActive)
+			return;
+		
 		//average the two finger positions
 		vec2 averageScreenPosition;
 		for (int i = 0; i < EFingerDefs::eFingerCount; ++i)
@@ -56,6 +61,8 @@ namespace engine
 		averageScreenPosition /= 2.0f; //there should always be 2 fingers for push
 		screenPos = averageScreenPosition;
 #elif IS_PC
+		if (!m_bIsPushActive)
+			return;
 		screenPos = m_vMouseInfo[eLeftButton].m_position;
 #endif
 		b2Vec2 pw = physics::g_camera.ConvertScreenToWorld(b2Vec2(screenPos.x, screenPos.y));
@@ -70,39 +77,39 @@ namespace engine
 	}
 
 #ifdef IS_MOBILE
-	void LarkController::OnTouchDown(const finger_events::TouchAction& action)
+	void LarkController::OnTouchDown(const touch_events::TouchAction& action)
 	{
 		if (m_bIsTestbed)
 			return;
 
-		int fingerId = action.m_event.tfinger.fingerId;
+		int touchId = action.m_touchId;
 		//don't use more than 3 fingers
-		if (fingerId > EFingerDefs::eFingerCount)
+		if (touchId > EFingerDefs::eFingerCount)
 			return;
 
 		//set values
-		FingerInfo& info = m_vFingerInfo[fingerId];
+		FingerInfo& info = m_vFingerInfo[touchId];
 		info.m_bDown = true;
 		info.m_time = 0;
 		info.m_position = action.m_pixel;
 		info.m_type = EFingerTypes::eUnknown;
 
 		//push check
-		PushCheck(fingerId);
+		PushCheck(touchId);
 	}
 
-	void LarkController::OnTouchUp(const touch_events::TouchAction action)
+	void LarkController::OnTouchUp(const touch_events::TouchAction& action)
 	{
 		if (m_bIsTestbed)
 			return;
 
-		int fingerId = action.m_event.tfinger.fingerId;
+		int touchId = action.m_touchId;
 		//don't use more than 3 fingers
-		if (fingerId > EFingerDefs::eFingerCount)
+		if (touchId > EFingerDefs::eFingerCount)
 			return;
 
 		//set values (pt1)
-		FingerInfo& info = m_vFingerInfo[fingerId];
+		FingerInfo& info = m_vFingerInfo[touchId];
 		info.m_position = action.m_pixel;
 		info.m_bDown = false;
 
@@ -134,20 +141,20 @@ namespace engine
 		if (m_bIsTestbed)
 			return;
 
-		int fingerId = action.m_event.tfinger.fingerId;
+		int touchId = action.m_touchId;
 		//don't use more than 3 fingers
-		if (fingerId > EFingerDefs::eFingerCount)
+		if (touchId > EFingerDefs::eFingerCount)
 			return;
 
 		//set values
-		FingerInfo& info = m_vFingerInfo[fingerId];
+		FingerInfo& info = m_vFingerInfo[touchId];
 		info.m_position = action.m_pixel;
 	}
 
 	void LarkController::PushCheck(const int& fingerId)
 	{
 		FingerInfo& info = m_vFingerInfo[fingerId];
-		assert(!info.m_bDown && info.m_type != EFingerTypes::eUnknown);
+		assert(info.m_bDown && info.m_type == EFingerTypes::eUnknown);
 
 		//find another finger we can use
 		int otherFingerId = -1;

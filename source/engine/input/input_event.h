@@ -86,8 +86,10 @@ namespace engine
 		{
 			vec2	m_pixel;
 			vec2	m_delta;
-			MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
-				: IEvent(event), m_pixel(pixel), m_delta(delta)
+			uchar	m_touchId;
+			
+			MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta, const uchar& touchId)
+				: IEvent(event), m_pixel(pixel), m_delta(delta), m_touchId(touchId)
 			{
 			}
 		};

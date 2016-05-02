@@ -28,13 +28,13 @@ namespace engine
 		void OnRopeEvent(const vec2& screenPos);
 
 #ifdef IS_MOBILE
-		void OnTouchDown(const touch_event::TouchAction& action);
-		void OnTouchUp(const touch_event::TouchAction& action);
-		void OnTouchMotion(const touch_event::MotionAction& action);
+		void OnTouchDown(const touch_events::TouchAction& action);
+		void OnTouchUp(const touch_events::TouchAction& action);
+		void OnTouchMotion(const touch_events::MotionAction& action);
 
 		void PushCheck(const int& fingerId);
 
-		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 1, eSecondFinger, eThirdFinger, eFingerCount };
+		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 0, eSecondFinger, eThirdFinger, eFingerCount };
 		enum EFingerTypes	{ eInvalidType, eUnknown, ePush, eRope };
 
 		struct FingerInfo

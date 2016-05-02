@@ -113,21 +113,21 @@ namespace engine
 				//TOUCH event
 			case SDL_FINGERDOWN:
 			{
-				touch_events::TouchAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				touch_events::TouchAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
 				//script::ui::CuiPart::OnFingerDown(action);
 				touch_events::s_InputTouchDown.Publish(action);
 				break;
 			}
 			case SDL_FINGERUP:
 			{
-				touch_events::TouchAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				touch_events::TouchAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
 				//script::ui::CuiPart::OnFingerDown(action);
-				touch_events::s_InputTouchDown.Publish(action);
+				touch_events::s_InputTouchUp.Publish(action);
 				break;
 			}
 			case SDL_FINGERMOTION:
 			{
-				touch_events::MotionAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), vec2(tEvent.tfinger.dx, -tEvent.tfinger.dy));
+				touch_events::MotionAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), vec2(tEvent.tfinger.dx, -tEvent.tfinger.dy), tEvent.tfinger.touchId);
 				//script::ui::CuiPart::OnFingerDown(action);
 				touch_events::s_InputTouchMotion.Publish(action);
 				break;
@@ -164,5 +164,13 @@ namespace engine
 		ret.x = x;
 		ret.y = logical_size.y - y;
 		return ret;
+	}
+	
+	const vec2 InputPlugin::ConvertFloatPixelToCartesian(float x, float y)
+	{
+		glm::i32vec2 logical_size;
+		SDL_GetWindowSize(m_pSdlWin, &logical_size.x, &logical_size.y);
+		
+		return ConvertPixelToCartesian(x * logical_size.x, y * logical_size.y);
 	}
 }

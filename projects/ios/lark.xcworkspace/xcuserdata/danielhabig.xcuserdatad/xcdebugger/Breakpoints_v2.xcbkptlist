@@ -41,12 +41,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../source/engine/physics/lark_controller.cpp"
-            timestampString = "483844403.789494"
+            timestampString = "483846959.452015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "LarkController::OnMouseUp(const mouse_events::ButtonAction&amp; action)"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "LarkController::PushCheck(const int&amp; fingerId)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,28 +57,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../source/engine/physics/lark_controller.cpp"
-            timestampString = "483844403.789494"
+            timestampString = "483846959.452015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "LarkController::OnMouseDown(const mouse_events::ButtonAction&amp; action)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../source/engine/physics/lark_controller.cpp"
-            timestampString = "483844403.789494"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "LarkController::OnFingerDown(const finger_events::TouchAction&amp; action)"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "LarkController::PushCheck(const int&amp; fingerId)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

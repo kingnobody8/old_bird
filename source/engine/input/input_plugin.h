@@ -16,6 +16,7 @@ namespace engine
 
 	private:
 		const vec2 ConvertPixelToCartesian(int x, int y);
+		const vec2 ConvertFloatPixelToCartesian(float x, float y);
 
 	public:
 		InputPlugin();
