@@ -92,6 +92,7 @@ namespace engine
 		info.m_time = 0;
 		info.m_position = action.m_pixel;
 		info.m_type = EFingerTypes::eUnknown;
+		info.m_fingerId = action.m_fingerId;
 
 		//push check
 		PushCheck(index);
@@ -132,6 +133,7 @@ namespace engine
 		//set values (pt2)
 		info.m_time = 0;
 		info.m_type = EFingerTypes::eInvalidType;
+		info.m_fingerId = 0;
 	}
 
 	void LarkController::OnTouchMotion(const touch_events::MotionAction& action)
@@ -257,6 +259,15 @@ namespace engine
 	void LarkController::DeactivatePush()
 	{
 		m_bIsPushActive = false;
+#ifdef IS_MOBILE
+		for(int i = 0; i < EFingerDefs::eFingerCount; ++i)
+		{
+			if(m_vFingerInfo[i].m_type == EFingerTypes::ePush)
+			{
+				m_vFingerInfo[i] = FingerInfo();
+			}
+		}
+#endif
 	}
 
 	void LarkController::OnRopeEvent(const vec2& screenPos)
