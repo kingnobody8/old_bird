@@ -82,20 +82,19 @@ namespace engine
 		if (m_bIsTestbed)
 			return;
 
-		int touchId = action.m_touchId;
-		//don't use more than 3 fingers
-		if (touchId > EFingerDefs::eFingerCount)
+		int index = FindTouchSlot(action.m_fingerId);
+		if (index == -1)
 			return;
 
 		//set values
-		FingerInfo& info = m_vFingerInfo[touchId];
+		FingerInfo& info = m_vFingerInfo[index];
 		info.m_bDown = true;
 		info.m_time = 0;
 		info.m_position = action.m_pixel;
 		info.m_type = EFingerTypes::eUnknown;
 
 		//push check
-		PushCheck(touchId);
+		PushCheck(index);
 	}
 
 	void LarkController::OnTouchUp(const touch_events::TouchAction& action)
@@ -103,13 +102,12 @@ namespace engine
 		if (m_bIsTestbed)
 			return;
 
-		int touchId = action.m_touchId;
-		//don't use more than 3 fingers
-		if (touchId > EFingerDefs::eFingerCount)
+		int index = FindTouchSlot(action.m_fingerId);
+		if (index == -1)
 			return;
 
 		//set values (pt1)
-		FingerInfo& info = m_vFingerInfo[touchId];
+		FingerInfo& info = m_vFingerInfo[index];
 		info.m_position = action.m_pixel;
 		info.m_bDown = false;
 
@@ -141,26 +139,44 @@ namespace engine
 		if (m_bIsTestbed)
 			return;
 
-		int touchId = action.m_touchId;
-		//don't use more than 3 fingers
-		if (touchId > EFingerDefs::eFingerCount)
+		int index = FindTouchSlot(action.m_fingerId);
+		if (index == -1)
 			return;
 
 		//set values
-		FingerInfo& info = m_vFingerInfo[touchId];
+		FingerInfo& info = m_vFingerInfo[index];
 		info.m_position = action.m_pixel;
 	}
 
-	void LarkController::PushCheck(const int& fingerId)
+	int LarkController::FindTouchSlot(const int64& fingerId)
+	{ 
+		int firstEmpty = -1;
+		for (int i = 0; i < EFingerDefs::eFingerCount; ++i)
+		{
+			if (firstEmpty == -1 && m_vFingerInfo[i].m_type == EFingerTypes::eInvalidType)
+			{
+				firstEmpty = i;
+			}
+
+			if (m_vFingerInfo[i].m_fingerId == fingerId)
+			{
+				return i;
+			}
+		}
+
+		return firstEmpty;
+	}
+
+	void LarkController::PushCheck(const int& index)
 	{
-		FingerInfo& info = m_vFingerInfo[fingerId];
+		FingerInfo& info = m_vFingerInfo[index];
 		assert(info.m_bDown && info.m_type == EFingerTypes::eUnknown);
 
 		//find another finger we can use
 		int otherFingerId = -1;
 		for (int i = 0; i < EFingerDefs::eFingerCount; ++i)
 		{
-			if (i == fingerId)
+			if (i == index)
 			{
 				continue;
 			}

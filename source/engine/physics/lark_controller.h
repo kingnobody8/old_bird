@@ -5,8 +5,6 @@
 
 namespace engine
 {
-	
-
 	class LarkController
 	{
 	public:
@@ -32,9 +30,10 @@ namespace engine
 		void OnTouchUp(const touch_events::TouchAction& action);
 		void OnTouchMotion(const touch_events::MotionAction& action);
 
-		void PushCheck(const int& fingerId);
+		int FindTouchSlot(const int64& fingerId);
+		void PushCheck(const int& index);
 
-		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 0, eSecondFinger, eThirdFinger, eFingerCount };
+		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 0, eSecondFinger, eThirdFinger, eFingerCount }; //remove this
 		enum EFingerTypes	{ eInvalidType, eUnknown, ePush, eRope };
 
 		struct FingerInfo
@@ -43,6 +42,7 @@ namespace engine
 			vec2 m_position;
 			EFingerTypes m_type = EFingerTypes::eInvalidType;
 			bool m_bDown = false;
+			int64 m_fingerId = 0;
 		};
 #elif IS_PC
 		void OnMouseDown(const mouse_events::ButtonAction& action);

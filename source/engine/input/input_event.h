@@ -86,10 +86,10 @@ namespace engine
 		{
 			vec2	m_pixel;
 			vec2	m_delta;
-			uchar	m_touchId;
+			int64	m_fingerId;
 			
-			MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta, const uchar& touchId)
-				: IEvent(event), m_pixel(pixel), m_delta(delta), m_touchId(touchId)
+			MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta, const int64& fingerId)
+				: IEvent(event), m_pixel(pixel), m_delta(delta), m_fingerId(fingerId)
 			{
 			}
 		};
@@ -97,10 +97,10 @@ namespace engine
 		struct TouchAction : public IEvent
 		{
 			vec2 m_pixel;
-			uchar m_touchId;
+			int64 m_fingerId;
 
-			TouchAction(const SDL_Event& event, const vec2& pixel, const uchar& touchId)
-				: IEvent(event), m_pixel(pixel), m_touchId(touchId)
+			TouchAction(const SDL_Event& event, const vec2& pixel, const int64& fingerId)
+				: IEvent(event), m_pixel(pixel), m_fingerId(fingerId)
 			{
 			}
 		};

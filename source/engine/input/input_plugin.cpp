@@ -113,21 +113,21 @@ namespace engine
 				//TOUCH event
 			case SDL_FINGERDOWN:
 			{
-				touch_events::TouchAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				touch_events::TouchAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.fingerId);
 				//script::ui::CuiPart::OnFingerDown(action);
 				touch_events::s_InputTouchDown.Publish(action);
 				break;
 			}
 			case SDL_FINGERUP:
 			{
-				touch_events::TouchAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				touch_events::TouchAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.fingerId);
 				//script::ui::CuiPart::OnFingerDown(action);
 				touch_events::s_InputTouchUp.Publish(action);
 				break;
 			}
 			case SDL_FINGERMOTION:
 			{
-				touch_events::MotionAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), vec2(tEvent.tfinger.dx, -tEvent.tfinger.dy), tEvent.tfinger.touchId);
+				touch_events::MotionAction action(tEvent, ConvertFloatPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), vec2(tEvent.tfinger.dx, -tEvent.tfinger.dy), tEvent.tfinger.fingerId);
 				//script::ui::CuiPart::OnFingerDown(action);
 				touch_events::s_InputTouchMotion.Publish(action);
 				break;
