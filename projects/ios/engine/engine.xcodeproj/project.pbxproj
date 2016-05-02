@@ -42,6 +42,7 @@
 		BC4B4A191C5B0D150012C25C /* button_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4B49ED1C5B0D150012C25C /* button_part.cpp */; };
 		BC4B4A1A1C5B0D150012C25C /* ui_part.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4B49EF1C5B0D150012C25C /* ui_part.cpp */; };
 		BC4B4A1B1C5B0D150012C25C /* state_plugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4B49F31C5B0D150012C25C /* state_plugin.cpp */; };
+		BCB17F2C1CD69FEA008227F1 /* lark_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCB17F2A1CD69FEA008227F1 /* lark_controller.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -135,6 +136,8 @@
 		BC4B49F21C5B0D150012C25C /* base_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_state.h; sourceTree = "<group>"; };
 		BC4B49F31C5B0D150012C25C /* state_plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = state_plugin.cpp; sourceTree = "<group>"; };
 		BC4B49F41C5B0D150012C25C /* state_plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state_plugin.h; sourceTree = "<group>"; };
+		BCB17F2A1CD69FEA008227F1 /* lark_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lark_controller.cpp; sourceTree = "<group>"; };
+		BCB17F2B1CD69FEA008227F1 /* lark_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lark_controller.h; sourceTree = "<group>"; };
 		BCD5EDC31C7580AA00ACE436 /* render_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_core.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,6 +241,8 @@
 		BC4B49B21C5B0D150012C25C /* physics */ = {
 			isa = PBXGroup;
 			children = (
+				BCB17F2A1CD69FEA008227F1 /* lark_controller.cpp */,
+				BCB17F2B1CD69FEA008227F1 /* lark_controller.h */,
 				BC4B49B31C5B0D150012C25C /* callbacks */,
 				BC4B49B61C5B0D150012C25C /* debug_draw.cpp */,
 				BC4B49B71C5B0D150012C25C /* debug_draw.h */,
@@ -419,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC4B4A181C5B0D150012C25C /* script.cpp in Sources */,
+				BCB17F2C1CD69FEA008227F1 /* lark_controller.cpp in Sources */,
 				BC4B49F91C5B0D150012C25C /* b2dJsonImage_OpenGL.cpp in Sources */,
 				BC4B4A0A1C5B0D150012C25C /* render_node.cpp in Sources */,
 				BC4B49FD1C5B0D150012C25C /* object.cpp in Sources */,

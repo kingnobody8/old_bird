@@ -26,6 +26,7 @@ namespace engine
 		void OnMouseDown(const mouse_events::ButtonAction& action);
 		void OnMouseUp(const mouse_events::ButtonAction& action);
 		void OnMouseMotion(const mouse_events::MotionAction& action);
+		void OnFingerDown(const finger_events::TouchAction& action);
 
 		void ActivatePush();
 		void DeactivatePush();

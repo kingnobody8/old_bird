@@ -79,4 +79,33 @@ namespace engine
 		static util::Publisher<ButtonAction> s_InputMouseButtonUp;
 		static util::Publisher<WheelAction>	s_InputMouseScrollWheel;
 	};
+	
+	struct finger_events
+	{
+		struct TouchAction : public IEvent
+		{
+			vec2 m_pixel;
+			uchar m_touchId;
+			
+			TouchAction(const SDL_Event& event, const vec2& pixel, const uchar& touchId)
+				: IEvent(event), m_pixel(pixel), m_touchId(touchId)
+			{
+			}
+		};
+		
+		struct MotionAction : public IEvent
+		{
+			vec2	m_pixel;
+			vec2	m_delta;
+			MotionAction(const SDL_Event& event, const vec2& pixel, const vec2& delta)
+			: IEvent(event), m_pixel(pixel), m_delta(delta)
+			{
+			}
+		};
+		
+		static util::Publisher<TouchAction> s_InputFingerDown;
+		static util::Publisher<TouchAction> s_InputFingerUp;
+		static util::Publisher<MotionAction> s_InputTouchMotion;
+		
+	};
 }

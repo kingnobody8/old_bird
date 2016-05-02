@@ -27,6 +27,7 @@ namespace engine
 		mouse_events::s_InputMouseButtonDown.Subscribe(&m_sub, BIND1(this, &LarkController::OnMouseDown));
 		mouse_events::s_InputMouseButtonUp.Subscribe(&m_sub, BIND1(this, &LarkController::OnMouseUp));
 		mouse_events::s_InputMouseMotion.Subscribe(&m_sub, BIND1(this, &LarkController::OnMouseMotion));
+		finger_events::s_InputFingerDown.Subscribe(&m_sub, BIND1(this, &LarkController::OnFingerDown));
 	}
 
 	void LarkController::Update(const util::Time& dt)
@@ -63,7 +64,14 @@ namespace engine
 	{
 	}
 
-
+	void LarkController::OnFingerDown(const finger_events::TouchAction& action)
+	{
+		int fingerId = action.m_fingerId;
+		
+		int x = 0;
+		x++;
+	}
+	
 	void LarkController::OnMouseDown(const mouse_events::ButtonAction& action)
 	{
 		if(m_bIsTestbed)

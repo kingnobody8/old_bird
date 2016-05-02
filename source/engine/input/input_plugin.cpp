@@ -112,6 +112,12 @@ namespace engine
 				break;
 				//TOUCH event
 			case SDL_FINGERDOWN:
+			{
+				finger_events::TouchAction action(tEvent, ConvertPixelToCartesian(tEvent.tfinger.x, tEvent.tfinger.y), tEvent.tfinger.touchId);
+				//script::ui::CuiPart::OnFingerDown(action);
+				finger_events::s_InputFingerDown.Publish(action);
+				break;
+			}
 			case SDL_FINGERUP:
 			case SDL_FINGERMOTION:
 				break;
