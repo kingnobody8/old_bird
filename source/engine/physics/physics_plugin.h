@@ -32,7 +32,7 @@ namespace engine
 			b2ParticleSystem* m_pParticleSystem;
 			LarkController m_LarkController;
 			bool m_bIsTestbed;
-			b2Shape* m_pParticleEmitterShape;
+			b2PolygonShape m_pParticleEmitterShape;
 			b2Vec2 m_pParticleEmitterPosition;
 
 

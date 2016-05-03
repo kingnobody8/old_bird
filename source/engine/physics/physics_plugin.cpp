@@ -17,7 +17,7 @@ namespace engine
 		const int VELOCITY_ITERATIONS = 8;
 		const int POSITION_ITERATIONS = 3;
 		const b2Vec2 GRAVITY = b2Vec2(0.0f, -10.0f);
-		const int PARTICLES_PER_SEC = 1000;
+		const int PARTICLES_PER_SEC = 24;
 
 		render::RectNode node;
 		render::DefaultShader shader;
@@ -99,7 +99,7 @@ namespace engine
 				pd.linearVelocity = b2Vec2(1.0f, 0.5f);
 				util::Color clr = util::Color::CYAN;
 				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);*/
-				m_pParticleEmitterShape = vBodies[i]->GetFixtureList()[0].GetShape();
+				m_pParticleEmitterShape = *(b2PolygonShape*)vBodies[i]->GetFixtureList()[0].GetShape();
 				m_pParticleEmitterPosition = vBodies[i]->GetPosition();
 
 				//b2PolygonShape* shapep = (b2PolygonShape*)bodyShape;
@@ -108,7 +108,7 @@ namespace engine
 				////pd.shape = vBodies[i]->GetFixtureList()[0].GetShape();
 
 				//b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
-				//m_pWorld->DestroyBody(vBodies[i]);
+				m_pWorld->DestroyBody(vBodies[i]);
 			}
 
 
@@ -149,7 +149,7 @@ namespace engine
 			b2Body* pLark = m_pWorld->CreateBody(&bdc);
 			b2FixtureDef fdef;
 			fdef.density = 10.0f;
-			fdef.restitution = 0.0f;
+			fdef.restitution = 0.5f;
 			fdef.shape = &shapec;
 			pLark->CreateFixture(&fdef);
 			m_LarkController.Init(m_pWorld, pLark);
@@ -240,17 +240,24 @@ namespace engine
 
 			//update particles
 			{
+				static util::Time t = 0;
+				t += dt;
+				vec2 dir;
+				dir.x = sin(t.Milli() / 1000.0f) * 2.0f - 1.0f;
+				dir.y = cos(t.Milli() / 1000.0f) * 2.0f - 1.0f;
+				dir *= 1000.0f;
+
 				static float particles = 0.0f;
 				particles += dt.Milli() / 1000.0f * PARTICLES_PER_SEC;
 
 				b2ParticleGroupDef pd;
 				pd.flags = b2_solidParticleGroup;
 				pd.lifetime = 10.0f;
-				pd.linearVelocity = b2Vec2(1.0f, 1.0f);
+				pd.linearVelocity = b2Vec2(dir.x, dir.y);
 				util::Color clr = util::Color::CYAN;
 				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
 
-				//pd.shape = m_pParticleEmitterShape;
+				pd.shape = &m_pParticleEmitterShape;
 				pd.position = m_pParticleEmitterPosition;
 				pd.particleCount = particles;
 				
