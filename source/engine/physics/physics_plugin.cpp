@@ -17,6 +17,7 @@ namespace engine
 		const int VELOCITY_ITERATIONS = 8;
 		const int POSITION_ITERATIONS = 3;
 		const b2Vec2 GRAVITY = b2Vec2(0.0f, -10.0f);
+		const int PARTICLES_PER_SEC = 1000;
 
 		render::RectNode node;
 		render::DefaultShader shader;
@@ -83,25 +84,31 @@ namespace engine
 			std::vector<b2Body*> vBodies;
 			m_json.getBodiesByCustomBool("particle_shape", true, vBodies);
 
+
+			const b2ParticleSystemDef particleSystemDef;
+			m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
+			m_pParticleSystem->SetRadius(0.1f);
+			m_pParticleSystem->SetDamping(0.2f);
+			m_pParticleSystem->SetDensity(10.0f);
+
 			for (int i = 0; i < vBodies.size(); ++i)
 			{
-				const b2ParticleSystemDef particleSystemDef;
-				m_pParticleSystem = m_pWorld->CreateParticleSystem(&particleSystemDef);
-				m_pParticleSystem->SetRadius(0.1f);
-				m_pParticleSystem->SetDamping(0.2f);
-				m_pParticleSystem->SetDensity(10.0f);
-				b2ParticleGroupDef pd;
+				/*b2ParticleGroupDef pd;
 				pd.flags = b2_solidParticleGroup;
+				pd.lifetime = 3.0f;
+				pd.linearVelocity = b2Vec2(1.0f, 0.5f);
 				util::Color clr = util::Color::CYAN;
-				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
-				b2Shape* bodyShape = vBodies[i]->GetFixtureList()[0].GetShape();
-				b2PolygonShape* shapep = (b2PolygonShape*)bodyShape;
-				pd.shape = shapep;
-				pd.position = vBodies[i]->GetPosition();
-				//pd.shape = vBodies[i]->GetFixtureList()[0].GetShape();
+				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);*/
+				m_pParticleEmitterShape = vBodies[i]->GetFixtureList()[0].GetShape();
+				m_pParticleEmitterPosition = vBodies[i]->GetPosition();
 
-				b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
-				m_pWorld->DestroyBody(vBodies[i]);
+				//b2PolygonShape* shapep = (b2PolygonShape*)bodyShape;
+				//pd.shape = shapep;
+				//pd.position = vBodies[i]->GetPosition();
+				////pd.shape = vBodies[i]->GetFixtureList()[0].GetShape();
+
+				//b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+				//m_pWorld->DestroyBody(vBodies[i]);
 			}
 
 
@@ -209,6 +216,7 @@ namespace engine
 			m_pParticleSystem = null;
 			m_pMouseJoint = null;
 			m_pGroundBody = null;
+			m_json = b2dJson();
 		}
 
 		VIRTUAL bool PhysicsPlugin::Update(const util::Time& dt)
@@ -229,6 +237,38 @@ namespace engine
 				rel = false;
 				return true;
 			}
+
+			//update particles
+			{
+				static float particles = 0.0f;
+				particles += dt.Milli() / 1000.0f * PARTICLES_PER_SEC;
+
+				b2ParticleGroupDef pd;
+				pd.flags = b2_solidParticleGroup;
+				pd.lifetime = 10.0f;
+				pd.linearVelocity = b2Vec2(1.0f, 1.0f);
+				util::Color clr = util::Color::CYAN;
+				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
+
+				//pd.shape = m_pParticleEmitterShape;
+				pd.position = m_pParticleEmitterPosition;
+				pd.particleCount = particles;
+				
+
+				if (pd.particleCount > 0)
+				{
+					b2Vec2* posData = new b2Vec2[pd.particleCount];
+					for (int i = 0; i < pd.particleCount; ++i)
+					{
+						posData[i] = b2Vec2(0, 0);
+					}
+					pd.positionData = posData;
+
+					b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+					particles = 0.0f;
+				}
+			}
+
 
 			m_LarkController.Update(dt);
 

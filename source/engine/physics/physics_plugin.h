@@ -32,6 +32,9 @@ namespace engine
 			b2ParticleSystem* m_pParticleSystem;
 			LarkController m_LarkController;
 			bool m_bIsTestbed;
+			b2Shape* m_pParticleEmitterShape;
+			b2Vec2 m_pParticleEmitterPosition;
+
 
 			void OnMouseDownTestbed(const mouse_events::ButtonAction& action);
 			void OnMouseUpTestbed(const mouse_events::ButtonAction& action);
