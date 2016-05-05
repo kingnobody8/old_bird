@@ -55,6 +55,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+#local workspace
+.xcuserdatad
+
 # Windows
 # =========================
 
