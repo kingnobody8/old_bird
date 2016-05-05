@@ -2,7 +2,7 @@
 #include "physics/physics_plugin.h"
 #include "callbacks/raycast_callback.h"
 
-#define ROPE_TIME 500
+#define ROPE_TIME 250
 
 namespace engine
 {
@@ -52,7 +52,8 @@ namespace engine
 		{
 			if (m_vFingerInfo[i].m_type != EFingerTypes::ePush)
 			{
-				PushCheck(i);
+				if(m_vFingerInfo[i].m_type == EFingerTypes::eUnknown)
+					PushCheck(i);
 				continue;
 			}
 			averageScreenPosition += m_vFingerInfo[i].m_position;

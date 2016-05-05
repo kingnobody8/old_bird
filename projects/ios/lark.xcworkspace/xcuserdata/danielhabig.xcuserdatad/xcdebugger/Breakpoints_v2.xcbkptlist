@@ -31,7 +31,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "455"
-            endingLineNumber = "455">
+            endingLineNumber = "455"
+            landmarkName = "PhysicsPlugin::OnMouseDownTestbed(const mouse_events::ButtonAction&amp; action)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

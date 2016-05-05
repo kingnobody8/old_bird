@@ -239,6 +239,7 @@ namespace engine
 			}
 
 			//update particles
+			if(m_pParticleSystem != null)
 			{
 				static util::Time t = 0;
 				t += dt;
