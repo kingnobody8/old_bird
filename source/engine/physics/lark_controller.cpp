@@ -45,20 +45,24 @@ namespace engine
 			m_vFingerInfo[i].m_time += dt;
 		}
 		
-		if (!m_bIsPushActive)
-			return;
-		
-		//average the two finger positions
+		//average the all push finger positions
 		vec2 averageScreenPosition;
+		int count = 0;
 		for (int i = 0; i < EFingerDefs::eFingerCount; ++i)
 		{
 			if (m_vFingerInfo[i].m_type != EFingerTypes::ePush)
 			{
+				PushCheck(i);
 				continue;
 			}
 			averageScreenPosition += m_vFingerInfo[i].m_position;
+			++count;
 		}
-		averageScreenPosition /= 2.0f; //there should always be 2 fingers for push
+
+		if(count == 0)
+			return;
+
+		averageScreenPosition /= (float)(count);
 		screenPos = averageScreenPosition;
 #elif IS_PC
 		if (!m_bIsPushActive)
@@ -93,9 +97,6 @@ namespace engine
 		info.m_position = action.m_pixel;
 		info.m_type = EFingerTypes::eUnknown;
 		info.m_fingerId = action.m_fingerId;
-
-		//push check
-		PushCheck(index);
 	}
 
 	void LarkController::OnTouchUp(const touch_events::TouchAction& action)
@@ -125,7 +126,7 @@ namespace engine
 		}
 		case EFingerTypes::ePush:
 		{
-			DeactivatePush();
+			//DeactivatePush();
 			break;
 		}
 		}
@@ -174,30 +175,31 @@ namespace engine
 		FingerInfo& info = m_vFingerInfo[index];
 		assert(info.m_bDown && info.m_type == EFingerTypes::eUnknown);
 
-		//find another finger we can use
-		int otherFingerId = -1;
-		for (int i = 0; i < EFingerDefs::eFingerCount; ++i)
-		{
-			if (i == index)
-			{
-				continue;
-			}
-			if (m_vFingerInfo[i].m_bDown && m_vFingerInfo[i].m_type == EFingerTypes::eUnknown)
-			{
-				otherFingerId = i;
-				break;
-			}
-		}
+		////find another finger we can use
+		//int otherFingerId = -1;
+		//for (int i = 0; i < EFingerDefs::eFingerCount; ++i)
+		//{
+		//	if (i == index)
+		//	{
+		//		continue;
+		//	}
+		//	if (m_vFingerInfo[i].m_bDown && m_vFingerInfo[i].m_type == EFingerTypes::eUnknown)
+		//	{
+		//		otherFingerId = i;
+		//		break;
+		//	}
+		//}
 
-		if (otherFingerId != -1)
-		{
-			FingerInfo& otherInfo = m_vFingerInfo[otherFingerId];
+		//if (otherFingerId != -1)
+		//{
+		//	FingerInfo& otherInfo = m_vFingerInfo[otherFingerId];
 
+		if(info.m_time.Milli() > ROPE_TIME)
 			info.m_type = EFingerTypes::ePush;
-			otherInfo.m_type = EFingerTypes::ePush;
+			//otherInfo.m_type = EFingerTypes::ePush;
 
-			ActivatePush();
-		}
+		//	ActivatePush();
+	//	}
 	}
 
 #elif IS_PC

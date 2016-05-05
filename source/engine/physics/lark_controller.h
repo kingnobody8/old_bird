@@ -33,7 +33,7 @@ namespace engine
 		int FindTouchSlot(const int64& fingerId);
 		void PushCheck(const int& index);
 
-		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 0, eSecondFinger, eThirdFinger, eFingerCount }; //remove this
+		enum EFingerDefs	{ eInvalidFinger = -1, eFirstFinger = 0, eSecondFinger, eThirdFinger, eFourthFinger, eFingerCount  }; //remove this
 		enum EFingerTypes	{ eInvalidType, eUnknown, ePush, eRope };
 
 		struct FingerInfo
