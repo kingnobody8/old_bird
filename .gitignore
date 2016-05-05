@@ -56,7 +56,7 @@ Temporary Items
 .apdisk
 
 #local workspace
-.xcuserdatad
+xcuserdata/*
 
 # Windows
 # =========================
