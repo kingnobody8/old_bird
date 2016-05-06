@@ -101,11 +101,14 @@ namespace engine
 				pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);*/
 				m_pParticleEmitterShape = *(b2PolygonShape*)vBodies[i]->GetFixtureList()[0].GetShape();
 				m_pParticleEmitterPosition = vBodies[i]->GetPosition();
+				angle = vBodies[i]->GetAngle();
 
 				//b2PolygonShape* shapep = (b2PolygonShape*)bodyShape;
 				//pd.shape = shapep;
 				//pd.position = vBodies[i]->GetPosition();
 				////pd.shape = vBodies[i]->GetFixtureList()[0].GetShape();
+
+				MakeParticles(1, -1, b2Vec2(0, 0));
 
 				//b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
 				m_pWorld->DestroyBody(vBodies[i]);
@@ -239,7 +242,7 @@ namespace engine
 			}
 
 			//update particles
-			if(m_pParticleSystem != null)
+			/*if(m_pParticleSystem != null)
 			{
 				static util::Time t = 0;
 				t += dt;
@@ -276,7 +279,7 @@ namespace engine
 					particles = 0.0f;
 				}
 			}
-
+*/
 
 			m_LarkController.Update(dt);
 
@@ -353,6 +356,35 @@ namespace engine
 
 			return true;
 		}
+
+		void PhysicsPlugin::MakeParticles(int count, int lifetime, b2Vec2 dir)
+		{
+			b2ParticleGroupDef pd;
+			pd.flags = b2_solidParticleGroup;
+			if (lifetime > 0)
+				pd.lifetime = lifetime;
+			pd.linearVelocity = dir;
+			util::Color clr = util::Color::CYAN;
+			pd.color = b2Color(clr.r, clr.g, clr.b, clr.a);
+
+			pd.shape = &m_pParticleEmitterShape;
+			pd.position = m_pParticleEmitterPosition;
+			pd.particleCount = count;
+			pd.angle = angle;
+
+
+			if (pd.particleCount > 0)
+			{
+				b2Vec2* posData = new b2Vec2[pd.particleCount];
+				for (int i = 0; i < pd.particleCount; ++i)
+				{
+					posData[i] = b2Vec2(0, 0);
+				}
+				pd.positionData = posData;
+				b2ParticleGroup * const group = m_pParticleSystem->CreateParticleGroup(pd);
+			}
+		}
+
 
 		void PhysicsPlugin::Reload()
 		{

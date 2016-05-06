@@ -34,7 +34,7 @@ namespace engine
 			bool m_bIsTestbed;
 			b2PolygonShape m_pParticleEmitterShape;
 			b2Vec2 m_pParticleEmitterPosition;
-
+			float angle;
 
 			void OnMouseDownTestbed(const mouse_events::ButtonAction& action);
 			void OnMouseUpTestbed(const mouse_events::ButtonAction& action);
@@ -50,6 +50,8 @@ namespace engine
 			void OnMouseWheel(const mouse_events::WheelAction& action);
 
 			void OnKeyDown(const key_events::KeyAction& action);
+
+			void MakeParticles(int count, int lifetime, b2Vec2 dir);
 
 		public:
 			PhysicsPlugin();
