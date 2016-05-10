@@ -81,4 +81,7 @@ $RECYCLE.BIN/
 
 # Custom
 build/*
+projects/android/android_entry/ARM/*
+projects/android/android_entry/ARM64/*
+*.opendb
 *.suo
