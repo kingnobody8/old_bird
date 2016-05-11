@@ -16,18 +16,8 @@
 #define OUT
 #define IN
 
-#ifdef IS_x32
-//Unsigned
-typedef unsigned char		u08;
-typedef unsigned short int	u16;
-typedef unsigned long int	u32;
-typedef unsigned long long	u64;
-//Signed
-typedef signed char			s08;
-typedef signed short int	s16;
-typedef signed long int		s32;
-typedef signed long long	s64;
-#elif IS_x64
+
+#ifdef IS_x64
 //Unsigned
 typedef unsigned char		u08;
 typedef unsigned short int	u16;
@@ -37,6 +27,17 @@ typedef unsigned long long	u64;
 typedef signed char			s08;
 typedef signed short int	s16;
 typedef signed int			s32;
+typedef signed long long	s64;
+#else //assume 32 bit
+//Unsigned
+typedef unsigned char		u08;
+typedef unsigned short int	u16;
+typedef unsigned long int	u32;
+typedef unsigned long long	u64;
+//Signed
+typedef signed char			s08;
+typedef signed short int	s16;
+typedef signed long int		s32;
 typedef signed long long	s64;
 #endif
 

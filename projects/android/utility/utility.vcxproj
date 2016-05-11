@@ -34,8 +34,47 @@
       <Platform>x86</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\utility\event\publisher.cpp" />
+    <ClCompile Include="..\..\..\source\utility\event\subscriber.cpp" />
+    <ClCompile Include="..\..\..\source\utility\helper\func.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\angle.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\matrix.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\transform.cpp" />
+    <ClCompile Include="..\..\..\source\utility\resource\json.cpp" />
+    <ClCompile Include="..\..\..\source\utility\time\util_time.cpp" />
+    <ClCompile Include="..\..\..\source\utility\types\color.cpp" />
+    <ClCompile Include="..\..\..\source\utility\types\rtti.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\utility\event\publisher.h" />
+    <ClInclude Include="..\..\..\source\utility\event\subscriber.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\common.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\enums.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\func.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\hierarchy.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\macro.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\platform.h" />
+    <ClInclude Include="..\..\..\source\utility\math\angle.h" />
+    <ClInclude Include="..\..\..\source\utility\math\box.h" />
+    <ClInclude Include="..\..\..\source\utility\math\matrix.h" />
+    <ClInclude Include="..\..\..\source\utility\math\transform.h" />
+    <ClInclude Include="..\..\..\source\utility\math\util_math.h" />
+    <ClInclude Include="..\..\..\source\utility\resource\json.h" />
+    <ClInclude Include="..\..\..\source\utility\time\tick.h" />
+    <ClInclude Include="..\..\..\source\utility\time\util_time.h" />
+    <ClInclude Include="..\..\..\source\utility\types\bit_flag.h" />
+    <ClInclude Include="..\..\..\source\utility\types\color.h" />
+    <ClInclude Include="..\..\..\source\utility\types\rtti.h" />
+    <ClInclude Include="..\..\..\source\utility\types\types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\source\utility\event\publisher.inl" />
+    <None Include="..\..\..\source\utility\helper\hierarchy.inl" />
+    <None Include="..\..\..\source\utility\types\color.def" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E50C3FC7-024F-4831-9FD7-5F51B2928634}</ProjectGuid>
+    <ProjectGuid>{41CEFCB3-0B01-492D-A2E0-1116C48B9FD0}</ProjectGuid>
     <Keyword>Android</Keyword>
     <RootNamespace>android_entry</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -160,7 +199,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -176,7 +215,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -192,7 +231,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -208,7 +247,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -224,7 +263,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -240,7 +279,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -256,7 +295,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -272,7 +311,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
     </ClCompile>
     <Link>
@@ -282,123 +321,6 @@
       <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\source\box2d\Box2D.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\b2BroadPhase.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\b2Collision.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\b2Distance.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\b2DynamicTree.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\b2TimeOfImpact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2ChainShape.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2CircleShape.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2EdgeShape.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2PolygonShape.h" />
-    <ClInclude Include="..\..\..\source\box2d\Collision\Shapes\b2Shape.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2BlockAllocator.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2Draw.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2FreeList.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2GrowableBuffer.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2GrowableStack.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2IntrusiveList.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2Math.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2Settings.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2SlabAllocator.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2StackAllocator.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2Stat.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2Timer.h" />
-    <ClInclude Include="..\..\..\source\box2d\Common\b2TrackedBlock.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2Body.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2ContactManager.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2Fixture.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2Island.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2TimeStep.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2World.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\b2WorldCallbacks.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2ChainAndCircleContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2ChainAndPolygonContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2CircleContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2Contact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2ContactSolver.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2EdgeAndCircleContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2EdgeAndPolygonContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2PolygonAndCircleContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Contacts\b2PolygonContact.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2DistanceJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2FrictionJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2GearJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2Joint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2MotorJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2MouseJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2PrismaticJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2PulleyJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2RevoluteJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2RopeJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2WeldJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Dynamics\Joints\b2WheelJoint.h" />
-    <ClInclude Include="..\..\..\source\box2d\Particle\b2Particle.h" />
-    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleAssembly.h" />
-    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleGroup.h" />
-    <ClInclude Include="..\..\..\source\box2d\Particle\b2ParticleSystem.h" />
-    <ClInclude Include="..\..\..\source\box2d\Particle\b2StackQueue.h" />
-    <ClInclude Include="..\..\..\source\box2d\Particle\b2VoronoiDiagram.h" />
-    <ClInclude Include="..\..\..\source\box2d\Rope\b2Rope.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2BroadPhase.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2CollideCircle.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2CollideEdge.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2CollidePolygon.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2Collision.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2Distance.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2DynamicTree.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\b2TimeOfImpact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\Shapes\b2ChainShape.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\Shapes\b2CircleShape.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\Shapes\b2EdgeShape.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Collision\Shapes\b2PolygonShape.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2BlockAllocator.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2Draw.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2FreeList.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2Math.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2Settings.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2StackAllocator.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2Stat.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2Timer.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Common\b2TrackedBlock.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\b2Body.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\b2ContactManager.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\b2Fixture.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\b2Island.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\b2World.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\b2WorldCallbacks.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2ChainAndCircleContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2ChainAndPolygonContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2CircleContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2Contact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2ContactSolver.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2EdgeAndCircleContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2EdgeAndPolygonContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2PolygonAndCircleContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Contacts\b2PolygonContact.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2DistanceJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2FrictionJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2GearJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2Joint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2MotorJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2MouseJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2PrismaticJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2PulleyJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2RevoluteJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2RopeJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2WeldJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Dynamics\Joints\b2WheelJoint.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Particle\b2Particle.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleAssembly.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleGroup.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Particle\b2ParticleSystem.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Particle\b2VoronoiDiagram.cpp" />
-    <ClCompile Include="..\..\..\source\box2d\Rope\b2Rope.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

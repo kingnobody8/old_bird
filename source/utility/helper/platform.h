@@ -29,7 +29,9 @@
 #define IS_APPLE 1
 #define IS_x64 1
 #endif
-#elif __linux	// linux
+#elif __linux	// linux - android
+#define IS_ANDROID 1
+#define IS_MOBILE 1
 #elif __unix	// all unices not caught above // Unix
 #elif __posix	// POSIX
 #endif
