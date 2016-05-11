@@ -15,5 +15,10 @@
 #elif IS_IOS
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#elif IS_ANDROID
+#include <EGL/egl.h>
+//#include <GLES/gl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #endif
 

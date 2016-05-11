@@ -58,7 +58,7 @@ namespace engine
 
 			__todo() // check this Matrix math
 
-				util::Matrix inverse = glm::inverse(m_matrix);
+				util::Matrix inverse;// = glm::inverse(m_matrix);
 			vec4 min;// = inverse * vec4(ret.lowerBound.x, ret.lowerBound.y, 0.0f, 1.0f);
 			vec4 max;// = inverse * vec4(ret.upperBound.x, ret.upperBound.y, 0.0f, 1.0f);
 			//	util::Matrix2D::Vector_Matrix_Multiply(util::vec2(ret.lowerBound.x, ret.lowerBound.y), inverse);

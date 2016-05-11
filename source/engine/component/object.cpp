@@ -9,11 +9,14 @@ namespace engine
 	{
 		STATIC std::vector<CObject*> CObject::s_MarkedForDestruction;
 
-		static void Nuke(CObject* pObj);
+		STATIC void CObject::Nuke(CObject* that)
+		{
+			that->Nuke();
+		}
 
 		STATIC void CObject::Clean()
 		{
-			for (int i = 0; i < s_MarkedForDestruction.size(); ++i)
+			for (size_t i = 0; i < s_MarkedForDestruction.size(); ++i)
 			{
 				s_MarkedForDestruction[i]->Nuke();
 			}
@@ -231,12 +234,12 @@ namespace engine
 		}
 		void CObject::SetWorldMatrix(const util::Matrix& mat)
 		{
-			util::Matrix temp = mat;
+		/*	util::Matrix temp = mat;
 			if (this->m_pParent)
 			{
-				temp = this->m_pParent->CalcWorldMatrix() * glm::inverse(mat);
+				temp = this->m_pParent->CalcWorldMatrix() * glm::inverse(mat.);
 			}
-			this->SetLocalMatrix(temp);
+			this->SetLocalMatrix(temp);*/
 		}
 
 		void CObject::SetLocalPosX(const float& x)
@@ -578,7 +581,7 @@ namespace engine
 			{
 				if (this->m_vChildren[i]->GetName() == szName && this->m_vChildren[i]->IsGroup())
 				{
-					return dynamic_cast<CGroup*>(this->m_vChildren[i]);
+					return static_cast<CGroup*>(this->m_vChildren[i]);
 				}
 			}
 

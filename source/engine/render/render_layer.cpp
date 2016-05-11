@@ -85,7 +85,7 @@ namespace engine
 			const b2AABB view = m_pCamera->CalcViewAabb();
 			Cull(view);
 
-			util::Matrix inv_cam = glm::inverse(m_pCamera->GetMatrix());
+			util::Matrix inv_cam;// = glm::inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{
 				(*iter)->operator()(inv_cam);

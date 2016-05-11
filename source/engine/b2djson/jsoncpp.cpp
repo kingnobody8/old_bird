@@ -1061,7 +1061,7 @@ std::istream& operator>>( std::istream &sin, Value &root )
     Json::Reader reader;
     bool ok = reader.parse(sin, root, true);
     //JSON_ASSERT( ok );
-    if (!ok) throw std::runtime_error(reader.getFormattedErrorMessages());
+   // if (!ok) throw std::runtime_error(reader.getFormattedErrorMessages());
     return sin;
 }
 
@@ -1562,7 +1562,7 @@ ValueIterator::operator =( const SelfType &other )
 
 #define JSON_ASSERT_UNREACHABLE assert( false )
 #define JSON_ASSERT( condition ) assert( condition );  // @todo <= change this into an exception throw
-#define JSON_FAIL_MESSAGE( message ) throw std::runtime_error( message );
+#define JSON_FAIL_MESSAGE( message ) assert(false && message);//throw std::runtime_error( message );
 #define JSON_ASSERT_MESSAGE( condition, message ) if (!( condition )) JSON_FAIL_MESSAGE( message )
 
 namespace Json {

@@ -15,6 +15,7 @@ namespace engine
 			static std::vector<CObject*> s_MarkedForDestruction;
 		public:
 			static void Clean();
+			static void Nuke(CObject* that);
 
 			/*Data*/
 		private:
