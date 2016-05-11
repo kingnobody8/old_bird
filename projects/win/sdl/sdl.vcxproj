@@ -124,10 +124,6 @@
     <ClCompile Include="..\..\..\source\sdl\test\SDL_test_md5.c" />
     <ClCompile Include="..\..\..\source\sdl\test\SDL_test_random.c" />
     <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_syscond.c" />
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_sysmutex.c" />
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_syssem.c" />
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_systhread.c" />
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_systls.c" />
     <ClCompile Include="..\..\..\source\sdl\thread\SDL_thread.c" />
     <ClCompile Include="..\..\..\source\sdl\thread\windows\SDL_sysmutex.c" />
     <ClCompile Include="..\..\..\source\sdl\thread\windows\SDL_syssem.c" />
@@ -316,8 +312,6 @@
     <ClInclude Include="..\..\..\source\sdl\SDL_assert_c.h" />
     <ClInclude Include="..\..\..\source\sdl\SDL_error_c.h" />
     <ClInclude Include="..\..\..\source\sdl\SDL_internal.h" />
-    <ClInclude Include="..\..\..\source\sdl\thread\generic\SDL_sysmutex_c.h" />
-    <ClInclude Include="..\..\..\source\sdl\thread\generic\SDL_systhread_c.h" />
     <ClInclude Include="..\..\..\source\sdl\thread\SDL_systhread.h" />
     <ClInclude Include="..\..\..\source\sdl\thread\SDL_thread_c.h" />
     <ClInclude Include="..\..\..\source\sdl\thread\windows\SDL_systhread_c.h" />

@@ -94,9 +94,6 @@
     <Filter Include="thread\windows">
       <UniqueIdentifier>{dbac778d-4d12-440c-8eed-1457794a01d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="thread\generic">
-      <UniqueIdentifier>{dfd19cb4-a23b-4801-aaf0-91b6ed927643}</UniqueIdentifier>
-    </Filter>
     <Filter Include="timer">
       <UniqueIdentifier>{cb47f69d-1fce-427e-ba5a-9e93f155f2d4}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="video\dummy">
       <UniqueIdentifier>{425ee3c1-6c00-4e43-86c5-f6b3586a0ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\generic">
+      <UniqueIdentifier>{d893cf5d-4e4f-4d2d-aaa4-9b1d35f09b48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -417,21 +417,6 @@
     <ClCompile Include="..\..\..\source\sdl\thread\windows\SDL_systls.c">
       <Filter>thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_syscond.c">
-      <Filter>thread\generic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_sysmutex.c">
-      <Filter>thread\generic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_syssem.c">
-      <Filter>thread\generic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_systhread.c">
-      <Filter>thread\generic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_systls.c">
-      <Filter>thread\generic</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\sdl\timer\SDL_timer.c">
       <Filter>timer</Filter>
     </ClCompile>
@@ -574,6 +559,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\sdl\video\dummy\SDL_nullvideo.c">
       <Filter>video\dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\sdl\thread\generic\SDL_syscond.c">
+      <Filter>thread\generic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -987,12 +975,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\sdl\thread\windows\SDL_systhread_c.h">
       <Filter>thread\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\sdl\thread\generic\SDL_sysmutex_c.h">
-      <Filter>thread\generic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\sdl\thread\generic\SDL_systhread_c.h">
-      <Filter>thread\generic</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\sdl\timer\SDL_timer_c.h">
       <Filter>timer</Filter>
