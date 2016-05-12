@@ -30,10 +30,10 @@ namespace engine
 		void RunFrame(void* params);
 	};
 
-	static Engine* Get()
+	/*static Engine* Get()
 	{
 		return Engine::Get();
-	}
+	}*/
 }
 
 

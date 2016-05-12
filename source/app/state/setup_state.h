@@ -11,7 +11,7 @@ namespace app
 
 		public:
 			SetupState();
-			~SetupState();
+			virtual ~SetupState();
 
 			virtual void Init();
 			virtual void Exit();
