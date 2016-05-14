@@ -175,7 +175,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -191,7 +192,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -207,7 +209,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -223,7 +226,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -239,7 +243,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -255,7 +260,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -271,7 +277,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -287,7 +294,8 @@
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /y "$(OutDir)*.a" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"
+xcopy /y "$(OutDir)*.recipe" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

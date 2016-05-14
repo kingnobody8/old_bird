@@ -109,6 +109,12 @@
     <Filter Include="test">
       <UniqueIdentifier>{d9c76482-5f6d-4197-ba4c-fd252cdaf901}</UniqueIdentifier>
     </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{8bc08f92-25c4-4d01-8ab3-29793efb2163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\android">
+      <UniqueIdentifier>{c2698f89-062c-4fc5-833f-b76580ea2bf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\sdl\atomic\SDL_atomic.c">
@@ -440,6 +446,9 @@
     <ClCompile Include="..\..\..\source\sdl\SDL_log.c" />
     <ClCompile Include="..\..\..\source\sdl\SDL.c" />
     <ClCompile Include="..\..\..\source\sdl\SDL_assert.c" />
+    <ClCompile Include="..\..\..\source\sdl\main\android\SDL_android_main.c">
+      <Filter>main\android</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\sdl\audio\SDL_audiodev_c.h">
