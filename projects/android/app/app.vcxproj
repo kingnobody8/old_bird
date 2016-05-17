@@ -160,9 +160,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -174,9 +176,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -188,9 +192,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -202,9 +208,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -216,9 +224,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -230,9 +240,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -244,9 +256,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -258,9 +272,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <CompileAs>CompileAsCpp</CompileAs>
       <CppLanguageStandard>c++11</CppLanguageStandard>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/app/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>engine;utility;box2d;sdl;%(LibraryDependencies);GLESv1_CM;EGL;GLESv2;m</LibraryDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\lib_output\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.so" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
