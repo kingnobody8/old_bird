@@ -24,6 +24,8 @@
 		BC075D1A1BEE6FCF00AA8C9A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D191BEE6FCF00AA8C9A /* assets */; };
 		BC075D1E1BEE700700AA8C9A /* media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC075D1D1BEE700700AA8C9A /* media.xcassets */; };
 		BC4B4A3D1C5B105F0012C25C /* setup_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */; };
+		BCD9F1D81CEEA52D0040E40D /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD9F1D71CEEA52D0040E40D /* GameController.framework */; };
+		BCD9F1DA1CEEA5CB0040E40D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD9F1D91CEEA5CB0040E40D /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		BC075D1D1BEE700700AA8C9A /* media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = media.xcassets; sourceTree = "<group>"; };
 		BC4B4A3B1C5B105F0012C25C /* setup_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup_state.cpp; sourceTree = "<group>"; };
 		BC4B4A3C1C5B105F0012C25C /* setup_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup_state.h; sourceTree = "<group>"; };
+		BCD9F1D71CEEA52D0040E40D /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		BCD9F1D91CEEA5CB0040E40D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD9F1DA1CEEA5CB0040E40D /* CoreMotion.framework in Frameworks */,
+				BCD9F1D81CEEA52D0040E40D /* GameController.framework in Frameworks */,
 				BC075B251BEE604B00AA8C9A /* ImageIO.framework in Frameworks */,
 				BC075B231BEE604500AA8C9A /* MobileCoreServices.framework in Frameworks */,
 				BC075B211BEE603E00AA8C9A /* CoreGraphics.framework in Frameworks */,
@@ -76,6 +82,7 @@
 		BC075ACA1BEE5C3D00AA8C9A = {
 			isa = PBXGroup;
 			children = (
+				BCD9F1D91CEEA5CB0040E40D /* CoreMotion.framework */,
 				BC4B4A3A1C5B105F0012C25C /* state */,
 				BC075D1D1BEE700700AA8C9A /* media.xcassets */,
 				BC075D191BEE6FCF00AA8C9A /* assets */,
@@ -90,6 +97,7 @@
 		BC075B261BEE609F00AA8C9A /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BCD9F1D71CEEA52D0040E40D /* GameController.framework */,
 				BC075B241BEE604B00AA8C9A /* ImageIO.framework */,
 				BC075B221BEE604500AA8C9A /* MobileCoreServices.framework */,
 				BC075B201BEE603E00AA8C9A /* CoreGraphics.framework */,
