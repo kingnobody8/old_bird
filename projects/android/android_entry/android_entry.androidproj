@@ -142,7 +142,6 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Content Include="res\values\strings.xml" />
     <AntBuildXml Include="build.xml" />
     <AndroidManifest Include="AndroidManifest.xml">
       <SubType>Designer</SubType>
@@ -153,6 +152,19 @@
     <ProjectReference Include="..\app\app.vcxproj">
       <Project>{199f384d-1d8a-4f56-a244-a5a55e392fea}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\sdl\sdl.vcxproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\drawable-hdpi\ic_launcher.png" />
+    <Content Include="res\drawable-mdpi\ic_launcher.png" />
+    <Content Include="res\drawable-xhdpi\ic_launcher.png" />
+    <Content Include="res\drawable-xxhdpi\ic_launcher.png" />
+    <Content Include="res\layout\main.xml" />
+    <Content Include="res\values\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <JavaCompile Include="src\org\liblark\LarkApp.java" />
+    <JavaCompile Include="src\org\libsdl\app\SDLActivity.java" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />

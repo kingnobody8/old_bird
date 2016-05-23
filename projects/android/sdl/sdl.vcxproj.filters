@@ -147,9 +147,6 @@
     <ClCompile Include="..\..\..\source\sdl\audio\android\SDL_androidaudio.c">
       <Filter>audio\android</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\sdl\core\android\SDL_android.c">
-      <Filter>core\android</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\sdl\cpuinfo\SDL_cpuinfo.c">
       <Filter>cpuinfo</Filter>
     </ClCompile>
@@ -446,8 +443,8 @@
     <ClCompile Include="..\..\..\source\sdl\SDL_log.c" />
     <ClCompile Include="..\..\..\source\sdl\SDL.c" />
     <ClCompile Include="..\..\..\source\sdl\SDL_assert.c" />
-    <ClCompile Include="..\..\..\source\sdl\main\android\SDL_android_main.c">
-      <Filter>main\android</Filter>
+    <ClCompile Include="..\..\..\source\sdl\core\android\SDL_android.c">
+      <Filter>core\android</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

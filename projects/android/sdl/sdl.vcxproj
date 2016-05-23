@@ -65,7 +65,6 @@
     <ClCompile Include="..\..\..\source\sdl\joystick\SDL_gamecontroller.c" />
     <ClCompile Include="..\..\..\source\sdl\joystick\SDL_joystick.c" />
     <ClCompile Include="..\..\..\source\sdl\loadso\dlopen\SDL_sysloadso.c" />
-    <ClCompile Include="..\..\..\source\sdl\main\android\SDL_android_main.c" />
     <ClCompile Include="..\..\..\source\sdl\power\android\SDL_syspower.c" />
     <ClCompile Include="..\..\..\source\sdl\power\SDL_power.c" />
     <ClCompile Include="..\..\..\source\sdl\render\direct3d11\SDL_render_d3d11.c" />
