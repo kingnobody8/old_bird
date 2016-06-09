@@ -70,7 +70,7 @@ namespace engine
 		//Don't quit
 		m_quit = false;
 
-#ifdef MOBILE //Set frame callback
+#ifdef IS_IOS //Set frame callback
 		SDL_iPhoneSetAnimationCallback(m_pRenderPlugin->GetSdlWindow(), 1, IosCallback, nullptr);
 #endif
 	}

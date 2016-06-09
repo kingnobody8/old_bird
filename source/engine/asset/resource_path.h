@@ -8,6 +8,5 @@
 #elif IS_APPLE
 		std::string getResourcePath(void);
 #elif IS_ANDROID
-static const std::string getResourcePath(void) { return "../../../"; }
+		static const std::string getResourcePath(void) { return ""; }
 #endif
-

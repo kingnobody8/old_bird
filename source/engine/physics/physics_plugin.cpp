@@ -16,7 +16,7 @@ namespace engine
 	{
 		const int VELOCITY_ITERATIONS = 8;
 		const int POSITION_ITERATIONS = 3;
-		const b2Vec2 GRAVITY = b2Vec2(0.0f, -10.0f);
+		const b2Vec2 GRAVITY = b2Vec2(0.0f, 0.0f);
 		const int PARTICLES_PER_SEC = 24;
 
 		render::RectNode node;

@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 
 	engi->Init(new app::state::SetupState());
 	
-#ifndef MOBILE
+#ifndef IS_IOS
 	while (!engi->GetQuit())
 	{
 		engi->RunFrame(null);
