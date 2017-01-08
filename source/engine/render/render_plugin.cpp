@@ -87,7 +87,7 @@ namespace engine
 
 			//Create Window
 			
-#ifdef IS_MOBILE
+#ifdef MOBILE
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
@@ -122,7 +122,7 @@ namespace engine
 			glViewport(0, 0, size.x, size.y);
 			
 			
-#ifndef IS_MOBILE
+#ifndef MOBILE
 			//Use Vsync
 			if (SDL_GL_SetSwapInterval(1) < 0)
 			{

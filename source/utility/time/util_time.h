@@ -4,7 +4,7 @@
 namespace util
 {
 	//TIME format??
-	// 2015y:09m:04d:22h:03m:46s:32ms
+	// 2015y:09m:04d:22h:03m:46s:32
 	// 15:09:04:22:03:46:32
 	// YYYY:MM:DD:HH:MM:SS:MS
 	// 2015:09:04:22:03:46:32
