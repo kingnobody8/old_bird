@@ -151,7 +151,7 @@ namespace engine
 
 					m_nodes.push_back(new render::CRenderNodeLine());
 					m_nodes[i]->Register(m_szLayer);
-					m_nodes[i]->SetColor(m_color.SDL());
+					m_nodes[i]->SetColor(m_color);
 					static_cast<render::CRenderNodeLine*>(m_nodes[i])->SetLine(util::shape::Segment(p1, p2));
 				}
 			}
@@ -211,13 +211,18 @@ namespace engine
 				}
 			}
 
-			VIRTUAL const util::shape::AABB CPointsPart::CalcAABB(void)
+			VIRTUAL const b2AABB CPointsPart::CalcAABB(void)
 			{
 				const std::vector<util::math::vec2> wpoints = CalcWorldPoints();
 
-				util::shape::AABB ret;
+				b2AABB ret = INVALID_AABB;
 				for (int i = 0; i < wpoints.size(); ++i)
-					ret.Stretch(wpoints[i]);
+				{
+					if (!ret.IsValid())
+						ret.lowerBound = ret.upperBound = b2Vec2(wpoints[i].x, wpoints[i].y);
+					else
+						ret.Combine(b2Vec2(wpoints[i].x, wpoints[i].y));
+				}
 				return ret;
 			}
 
@@ -236,7 +241,7 @@ namespace engine
 				__todo() //this needs to do a vertical search for ColorModPart and see what colors it applies to us so we can properly set the nod
 				m_color = clr;
 				for (int i = 0; i < m_nodes.size(); ++i)
-					m_nodes[i]->SetColor(clr.SDL());
+					m_nodes[i]->SetColor(clr);
 			}
 
 			VIRTUAL void CPointsPart::SetLayer(const std::string& szLayer)

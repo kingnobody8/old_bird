@@ -1,33 +1,17 @@
 #pragma once
-#include "timer.h"
-#include "script/script.h"
-
-#include "event/publisher.h"
-#include "event/publisher.inl"
-#include "event/subscriber.h"
-#include "input/input.h"
-
-#include "script/ui/button_part.h"
+#include "utility/time/tick.h"
+#include "render/render_plugin.h"
 
 namespace engine
 {
 	//forward declare
-	class IBaseState;
-	class Engine;
-	namespace component
-	{
-		class CObject;
-		class CGroup;
-		class IPart;
-	}
+	namespace state { class IBaseState; }
 
 	class Engine
 	{
 	private:
-		util::CTimer m_timer;
-		IBaseState* m_pCurrState;
-		IBaseState* m_pNextState;
-		component::CGroup*		m_pRoot;
+		util::Tick				m_timer;
+		render::RenderPlugin*	m_pRenderPlugin;
 		bool					m_quit;
 
 		static Engine* s_pInstance;
@@ -35,32 +19,33 @@ namespace engine
 		~Engine();
 
 		void Update();
-		void PushState(IBaseState* const pState);
-
-		void OnMode(int mode);
-		void OnMode2(int mode);
-		void OnAKey(input::key_events::KeyAction action);
-		void OnMouseBtn(input::mouse_events::MotionAction action);
-
-		void OnBtn(script::ui::CButtonPart* btn);
-
 
 	public:
 		static Engine* Get(void);
 		static void DeleteInstance(void);
 		const bool GetQuit() const { return m_quit; }
 
-		void Init(IBaseState* const pFirstState);
+		void Init(state::IBaseState* const pFirstState);
 		void Exit(void);
 		void RunFrame(void* params);
-
-
-		util::event::IntPublisher pub;
-		util::event::Subscriber sub;
 	};
 
-	static Engine* Get()
+	/*static Engine* Get()
 	{
 		return Engine::Get();
-	}
+	}*/
 }
+
+
+/*HABIG BEGIN*/
+//#include <string>
+//#include <assert.h>
+//static void CheckSdlError(const char* ignore_error = nullptr)
+//{
+//	const char* err = SDL_GetError();
+//	if (*err != 0)
+//		SDL_Log("SDL Error: %s", err);
+//	assert(*err == 0 || std::strcmp(err, ignore_error) == 0);
+//	SDL_ClearError();
+//}
+/*HABIG END*/

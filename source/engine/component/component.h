@@ -1,11 +1,10 @@
 #pragma once
-#include "func.h"
-#include "types.h"
-#include "math/matrix_2d.h"
-#include "shape/aabb.h"
-#include "json.h"
-#include "bit_flag.h"
-#include "enums.h"
+#include "utility/helper/func.h"
+#include "utility/types/types.h"
+#include "utility/resource/json.h"
+#include "utility/types/bit_flag.h"
+#include "utility/math/util_math.h"
+#include "utility/helper/enums.h"
 #include <map>
 #include <list>
 #include <vector>
@@ -35,7 +34,8 @@ namespace engine
 			PARENT_VISIBLE = 0x04,	//part doesn't use this
 			STARTED = 0x08,
 			STOPPED = 0x10,
-			NUKED = 0x20
+			DIRTY = 0x20,
+			NUKED = 0x40
 		};
 	}
 }

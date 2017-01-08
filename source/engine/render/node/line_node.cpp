@@ -1,58 +1,142 @@
 #include "line_node.h"
-#include "../render_layer.h"
-#include "func.h"
+#include "utility/helper/func.h"
+#include "../shader/shader_default.h"
 
 namespace engine
 {
 	namespace render
 	{
-		void CRenderNodeLine::SetLine(const util::shape::Segment& seg)
+		LineNode::LineNode()
+			: m_vVerts(null)
+			, m_vertCount(0)
+			, m_vIndicies(null)
+			, m_indexCount(0)
 		{
-			this->m_seg = seg;
-			m_flag = NodeStateFlag::MOVE_DIRTY | NodeStateFlag::CULL_DIRTY;
 		}
-		
-		VIRTUAL const b2PolygonShape& CRenderNodeLine::CalcShape()
+
+		VIRTUAL LineNode::~LineNode()
 		{
-			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
+			FreeVBO();
+		}
+
+		void LineNode::InitVBO(const std::vector<Vertex>& verts)
+		{
+			//early out
+			if (verts.empty())
+				return;
+
+			//Cleanup any old data
+			FreeVBO();
+
+			m_vertCount = verts.size();
+			m_vVerts = new Vertex[m_vertCount];
+			for (int i = 0; i < m_vertCount; ++i)
 			{
-				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
-
-				util::shape::AABB box;
-				box.m_min = util::math::vec2(Min(m_seg.start.x, m_seg.end.x), Min(m_seg.start.y, m_seg.end.y));
-				box.m_max = util::math::vec2(Max(m_seg.start.x, m_seg.end.x), Max(m_seg.start.y, m_seg.end.y));
-
-				m_shape.SetAsBox((float32)box.CalcExtends().x, (float32)box.CalcExtends().y,
-					b2Vec2((float32)box.CalcCenter().x, (float32)box.CalcCenter().y), 0);
+				m_vVerts[i] = verts[i];
 			}
-			return m_shape;
+
+			m_indexCount = verts.size();
+			m_vIndicies = new int[m_indexCount];
+			for (int i = 0; i < m_indexCount; i++)
+			{
+				m_vIndicies[i] = i;
+			}
+
+			//Create VBO
+			glGenBuffers(1, &m_vboID);
+			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
+			glBufferData(GL_ARRAY_BUFFER, m_vertCount * sizeof(Vertex), m_vVerts, GL_DYNAMIC_DRAW);
+
+			//Create IBO
+			glGenBuffers(1, &m_iboID);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexCount * sizeof(GLuint), m_vIndicies, GL_DYNAMIC_DRAW);
+
+			//Unbind buffers
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
 		}
-		
-		VIRTUAL void CRenderNodeLine::operator() (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam)
+
+		VIRTUAL void LineNode::FreeVBO()
 		{
-			util::math::vec2 tmp1 = m_seg.start;
-			util::math::vec2 tmp2 = m_seg.end;
+			if (m_vboID != 0)
+			{
+				glDeleteBuffers(1, &m_vboID);
+				glDeleteBuffers(1, &m_iboID);
 
-			//get screen space
-			tmp1 = util::math::Matrix2D::Vector_Matrix_Multiply(tmp1, inv_cam);
-			tmp2 = util::math::Matrix2D::Vector_Matrix_Multiply(tmp2, inv_cam);
+				SafeDelete(m_vVerts);
+				m_vertCount = 0;
+				SafeDelete(m_vIndicies);
+				m_indexCount = 0;
+			}
+		}
 
-			//get screen info
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
-			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+		VIRTUAL void LineNode::CalcAabbInternal()
+		{
+			m_aabb = b2AABB();
+			for (int i = 0; i < m_vertCount; ++i)
+			{
+				vec4 tmp = m_matrix * vec4(m_vVerts[i].position.x, m_vVerts[i].position.y, 0.0f, 1.0f);
+				if (!m_aabb.IsValid())
+				{
+					m_aabb.lowerBound = m_aabb.upperBound = b2Vec2(tmp.x, tmp.y);
+				}
+				else
+				{
+					m_aabb.Combine(b2Vec2(tmp.x, tmp.y));
+				}
+			}
+		}
 
-			//set the sdl points
-			SDL_Point p1, p2;
-			p1.x = (int)(origin.x + tmp1.x);
-			p1.y = (int)(origin.y - tmp1.y);
-			p2.x = (int)(origin.x + tmp2.x);
-			p2.y = (int)(origin.y - tmp2.y);
+		VIRTUAL void LineNode::operator() (const util::Matrix& inv_cam)
+		{
+			if (m_vboID == 0 || m_pShader == null)
+				return;
 
-			ScissorOperation(pRen, origin);
+			m_pShader->Bind();
 
-			SDL_SetRenderDrawColor(pRen, m_clr.r, m_clr.g, m_clr.b, m_clr.a);
-			SDL_RenderDrawLine(pRen, p1.x, p1.y, p2.x, p2.y);
+			glEnable(GL_BLEND);
+			glDisable(GL_DEPTH_TEST);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+			DefaultShader* dShader = static_cast<DefaultShader*>(m_pShader);
+			dShader->EnableVertexPos2D();
+			dShader->EnableVertexColor();
+
+			glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
+			dShader->SetVertexPos2D(sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+			dShader->SetVertexColor(sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
+			
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iboID);
+			glDrawElements(GL_LINE_LOOP, m_indexCount, GL_UNSIGNED_INT, NULL);
+
+			dShader->DisableVertexPos2D();
+			dShader->DisableVertexColor();
+
+			m_pShader->Unbind();
+
+		}
+
+		const std::vector<Vertex> LineNode::GetVerts()
+		{
+			std::vector<Vertex> ret;
+			ret.resize(m_vertCount);
+			for (int i = 0; i < m_vertCount; ++i)
+			{
+				ret[i] = m_vVerts[i];
+			}
+			return ret;
+		}
+
+		const std::vector<int> LineNode::GetIndicies()
+		{
+			std::vector<int> ret;
+			ret.resize(m_indexCount);
+			for (int i = 0; i < m_indexCount; ++i)
+			{
+				ret[i] = m_vIndicies[i];
+			}
+			return ret;
 		}
 	}
 }

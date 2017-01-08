@@ -1,7 +1,6 @@
 #include "render_node.h"
 #include "../render_layer.h"
-#include "func.h"
-#include "sprite_node.h"
+#include "utility/helper/func.h"
 
 namespace engine
 {
@@ -31,9 +30,11 @@ namespace engine
 			: m_pLayer(null)
 			, m_flag(MOVE_DIRTY | CULL_DIRTY)
 			, m_zed(0.0f)
-			, m_use_scissor(false)
+			, m_vboID(0)
+			, m_iboID(0)
+			, m_pShader(null)
+		//	, m_use_scissor(false)
 		{
-			m_clr.a = m_clr.r = m_clr.g = m_clr.b = 255;
 		}
 		
 		VIRTUAL IRenderNode::~IRenderNode()
@@ -41,23 +42,23 @@ namespace engine
 			Unregister();
 		}
 		
-		void IRenderNode::SetScissorRect(const util::shape::AABB& scissor)
+	/*	void IRenderNode::SetScissorRect(const b2AABB& scissor)
 		{
-			if (scissor.IsInvalid())
+			if (scissor.IsValid())
 				return;
 			m_scissor = scissor;
 			m_use_scissor = true;
 		}
 		
-		void IRenderNode::ScissorOperation(SDL_Renderer* pRen, const util::math::vec2& origin)
+		void IRenderNode::ScissorOperation(SDL_Renderer* pRen, const vec2& origin)
 		{
 			if (m_use_scissor)
 			{
 				SDL_Rect scissor;
-				scissor.x = (int)(origin.x + m_scissor.m_min.x);
-				scissor.y = (int)(origin.y - m_scissor.m_max.y);
-				scissor.w = (int)m_scissor.CalcSize().w;
-				scissor.h = (int)m_scissor.CalcSize().h;
+				scissor.x = (int)(origin.x + m_scissor.lowerBound.x);
+				scissor.y = (int)(origin.y - m_scissor.upperBound.y);
+				scissor.w = (int)m_scissor.GetExtents().x * 2;
+				scissor.h = (int)m_scissor.GetExtents().y * 2;
 				SDL_RenderSetClipRect(pRen, &scissor);
 			}
 			else
@@ -65,8 +66,8 @@ namespace engine
 				SDL_RenderSetClipRect(pRen, null);
 			}
 		}
-		
-		const bool IRenderNode::CheckInView(const b2PolygonShape& view)
+		*/
+		const bool IRenderNode::CheckInView(const b2AABB& view)
 		{
 			__todo()
 				//USE BOX2D polygonshape for shape checks, add a function to each rendernode that returns it's aabb,
@@ -77,25 +78,22 @@ namespace engine
 				//however one idea is to cache a bool saying if an object has moved since last cull, it has then we only check the objects that have moved
 				//howeve against that idea is that if the camera moves we still have to recheck everything, so this won't be very useful during gameplay
 
-				CalcShape();
+			CalcAABB();
 
-			b2Transform trans_shape, trans_view;
-			const bool overlap = b2TestOverlap(&m_shape, 0, &view, 0, trans_shape, trans_view);
+			const bool overlap = view.Contains(m_aabb);
 
 			return overlap;
 		}
 		
-		const util::shape::AABB IRenderNode::CalcAABB()
+		const b2AABB IRenderNode::CalcAABB()
 		{
-			m_shape = CalcShape();
-			b2AABB temp;
-			b2Transform identity;
-			identity.SetIdentity();
-			m_shape.ComputeAABB(&temp, identity, 0);
-			const util::math::vec2 min(temp.lowerBound.x, temp.lowerBound.y);
-			const util::math::vec2 max(temp.upperBound.x, temp.upperBound.y);
-			const util::shape::AABB aabb(min, max);
-			return aabb;
+			if (m_flag.Flag(NodeStateFlag::MOVE_DIRTY))
+			{
+				m_flag.FlagOff(NodeStateFlag::MOVE_DIRTY);
+				CalcAabbInternal();
+			}
+
+			return m_aabb;
 		}
 	}
 }

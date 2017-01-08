@@ -37,12 +37,12 @@ namespace engine
 				CUiPart::LoadJson(json);
 			}
 
-			void CButtonPart::Subscribe(util::event::Subscriber* subscriber, util::event::Publisher<CButtonPart*>::Callback callback, const int& priority)
+			void CButtonPart::Subscribe(util::Subscriber* subscriber, util::Publisher<CButtonPart*>::Callback callback, const int& priority)
 			{
 				m_publisher.Subscribe(subscriber, callback, priority);
 			}
 
-			void CButtonPart::Unsubscribe(util::event::Subscriber* subscriber)
+			void CButtonPart::Unsubscribe(util::Subscriber* subscriber)
 			{
 				m_publisher.Unsubscribe(subscriber);
 			}
@@ -52,7 +52,7 @@ namespace engine
 				m_publisher.UnsubscribeAll();
 			}
 
-			VIRTUAL bool CButtonPart::OnMouseButtonDownInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos)
+			VIRTUAL bool CButtonPart::OnMouseButtonDownInternal(const mouse_events::ButtonAction& action, const vec2& wpos)
 			{
 				const bool intersection = CUiPart::OnMouseButtonDownInternal(action, wpos);
 
@@ -65,7 +65,7 @@ namespace engine
 				return true;
 			}
 		
-			VIRTUAL bool CButtonPart::OnMouseButtonUpInternal(const input::mouse_events::ButtonAction& action, const util::math::vec2& wpos)
+			VIRTUAL bool CButtonPart::OnMouseButtonUpInternal(const mouse_events::ButtonAction& action, const vec2& wpos)
 			{
 				if (!m_bPressed)
 					return false;
@@ -85,7 +85,7 @@ namespace engine
 				return false;
 			}
 			
-			VIRTUAL bool CButtonPart::OnMouseMotionInternal(const input::mouse_events::MotionAction& action, const util::math::vec2& wpos)
+			VIRTUAL bool CButtonPart::OnMouseMotionInternal(const mouse_events::MotionAction& action, const vec2& wpos)
 			{
 				if (!m_bPressed)
 					return false;

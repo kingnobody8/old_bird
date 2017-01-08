@@ -1,0 +1,19 @@
+//Transformation Matrices
+uniform mat4 u_projectionMatrix;
+uniform mat4 u_modelViewMatrix;
+
+//Input VertexColor
+in vec2 n_vertexPosition;
+in vec4 n_vertexColor;
+
+//Output
+out vec4 o_vertexColor;
+
+void main()
+{
+	//Process color
+	o_vertexColor = n_vertexColor;
+	
+	//Process vertex
+	gl_Position = u_projectionMatrix * u_modelViewMatrix * vec4( n_vertexPosition.x, n_vertexPosition.y, 0.0, 1.0 );
+}

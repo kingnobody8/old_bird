@@ -1,25 +1,32 @@
 #pragma once
 #include "render_node.h"
-#include "shape/segment.h"
+#include <vector>
 
 namespace engine
 {
 	namespace render
 	{
-		class CRenderNodeLine : public IRenderNode
+		class LineNode : public IRenderNode
 		{
-		private:
-			util::shape::Segment m_seg;
+		private: __todo() //maybe we should template this class so that we can have different types of verts
+			Vertex* m_vVerts;
+			int	m_vertCount;
+			int* m_vIndicies;
+			int m_indexCount;
 
 		protected:
-			virtual const b2PolygonShape& CalcShape();
+			virtual void CalcAabbInternal();
 
 		public:
-			virtual void operator () (SDL_Renderer* pRen, const util::math::Matrix2D& inv_cam);
-			
-			void SetLine(const util::shape::Segment& seg);
-		
-			inline const util::shape::Segment& GetLine() const { return m_seg; }
+			LineNode();
+			virtual ~LineNode();
+			virtual void operator () (const util::Matrix& inv_cam);
+
+			const std::vector<Vertex> GetVerts();
+			const std::vector<int> GetIndicies();
+
+			void InitVBO(const std::vector<Vertex>& verts);
+			virtual void FreeVBO();
 		};
 	}
 }

@@ -15,6 +15,7 @@ namespace engine
 			static std::vector<CObject*> s_MarkedForDestruction;
 		public:
 			static void Clean();
+			static void Nuke(CObject* that);
 
 			/*Data*/
 		private:
@@ -22,9 +23,9 @@ namespace engine
 			std::string					m_szName;
 			CGroup*						m_pParent;
 			std::vector<IPart*>			m_vParts;
-			util::math::Matrix2D		m_cMatLocal;
+			util::Matrix			m_cMatLocal;
 			float						m_fZed;
-			util::Flag08				m_eFlag;
+			util::Flag08			m_eFlag;
 		public:
 
 			/*Func*/
@@ -59,47 +60,48 @@ namespace engine
 			inline const std::string&				GetName(void) const { return this->m_szName; }
 			inline CGroup*							GetParent(void) const { return this->m_pParent; }
 			inline const std::vector<IPart*>&		GetParts(void) const { return this->m_vParts; }
-			inline const util::math::Matrix2D&		GetLocalMatrix(void) const { return this->m_cMatLocal; }
+			inline const util::Matrix&					GetLocalMatrix(void) const { return this->m_cMatLocal; }
 			inline const float&						GetLocalZed(void) const { return this->m_fZed; }
 			inline const bool						GetLocalVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE); }
 			inline const bool						GetWorldVisible(void) const { return this->m_eFlag.Flag(EFlag::SELF_VISIBLE | EFlag::PARENT_VISIBLE); }
 
-			inline const vec2						GetLocalPos(void) const { return this->m_cMatLocal.GetPosition(); }
-			inline const vec2						GetLocalScale(void) const { return this->m_cMatLocal.GetScale(); }
-			inline const float						GetLocalRotationZ(void) const { return this->m_cMatLocal.GetRotationZ(); }
+			//TODO fix these
+			inline const util::vec3						GetLocalPos(void) const { return util::vec3(); }// this->m_cMatLocal.GetPosition();}
+			inline const util::vec3						GetLocalScale(void) const { return  util::vec3(); }//this->m_cMatLocal.GetScale(); }
+			inline const util::vec3						GetLocalRotation(void) const { return  util::vec3(); }//this->m_cMatLocal.GetRotation(); }
 
 			//Calcs
-			const util::math::Matrix2D				CalcWorldMatrix(void) const;
+			const util::Matrix							CalcWorldMatrix(void) const;
 			const float								CalcWorldZed(void) const;
 
-			inline const vec2						CalcWorldPos(void) const { return this->CalcWorldMatrix().GetPosition(); }
-			inline const vec2						CalcWorldScale(void) const { return this->CalcWorldMatrix().GetScale(); }
-			inline const float						CalcWorldRotationZ(void) const { return this->CalcWorldMatrix().GetRotationZ(); }
+			inline const util::vec3						CalcWorldPos(void) const { return  util::vec3(); }//this->CalcWorldMatrix().GetPosition(); }
+			inline const util::vec3						CalcWorldScale(void) const { return  util::vec3(); }//this->CalcWorldMatrix().GetScale(); }
+			inline const util::vec3						CalcWorldRotation(void) const { return  util::vec3(); }//this->CalcWorldMatrix().GetRotation(); }
 
-			const util::shape::AABB					CalcAabb(void) const;
+			const b2AABB							CalcAabb(void) const;
 
 			virtual inline bool						IsGroup(void) const { return false; }
 
 			//Sets
 			inline void								SetName(const std::string& szName) { this->m_szName = szName; }
 			void									SetParent(CGroup* const pParent);
-			void									SetLocalMatrix(const util::math::Matrix2D& mat);
-			void									SetWorldMatrix(const util::math::Matrix2D& mat);
+			void									SetLocalMatrix(const util::Matrix& mat);
+			void									SetWorldMatrix(const util::Matrix& mat);
 
 			void									SetLocalPosX(const float& x);
 			void									SetLocalPosY(const float& y);
 			void									SetLocalPosXY(const float& x, const float& y);
-			inline void								SetLocalPosXY(const vec2& pos) { this->SetLocalPosXY(pos.x, pos.y); }
+			inline void								SetLocalPosXY(const util::vec2& pos) { this->SetLocalPosXY(pos.x, pos.y); }
 			void									SetLocalScale(const float& x, const float& y);
-			inline void								SetLocalScale(const vec2& scale) { this->SetLocalScale(scale.x, scale.y); }
+			inline void								SetLocalScale(const util::vec2& scale) { this->SetLocalScale(scale.x, scale.y); }
 			void									SetLocalRotationZ(const float& rot);
 
 			void									SetWorldPosX(const float& x);
 			void									SetWorldPosY(const float& y);
 			void									SetWorldPosXY(const float& x, const float& y);
-			inline void								SetWorldPosXY(const vec2& pos) { this->SetWorldPosXY(pos.x, pos.y); }
+			inline void								SetWorldPosXY(const util::vec2& pos) { this->SetWorldPosXY(pos.x, pos.y); }
 			void									SetWorldScale(const float& x, const float& y);
-			inline void								SetWorldScale(const vec2& scale) { this->SetWorldScale(scale.x, scale.y); }
+			inline void								SetWorldScale(const util::vec2& scale) { this->SetWorldScale(scale.x, scale.y); }
 			void									SetWorldRotationZ(const float& rot);
 
 			inline void								SetLocalZed(const float& fZed) { this->m_fZed = fZed; }

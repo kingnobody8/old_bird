@@ -1,6 +1,5 @@
 #include "math/interp.h"
 #include "func.h"
-#include "consts.h"
 #include <assert.h>
 //https://github.com/jesusgollonet/ofpennereasing
 

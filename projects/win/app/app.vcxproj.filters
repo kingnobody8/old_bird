@@ -2,5 +2,18 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\..\source\app\main.cpp" />
+    <ClCompile Include="..\..\..\source\app\state\setup_state.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="state">
+      <UniqueIdentifier>{694f86e3-7302-457a-98ab-5e9b57a747a2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\app\state\setup_state.h">
+      <Filter>state</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

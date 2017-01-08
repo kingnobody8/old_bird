@@ -19,53 +19,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\source\utility\bit_flag.h" />
-    <ClInclude Include="..\..\..\source\utility\color.h" />
-    <ClInclude Include="..\..\..\source\utility\common.h" />
-    <ClInclude Include="..\..\..\source\utility\enums.h" />
-    <ClInclude Include="..\..\..\source\utility\event\publisher.h" />
-    <ClInclude Include="..\..\..\source\utility\event\subscriber.h" />
-    <ClInclude Include="..\..\..\source\utility\event\publisher.inl" />
-    <ClInclude Include="..\..\..\source\utility\func.h" />
-    <ClInclude Include="..\..\..\source\utility\json.h" />
-    <ClInclude Include="..\..\..\source\utility\macro.h" />
-    <ClInclude Include="..\..\..\source\utility\math\consts.h" />
-    <ClInclude Include="..\..\..\source\utility\math\interp.h" />
-    <ClInclude Include="..\..\..\source\utility\math\matrix_2d.h" />
-    <ClInclude Include="..\..\..\source\utility\math\matrix_stack.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type2.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type3.h" />
-    <ClInclude Include="..\..\..\source\utility\math\type4.h" />
-    <ClInclude Include="..\..\..\source\utility\platform.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\aabb.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\circle.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\line.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\ray.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\rect.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\segment.h" />
-    <ClInclude Include="..\..\..\source\utility\shape\shape.h" />
-    <ClInclude Include="..\..\..\source\utility\timer.h" />
-    <ClInclude Include="..\..\..\source\utility\types.h" />
-    <ClInclude Include="..\..\..\source\utility\util_time.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\source\utility\color.cpp" />
     <ClCompile Include="..\..\..\source\utility\event\publisher.cpp" />
     <ClCompile Include="..\..\..\source\utility\event\subscriber.cpp" />
-    <ClCompile Include="..\..\..\source\utility\func.cpp" />
-    <ClCompile Include="..\..\..\source\utility\json.cpp" />
-    <ClCompile Include="..\..\..\source\utility\math\interp.cpp" />
-    <ClCompile Include="..\..\..\source\utility\math\matrix_2d.cpp" />
-    <ClCompile Include="..\..\..\source\utility\math\matrix_stack.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\aabb.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\circle.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\line.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\ray.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\rect.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\segment.cpp" />
-    <ClCompile Include="..\..\..\source\utility\shape\shape.cpp" />
-    <ClCompile Include="..\..\..\source\utility\timer.cpp" />
-    <ClCompile Include="..\..\..\source\utility\util_time.cpp" />
+    <ClCompile Include="..\..\..\source\utility\helper\func.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\angle.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\matrix.cpp" />
+    <ClCompile Include="..\..\..\source\utility\math\transform.cpp" />
+    <ClCompile Include="..\..\..\source\utility\resource\json.cpp" />
+    <ClCompile Include="..\..\..\source\utility\time\util_time.cpp" />
+    <ClCompile Include="..\..\..\source\utility\types\color.cpp" />
+    <ClCompile Include="..\..\..\source\utility\types\rtti.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\utility\event\publisher.h" />
+    <ClInclude Include="..\..\..\source\utility\event\subscriber.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\common.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\enums.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\func.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\hierarchy.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\macro.h" />
+    <ClInclude Include="..\..\..\source\utility\helper\platform.h" />
+    <ClInclude Include="..\..\..\source\utility\math\angle.h" />
+    <ClInclude Include="..\..\..\source\utility\math\box.h" />
+    <ClInclude Include="..\..\..\source\utility\math\matrix.h" />
+    <ClInclude Include="..\..\..\source\utility\math\transform.h" />
+    <ClInclude Include="..\..\..\source\utility\math\util_math.h" />
+    <ClInclude Include="..\..\..\source\utility\resource\json.h" />
+    <ClInclude Include="..\..\..\source\utility\time\tick.h" />
+    <ClInclude Include="..\..\..\source\utility\time\util_time.h" />
+    <ClInclude Include="..\..\..\source\utility\types\bit_flag.h" />
+    <ClInclude Include="..\..\..\source\utility\types\color.h" />
+    <ClInclude Include="..\..\..\source\utility\types\rtti.h" />
+    <ClInclude Include="..\..\..\source\utility\types\types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\source\utility\event\publisher.inl" />
+    <None Include="..\..\..\source\utility\helper\hierarchy.inl" />
+    <None Include="..\..\..\source\utility\types\color.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{06170E48-B096-488C-8516-3B70F24FD6A6}</ProjectGuid>
@@ -146,14 +136,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/utility/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -166,14 +156,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/utility/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -188,7 +178,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/utility/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -197,7 +187,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
@@ -212,7 +202,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/utility/;../../../source/sdl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/utility/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -222,7 +212,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl.lib</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>

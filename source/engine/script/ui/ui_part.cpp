@@ -113,13 +113,13 @@ namespace engine
 				}
 			}
 
-			STATIC void CUiPart::OnMouseButtonDown(const input::mouse_events::ButtonAction& action)
+			STATIC void CUiPart::OnMouseButtonDown(const mouse_events::ButtonAction& action)
 			{
 				CleanUiParts();
 
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(action.m_pixel);
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
@@ -132,13 +132,13 @@ namespace engine
 				}
 			}
 			
-			STATIC void CUiPart::OnMouseButtonUp(const input::mouse_events::ButtonAction& action)
+			STATIC void CUiPart::OnMouseButtonUp(const mouse_events::ButtonAction& action)
 			{
 				CleanUiParts();
 				
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(action.m_pixel);
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{
@@ -151,13 +151,13 @@ namespace engine
 				}
 			}
 
-			STATIC void CUiPart::OnMouseMotion(const input::mouse_events::MotionAction& action)
+			STATIC void CUiPart::OnMouseMotion(const mouse_events::MotionAction& action)
 			{
 				CleanUiParts();
 				
 				for (std::list<CUiPart::UiLayer>::iterator layer_iter = s_uiLayers.begin(); layer_iter != s_uiLayers.end(); ++layer_iter)
 				{
-					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(vec2(action.m_pixel.x, action.m_pixel.y));
+					const vec2 wpos = (*layer_iter).m_pLayer->ConvertPointFromScreenToWorld(action.m_pixel);
 
 					for (UiPartIter part_iter = (*layer_iter).m_uiParts.begin(); part_iter != (*layer_iter).m_uiParts.end(); ++part_iter)
 					{

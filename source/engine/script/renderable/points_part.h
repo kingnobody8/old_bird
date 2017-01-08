@@ -48,7 +48,7 @@ namespace engine
 				virtual void OnMatrixChanged();
 				virtual void OnVisibilityChanged(const bool visible);
 
-				virtual const util::shape::AABB CalcAABB(void);
+				virtual const b2AABB CalcAABB(void);
 
 				const bool IsRegistered() const;
 

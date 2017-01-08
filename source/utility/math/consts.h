@@ -1,4 +1,5 @@
 #pragma once
+#include "box2d/Box2D.h"
 
 #define DEG_TO_RAD 0.0174532925f
 #define RAD_TO_DEG 57.2957795f
@@ -15,3 +16,5 @@
 #endif
 
 #define EPSI(test, goal) (test < goal + EPSILON && test > goal - EPSILON)
+
+const b2AABB INVALID_AABB = b2AABB(b2Vec2(1.0f, 1.0f), b2Vec2(-1.0f, -1.0f));

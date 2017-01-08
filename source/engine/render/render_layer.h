@@ -1,9 +1,9 @@
 #pragma once
 #include "sdl/include/SDL.h"
 #include <list>
-#include "macro.h"
-#include "shape/aabb.h"
+#include "utility/helper/macro.h"
 #include <string>
+#include "utility/math/math.h"
 
 namespace engine
 {
@@ -22,7 +22,7 @@ namespace engine
 			static CRenderLayer* FindLayer(const std::string& szLayer);
 			static CRenderLayer* CreateLayer(const std::string& name, const int& sort_rank, CCamera* const pCam);
 			static void DestroyLayers();
-			static void RenderAllLayers(SDL_Renderer* pRen);
+			static void RenderAllLayers();
 
 		private:
 			std::list<IRenderNode*> m_vNodes;
@@ -30,9 +30,10 @@ namespace engine
 			CCamera* m_pCamera;
 			std::string m_name;
 			int m_sort_rank;
+			bool m_bVisible;
 
 		private:
-			void Cull(const util::shape::AABB& view);
+			void Cull(const b2AABB& view);
 
 			CRenderLayer();
 			CRenderLayer(const std::string& name, const int& sort_rank, CCamera* const pCam);
@@ -41,12 +42,15 @@ namespace engine
 			void RegisterNode(IRenderNode* pNode);
 			void UnregisterNode(IRenderNode* pNode);
 			void ClearAllNodes(void);
-			void DoRender(SDL_Renderer* pRen);
+			void DoRender();
 			inline CCamera* const GetCamera(void) const { return m_pCamera; }
 			inline const std::string& GetName() const { return m_name; }
 			inline const int& GetSortRank() const { return m_sort_rank; }
-			const util::math::vec2 ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point);
-			const util::math::vec2 ConvertPointFromWorldToScreen(util::math::vec2 m_world_point);
+			const vec2 ConvertPointFromScreenToWorld(vec2 m_screen_point);
+			const vec2 ConvertPointFromWorldToScreen(vec2 m_world_point);
+
+			inline void SetVisible(const bool b) { m_bVisible = b; }
+			inline bool GetVisible() const { return m_bVisible; }
 		};
 	}
 }

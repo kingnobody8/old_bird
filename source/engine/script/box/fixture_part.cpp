@@ -1,6 +1,7 @@
 #include "fixture_part.h"
 #include "script/script.h"
 #include "component/object.h"
+#include "math/consts.h"
 
 namespace engine
 {
@@ -27,11 +28,11 @@ namespace engine
 			{
 				IBox2DPart::Init();
 
-				util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
+				util::Matrix wmat = m_pOwner->CalcWorldMatrix();
 
-				vec2 pos = wmat.GetPosition();
-				util::shape::AABB aabb = m_pOwner->CalcAabb();
-				const vec2 extends = aabb.CalcExtends();
+				util::vec3 pos;// = wmat.GetPosition();
+				util::AABB aabb = m_pOwner->CalcAabb();
+				const util::vec2 extends = util::vec2(aabb.GetExtents().x, aabb.GetExtents().y);
 
 				const b2Vec2 b2points[4] =
 				{
@@ -47,7 +48,7 @@ namespace engine
 
 				m_bodyDef.userData = this;
 				m_bodyDef.position = b2Vec2(pos.x * PIX_TO_BOX, pos.y * PIX_TO_BOX);
-				m_bodyDef.angle = wmat.GetRotationZ() * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
+				//m_bodyDef.angle = wmat.GetRotation().z * DEG_TO_RAD; __todo() // there seems to be problems if the box part starts off rotated
 				m_pBody = s_pWorld->CreateBody(&m_bodyDef);
 
 				m_fixtureDef.userData = this;
@@ -100,7 +101,7 @@ namespace engine
 				assert(filter.HasMember("group_index"));
 				assert(filter.HasMember("mask_bits"));
 
-				const vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
+				const util::vec2 linearVelocity = ((const util::JSON&)(body_def["linear_velocity"])).GetVec2();
 				m_bodyDef.linearVelocity = b2Vec2(linearVelocity.x, linearVelocity.y);
 				m_bodyDef.angularVelocity = body_def["angular_velocity"].GetDouble();
 				m_bodyDef.linearDamping = body_def["linear_damping"].GetDouble();
@@ -135,14 +136,14 @@ namespace engine
 
 			VIRTUAL void CFixturePart::OnMatrixChanged()
 			{
-				if (m_bSettingMatrix) //we only want to respond to a matrix changed event, if someone else changes our matrix
+				if (m_bSettingMatrix) //we only want to respond to a Matrix changed event, if someone else changes our Matrix
 					return;
 
-				__todo()//we may want a soft assert here, because we probably should never be setting a box parts matrix outside of the initial setup
+				__todo()//we may want a soft assert here, because we probably should never be setting a box parts Matrix outside of the initial setup
 
-					util::math::Matrix2D wmat = m_pOwner->CalcWorldMatrix();
-				vec2 pos = wmat.GetPosition() * PIX_TO_BOX;
-				m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotationZ() * DEG_TO_RAD);
+				util::Matrix wmat = m_pOwner->CalcWorldMatrix();
+				util::vec3 pos;// = wmat.GetPosition() * PIX_TO_BOX;
+				//m_pBody->SetTransform(b2Vec2(pos.x, pos.y), wmat.GetRotation().z * DEG_TO_RAD);
 				m_pBody->SetLinearVelocity(b2Vec2(0, 0));
 				m_pBody->SetAngularVelocity(0);
 				m_pBody->SetAwake(true);

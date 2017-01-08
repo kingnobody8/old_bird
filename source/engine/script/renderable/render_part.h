@@ -33,7 +33,7 @@ namespace engine
 				virtual void OnZedChanged(void);
 				virtual void OnVisibilityChanged(const bool visible);
 
-				virtual const util::shape::AABB CalcAABB(void);
+				virtual const b2AABB CalcAABB(void);
 				virtual inline const bool IsRenderable(void) const { return true; }
 
 				virtual const bool IsRegistered() const;

@@ -1,7 +1,6 @@
 #include "render_layer.h"
 #include "node/render_node.h"
 #include "camera.h"
-#include "renderer.h"
 #include <algorithm>
 
 namespace engine
@@ -49,10 +48,10 @@ namespace engine
 			s_layers.clear();
 		}
 
-		STATIC void CRenderLayer::RenderAllLayers(SDL_Renderer* pRen)
+		STATIC void CRenderLayer::RenderAllLayers()
 		{
 			for (auto iter = s_layers.begin(); iter != s_layers.end(); ++iter)
-				(*iter)->DoRender(pRen);
+				(*iter)->DoRender();
 		}
 
 		CRenderLayer::CRenderLayer(void)
@@ -68,40 +67,28 @@ namespace engine
 		{
 		}
 
-		void CRenderLayer::Cull(const util::shape::AABB& view)
+		void CRenderLayer::Cull(const b2AABB& view)
 		{
 			//Copy the real list to the temp list
 			this->m_vCulledNodes.clear();
 			this->m_vCulledNodes = this->m_vNodes;
 
 			__todo()//TODO actually cull the nodes
-
-			this->m_vNodes.sort(SortNodeFunc);
+			this->m_vCulledNodes.sort(SortNodeFunc);
 		}
 
-		void CRenderLayer::DoRender(SDL_Renderer* pRen)
+		void CRenderLayer::DoRender()
 		{
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(pRen, &logical_size.w, &logical_size.h);
-			util::math::vec2 half_dims(logical_size.x * 0.5f, logical_size.y * 0.5f);
-			const util::shape::AABB view = m_pCamera->CalcViewAabb(half_dims);
-			
+			if (!m_bVisible)
+				return;
+
+			const b2AABB view = m_pCamera->CalcViewAabb();
 			Cull(view);
 
-			//__todo()//remove this when you don't want to see the camera box anymore
-			//CRenderNodeRect cam_box;
-			//cam_box.SetAABB(m_pCamera->CalcViewAabb(half_dims));
-			//cam_box.SetFill(false);
-			//cam_box(pRen, util::math::Matrix2D()); //this is incorrect and should use the actual camera matrix
-
-
-			__todo() //replace this with the nodes found after the cull
-				//also use the actuall camera matrix
-
-			util::math::Matrix2D inv_cam = util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix());
+			util::Matrix inv_cam;// = glm::inverse(m_pCamera->GetMatrix());
 			for (auto iter = m_vCulledNodes.begin(); iter != m_vCulledNodes.end(); ++iter)
 			{
-				(*iter)->operator()(pRen, inv_cam);
+				(*iter)->operator()(inv_cam);
 			}
 		}
 
@@ -128,22 +115,24 @@ namespace engine
 			this->m_vNodes.clear();
 		}
 
-		const util::math::vec2 CRenderLayer::ConvertPointFromScreenToWorld(util::math::vec2 m_screen_point)
+		const vec2 CRenderLayer::ConvertPointFromScreenToWorld(vec2 m_screen_point)
 		{
 			//get screen info
-			util::math::Type2<int> logical_size;
-			SDL_GetRendererOutputSize(render::GetSdlRenderer(), &logical_size.w, &logical_size.h);
-			util::math::vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
+			glm::i32vec2 logical_size;
+			//SDL_GetWindowSize(render::GetSdlWindow(), &logical_size.x, &logical_size.y);
+			vec2 origin(logical_size.x * 0.5f, logical_size.y * 0.5f);
 
 			m_screen_point.x = m_screen_point.x - origin.x;
 			m_screen_point.y = m_screen_point.y - origin.y;
 
-			return util::math::Matrix2D::Vector_Matrix_Multiply(m_screen_point, m_pCamera->GetMatrix());
+			const vec4 tmp;// = m_pCamera->GetMatrix() * vec4(m_screen_point.x, m_screen_point.y, 0.0f, 1.0f);
+			return vec2(tmp.x, tmp.y);
 		}
 
-		const util::math::vec2 CRenderLayer::ConvertPointFromWorldToScreen(util::math::vec2 m_world_point)
+		const vec2 CRenderLayer::ConvertPointFromWorldToScreen(vec2 m_world_point)
 		{
-			return util::math::Matrix2D::Vector_Matrix_Multiply(m_world_point, util::math::Matrix2D::Matrix_Inverse(m_pCamera->GetMatrix()));
+			const vec4 tmp;// = glm::inverse(m_pCamera->GetMatrix()) * vec4(m_world_point.x, m_world_point.y, 0.0f, 1.0f);
+			return vec2(tmp.x, tmp.y);
 		}
 	}
 }

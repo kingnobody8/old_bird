@@ -19,61 +19,91 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\bridge\win\bridge-gl-win.cc" />
     <ClCompile Include="..\..\..\source\engine\asset\loader.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJson.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\b2dJsonImage_OpenGL.cpp" />
+    <ClCompile Include="..\..\..\source\engine\b2djson\jsoncpp.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\component.cpp" />
+    <ClCompile Include="..\..\..\source\engine\component\component_plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\object.cpp" />
     <ClCompile Include="..\..\..\source\engine\component\part.cpp" />
     <ClCompile Include="..\..\..\source\engine\engine.cpp" />
-    <ClCompile Include="..\..\..\source\engine\input\input.cpp" />
+    <ClCompile Include="..\..\..\source\engine\input\input_event.cpp" />
+    <ClCompile Include="..\..\..\source\engine\input\input_plugin.cpp" />
+    <ClCompile Include="..\..\..\source\engine\physics\debug_draw.cpp" />
+    <ClCompile Include="..\..\..\source\engine\physics\lark_controller.cpp" />
+    <ClCompile Include="..\..\..\source\engine\physics\physics_plugin.cpp" />
+    <ClCompile Include="..\..\..\source\engine\plugin.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\camera.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\circle_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\line_node.cpp" />
-    <ClCompile Include="..\..\..\source\engine\render\node\point_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\rect_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\node\render_node.cpp" />
-    <ClCompile Include="..\..\..\source\engine\render\node\sprite_node.cpp" />
-    <ClCompile Include="..\..\..\source\engine\render\renderer.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\node\polygon_node.cpp" />
     <ClCompile Include="..\..\..\source\engine\render\render_layer.cpp" />
-    <ClCompile Include="..\..\..\source\engine\script\renderable\circle_part.cpp" />
-  <ClCompile Include="..\..\..\source\engine\script\box\box2d_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\render_plugin.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_color_polygon.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_default.cpp" />
+    <ClCompile Include="..\..\..\source\engine\render\shader\shader_program.cpp" />
+    <ClCompile Include="..\..\..\source\engine\script\box\box2d_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\box\fixture_part.cpp" />
-    <ClCompile Include="..\..\..\source\engine\script\renderable\img_part.cpp" />
-    <ClCompile Include="..\..\..\source\engine\script\renderable\aabb_part.cpp" />
-    <ClCompile Include="..\..\..\source\engine\script\renderable\points_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\renderable\render_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\script.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\ui\button_part.cpp" />
     <ClCompile Include="..\..\..\source\engine\script\ui\ui_part.cpp" />
+    <ClCompile Include="..\..\..\source\engine\state\state_plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\source\bridge\win\bridge-gl-win.h" />
+    <ClInclude Include="..\..\..\source\bridge\win\GL\glext.h" />
     <ClInclude Include="..\..\..\source\engine\asset\loader.h" />
     <ClInclude Include="..\..\..\source\engine\asset\resource_path.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJson.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJsonImage.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\b2dJsonImage_OpenGL.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\bitmap.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\json\json-forwards.h" />
+    <ClInclude Include="..\..\..\source\engine\b2djson\json\json.h" />
     <ClInclude Include="..\..\..\source\engine\component\component.h" />
+    <ClInclude Include="..\..\..\source\engine\component\component_plugin.h" />
     <ClInclude Include="..\..\..\source\engine\component\object.h" />
     <ClInclude Include="..\..\..\source\engine\component\part.h" />
     <ClInclude Include="..\..\..\source\engine\engine.h" />
-    <ClInclude Include="..\..\..\source\engine\input\input.h" />
+    <ClInclude Include="..\..\..\source\engine\input\input_event.h" />
+    <ClInclude Include="..\..\..\source\engine\input\input_plugin.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\callbacks\aabb_callback.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\callbacks\raycast_callback.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\debug_draw.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\lark_controller.h" />
+    <ClInclude Include="..\..\..\source\engine\physics\physics_plugin.h" />
+    <ClInclude Include="..\..\..\source\engine\plugin.h" />
     <ClInclude Include="..\..\..\source\engine\render\camera.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\circle_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\line_node.h" />
-    <ClInclude Include="..\..\..\source\engine\render\node\point_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\rect_node.h" />
     <ClInclude Include="..\..\..\source\engine\render\node\render_node.h" />
-    <ClInclude Include="..\..\..\source\engine\render\node\sprite_node.h" />
-    <ClInclude Include="..\..\..\source\engine\render\renderer.h" />
+    <ClInclude Include="..\..\..\source\engine\render\node\polygon_node.h" />
+    <ClInclude Include="..\..\..\source\engine\render\render_core.h" />
     <ClInclude Include="..\..\..\source\engine\render\render_layer.h" />
-    <ClInclude Include="..\..\..\source\engine\script\renderable\circle_part.h" />
-  <ClInclude Include="..\..\..\source\engine\script\box\box2d_part.h" />
+    <ClInclude Include="..\..\..\source\engine\render\render_plugin.h" />
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader.h" />
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_color_polygon.h" />
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_default.h" />
+    <ClInclude Include="..\..\..\source\engine\render\shader\shader_program.h" />
+    <ClInclude Include="..\..\..\source\engine\script\box\box2d_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\box\fixture_part.h" />
-    <ClInclude Include="..\..\..\source\engine\script\renderable\img_part.h" />
-    <ClInclude Include="..\..\..\source\engine\script\renderable\aabb_part.h" />
-    <ClInclude Include="..\..\..\source\engine\script\renderable\points_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\renderable\render_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\script.h" />
     <ClInclude Include="..\..\..\source\engine\script\ui\button_part.h" />
     <ClInclude Include="..\..\..\source\engine\script\ui\ui_part.h" />
+    <ClInclude Include="..\..\..\source\engine\state\base_state.h" />
+    <ClInclude Include="..\..\..\source\engine\state\state_plugin.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\source\bridge\win\bridge-gl-win.inl" />
     <None Include="..\..\..\source\engine\component\object.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -155,7 +185,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;../../../source/sdl_image/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -165,7 +195,7 @@
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>sdl.lib;sdl_image.lib;box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>utility.lib;sdl.lib;box2d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -175,7 +205,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;../../../source/sdl_image/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -185,7 +215,7 @@
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>sdl.lib;sdl_image.lib;box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>utility.lib;sdl.lib;box2d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -197,7 +227,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;../../../source/sdl_image/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -209,7 +239,7 @@
       <Command>xcopy /y "$(OutDir)*.lib" "$(ProjectDir)"..\..\..\"build\lib_output\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>sdl.lib;sdl_image.lib;box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>utility.lib;sdl.lib;box2d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -221,7 +251,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/;../../../source/sdl_image/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../source/;../../../source/engine/;../../../source/utility/;../../../source/box2d/;../../../source/sdl/include/</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -237,7 +267,7 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <Lib>
-      <AdditionalDependencies>sdl.lib;sdl_image.lib;box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>utility.lib;sdl.lib;box2d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

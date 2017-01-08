@@ -161,6 +161,15 @@ struct b2RayCastOutput
 /// An axis aligned bounding box.
 struct b2AABB
 {
+	/*HABIG - begin edit*/
+	b2AABB()
+	{}
+
+	b2AABB(const b2Vec2& min, const b2Vec2& max)
+		: lowerBound(min), upperBound(max)
+	{}
+	/*HABIG - end edit*/
+
 	/// Verify that the bounds are sorted.
 	bool IsValid() const;
 
@@ -198,6 +207,14 @@ struct b2AABB
 		upperBound = b2Max(aabb1.upperBound, aabb2.upperBound);
 	}
 
+	/*HABIG - begin edit*/
+	void Combine(const b2Vec2& point)
+	{
+		lowerBound = b2Min(lowerBound, point);
+		upperBound = b2Max(upperBound, point);
+	}
+	/*HABIG - end edit*/
+
 	/// Does this aabb contain the provided AABB.
 	bool Contains(const b2AABB& aabb) const
 	{
@@ -208,6 +225,28 @@ struct b2AABB
 		result = result && aabb.upperBound.y <= upperBound.y;
 		return result;
 	}
+
+	/*HABIG - begin edit*/
+	bool Contains(const b2Vec2& point, const bool bIncludeEdges = true)
+	{
+		bool result = true;
+		if (bIncludeEdges)
+		{
+			result = result && point.x >= lowerBound.x;
+			result = result && point.y >= lowerBound.y;
+			result = result && point.x <= upperBound.x;
+			result = result && point.y <= upperBound.y;
+		}
+		else
+		{
+			result = result && point.x > lowerBound.x;
+			result = result && point.y > lowerBound.y;
+			result = result && point.x < upperBound.x;
+			result = result && point.y < upperBound.y;
+		}
+		return result;
+	}
+	/*HABIG - end edit*/
 
 	bool RayCast(b2RayCastOutput* output, const b2RayCastInput& input) const;
 
